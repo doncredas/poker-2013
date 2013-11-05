@@ -30,15 +30,16 @@ public class Dealer {
 		
 	}//Costruttore
 	
-	private void mischia(){
+	public void mischia(){
 		for(int k=0;k<3;k++){
 			int iS=0, iD, sx, dx, iTotale=0;			
 			iD=(int)((Math.random()*10)+22); //indice per dividere il mazzo a metà
+			int inD=iD;
 			Carta[] mazzoMischiato=new Carta[52];
 			while(iTotale<52){
 				sx=(int)Math.round(Math.random()*2)+1;
 				dx=(int)Math.round(Math.random()*2)+1;
-				 for(int i=0; i<sx && iS<iD; i++){
+				 for(int i=0; i<sx && iS<inD; i++){
 					 mazzoMischiato[iTotale]=mazzo[iS+i];
 					 iS++;
 					 iTotale++;
@@ -54,6 +55,15 @@ public class Dealer {
 			mazzoMischiato=tmp;
 		}//for
 	}//mischia
+	
+	public void turnRiver(){
+		primaCarta--;
+		if(carteComuni[3]==null)
+			carteComuni[3]=mazzo[primaCarta];
+		else
+			carteComuni[4]=mazzo[primaCarta];
+		primaCarta--;
+	}//turnRiver
 	
 	
 	
