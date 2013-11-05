@@ -56,6 +56,17 @@ public class Dealer {
 		}//for
 	}//mischia
 	
+	public void daiCarte(){
+		for(int i = 0; i < g.length; i++){
+			g[i].setCarta1(mazzo[primaCarta]);
+			primaCarta--;
+		}
+		for(int i = 0; i < g.length; i++){
+			g[i].setCarta2(mazzo[primaCarta]);
+			primaCarta--;
+		}
+	}//daiCarte
+	
 	public void flop(){
 		primaCarta--;
 		for(int i=0;i<3;i++, primaCarta--)
