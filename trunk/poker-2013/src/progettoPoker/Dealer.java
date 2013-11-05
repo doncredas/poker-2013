@@ -56,6 +56,12 @@ public class Dealer {
 		}//for
 	}//mischia
 	
+	public void flop(){
+		primaCarta--;
+		for(int i=0;i<3;i++, primaCarta--)
+			carteComuni[i]=mazzo[primaCarta];
+	}//flop
+	
 	public void turnRiver(){
 		primaCarta--;
 		if(carteComuni[3]==null)
