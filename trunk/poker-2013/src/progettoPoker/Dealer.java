@@ -13,6 +13,7 @@ public class Dealer {
 	private int primaCarta=51;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
 	*della prima "carta utile" del mazzo
 	*/
+	private final int SCALA_REALE=8;
 	private Giocatore[]g;
 	private Carta[] carteComuni=new Carta[5];
 	public Dealer(int nGiocatori, int fiches) {

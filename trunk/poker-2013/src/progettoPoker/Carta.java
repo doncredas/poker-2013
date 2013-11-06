@@ -12,6 +12,10 @@ public class Carta {
 		this.val=val;
 		this.palo=palo;
 	}
+	public Carta(Carta c){
+		this.val=c.val;
+		this.palo=c.palo;
+	}
 	public int getVal() {
 		return val;
 	}
