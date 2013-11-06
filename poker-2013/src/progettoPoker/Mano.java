@@ -44,15 +44,21 @@ public class Mano {
 		return false;
 	}
 	
-	private int copie(){
-		int cont=1, cMax=1;
+	private int[] copie(){//ho modificato il metodo in modo che ritorni le prime due ripetizioni
+		int cont=1;
+		int[] cMax={1,1};
 		for(int i=0; i<c.length; i++){
 			for(int j=i+1; i<c.length; j++){
 				if(c[i].getVal()==c[j].getVal())
 					cont++;					
 			}
-			if(cont>cMax)
-			cMax=cont;
+			if(cont>cMax[1]){
+				cMax[2]=cMax[1];
+				cMax[1]=cont;
+			}else
+				if(cont>cMax[2]){
+					cMax[2]=cont;
+				}
 			cont=1;
 		}
 		return cMax;
