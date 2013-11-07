@@ -22,9 +22,9 @@ public class Dealer {
 			g[i]=new Giocatore(fiches);
 		}
 		for(int i=0;i<52;i++){
-			if(i<=13){mazzo[i]=new Carta(i+1,'c');continue;}
-			if(i<=26){mazzo[i]=new Carta((i%13)+1,'q');continue;}
-			if(i<=39){mazzo[i]=new Carta((i%13)+1,'f');continue;}
+			if(i<=12){mazzo[i]=new Carta(i+1,'c');continue;}
+			if(i<=25){mazzo[i]=new Carta((i%13)+1,'q');continue;}
+			if(i<=38){mazzo[i]=new Carta((i%13)+1,'f');continue;}
 			else{mazzo[i]=new Carta((i%13)+1,'p');}
 		}
 		piccoloBuio=fiches/100;
