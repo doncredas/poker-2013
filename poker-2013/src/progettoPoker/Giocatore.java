@@ -7,8 +7,12 @@ public class Giocatore {
 	private int fiches;
 	private Carta carta1;
 	private Carta carta2;
+	private boolean inGioco=true;
 	public int getFiches() {
 		return fiches;
+	}
+	public boolean getInGioco(){
+		return inGioco;
 	}
 	public void setFiches(int fiches) {
 		this.fiches = fiches;

@@ -25,7 +25,7 @@ public class Mano {
 		if(val!=0)
 		return val;
 		return calcolaVal();
-	}
+	}//getVal
 	
 	private boolean colore(){
 		int c=0;
@@ -42,7 +42,7 @@ public class Mano {
 		}
 		if(c>=5||q>=5||f>=5||p>=5)return true;
 		return false;
-	}
+	}//colore
 	
 	private int[] copie(){//ho modificato il metodo in modo che ritorni le prime due ripetizioni
 		int cont=1;
@@ -62,11 +62,34 @@ public class Mano {
 			cont=1;
 		}
 		return cMax;
-	}
+	}//copie
 	
+	private boolean scala(){
+		int[] copia = new int [8];
+		int cont=0;
+		for(int i=0; i<c.length; i++){
+			copia[i]=c[i].getVal();
+		}
+		Arrays.sort(copia);
+		if(copia[0]==1) copia[7]=14;
+		for(int i=0; i<copia.length-1; i++){
+			if(copia[i]-copia[i+1]==-1) cont++;
+			else cont=0;
+			if(cont==4) return true;
+		}		
+		return false;	
+	}//scala
+		
 	private int calcolaVal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-}
-
+		if(scala()&&colore())return val=SCALA_REALE;
+		if(copie()[0]==4)return val=POKER;
+		if(copie()[0]==3&&copie()[1]==2)return val=FULL; 
+		if(colore())return val=COLORE;
+		if(scala())return val=SCALA;
+		if(copie()[0]==3)return val=TRIS;
+		if(copie()[0]==2&&copie()[1]==2)return val=DOPPIA_COPPIA;
+		if(copie()[0]==2)return val=COPPIA;
+		return val=CARTA_ALTA;		
+	}//calcolaVal
+	
+}//Mano

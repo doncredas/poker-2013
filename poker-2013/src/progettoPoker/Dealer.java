@@ -1,4 +1,7 @@
 package progettoPoker;
+
+import java.util.HashMap;
+
 /**
  * Classe che gestisce i bui e il mazzo: rialza i bui dopo un certo numero di mani, preleva le quote dai giocatori,
  * mischia il mazzo, da le carte ecc..
@@ -30,6 +33,27 @@ public class Dealer {
 		piccoloBuio=fiches/100;
 		
 	}//Costruttore
+	
+	public Giocatore[] vincitoreMano(){
+		HashMap<Mano, Giocatore> mani= new HashMap<Mano, Giocatore>();
+		
+		for(int i=0; i<g.length; i++)
+			if(g[i].getInGioco()) mani.put(new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2()), g[i]);
+		int manoMigliore=0;
+		int manoCorrente=0;
+		
+		for(Mano m : mani.keySet()){
+			manoCorrente=m.getVal();
+			if(manoCorrente>manoMigliore) manoMigliore=manoCorrente;
+		}
+		
+		for(Mano m : mani.keySet())
+			if(m.getVal()!=manoMigliore) mani.remove(m);
+		return g;
+		
+		
+	}
+	
 	
 	public void mischia(){
 		for(int k=0;k<3;k++){
