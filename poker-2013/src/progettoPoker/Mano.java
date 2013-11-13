@@ -12,6 +12,8 @@ public class Mano {
 	final int DOPPIA_COPPIA=3;
 	final int COPPIA=2;
 	final int CARTA_ALTA=1;
+	int cartaMax1=0;
+	int cartaMax2=0;
 	Carta[] c=new Carta[7];
 	int val=0;
 	
@@ -32,6 +34,7 @@ public class Mano {
 		int q=0;
 		int f=0;
 		int p=0;
+		char seme='n';
 		for(int i=0;i<7;i++){
 			switch(this.c[i].getPalo()){
 			case'c':c++;
@@ -40,7 +43,13 @@ public class Mano {
 			case'p':p++; 
 			}
 		}
-		if(c>=5||q>=5||f>=5||p>=5)return true;
+		if(c>=5)seme='c';
+		if(q>=5)seme='q';
+		if(f>=5)seme='f';
+		if(p>=5)seme='p';
+		if(this.c[5].getPalo()==seme)cartaMax1=this.c[5].getVal();
+		if(this.c[6].getPalo()==seme&&this.c[6].getVal()>cartaMax1)cartaMax1=this.c[6].getVal();
+		if(seme!='n')return true;
 		return false;
 	}//colore
 	

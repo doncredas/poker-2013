@@ -5,7 +5,7 @@ package progettoPoker;
  * più modificabile. Comprende il costruttore che riceve il palo e il valore e i metodi getter.
  *
  */
-public class Carta {
+public class Carta implements Comparable<Carta>{
 	private final int val;
 	private final char palo;
 	public Carta(int val,char palo){
@@ -21,6 +21,10 @@ public class Carta {
 	}
 	public char getPalo() {
 		return palo;
+	}
+	@Override
+	public int compareTo(Carta c) {
+		return this.getVal()-c.getVal();
 	}
 	
 }
