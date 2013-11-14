@@ -9,8 +9,7 @@ public class EchoClient {
         Socket echoSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-        String nomeSocket="127.0.0.1";
-
+      String nomeSocket="192.168.43.59";
         try {
             echoSocket = new Socket(nomeSocket, 7777);
             out = new PrintWriter(echoSocket.getOutputStream(), true);

@@ -8,12 +8,16 @@ public class MyServer {
 	public static void main(String[] args) throws IOException {
 
 		ServerSocket serverSocket = null;
+	
 		try {
 			serverSocket = new ServerSocket(7777);
 		} catch (IOException e) {
 			System.err.println("Could not listen on port.");
 			System.exit(1);
 		}
+		
+		InetAddress ia=InetAddress.getLocalHost();
+		System.out.println(ia);
 		int c=0;
 		while (true) {
 			c++;
@@ -25,7 +29,7 @@ public class MyServer {
 				System.err.println("Accept failed.");
 				System.exit(1);
 			}
-
+			System.out.println(clientSocket);
 			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),
 					true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -33,17 +37,18 @@ public class MyServer {
 			String inputLine;
 
 			out.println("Server 1");
-
 			while ((inputLine = in.readLine()) != null) {
 				if (inputLine.equals("Bye."))
 					break;
 				Date now = new Date(System.currentTimeMillis());
 				out.println(now + ": " + inputLine);
 			}
+			
 			out.close();
 			in.close();
 			clientSocket.close();
-			if(c==1){
+			
+			if(c==2){
 				serverSocket.close();
 				//System.out.println("Fine trasmissione");
 				System.exit(0);
