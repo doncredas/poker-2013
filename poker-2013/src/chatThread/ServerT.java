@@ -20,7 +20,7 @@ public class ServerT {
 				clientSocket[i]);
 		Thread thread = new Thread(recieve);
 		thread.start();
-		SendToClientThread send = new SendToClientThread(clientSocket[i]);
+		SendToClientThread send = new SendToClientThread(clientSocket);
 		Thread thread2 = new Thread(send);
 		thread2.start();
 		}
