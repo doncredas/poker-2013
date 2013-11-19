@@ -4,27 +4,30 @@ import java.net.Socket;
 import java.io.*;
 
 class SendToClientThread implements Runnable {
-	PrintWriter pwPrintWriter;
-	Socket clientSock = null;
+	PrintWriter[] pwPrintWriter=new PrintWriter[2];
+	Socket[] clientSock = null;
+	BufferedReader input=null;
 
-	public SendToClientThread(Socket clientSock) {
+	public SendToClientThread(Socket[] clientSock) {
 		this.clientSock = clientSock;
+		input=new BufferedReader(new InputStreamReader(System.in));
 	}
 
 	public void run() {
 		try {
-			pwPrintWriter = new PrintWriter(new OutputStreamWriter(
-					this.clientSock.getOutputStream()));// get outputstream
+			for(int i=0;i<clientSock.length;i++)
+			pwPrintWriter[i] = new PrintWriter(new OutputStreamWriter(
+					this.clientSock[i].getOutputStream()));// get outputstream
 			while (true) {
 				String msgToClientString = null;
-				BufferedReader input = new BufferedReader(
-						new InputStreamReader(System.in));// get userinput
+				// get userinput
 				msgToClientString = input.readLine();// get message to send to
-														// client
-				pwPrintWriter.println(msgToClientString);// send message to
+				for(int i=0;i<clientSock.length;i++){								// client
+				pwPrintWriter[i].println(msgToClientString);// send message to
 															// client with
 															// PrintWriter
-				pwPrintWriter.flush();// flush the PrintWriter
+				pwPrintWriter[i].flush();// flush the PrintWriter
+				}
 				System.out
 						.println("Please enter something to send back to client..");
 			}// end while
