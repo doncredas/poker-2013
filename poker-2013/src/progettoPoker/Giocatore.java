@@ -1,4 +1,7 @@
 package progettoPoker;
+
+import java.net.Socket;
+
 /**
  * Rappresenta il singolo giocatore con le proprie fiches e carte
  *
@@ -8,6 +11,7 @@ public class Giocatore {
 	private Carta carta1;
 	private Carta carta2;
 	private boolean inGioco=true;
+	private Socket client=null;
 	public int getFiches() {
 		return fiches;
 	}
@@ -26,11 +30,18 @@ public class Giocatore {
 	public Carta getCarta2() {
 		return carta2;
 	}
+	public Socket getSocket(){
+		return client;
+	}
 	public void setCarta2(Carta carta2) {
 		this.carta2 = carta2;
 	}
 	public Giocatore(int fiches) {
 		this.fiches=fiches;
+	}
+	public Giocatore(int fiches,Socket s) {
+		this.fiches=fiches;
+		client=s;
 	}
 
 }

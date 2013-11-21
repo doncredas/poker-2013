@@ -1,5 +1,6 @@
 package progettoPoker;
 
+import java.net.Socket;
 import java.util.HashMap;
 
 /**
@@ -13,16 +14,23 @@ public class Dealer {
 	private int nMano=0;//a che mano siamo
 	private int piccoloBuio;//il valore del piccolo buio (il grande buio è il doppio)
 	private Carta []mazzo=new Carta[52];//il mazzo visto come array di 52 carte
-	private int primaCarta=51;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
+	private int primaCarta=51;
+	private Socket[] s;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
 	*della prima "carta utile" del mazzo
 	*/
 	private final int SCALA_REALE=8;
 	private Giocatore[]g;
+	public Socket[] getS() {
+		return s;
+	}
+
 	private Carta[] carteComuni=new Carta[5];
-	public Dealer(int nGiocatori, int fiches) {
+	public Dealer(int nGiocatori, int fiches, Socket []s) {
+		this.s=s;
 		g=new Giocatore[nGiocatori];
-		for(int i=0; i<g.length;i++){
-			g[i]=new Giocatore(fiches);
+		g[0]=new Giocatore(fiches);
+		for(int i=1; i<g.length;i++){
+			g[i]=new Giocatore(fiches,s[i]);
 		}
 		for(int i=0;i<52;i++){
 			if(i<=12){mazzo[i]=new Carta(i+1,'c');continue;}
