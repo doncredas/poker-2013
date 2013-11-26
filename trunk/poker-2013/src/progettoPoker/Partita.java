@@ -5,10 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -19,7 +15,7 @@ public class Partita extends JFrame implements Runnable {
 	private ObjectOutputStream OOS[] = null;
 	private ObjectInputStream OIS[] = null;
 	//private BufferedReader br = null;
-	private Thread[] t = null;
+	private Thread t = null;
 	private Dealer d = null;
 	private boolean fineMano=false;
 	
@@ -39,7 +35,7 @@ public class Partita extends JFrame implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Thread t=new Thread(this);
+			t=new Thread(this);
 			t.run();
 			
 		}
@@ -49,15 +45,43 @@ public class Partita extends JFrame implements Runnable {
 	public void run() {
 		while(true){
 			d.mischia();
+			fineMano=false;
 			while(!fineMano){
 				d.daiCarte();
-				//TODO continue
+				Comando c=new Comando(null);
+				for(int i=0;i<OOS.length;i++){
+					try {
+						OOS[i].writeObject(c);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Comando risp=null;
+					while(risp==null){
+						try {
+							risp=(Comando) OIS[i].readObject();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					eseguiComando(risp);
+					
+				}
 			}
 		}
 		
 
 	}
 	
+
+	private void eseguiComando(Comando c) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/**
 	 * @param args

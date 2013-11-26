@@ -2,6 +2,7 @@ package net;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class EchoClient {
       public static void main(String[] args) throws IOException {
@@ -9,7 +10,7 @@ public class EchoClient {
         Socket echoSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-      String nomeSocket="192.168.43.59";
+      String nomeSocket="192.168.43.129";
         try {
             echoSocket = new Socket(nomeSocket, 7777);
             out = new PrintWriter(echoSocket.getOutputStream(), true);
@@ -21,10 +22,20 @@ public class EchoClient {
             System.err.println("Couldn't get I/O for the connection to: "+args[0]);
             System.exit(1);
         }
-
+        
         System.out.println("Server welcome is: "+in.readLine());
-
-        out.println("Hello how are you");
+        Scanner sc=new Scanner(System.in);
+       while(true){
+        	
+        	
+        		while(in.ready())
+        	System.out.println(in.readLine());
+        		out.println(sc.next());
+        	
+        	
+        	
+        }
+        /*out.println("Hello how are you");
         System.out.println("Server responded: "+in.readLine());
 
         out.println("Some other stuff");
@@ -33,5 +44,6 @@ public class EchoClient {
         out.close();
         in.close();
         echoSocket.close();
+        */
     }
 }

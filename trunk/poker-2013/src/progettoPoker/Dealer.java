@@ -1,7 +1,11 @@
 package progettoPoker;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
+
+import progettoPoker.Comando.Tipo;
 
 /**
  * Classe che gestisce i bui e il mazzo: rialza i bui dopo un certo numero di mani, preleva le quote dai giocatori,
@@ -18,10 +22,16 @@ public class Dealer {
 	private Socket[] s;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
 	*della prima "carta utile" del mazzo
 	*/
+	private int piatto=0;
+	private int puntata=piccoloBuio*2;
 	private final int SCALA_REALE=8;
 	private Giocatore[]g;
 	public Socket[] getS() {
 		return s;
+	}
+
+	public Giocatore[] getG() {
+		return g;
 	}
 
 	private Carta[] carteComuni=new Carta[5];
@@ -130,6 +140,33 @@ public class Dealer {
 		primaCarta--;
 	}//turnRiver
 	
+	public void fold(int gioc){
+		if(buioPosizione==gioc)
+			if(g[gioc].getFiches()<piccoloBuio){
+				piatto+=g[gioc].getFiches();
+				g[gioc].setFiches(0);
+			}else{
+				g[gioc].setFiches(g[gioc].getFiches()-piccoloBuio);
+				piatto+=piccoloBuio;
+			}
+		g[gioc].setInGioco(false);
+	}
 	
+	public void checkCall(int gioc){
+		if(g[gioc].getFiches()<puntata){
+			piatto+=g[gioc].getFiches();
+			g[gioc].setFiches(0);
+		}		
+		else{
+			g[gioc].setFiches(g[gioc].getFiches()-puntata);
+			piatto+=puntata;
+		}
+	}
+	
+	public void raise(int gioc, int fiches){
+		g[gioc].setFiches(g[gioc].getFiches()-fiches);
+		piatto+=fiches;
+		puntata=fiches;
+	}
 	
 }//Dealer
