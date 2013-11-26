@@ -16,8 +16,8 @@ class SendToClientThread implements Runnable {
 	public void run() {
 		try {
 			for(int i=0;i<clientSock.length;i++)
-			pwPrintWriter[i] = new PrintWriter(new OutputStreamWriter(
-					this.clientSock[i].getOutputStream()));// get outputstream
+			pwPrintWriter[i] = new PrintWriter(
+					this.clientSock[i].getOutputStream());// get outputstream
 			while (true) {
 				String msgToClientString = null;
 				// get userinput

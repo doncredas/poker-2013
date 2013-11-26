@@ -1,6 +1,8 @@
 package progettoPoker;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
 
 public class Mano {
 	final int SCALA_REALE=9;
@@ -64,9 +66,11 @@ public class Mano {
 			if(cont>cMax[1]){
 				cMax[2]=cMax[1];
 				cMax[1]=cont;
+				cartaMax1=cont;
 			}else
 				if(cont>cMax[2]){
 					cMax[2]=cont;
+					cartaMax2=cont;
 				}
 			cont=1;
 		}
@@ -101,4 +105,25 @@ public class Mano {
 		return val=CARTA_ALTA;		
 	}//calcolaVal
 	
+	public void ManiMigliori(HashMap<Mano,Giocatore> mani){
+		Set<Mano> man=mani.keySet();
+		int tmp = 0;
+		int tmp2=0;
+		//Mano Migliore=null;
+		for(Mano m:man){
+			if(m.cartaMax1>tmp){//TODO rendere cartamax1 e cartaMax2 Carte
+				tmp=cartaMax1;		
+				//Migliore=m;
+			}
+			if(cartaMax2!=0){
+				if(m.cartaMax2>tmp){
+					tmp=cartaMax2;	
+				}
+			}
+		}
+		for(Mano m:man){
+			if(m.cartaMax1<tmp||m.cartaMax2<tmp2)mani.remove(m);
+		}
+	}
+		
 }//Mano

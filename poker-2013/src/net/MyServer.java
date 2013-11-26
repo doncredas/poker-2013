@@ -5,8 +5,13 @@ import java.io.*;
 import java.util.*;
 
 public class MyServer {
+	public static String indiri() throws UnknownHostException{
+	InetAddress glh=InetAddress.getLocalHost();
+	String indirizzo=glh.getHostAddress();
+	return indirizzo;
+	}
 	public static void main(String[] args) throws IOException {
-
+		
 		ServerSocket serverSocket = null;
 	
 		try {
@@ -48,7 +53,7 @@ public class MyServer {
 			in.close();
 			clientSocket.close();
 			
-			if(c==2){
+			if(c==3){
 				serverSocket.close();
 				//System.out.println("Fine trasmissione");
 				System.exit(0);
