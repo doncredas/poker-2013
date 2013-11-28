@@ -3,6 +3,7 @@ package progettoPoker;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import progettoPoker.Comando.Tipo;
@@ -16,6 +17,8 @@ import progettoPoker.Comando.Tipo;
 public class Dealer {
 	private int buioPosizione;//indica il giocatore che dovrà pagare il piccolo buio
 	private int nMano=0;//a che mano siamo
+	private int posD=0;
+	private int nGiocatori=0;
 	private int piccoloBuio;//il valore del piccolo buio (il grande buio è il doppio)
 	private Carta []mazzo=new Carta[52];//il mazzo visto come array di 52 carte
 	private int primaCarta=51;
@@ -32,11 +35,13 @@ public class Dealer {
 
 	public Giocatore[] getG() {
 		return g;
-	}
+	}//getG
 
 	private Carta[] carteComuni=new Carta[5];
+	
 	public Dealer(int nGiocatori, int fiches, Socket []s) {
 		this.s=s;
+		this.nGiocatori=nGiocatori;
 		g=new Giocatore[nGiocatori];
 		g[0]=new Giocatore(fiches);
 		for(int i=1; i<g.length;i++){
@@ -72,8 +77,7 @@ public class Dealer {
 		
 		for(Mano m : mani.keySet())
 			if(m.getVal()!=manoMigliore) mani.remove(m);
-		
-		
+
 		if(mani.size()==1){
 			vincenti=new Giocatore[1];
 			vincenti[1]=mani.get(migliore);
@@ -81,11 +85,10 @@ public class Dealer {
 		else{
 			Mano.ManiMigliori(mani);
 		}
-		
-		
+				
 		return vincenti;
 		
-	}
+	}//vincitoreMano
 	
 	
 	public void mischia(){
@@ -114,31 +117,85 @@ public class Dealer {
 		}//for
 	}//mischia
 	
-	public void daiCarte(){
-		for(int i = 0; i < g.length; i++){
-			g[i].setCarta1(mazzo[primaCarta]);
-			primaCarta--;
-		}
-		for(int i = 0; i < g.length; i++){
-			g[i].setCarta2(mazzo[primaCarta]);
-			primaCarta--;
-		}
+	public void muoviDealer(){
+		boolean trovato=false;
+		for(int i=(posD+1)%nGiocatori; i==posD || !trovato ; i=(i+1)%nGiocatori){
+			if(g[i].getFiches()>0){
+				posD=i;
+				trovato=true;
+			}else 
+				if(g[i].getFineGiro()){
+					g[i].setFineGiro(false);
+					posD=i;
+					trovato=true;
+				}
+		}//for				
+		nMano++;
+	}//muoviDealer
+	
+	public void daiCarte(){		
+		int j = (posD+1)%nGiocatori;
+		do{	
+			if(g[j].getFiches()>0){
+				g[j].setCarta1(mazzo[primaCarta]);
+				primaCarta--;
+				j=(j+1)%nGiocatori;
+			}
+			
+		}while( j != posD);
+
+		int i = (posD+1)%nGiocatori;
+		do{	
+			if(g[i].getFiches()>0){
+				g[i].setCarta1(mazzo[primaCarta]);
+				primaCarta--;
+				j=(i+1)%nGiocatori;
+			}			
+		}while( i != posD);
 	}//daiCarte
 	
-	public void flop(){
+	public void flop(ObjectOutputStream [] oos){
 		primaCarta--;
 		for(int i=0;i<3;i++, primaCarta--)
 			carteComuni[i]=mazzo[primaCarta];
+		Comando c=new Comando(Tipo.DAI_CARTA, Arrays.copyOf(carteComuni, 3) );
+		for(int i=0; i<oos.length; i++){
+			try {
+				oos[i].writeObject(c);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}//flop
 	
-	public void turnRiver(){
+	public void turn(ObjectOutputStream [] oos){
 		primaCarta--;
-		if(carteComuni[3]==null)
-			carteComuni[3]=mazzo[primaCarta];
-		else
-			carteComuni[4]=mazzo[primaCarta];
+		carteComuni[3]=mazzo[primaCarta];
+		Comando c=new Comando(Tipo.DAI_CARTA, carteComuni[3] );
+		for(int i=0; i<oos.length; i++){
+			try {
+				oos[i].writeObject(c);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}//turn
+	
+	public void river(ObjectOutputStream [] oos){
+		carteComuni[4]=mazzo[primaCarta];
 		primaCarta--;
-	}//turnRiver
+		Comando c=new Comando(Tipo.DAI_CARTA, carteComuni[4] );
+		for(int i=0; i<oos.length; i++){
+			try {
+				oos[i].writeObject(c);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
+	}//river
 	
 	public void fold(int gioc){
 		if(buioPosizione==gioc)
@@ -150,7 +207,7 @@ public class Dealer {
 				piatto+=piccoloBuio;
 			}
 		g[gioc].setInGioco(false);
-	}
+	}//fold
 	
 	public void checkCall(int gioc){
 		if(g[gioc].getFiches()<puntata){
@@ -161,12 +218,12 @@ public class Dealer {
 			g[gioc].setFiches(g[gioc].getFiches()-puntata);
 			piatto+=puntata;
 		}
-	}
+	}//checCall
 	
 	public void raise(int gioc, int fiches){
 		g[gioc].setFiches(g[gioc].getFiches()-fiches);
 		piatto+=fiches;
 		puntata=fiches;
-	}
+	}//rais
 	
 }//Dealer
