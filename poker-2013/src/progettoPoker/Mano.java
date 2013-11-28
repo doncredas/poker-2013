@@ -73,12 +73,14 @@ public class Mano {
 					cartaMax2=cont;
 				}
 			cont=1;
+			
 		}
 		return cMax;
 	}//copie
 	
 	private boolean scala(){
 		int[] copia = new int [8];
+		boolean scala = false;
 		int cont=0;
 		for(int i=0; i<c.length; i++){
 			copia[i]=c[i].getVal();
@@ -86,11 +88,15 @@ public class Mano {
 		Arrays.sort(copia);
 		if(copia[0]==1) copia[7]=14;
 		for(int i=0; i<copia.length-1; i++){
+			if(copia[i+1] != 0)
 			if(copia[i]-copia[i+1]==-1) cont++;
 			else cont=0;
-			if(cont==4) return true;
-		}		
-		return false;	
+			if(cont>=4){
+				cartaMax1 = copia[i];
+				scala = true;
+			}
+		}
+		return scala;	
 	}//scala
 		
 	private int calcolaVal() {
@@ -105,19 +111,20 @@ public class Mano {
 		return val=CARTA_ALTA;		
 	}//calcolaVal
 	
-	public void ManiMigliori(HashMap<Mano,Giocatore> mani){
+	public static void ManiMigliori(HashMap<Mano,Giocatore> mani){
 		Set<Mano> man=mani.keySet();
 		int tmp = 0;
 		int tmp2=0;
 		//Mano Migliore=null;
 		for(Mano m:man){
+			if(m.cartaMax1 == 1) m.cartaMax1 = 14;
 			if(m.cartaMax1>tmp){//TODO rendere cartamax1 e cartaMax2 Carte
-				tmp=cartaMax1;		
+				tmp=m.cartaMax1;		
 				//Migliore=m;
 			}
-			if(cartaMax2!=0){
+			if(m.cartaMax2!=0){
 				if(m.cartaMax2>tmp){
-					tmp=cartaMax2;	
+					tmp=m.cartaMax2;	
 				}
 			}
 		}

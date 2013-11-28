@@ -79,7 +79,7 @@ public class Dealer {
 			vincenti[1]=mani.get(migliore);
 		}
 		else{
-			
+			Mano.ManiMigliori(mani);
 		}
 		
 		
