@@ -50,26 +50,27 @@ public class Partita extends JFrame implements Runnable {
 				d.daiCarte();
 				Comando c=new Comando(null);
 				for(int i=0;i<OOS.length;i++){
-					try {
-						OOS[i].writeObject(c);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					Comando risp=null;
-					while(risp==null){
+					if(d.getG()[i].getInGioco()){
 						try {
-							risp=(Comando) OIS[i].readObject();
-						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							OOS[i].writeObject(c);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						Comando risp=null;
+						while(risp==null){
+							try {
+								risp=(Comando) OIS[i].readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						eseguiComando(risp,i);
 					}
-					eseguiComando(risp);
-					
 				}
 			}
 		}
@@ -78,8 +79,20 @@ public class Partita extends JFrame implements Runnable {
 	}
 	
 
-	private void eseguiComando(Comando c) {
-		// TODO Auto-generated method stub
+	private void eseguiComando(Comando c,int i) {
+		switch(c.getT()){
+		case FOLD:
+			d.fold(i);
+			break;
+		case CHECK_CALL:
+			d.checkCall(i);
+			break;
+		case RAISE:
+			d.raise(i,c.getFiches());
+			break;
+		default:
+			break;
+		}
 		
 	}
 
