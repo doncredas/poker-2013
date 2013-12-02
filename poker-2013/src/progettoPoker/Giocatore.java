@@ -15,7 +15,9 @@ public class Giocatore {
 	private Carta carta1;
 	private Carta carta2;
 	private boolean inGioco=true;
-	private Socket client=null;
+	//se un giocatore viene eliminato fineGiro rimane true fino a quando non diventa dealer
+	private boolean fineGiro=true; 
+	private Socket client=null;    
 	private Comando com=null;
 	private ObjectOutputStream OOS=null;
 	public int getFiches() {
@@ -27,6 +29,13 @@ public class Giocatore {
 	public void setInGioco(boolean inGioco) {
 		this.inGioco = inGioco;
 	}
+	public boolean getFineGiro(){
+		return fineGiro;
+	}
+	public void setFineGiro(boolean fineGiro){
+		this.fineGiro=fineGiro;
+	}
+
 	public void setFiches(int fiches) {
 		this.fiches = fiches;
 		if(OOS!=null){
