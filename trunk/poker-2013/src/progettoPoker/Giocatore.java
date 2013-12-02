@@ -20,6 +20,7 @@ public class Giocatore {
 	private Socket client=null;    
 	private Comando com=null;
 	private ObjectOutputStream OOS=null;
+	protected final int indice;
 	public int getFiches() {
 		return fiches;
 	}
@@ -81,11 +82,13 @@ public class Giocatore {
 		}
 		}
 	}
-	public Giocatore(int fiches) {
+	public Giocatore(int fiches,int indice) {
 		this.fiches=fiches;
+		this.indice=indice;
 	}
-	public Giocatore(int fiches,Socket s) {
+	public Giocatore(int fiches,Socket s,int indice) {
 		this.fiches=fiches;
+		this.indice=indice;
 		client=s;
 		com=new Comando(null,fiches);
 		try {
