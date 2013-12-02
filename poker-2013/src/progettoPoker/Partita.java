@@ -8,6 +8,8 @@ import java.util.concurrent.Semaphore;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import progettoPoker.Comando.Tipo;
+
 
 public class Partita extends JFrame implements Runnable {
 	private ServerSocket ss = null;
@@ -45,10 +47,12 @@ public class Partita extends JFrame implements Runnable {
 	public void run() {
 		while(true){
 			d.mischia();
+			d.daiCarte();
 			fineMano=false;
-			while(!fineMano){
-				d.daiCarte();
-				Comando c=new Comando(null);
+			Comando c=new Comando(null);
+			boolean raise=false;
+			while(!fineMano){	
+				raise=false;
 				for(int i=0;i<OOS.length;i++){
 					if(d.getG()[i].getInGioco()){
 						try {
@@ -70,14 +74,30 @@ public class Partita extends JFrame implements Runnable {
 							}
 						}
 						eseguiComando(risp,i);
+						if(risp.getT()==Tipo.RAISE)raise=true;
 					}
 				}
+				if(!raise)CreaComando();
 			}
 		}
 		
 
 	}
 	
+
+	private void CreaComando() {
+		
+		if(d.getCarteComuni()[0]==null){
+			d.flop(OOS);
+		}else
+			if(d.getCarteComuni()[3]==null){
+				d.turn(OOS);
+			}else
+				if(d.getCarteComuni()[4]==null){
+					d.river(OOS);
+				}else
+					d.fineMano(OOS);
+	}
 
 	private void eseguiComando(Comando c,int i) {
 		switch(c.getT()){
