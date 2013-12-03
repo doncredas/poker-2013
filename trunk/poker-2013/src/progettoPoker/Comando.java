@@ -1,13 +1,20 @@
 package progettoPoker;
 
 public class Comando {
-	enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA};
+	enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME};
 	Carta c;
 	Carta[] car=new Carta[3];
 	int fiches;
 	int gioc;
 	Tipo t;
 	Tipo t1;
+	String nickName;
+	
+	public Comando(Tipo nickName, String name){
+		this.t = nickName;
+		this.nickName = name;
+	}
+	
 	Comando(Tipo t){
 		this.t=t;
 	}
