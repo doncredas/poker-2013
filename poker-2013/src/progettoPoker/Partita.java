@@ -20,7 +20,8 @@ public class Partita {
 	private Thread t = null;
 	private Dealer d = null;
 	private boolean fineMano=false;
-	
+	private int tempo=60;
+	private Cronometro cron=new Cronometro();
 
 	public Partita()  {
 		// TODO Auto-generated constructor stub
@@ -44,16 +45,42 @@ public class Partita {
 
 	public void esegui() {
 		while(true){
+			Comando c=new Comando(Tipo.NICK_NAME);
+			Comando risp=null;
+			//TODO set nickname del server
+			for (int i = 1; i < OOS.length; i++) {
+				try {
+					OOS[i].writeObject(c);
+					risp=(Comando)OIS[i].readObject();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				for (int j = 0; j < i; j++) {
+					if(d.getG()[j].getNickName().equals(risp.getNickName())){
+						i--;
+						break;
+					}
+				}
+				d.getG()[i].setNickName(risp.getNickName());
+			}//nick
 			d.mischia();
 			d.daiCarte();
 			fineMano=false;
-			Comando c=new Comando(null);
-			boolean raise=false;
+			c=new Comando(null);
 			int primoGiocatore=0;
-			Comando risp=null;
+			int ultimoRaise;
+			risp=null;
 			while(!fineMano){	
-				raise=false;
+				ultimoRaise=-1;
 				for(int cont=0,i=primoGiocatore;cont<OOS.length;cont++,i=(i+1)%OOS.length){
+					if(i==ultimoRaise){
+						ultimoRaise=-1;
+						break;
+					}
 					if(i==0){
 						//TODO collegare alla grafica
 					}else
@@ -65,7 +92,8 @@ public class Partita {
 							e.printStackTrace();
 						}
 						risp=null;
-						while(risp==null){
+						cron.reset();//TODO spostare il cronometro nel client
+						while(risp==null&&cron.getSecondi()<tempo){
 							try {
 								risp=(Comando) OIS[i].readObject();
 							} catch (ClassNotFoundException e) {
@@ -77,10 +105,10 @@ public class Partita {
 							}
 						}
 						eseguiComando(risp,i);
-						if(risp.getT()==Tipo.RAISE)raise=true;
+						if(risp.getT()==Tipo.RAISE)ultimoRaise=i;
 					}
 				}
-				if(!raise)CreaComando();
+				if(ultimoRaise==-1)CreaComando();
 			}
 			primoGiocatore=(primoGiocatore+1)%OOS.length;
 		}
@@ -125,6 +153,7 @@ public class Partita {
 	 */
 	public static void main(String[] args) {
 		ServerSocket server=null;
+		Socket client=null;
 		int sc = JOptionPane.showOptionDialog(null,
 				"Creare una nuova partita o connettersi ad una esistente?",
 				"Poker", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -165,7 +194,19 @@ public class Partita {
 				}
 			Dealer d=new Dealer(numG,10000,s);
 			new Partita(server,d);
+		}else{
+			String ip=JOptionPane.showInputDialog("Inserire indirizzio ip");
+			try {
+				client=new Socket(ip,7777);
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 		//System.out.println(sc);
 		//Partita p = new Partita();
 		//p.setVisible(true);

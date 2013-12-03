@@ -23,11 +23,12 @@ public class Dealer {
 	private int nGiocatori=0;
 	private int piccoloBuio;//il valore del piccolo buio (il grande buio è il doppio)
 	private Carta []mazzo=new Carta[52];//il mazzo visto come array di 52 carte
-	private int primaCarta=51;
-	private Cronometro c;
-	private Socket[] s;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
+	private int primaCarta=51;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice
 	*della prima "carta utile" del mazzo
 	*/
+	private Cronometro c;
+	private Socket[] s; //array dei client da passare ai singoli giocatori
+	
 	private int puntata=piccoloBuio*2;
 	private Giocatore[]g;
 	private int []piatto=new int [g.length];

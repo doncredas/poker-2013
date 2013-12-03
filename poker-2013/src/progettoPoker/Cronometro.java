@@ -20,7 +20,7 @@ public class Cronometro extends Thread {
 	}
 	
 	public void reset(){
-		secondi = 0;
+		secondi=0;
 	}
 
 }
