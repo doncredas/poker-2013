@@ -11,6 +11,7 @@ import progettoPoker.Comando.Tipo;
  *
  */
 public class Giocatore {
+	private String nickName;
 	private int fiches;
 	private Carta carta1;
 	private Carta carta2;
@@ -21,6 +22,15 @@ public class Giocatore {
 	private Comando com=null;
 	private ObjectOutputStream OOS=null;
 	protected final int indice;
+	
+	public String getNickName() {
+		return nickName;
+	}
+	
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
 	public int getFiches() {
 		return fiches;
 	}
