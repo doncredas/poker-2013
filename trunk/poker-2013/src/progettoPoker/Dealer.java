@@ -15,6 +15,8 @@ import progettoPoker.Comando.Tipo;
  *
  */
 public class Dealer {
+	private int tempoBui=600;
+	private double incrementoBui=2;
 	private int buioPosizione;//indica il giocatore che dovrà pagare il piccolo buio
 	private int nMano=0;//a che mano siamo
 	private int posD=0;
@@ -22,6 +24,7 @@ public class Dealer {
 	private int piccoloBuio;//il valore del piccolo buio (il grande buio è il doppio)
 	private Carta []mazzo=new Carta[52];//il mazzo visto come array di 52 carte
 	private int primaCarta=51;
+	private Cronometro c;
 	private Socket[] s;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
 	*della prima "carta utile" del mazzo
 	*/
@@ -56,9 +59,22 @@ public class Dealer {
 			else{mazzo[i]=new Carta((i%13)+1,'p');}
 		}
 		piccoloBuio=fiches/100;
+		buioPosizione=1;
+		//this.incrementoBui=incrementoBui;
+		//this.tempoBui=tempoBui;
+		c=new Cronometro();
+		c.run();
 		
 	}//Costruttore
 	
+	public int getPiccoloBuio(){
+		return buioPosizione;
+	}
+	
+	public int getValBuio(){
+		return piccoloBuio;
+	}
+
 	public Giocatore[] vincitoreMano(){
 		HashMap<Mano, Giocatore> mani= new HashMap<Mano, Giocatore>();
 		Giocatore[] vincenti = null;
@@ -240,6 +256,11 @@ public class Dealer {
 		puntata=fiches;
 	}//rais
 
+	public int getGrandeBuio() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public void fineMano(ObjectOutputStream[] oOS) {
 		Giocatore [] vincitori=vincitoreMano();
 		Comando vin=null;
@@ -267,6 +288,10 @@ public class Dealer {
 			if(g[i].getFiches()!=0)
 			g[i].setInGioco(true);
 		}
-	}
+		if(c.getSecondi()>=tempoBui){
+			c.reset();
+			piccoloBuio*=incrementoBui;
+		}
+	}//fineMano
 	
 }//Dealer
