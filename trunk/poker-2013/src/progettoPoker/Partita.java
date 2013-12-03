@@ -11,7 +11,7 @@ import javax.swing.event.*;
 import progettoPoker.Comando.Tipo;
 
 
-public class Partita extends JFrame implements Runnable {
+public class Partita {
 	private ServerSocket ss = null;
 	private Socket s = null;
 	private ObjectOutputStream OOS[] = null;
@@ -37,23 +37,26 @@ public class Partita extends JFrame implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			t=new Thread(this);
-			t.run();
+			this.esegui();
 			
 		}
 	}
 
-	@Override
-	public void run() {
+	public void esegui() {
 		while(true){
 			d.mischia();
 			d.daiCarte();
 			fineMano=false;
 			Comando c=new Comando(null);
 			boolean raise=false;
+			int primoGiocatore=0;
+			Comando risp=null;
 			while(!fineMano){	
 				raise=false;
-				for(int i=0;i<OOS.length;i++){
+				for(int cont=0,i=primoGiocatore;cont<OOS.length;cont++,i=(i+1)%OOS.length){
+					if(i==0){
+						//TODO collegare alla grafica
+					}else
 					if(d.getG()[i].getInGioco()){
 						try {
 							OOS[i].writeObject(c);
@@ -61,7 +64,7 @@ public class Partita extends JFrame implements Runnable {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						Comando risp=null;
+						risp=null;
 						while(risp==null){
 							try {
 								risp=(Comando) OIS[i].readObject();
@@ -79,6 +82,7 @@ public class Partita extends JFrame implements Runnable {
 				}
 				if(!raise)CreaComando();
 			}
+			primoGiocatore=(primoGiocatore+1)%OOS.length;
 		}
 		
 
