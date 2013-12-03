@@ -25,27 +25,30 @@ public class Dealer {
 	private Socket[] s;/*invece di eliminare le carte che diamo ai giocatori dal mazzo, manteniamo un indice 
 	*della prima "carta utile" del mazzo
 	*/
-	private int piatto=0;
 	private int puntata=piccoloBuio*2;
 	private final int SCALA_REALE=8;
 	private Giocatore[]g;
+	private int []piatto=new int [g.length];
+	private Carta[] carteComuni=new Carta[5];
 	public Socket[] getS() {
 		return s;
+	}
+
+	public Carta[] getCarteComuni() {
+		return carteComuni;
 	}
 
 	public Giocatore[] getG() {
 		return g;
 	}//getG
 
-	private Carta[] carteComuni=new Carta[5];
-	
 	public Dealer(int nGiocatori, int fiches, Socket []s) {
 		this.s=s;
 		this.nGiocatori=nGiocatori;
 		g=new Giocatore[nGiocatori];
-		g[0]=new Giocatore(fiches);
+		g[0]=new Giocatore(fiches,0);
 		for(int i=1; i<g.length;i++){
-			g[i]=new Giocatore(fiches,s[i]);
+			g[i]=new Giocatore(fiches,s[i],i);
 		}
 		for(int i=0;i<52;i++){
 			if(i<=12){mazzo[i]=new Carta(i+1,'c');continue;}
@@ -81,11 +84,17 @@ public class Dealer {
 		if(mani.size()==1){
 			vincenti=new Giocatore[1];
 			vincenti[1]=mani.get(migliore);
+			return vincenti;
 		}
 		else{
 			Mano.ManiMigliori(mani);
 		}
-				
+		vincenti=new Giocatore[mani.size()];
+		int i=0;
+		for(Mano m:mani.keySet()){
+			vincenti[i]=mani.get(m);
+			i++;
+		}
 		return vincenti;
 		
 	}//vincitoreMano
@@ -198,32 +207,67 @@ public class Dealer {
 	}//river
 	
 	public void fold(int gioc){
-		if(buioPosizione==gioc)
-			if(g[gioc].getFiches()<piccoloBuio){
-				piatto+=g[gioc].getFiches();
-				g[gioc].setFiches(0);
-			}else{
-				g[gioc].setFiches(g[gioc].getFiches()-piccoloBuio);
-				piatto+=piccoloBuio;
-			}
+		if(buioPosizione==gioc){
+			g[gioc].setFiches(g[gioc].getFiches()-piccoloBuio);
+			piatto[gioc]+=piccoloBuio;
+		}
+		if(gioc==posGrandeBuio()){
+			g[gioc].setFiches(g[gioc].getFiches()-piccoloBuio*2);
+			piatto[gioc]+=piccoloBuio*2;
+		}
 		g[gioc].setInGioco(false);
 	}//fold
 	
+	public int posGrandeBuio() {
+		int i=buioPosizione+1%nGiocatori;
+		while(!g[i].getInGioco()){i++;}
+		return i;
+	}
+
 	public void checkCall(int gioc){
 		if(g[gioc].getFiches()<puntata){
-			piatto+=g[gioc].getFiches();
+			piatto[gioc]+=g[gioc].getFiches();
 			g[gioc].setFiches(0);
 		}		
 		else{
 			g[gioc].setFiches(g[gioc].getFiches()-puntata);
-			piatto+=puntata;
+			piatto[gioc]+=puntata;
 		}
 	}//checCall
 	
 	public void raise(int gioc, int fiches){
 		g[gioc].setFiches(g[gioc].getFiches()-fiches);
-		piatto+=fiches;
+		piatto[gioc]+=fiches;
 		puntata=fiches;
 	}//rais
+
+	public void fineMano(ObjectOutputStream[] oOS) {
+		Giocatore [] vincitori=vincitoreMano();
+		Comando vin=null;
+		int quota=0;
+		int vincita=0;
+		for(int i=0;i<vincitori.length;i++){
+			quota=piatto[vincitori[i].indice]/vincitori.length;
+			for (int j = 0; j < g.length; j++) {
+				if(piatto[j]/vincitori.length<quota)
+					vincita+=piatto[j]/vincitori.length;
+				else
+					vincita+=quota;
+			}
+			vin=new Comando(null,vincitori[i].getFiches()+vincita);
+			try {
+				oOS[vincitori[i].indice].writeObject(vin);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			vincita=0;
+		}
+		muoviDealer();
+		for (int i = 0; i < g.length; i++) {
+			if(g[i].getFiches()!=0)
+			g[i].setInGioco(true);
+		}
+	}
 	
 }//Dealer
