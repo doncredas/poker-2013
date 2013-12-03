@@ -18,5 +18,9 @@ public class Cronometro extends Thread {
 	public int getSecondi(){
 		return secondi;
 	}
+	
+	public void reset(){
+		secondi = 0;
+	}
 
 }
