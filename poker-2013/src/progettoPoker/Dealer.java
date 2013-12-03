@@ -26,7 +26,6 @@ public class Dealer {
 	*della prima "carta utile" del mazzo
 	*/
 	private int puntata=piccoloBuio*2;
-	private final int SCALA_REALE=8;
 	private Giocatore[]g;
 	private int []piatto=new int [g.length];
 	private Carta[] carteComuni=new Carta[5];
