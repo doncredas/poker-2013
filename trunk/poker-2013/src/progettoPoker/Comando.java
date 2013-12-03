@@ -40,6 +40,10 @@ public class Comando {
 		this.t1=t1;
 		this.gioc=g;
 	}
+	
+	public String getNickName(){
+		return nickName;
+	}
 	public Carta getC() {
 		return c;
 	}
