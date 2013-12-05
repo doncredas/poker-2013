@@ -8,10 +8,8 @@ public class Cronometro extends Thread {
 		while(!isInterrupted()){
 			try{
 				sleep(1000);
-				System.out.println(secondi);
 				secondi++;
 			}catch(InterruptedException e){
-				System.out.println("errore!");
 				break;
 			}
 		}

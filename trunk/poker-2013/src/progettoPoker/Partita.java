@@ -65,6 +65,7 @@ public class Partita {
 		while(true){
 			Comando c=new Comando(Tipo.NICK_NAME);
 			Comando risp=null;
+			boolean ok=true;
 			//TODO set nickname del server
 			for (int i = 1; i < OOS.length; i++) {
 				try {
@@ -79,10 +80,24 @@ public class Partita {
 				} 
 				for (int j = 0; j < i; j++) {
 					if(d.getG()[j].getNickName().equals(risp.getNickName())){
+						ok=false;
 						i--;
 						break;
 					}
 				}
+				Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
+				if(ok){
+					for (int j = 1; j < OOS.length; j++) {
+						if(j!=i)
+							try {
+								OOS[i].writeObject(notifica);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					}
+				}
+				ok=true;
 				d.getG()[i].setNickName(risp.getNickName());
 			}//nick
 			d.mischia();

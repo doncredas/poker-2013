@@ -65,9 +65,7 @@ public class Dealer {
 		//this.incrementoBui=incrementoBui;
 		//this.tempoBui=tempoBui;
 		c=new Cronometro();
-		c.run();
-		//c.interrupt();
-		System.out.println("prova");
+		c.start();
 		
 	}//Costruttore
 	
