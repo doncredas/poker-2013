@@ -1,6 +1,12 @@
 package progettoPoker;
 
-public class Comando {
+import java.io.Serializable;
+
+public class Comando implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9198700338386482018L;
 	enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME};
 	Carta c;
 	Carta[] car=new Carta[3];
