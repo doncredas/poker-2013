@@ -31,7 +31,7 @@ public class Dealer {
 	
 	private int puntata=piccoloBuio*2;
 	private Giocatore[]g;
-	private int []piatto=new int [g.length];
+	private int []piatto;
 	private Carta[] carteComuni=new Carta[5];
 	public Socket[] getS() {
 		return s;
@@ -49,9 +49,10 @@ public class Dealer {
 		this.s=s;
 		this.nGiocatori=nGiocatori;
 		g=new Giocatore[nGiocatori];
+		piatto=new int [g.length];
 		g[0]=new Giocatore(fiches,0);
 		for(int i=1; i<g.length;i++){
-			g[i]=new Giocatore(fiches,s[i],i);
+			g[i]=new Giocatore(fiches,s[i-1],i);
 		}
 		for(int i=0;i<52;i++){
 			if(i<=12){mazzo[i]=new Carta(i+1,'c');continue;}
@@ -65,6 +66,8 @@ public class Dealer {
 		//this.tempoBui=tempoBui;
 		c=new Cronometro();
 		c.run();
+		//c.interrupt();
+		System.out.println("prova");
 		
 	}//Costruttore
 	
