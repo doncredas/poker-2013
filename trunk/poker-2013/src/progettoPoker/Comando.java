@@ -3,10 +3,9 @@ package progettoPoker;
 import java.io.Serializable;
 
 public class Comando implements Serializable {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -9198700338386482018L;
+
 	enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME};
 	Carta c;
 	Carta[] car=new Carta[3];
@@ -45,6 +44,20 @@ public class Comando implements Serializable {
 		this.t=t;
 		this.t1=t1;
 		this.gioc=g;
+	}
+	
+	Comando(Tipo t, Tipo t1, int g, String nickName){
+		this.t=t;
+		this.t1=t1;
+		this.gioc=g;
+		this.nickName=nickName;
+	}
+	
+	Comando(Tipo t, Tipo t1, int g, int fiches){
+		this.t=t;
+		this.t1=t1;
+		this.gioc=g;
+		this.fiches=fiches;
 	}
 	
 	public String getNickName(){
