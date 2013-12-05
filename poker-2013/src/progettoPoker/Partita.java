@@ -1,5 +1,7 @@
 package progettoPoker;
 
+import grafica.GraficaPoker;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -12,10 +14,12 @@ import progettoPoker.Comando.Tipo;
 
 
 public class Partita {
-	private ServerSocket ss = null;
+	//private ServerSocket ss = null;
 	private Socket s = null;
 	private ObjectOutputStream OOS[] = null;
 	private ObjectInputStream OIS[] = null;
+	private ObjectOutputStream oos=null;
+	private ObjectInputStream ois=null;
 	//private BufferedReader br = null;
 	private Thread t = null;
 	private Dealer d = null;
@@ -23,12 +27,26 @@ public class Partita {
 	private int tempo=60;
 	private Cronometro cron=new Cronometro();
 
-	public Partita()  {
-		// TODO Auto-generated constructor stub
+	public Partita(Socket client)  {
+		this.s=client;
+		try {
+			oos=new ObjectOutputStream(s.getOutputStream());
+			ois=new ObjectInputStream(s.getInputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		eseguiClient();
 	}
 	
-	public Partita(ServerSocket ss,Dealer d)  {
-		this.ss=ss;
+	private void eseguiClient() {
+		GraficaPoker gp=new GraficaPoker();
+		
+	}
+
+	public Partita(Dealer d)  {
+		//this.ss=ss;
+		GraficaPoker gp=new GraficaPoker();
 		this.d=d;
 		for(int i=0;i<d.getS().length;i++){
 			try {
@@ -38,12 +56,12 @@ public class Partita {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			this.esegui();
+			eseguiServer();
 			
 		}
 	}
 
-	public void esegui() {
+	private void eseguiServer() {
 		while(true){
 			Comando c=new Comando(Tipo.NICK_NAME);
 			Comando risp=null;
@@ -193,7 +211,7 @@ public class Partita {
 					e.printStackTrace();
 				}
 			Dealer d=new Dealer(numG,10000,s);
-			new Partita(server,d);
+			new Partita(d);
 		}else{
 			String ip=JOptionPane.showInputDialog("Inserire indirizzio ip");
 			try {
@@ -205,6 +223,7 @@ public class Partita {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			new Partita(client);
 		}
 		
 		//System.out.println(sc);
@@ -242,8 +261,6 @@ public class Partita {
 				numGioc=list.getSelectedValue();
 				s.release();
 			}catch(Exception e){System.out.println("err");}
-			
 		}
-		 
-		}
+	}
 }
