@@ -16,17 +16,17 @@ public class InviaChat implements MouseListener, KeyListener {
 
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
-
 	public InviaChat(JTextArea a, JTextField b) {
 		this.Chat = a;
 		this.ConsChat = b;
+
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 		if(arg0.getKeyCode()==KeyEvent.VK_ENTER)
 		{
 			if (this.ConsChat.getText().length() > 0) 
