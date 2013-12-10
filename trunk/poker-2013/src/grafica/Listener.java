@@ -2,6 +2,8 @@ package grafica;
 
 // GESTIONE DEL BOTTONE INVIA DELLA CHAT
 import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -12,11 +14,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class InviaChat implements MouseListener, KeyListener {
+public class Listener implements KeyListener,ActionListener {
 
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
-	public InviaChat(JTextArea a, JTextField b) {
+	
+	public Listener(JTextArea a, JTextField b) {
 		this.Chat = a;
 		this.ConsChat = b;
 
@@ -49,38 +52,26 @@ public class InviaChat implements MouseListener, KeyListener {
 
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
-	}
+	
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-
-		if (this.ConsChat.getText().length() > 0) 
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		
+		if(arg0.getSource()==GraficaPoker.Invia)
 		{
-			this.Chat.setText(this.Chat.getText() + "  Nickname: "	+ ConsChat.getText()+ "\n" );
-			ConsChat.setText("");
+			if (this.ConsChat.getText().length() > 0) 
+			{
+				this.Chat.setText(this.Chat.getText() + "  Nickname: "	+ ConsChat.getText()+ "\n" );
+				ConsChat.setText("");
+			}
 		}
+		if(arg0.getSource()==GraficaPoker.SegnaPunti)
+		{
+
+		}
+		
 	}
 
 }
