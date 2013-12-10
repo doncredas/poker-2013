@@ -17,22 +17,46 @@ public class GraficaPoker extends JFrame {
 	File Bottoni = new File(Immagini.getAbsolutePath() + "\\Bottoni");
 	File Carte = new File(Immagini.getAbsolutePath() + "\\Carte");
 
-	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA
-													// PUTNEGGIO
+	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
 	Container principale = this.getContentPane();
 	
+	/**
+	 * 
+	 * 
+	 */
 	public void Scrivi(String messaggio)
 	{
 		Chat.append(messaggio);
 	}
+	public void disableFold()
+	{
+		Fold.setEnabled(false);
+	}
+	public void disableRaise()
+	{
+		Raise.setEnabled(false);
+	}
+	/**
+	 * Chiamato con true disabilita i bottoni.
+	 * Chiamato con false abilita i bottoni.
+	 */
+	public void disableBottoni(boolean flag)
+	{
+		Fold.setEnabled(!flag);
+		Raise.setEnabled(!flag);
+		Call.setEnabled(!flag);
+		AllIn.setEnabled(!flag);
+	}
 
 	// CREAZIONE BOTTONI
-	JButton Fold = new JButton("Fold");
-	JButton Call = new JButton("Call");
-	JButton Raise = new JButton("Raise");
-	JButton AllIn = new JButton("All-In");
-	JButton Invia = new JButton("Invia");
-	JButton SegnaPunti = new JButton("Punti");
+	static JButton Fold = new JButton("Fold");
+	static JButton Call = new JButton("Call");
+	static JButton Raise = new JButton("Raise");
+	static JButton AllIn = new JButton("All-In");
+	static JButton Invia = new JButton("Invia");
+	static JButton SegnaPunti = new JButton("Punti");
+	static JButton VisChat=new JButton("Chat");
+	JButton Stats=new JButton("Stats");
 
 	// GIOCATORE 1
 	JLabel etiUtente1 = new JLabel();
@@ -101,7 +125,8 @@ public class GraficaPoker extends JFrame {
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
 	JScrollPane ScrollChat = new JScrollPane(Chat);
-	InviaChat ic = new InviaChat(Chat, ConsChat); // LISTENER
+	
+	Listener list = new Listener(Chat, ConsChat); // LISTENER
 
 	// IMMAGINI: CARTE COPERTE
 	ImageIcon ut2 = new ImageIcon(Carte.getAbsolutePath() + "\\ut2.png");
@@ -130,7 +155,12 @@ public class GraficaPoker extends JFrame {
 	ImageIcon Sendpre = new ImageIcon(Bottoni.getAbsolutePath()
 			+ "\\Sendpre.png");
 	ImageIcon Sendnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Send.png");
+	
+	//BOTTONI PER LA CHAT
+	ImageIcon VisualizzaChat=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChat.png");
+	ImageIcon Statistics=new ImageIcon(Bottoni.getAbsolutePath()+"Stats.png");
 
+	
 	// IMMAGINI: ETICHETTA
 	ImageIcon Etichetta = new ImageIcon(Bottoni.getAbsolutePath()
 			+ "\\EtichettaR.png");
@@ -321,6 +351,7 @@ public class GraficaPoker extends JFrame {
 		Fold.setPressedIcon(Foldpre);
 		Fold.setBounds(350, 590, 90, 30);
 		Fold.setBorder(null);
+		//Fold.addActionListener(l);
 		Call.setIcon(Callnot);
 		Call.setPressedIcon(Callpre);
 		Call.setBounds(450, 590, 90, 30);
@@ -472,23 +503,27 @@ public class GraficaPoker extends JFrame {
 
 		// LISTENER
 		SegnaPunti.addMouseListener(FP); // Apre la finestra dei Punteggi
-		Invia.addMouseListener(ic); // Listener del bottone Invia (Chat)
-		ConsChat.addKeyListener(ic); // Listener della console della Chat
+		Invia.addActionListener(list); // Listener del bottone Invia (Chat)
+		ConsChat.addKeyListener(list); // Listener della console della Chat
 
 		// CHAT
-		ScrollChat.setBounds(900, 530, 290, 100);
+		ScrollChat.setBounds(927, 542, 290, 100);
 		ScrollChat.setWheelScrollingEnabled(true);
 		Chat.setEditable(false);
 		Chat.setOpaque(false);
 		Chat.setForeground(Color.BLUE);
 		Chat.setFont(font);
 		ConsChat.setFont(font);
-		ConsChat.setBounds(900, 632, 200, 30);
+		ConsChat.setBounds(927, 643, 200, 30);
 		ConsChat.setForeground(Color.BLACK);
 		Invia.setIcon(Sendnot);
 		Invia.setPressedIcon(Sendpre);
-		Invia.setBounds(1101, 632, 90, 30);
+		Invia.setBounds(1128, 643, 90, 30);
 		Invia.setBorder(null);
+		VisChat.setIcon(VisualizzaChat);
+		VisChat.setBounds(950,510,90,30);
+		Stats.setIcon(Statistics);
+		Stats.setBounds(1050, 500, 90, 30);
 
 		// INSERIMENTO NELLA FINESTRA
 
@@ -501,6 +536,8 @@ public class GraficaPoker extends JFrame {
 		principale.add(AllIn);
 		principale.add(Invia);
 		principale.add(SegnaPunti);
+		principale.add(Stats);
+		principale.add(VisChat);
 
 		principale.add(mazzo);
 
