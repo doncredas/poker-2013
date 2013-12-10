@@ -6,7 +6,7 @@ public class Comando implements Serializable {
 	
 	private static final long serialVersionUID = -9198700338386482018L;
 
-	enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME};
+	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME};
 	Carta c;
 	Carta[] car=new Carta[3];
 	int fiches;
@@ -20,7 +20,7 @@ public class Comando implements Serializable {
 		this.nickName = name;
 	}
 	
-	Comando(Tipo t){
+	public Comando(Tipo t){
 		this.t=t;
 	}
 	Comando(Tipo t,Carta c){
