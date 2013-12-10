@@ -14,6 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import progettoPoker.*;
+import progettoPoker.Comando.Tipo;
+
 public class Listener implements KeyListener,ActionListener {
 
 	JTextArea Chat = new JTextArea();
@@ -67,9 +70,9 @@ public class Listener implements KeyListener,ActionListener {
 				ConsChat.setText("");
 			}
 		}
-		if(arg0.getSource()==GraficaPoker.SegnaPunti)
+		if(arg0.getSource()==GraficaPoker.Fold)
 		{
-
+             GraficaPoker.com=new Comando(Tipo.FOLD);
 		}
 		
 	}
