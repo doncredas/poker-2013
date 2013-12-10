@@ -41,6 +41,51 @@ public class Partita {
 	
 	private void eseguiClient() {
 		GraficaPoker gp=new GraficaPoker();
+		Comando com=null;
+		Comando vecchio=null;
+		while(true){
+			while(com==vecchio){
+				try {
+					com=(Comando)ois.readObject();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				eseguiComando(com,gp);
+				vecchio=com;
+			}
+		}
+	}
+
+	private void eseguiComando(Comando com,GraficaPoker gp) {
+		Comando risp=null;
+		if(com.t==null&&com.fiches==0){
+			gp.disableBottoni(false);
+			while(risp==null){
+				risp=gp.getComando();
+			}
+		}else{
+			if(com.t==null){
+				//TODO set fiches
+			}else{
+				switch(com.t){
+				case NICK_NAME:risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
+				case DAI_CARTA:
+				case NOTIFICA:
+				}
+			}
+		}
+		if(risp!=null){
+			try {
+				oos.writeObject(risp);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
