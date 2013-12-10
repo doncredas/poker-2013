@@ -12,12 +12,11 @@ class RecieveThread implements Runnable {
 	public void run() {
 		try {
 			recieve = new BufferedReader(new InputStreamReader(
-					this.sock.getInputStream()));// get inputstream
+			this.sock.getInputStream()));// get inputstream
 			String msgRecieved = null;
 			while ((msgRecieved = recieve.readLine()) != null) {
 				System.out.println("From Server: " + msgRecieved);
-				System.out
-						.println("Please enter something to send to server..");
+				System.out.println("Please enter something to send to server..");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
