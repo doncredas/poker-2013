@@ -6,12 +6,25 @@ import java.awt.*;
 import java.io.File;
 //import java.net.*;
 
+
 import javax.swing.*;
+
+import progettoPoker.Comando;
 
 public class GraficaPoker extends JFrame {
 	public GiocatoreGrafico Giocatore1=null;
 	public GiocatoreGrafico Giocatore2=null;
 	GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
+	static Comando com=null;
+	
+	public Comando getComando()
+	{
+		return com;
+	}
+	public void resetComando()
+	{
+		com=null;
+	}
 	
 	static File Immagini = new File("Immagini");
 	File Bottoni = new File(Immagini.getAbsolutePath() + "\\Bottoni");
@@ -54,9 +67,9 @@ public class GraficaPoker extends JFrame {
 	static JButton Raise = new JButton("Raise");
 	static JButton AllIn = new JButton("All-In");
 	static JButton Invia = new JButton("Invia");
-	static JButton SegnaPunti = new JButton("Punti");
+	       JButton SegnaPunti = new JButton("Punti");
 	static JButton VisChat=new JButton("Chat");
-	JButton Stats=new JButton("Stats");
+	static JButton Stats=new JButton("Stats");
 
 	// GIOCATORE 1
 	JLabel etiUtente1 = new JLabel();
