@@ -29,7 +29,8 @@ class RecieveFromClientThread implements Runnable {
 						break;// break to close socket if EXIT
 					}
 					System.out.println("From Client: " + messageString);// print the message from client
-					
+					//manda il messaggio nella chat grafica
+					grafica.GraficaPoker.Scrivi(messageString);
 					//Manda il messaggio a tutti quanti
 					for(int i=0;i<clientSocket1.length;i++)
 					pwPrintWriter[i] = new PrintWriter(this.clientSocket1[i].getOutputStream());

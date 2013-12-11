@@ -13,7 +13,7 @@ class SendToClientThread implements Runnable {
 		input=new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-	public void run() {
+	public void run(){
 		try {
 			for(int i=0;i<clientSock.length;i++)
 				pwPrintWriter[i] = new PrintWriter(this.clientSock[i].getOutputStream());// get outputstream
@@ -25,8 +25,7 @@ class SendToClientThread implements Runnable {
 				pwPrintWriter[i].println(msgToClientString);// send message to client with PrintWriter
 				pwPrintWriter[i].flush();// flush the PrintWriter
 				}
-				System.out
-						.println("Please enter something to send back to client..");
+				System.out.println("Please enter something to send back to client..");
 			}// end while
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

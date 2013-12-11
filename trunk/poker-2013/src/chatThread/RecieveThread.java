@@ -16,6 +16,8 @@ class RecieveThread implements Runnable {
 			String msgRecieved = null;
 			while ((msgRecieved = recieve.readLine()) != null) {
 				System.out.println("From Server: " + msgRecieved);
+				//manda il messaggio nella chat grafica
+				grafica.GraficaPoker.Scrivi(msgRecieved);
 				System.out.println("Please enter something to send to server..");
 			}
 		} catch (Exception e) {
