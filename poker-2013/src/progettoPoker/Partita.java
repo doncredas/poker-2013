@@ -10,6 +10,9 @@ import java.util.concurrent.Semaphore;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import chatThread.ClientT;
+import chatThread.ServerT;
+
 import progettoPoker.Comando.Tipo;
 
 
@@ -41,6 +44,7 @@ public class Partita {
 	
 	private void eseguiClient() {
 		GraficaPoker gp=new GraficaPoker();
+		ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
 		Comando vecchio=null;
 		while(true){
@@ -92,6 +96,12 @@ public class Partita {
 	public Partita(Dealer d)  {
 		//this.ss=ss;
 		GraficaPoker gp=new GraficaPoker();
+		try {
+			ServerT chat=new ServerT(1,444);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		this.d=d;
 		for(int i=0;i<d.getS().length;i++){
 			try {
@@ -271,6 +281,7 @@ public class Partita {
 					e.printStackTrace();
 				}
 			Dealer d=new Dealer(numG,10000,s);
+			JOptionPane.showMessageDialog(null,"Inserire "+server.getInetAddress()+" nei client");
 			new Partita(d);
 		}else{
 			String ip=JOptionPane.showInputDialog("Inserire indirizzio ip");

@@ -2,18 +2,21 @@ package chatThread;
 
 import java.net.*;
 public class ClientT {
-
-public static void main(String[] args){
+	private Socket sock;
+	private SendThread sendThread;
+	private RecieveThread recieveThread;
+	private Thread thread,thread2;
+	
+	public ClientT(InetAddress ip,int port){
 		try {
-			Socket sock = new Socket("10.0.201.14",444);
-			SendThread sendThread = new SendThread(sock);
-			Thread thread = new Thread(sendThread);
+			sock = new Socket(ip,port);
+			sendThread = new SendThread(sock);
+			thread = new Thread(sendThread);
 			thread.start();
-			RecieveThread recieveThread = new RecieveThread(sock);
-			Thread thread2 =new Thread(recieveThread);
+			recieveThread = new RecieveThread(sock);
+			thread2 =new Thread(recieveThread);
 			thread2.start();
 		} catch (Exception e) {System.out.println(e.getMessage());}
-
-     }
+	}
 }
 
