@@ -2,10 +2,13 @@ package progettoPoker;
 
 import grafica.GraficaPoker;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.concurrent.Semaphore;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -44,6 +47,7 @@ public class Partita {
 	
 	private void eseguiClient() {
 		GraficaPoker gp=new GraficaPoker();
+		System.out.println(s.getInetAddress());
 		ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
 		Comando vecchio=null;
@@ -235,6 +239,16 @@ public class Partita {
 		}
 		
 	}
+	
+	static void displayInterfaceInformation(NetworkInterface netint) throws SocketException {
+        System.out.printf("Display name: %s\n", netint.getDisplayName());
+        System.out.printf("Name: %s\n", netint.getName());
+        Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+        for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+        	System.out.printf("InetAddress: %s\n", inetAddress);
+        }
+        System.out.printf("\n");
+     }
 
 	/**
 	 * @param args
@@ -271,6 +285,25 @@ public class Partita {
 				e.printStackTrace();
 			}
 			
+				try {
+					Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+					for (NetworkInterface netint : Collections.list(nets))
+			            displayInterfaceInformation(netint);
+					InetAddress []ia=server.getInetAddress().getAllByName("Utente-PC");
+					System.out.println(ia[1]);
+					JOptionPane.showMessageDialog(null,"Inserire "+Inet4Address.getLocalHost().getHostAddress()+" nei client");
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SocketException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			
+			
 			int numG=n.getValue();
 			Socket [] s=new Socket[numG-1];
 			for(int i=0;i<s.length;i++)
@@ -281,7 +314,7 @@ public class Partita {
 					e.printStackTrace();
 				}
 			Dealer d=new Dealer(numG,10000,s);
-			JOptionPane.showMessageDialog(null,"Inserire "+server.getInetAddress()+" nei client");
+			
 			new Partita(d);
 		}else{
 			String ip=JOptionPane.showInputDialog("Inserire indirizzio ip");
@@ -301,7 +334,9 @@ public class Partita {
 		//Partita p = new Partita();
 		//p.setVisible(true);
 
+		
 	}
+	
 	static class NumGioc extends JPanel implements ActionListener{ 
 
 		JList<Integer> list; 
