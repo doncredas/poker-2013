@@ -18,12 +18,14 @@ class SendThread implements Runnable {
 						+ sock.getInetAddress() + " on port " + sock.getPort());
 				this.print = new PrintWriter(sock.getOutputStream(), true);
 				while (true) {
-					System.out
-							.println("Type your message to send to server..type 'EXIT' to exit");
+					System.out.println("Type your message to send to server..type 'EXIT' to exit");
 					brinput = new BufferedReader(new InputStreamReader(
 							System.in));
 					String msgtoServerString = null;
-					msgtoServerString = brinput.readLine();
+					msgtoServerString = grafica.GraficaPoker.getConsChat().getText();
+					grafica.GraficaPoker.scriviChat(msgtoServerString);
+
+					//msgtoServerString = brinput.readLine();
 					this.print.println(msgtoServerString);
 					this.print.flush();
 					if (msgtoServerString.equals("EXIT"))
