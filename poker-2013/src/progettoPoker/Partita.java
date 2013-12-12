@@ -62,15 +62,15 @@ public class Partita {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				eseguiComando(com,gp);
-				vecchio=com;
 			}
+			eseguiComando(com,gp);
+			vecchio=com;
 		}
 	}
 
 	private void eseguiComando(Comando com,GraficaPoker gp) {
 		Comando risp=null;
-		if(com==null){
+		if(com.t==null&&com.fiches==0){
 			gp.disableBottoni(false);
 			while(risp==null){
 				risp=gp.getComando();
