@@ -1,8 +1,12 @@
 package grafica;
 
 import java.awt.Color;
+import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import progettoPoker.Carta;
 
 public class GiocatoreGrafico
 {
@@ -11,6 +15,7 @@ public class GiocatoreGrafico
 	private JLabel fiches=null;
 	private JLabel carta1=null;
 	private JLabel carta2=null;
+
 	
 	public GiocatoreGrafico(JLabel eti,JLabel nome,JLabel fich, JLabel car1,JLabel car2)
 	{
@@ -72,8 +77,9 @@ public class GiocatoreGrafico
 	/**
 	 * Setta l'icona delle carte del giocatore
 	 */
-	public void setCarte(/*Carta c1, Carta c2*/)
+	public void setCarte(Carta c1)
 	{
+		this.carta1.setIcon(MazzoGrafico.tredici);
 		
 	}
 
