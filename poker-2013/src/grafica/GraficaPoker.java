@@ -1,10 +1,12 @@
 package grafica;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 import java.io.File;
 //import java.net.*;
+
 
 
 
@@ -34,13 +36,12 @@ public class GraficaPoker extends JFrame {
 	static File Bottoni = new File(Immagini.getAbsolutePath() + "\\Bottoni");
 	File Carte = new File(Immagini.getAbsolutePath() + "\\Carte");
 
+	
+	
 	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
 	Container principale = this.getContentPane();
 	
-	/**
-	 * 
-	 * 
-	 */
+	
 	public static void scriviChat(String messaggio)
 	{
 		Chat.append(" "+messaggio+"\n");
@@ -170,24 +171,17 @@ public class GraficaPoker extends JFrame {
 	ImageIcon copertamezza=new ImageIcon(Carte.getAbsolutePath()+"\\copMez.png");
 	
 	// IMMAGINI: BOTTONI
-	ImageIcon Foldpre = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Foldpre.png");
+	ImageIcon Foldpre = new ImageIcon(Bottoni.getAbsolutePath()	+ "\\Foldpre.png");
 	ImageIcon Foldnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Fold.png");
-	ImageIcon Callpre = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Callpre.png");
+	ImageIcon Callpre = new ImageIcon(Bottoni.getAbsolutePath()	+ "\\Callpre.png");
 	ImageIcon Callnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Call.png");
-	ImageIcon Raisepre = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Raisepre.png");
-	ImageIcon Raisenot = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Raise.png");
+	ImageIcon Raisepre = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Raisepre.png");
+	ImageIcon Raisenot = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Raise.png");
 	ImageIcon Allpre = new ImageIcon(Bottoni.getAbsolutePath() + "\\Allpre.png");
 	ImageIcon Allnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\All.png");
-	ImageIcon Puntipre = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Puntipre.png");
-	ImageIcon Puntinot = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Punti.png");
-	ImageIcon Sendpre = new ImageIcon(Bottoni.getAbsolutePath()
-			+ "\\Sendpre.png");
+	ImageIcon Puntipre = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Puntipre.png");
+	ImageIcon Puntinot = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Punti.png");
+	ImageIcon Sendpre = new ImageIcon(Bottoni.getAbsolutePath()	+ "\\Sendpre.png");
 	ImageIcon Sendnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Send.png");
 	
 	//BOTTONI PER LA CHAT
@@ -205,151 +199,8 @@ public class GraficaPoker extends JFrame {
 	JLabel sfondo = new JLabel(sfon);
 
 	// IMMAGINI: ICONE CARTE 
-	ImageIcon uno = new ImageIcon(Carte.getAbsolutePath() + "\\1.png");// 2 di
-																		// cuori
-	ImageIcon due = new ImageIcon(Carte.getAbsolutePath() + "\\2.png");// 3 di
-																		// cuori
-	ImageIcon tre = new ImageIcon(Carte.getAbsolutePath() + "\\3.png");// 4 di
-																		// cuori
-	ImageIcon quattro = new ImageIcon(Carte.getAbsolutePath() + "\\4.png");// 5
-																			// di
-																			// cuori
-	ImageIcon cinque = new ImageIcon(Carte.getAbsolutePath() + "\\5.png");// 6
-																			// di
-																			// cuori
-	ImageIcon sei = new ImageIcon(Carte.getAbsolutePath() + "\\6.png");// 7 di
-																		// cuori
-	ImageIcon sette = new ImageIcon(Carte.getAbsolutePath() + "\\7.png");// 8 di
-																			// cuori
-	ImageIcon otto = new ImageIcon(Carte.getAbsolutePath() + "\\8.png");// 9 di
-																		// cuori
-	ImageIcon nove = new ImageIcon(Carte.getAbsolutePath() + "\\9.png");// 10 di
-																		// cuori
-	ImageIcon dieci = new ImageIcon(Carte.getAbsolutePath() + "\\10.png");// J
-																			// di
-																			// cuori
-	ImageIcon undici = new ImageIcon(Carte.getAbsolutePath() + "\\11.png");// Q
-																			// di
-																			// cuori
-	ImageIcon dodici = new ImageIcon(Carte.getAbsolutePath() + "\\12.png");// K
-																			// di
-																			// cuori
-	ImageIcon tredici = new ImageIcon(Carte.getAbsolutePath() + "\\13.png");// Asso
-																			// di
-																			// cuori
-	ImageIcon quattordici = new ImageIcon(Carte.getAbsolutePath() + "\\14.png"); // 2
-																					// di
-																					// quadri
-	ImageIcon quindici = new ImageIcon(Carte.getAbsolutePath() + "\\15.png"); // 3
-																				// di
-																				// quadri
-	ImageIcon sedici = new ImageIcon(Carte.getAbsolutePath() + "\\16.png"); // 4
-																			// di
-																			// quadri
-	ImageIcon diciassette = new ImageIcon(Carte.getAbsolutePath() + "\\17.png");// 5
-																				// di
-																				// quadri
-	ImageIcon diciotto = new ImageIcon(Carte.getAbsolutePath() + "\\18.png");// 6
-																				// di
-																				// quadri
-	ImageIcon diciannove = new ImageIcon(Carte.getAbsolutePath() + "\\19.png");// 7
-																				// di
-																				// quadri
-	ImageIcon venti = new ImageIcon(Carte.getAbsolutePath() + "\\20.png");// 8
-																			// di
-																			// quadri
-	ImageIcon ventuno = new ImageIcon(Carte.getAbsolutePath() + "\\21.png");// 9
-																			// di
-																			// quadri
-	ImageIcon ventidue = new ImageIcon(Carte.getAbsolutePath() + "\\22.png");// 10
-																				// di
-																				// quadri
-	ImageIcon ventitre = new ImageIcon(Carte.getAbsolutePath() + "\\23.png");// J
-																				// di
-																				// quadri
-	ImageIcon ventiquattro = new ImageIcon(Carte.getAbsolutePath() + "\\24.png");// Q
-																					// di
-																					// quadri
-	ImageIcon venticinque = new ImageIcon(Carte.getAbsolutePath() + "\\25.png");// K
-																				// di
-																				// quadri
-	ImageIcon ventisei = new ImageIcon(Carte.getAbsolutePath() + "\\26.png");// Asso
-																				// di
-																				// quadri
-	ImageIcon ventisette = new ImageIcon(Carte.getAbsolutePath() + "\\27.png"); // 2
-																				// di
-																				// fiori
-	ImageIcon ventotto = new ImageIcon(Carte.getAbsolutePath() + "\\28.png"); // 3
-																				// di
-																				// fiori
-	ImageIcon ventinove = new ImageIcon(Carte.getAbsolutePath() + "\\29.png"); // 4
-																				// di
-																				// fiori
-	ImageIcon trenta = new ImageIcon(Carte.getAbsolutePath() + "\\30.png");// 5
-																			// di
-																			// fiori
-	ImageIcon trentuno = new ImageIcon(Carte.getAbsolutePath() + "\\31.png");// 6
-																				// di
-																				// fiori
-	ImageIcon trentadue = new ImageIcon(Carte.getAbsolutePath() + "\\32.png");// 7
-																				// di
-																				// fiori
-	ImageIcon trentatre = new ImageIcon(Carte.getAbsolutePath() + "\\33.png");// 8
-																				// di
-																				// fiori
-	ImageIcon trentaquattro = new ImageIcon(Carte.getAbsolutePath()
-			+ "\\34.png");// 9 di fiori
-	ImageIcon trentacinque = new ImageIcon(Carte.getAbsolutePath() + "\\35.png");// 10
-																					// di
-																					// fiori
-	ImageIcon trentasei = new ImageIcon(Carte.getAbsolutePath() + "\\36.png");// J
-																				// di
-																				// fiori
-	ImageIcon trentasette = new ImageIcon(Carte.getAbsolutePath() + "\\37.png");// Q
-																				// di
-																				// fiori
-	ImageIcon trentotto = new ImageIcon(Carte.getAbsolutePath() + "\\38.png");// K
-																				// di
-																				// fiori
-	ImageIcon trentanove = new ImageIcon(Carte.getAbsolutePath() + "\\39.png");// Asso
-																				// di
-																				// fiori
-	ImageIcon quaranta = new ImageIcon(Carte.getAbsolutePath() + "\\40.png"); // 2
-																				// di
-																				// picche
-	ImageIcon quarantuno = new ImageIcon(Carte.getAbsolutePath() + "\\41.png"); // 3
-																				// di
-																				// picche
-	ImageIcon quarantadue = new ImageIcon(Carte.getAbsolutePath() + "\\42.png"); // 4
-																					// di
-																					// picche
-	ImageIcon quarantatre = new ImageIcon(Carte.getAbsolutePath() + "\\43.png");// 5
-																				// di
-																				// picche
-	ImageIcon quarantaquattro = new ImageIcon(Carte.getAbsolutePath()
-			+ "\\44.png");// 6 di picche
-	ImageIcon quarantacinque = new ImageIcon(Carte.getAbsolutePath()
-			+ "\\45.png");// 7 di picche
-	ImageIcon quarantasei = new ImageIcon(Carte.getAbsolutePath() + "\\46.png");// 8
-																				// di
-																				// picche
-	ImageIcon quarantasette = new ImageIcon(Carte.getAbsolutePath()
-			+ "\\47.png");// 9 di picche
-	ImageIcon quarantotto = new ImageIcon(Carte.getAbsolutePath() + "\\48.png");// 10
-																				// di
-																				// picche
-	ImageIcon quarantanove = new ImageIcon(Carte.getAbsolutePath() + "\\49.png");// J
-																					// di
-																					// picche
-	ImageIcon cinquanta = new ImageIcon(Carte.getAbsolutePath() + "\\50.png");// Q
-																				// di
-																				// picche
-	ImageIcon cinquantuno = new ImageIcon(Carte.getAbsolutePath() + "\\51.png");// K
-																				// di
-																				// picche
-	ImageIcon cinquantadue = new ImageIcon(Carte.getAbsolutePath() + "\\52.png");// Asso
-																					// di
-																					// picche
+	
+	
 
 	// IMMAGINI: LOGO FRAME
 	ImageIcon logo = new ImageIcon(Bottoni.getAbsolutePath() + "\\logo.jpg");
@@ -406,19 +257,19 @@ public class GraficaPoker extends JFrame {
 
 		// LE 5 CARTE SUL TAVOLO + MAZZO (completo ma devono essere modificabili)
 
-		cartaT1.setIcon(tredici);
+		cartaT1.setIcon(MazzoGrafico.tredici);
 		cartaT1.setBounds(300, 240, 100, 100); 
 
-		cartaT2.setIcon(ventisei);
+		cartaT2.setIcon(MazzoGrafico.ventisei);
 		cartaT2.setBounds(380, 240, 100, 100);
 
-		cartaT3.setIcon(trentanove);
+		cartaT3.setIcon(MazzoGrafico.trentanove);
 		cartaT3.setBounds(460, 240, 100,100); 
 
-		cartaT4.setIcon(cinquantadue);
+		cartaT4.setIcon(MazzoGrafico.cinquantadue);
 		cartaT4.setBounds(540, 240, 100, 100); 
 
-		cartaT5.setIcon(uno);
+		cartaT5.setIcon(MazzoGrafico.uno);
 		cartaT5.setBounds(620, 240, 100,100); 
 
 		mazzo.setIcon(Mazzo);
@@ -434,9 +285,9 @@ public class GraficaPoker extends JFrame {
 		fiches1.setFont(fontfiches); // rispetto a Utente1
 		fiches1.setBounds(585, 526, 100, 60); // +35,+10
 		fiches1.setForeground(Color.BLACK); 
-		Gioc1Car1.setIcon(trenta);
+		Gioc1Car1.setIcon(MazzoGrafico.trenta);
 		Gioc1Car1.setBounds(510, 420, 100, 100);
-		Gioc1Car2.setIcon(quaranta);
+		Gioc1Car2.setIcon(MazzoGrafico.quaranta);
 		Gioc1Car2.setBounds(582, 420, 100, 100);
 		GiocatoreGrafico Giocatore1 = new GiocatoreGrafico(etiUtente1, nome1,fiches1, Gioc1Car1, Gioc1Car2);
 		Giocatori[0]=Giocatore1;
@@ -567,10 +418,12 @@ public class GraficaPoker extends JFrame {
 		BarRaise.addMouseListener(list);
 		ScrollRaise.addMouseListener(list);
 
+
 		
+		
+		//SCROLL DEL RAISE
 		BarRaise.setOrientation(0); //MESSO IN ORIZZONTALE
 		BarRaise.setMaximum(110);  //SETTA IL MASSIMO
-		  //RITORNA IL VALORE ATTUALE DELLA BARRA
 		ScrollRaise.setBorder(null);
 		ScrollRaise.setBounds(450,640,150,20);
 		ConsRaise.setBounds(602,640,55,20);

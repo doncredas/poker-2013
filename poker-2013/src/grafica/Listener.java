@@ -8,13 +8,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
 
 import progettoPoker.*;
 import progettoPoker.Comando.Tipo;
 
-public class Listener implements KeyListener,ActionListener,MouseListener {
+public class Listener implements KeyListener,ActionListener,MouseListener,MouseMotionListener{
 
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
@@ -42,8 +43,6 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 		this.BarRaise=sb;
 		this.ConsRaise=br;
 		this.ScrollRaise=spb;
-
-
 
 	}
 
@@ -129,18 +128,19 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
+		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
@@ -160,6 +160,18 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 		// TODO Auto-generated method stub
 
 		this.ConsRaise.setText(Integer.toString(this.BarRaise.getValue()));
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		
 	}
 
 }
