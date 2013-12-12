@@ -22,6 +22,8 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
 	JTextArea Statistiche=new JTextArea();
+	JScrollPane ScrollChat = new JScrollPane(Chat);
+	JScrollPane ScrollStat = new JScrollPane(Statistiche);
 	
 	ImageIcon VisChatSelected=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\VisChatSel.png");
 	ImageIcon StatSelected=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\StatsSel.png");
@@ -29,10 +31,12 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 	ImageIcon Statistics=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\Stats.png");
 	
 	
-	public Listener(JTextArea a, JTextField b,JTextArea c) {
+	public Listener(JTextArea a, JTextField b,JTextArea c,JScrollPane sc,JScrollPane ss) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche=c;
+		this.ScrollChat=sc;
+		this.ScrollStat=ss;
 
 
 
@@ -49,6 +53,8 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 				this.Chat.setText(this.Chat.getText() + "  Nickname: "	+ ConsChat.getText()+ "\n" );
 				ConsChat.setText("");
 			}
+			this.Statistiche.setText(this.Chat.getText()+" STAT: "+ConsChat.getText()+"\n");
+			ConsChat.setText("");
 		}
 	}
 
@@ -72,22 +78,26 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 	{
 		if(arg0.getSource()==GraficaPoker.VisChat)
 		{
+			this.Statistiche.setVisible(false);
+			this.ScrollStat.setVisible(false);
 			this.Chat.setVisible(true);
+			this.ScrollChat.setVisible(true);
 			this.ConsChat.setVisible(true);
 			GraficaPoker.Invia.setVisible(true);
-			this.Statistiche.setVisible(false);
 			GraficaPoker.VisChat.setIcon(VisChatSelected);;
             GraficaPoker.Stats.setIcon(Statistics);
 		}
 		if(arg0.getSource()==GraficaPoker.Stats)
 		{
 			this.Chat.setVisible(false);
+			this.ScrollChat.setVisible(false);
+			this.Statistiche.setVisible(true);
+			this.ScrollStat.setVisible(true);
 			this.ConsChat.setVisible(false);
 			GraficaPoker.Invia.setVisible(false);
-			this.Statistiche.setVisible(true);
             GraficaPoker.Stats.setIcon(StatSelected);
 			GraficaPoker.VisChat.setIcon(VisualizzaChat);
-			this.Statistiche.append("STATISTICHE");
+			
 
 		}
 			
