@@ -25,6 +25,7 @@ class RecieveFromClientThread implements Runnable {
 			brBufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 			while (true) {
 				messageString = grafica.GraficaPoker.getConsChat().getText();
+				//grafica.GraficaPoker.setConsChat(" ");
 
 				//while ((messageString = brBufferedReader.readLine()) != null) {// assign message from client to messageString
 				//	if (messageString.equals("EXIT")) {
