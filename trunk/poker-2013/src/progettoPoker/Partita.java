@@ -22,7 +22,7 @@ import progettoPoker.Comando.Tipo;
 public class Partita {
 	//private ServerSocket ss = null;
 	private Socket s = null;
-	private ObjectOutputStream OOS[] = null;
+	private static ObjectOutputStream OOS[] = null;
 	private ObjectInputStream OIS[] = null;
 	private ObjectOutputStream oos=null;
 	private ObjectInputStream ois=null;
@@ -55,6 +55,7 @@ public class Partita {
 			while(com==vecchio){
 				try {
 					com=(Comando)ois.readObject();
+					
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -81,7 +82,7 @@ public class Partita {
 			}else{
 				switch(com.t){
 				case NICK_NAME:risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
-				case DAI_CARTA:
+				case DAI_CARTA:gp.Giocatori[0].setCarte(com.getC());
 				case NOTIFICA:
 				}
 			}
@@ -107,11 +108,11 @@ public class Partita {
 			e1.printStackTrace();
 		}
 		this.d=d;
-		OOS=new ObjectOutputStream[d.getG().length-1];
+		//OOS=new ObjectOutputStream[d.getG().length-1];
 		OIS=new ObjectInputStream[d.getG().length-1];
 		for(int i=0;i<d.getS().length;i++){
 			try {
-				OOS[i]=new ObjectOutputStream(d.getS()[i].getOutputStream());
+				//OOS[i]=new ObjectOutputStream(d.getS()[i].getOutputStream());
 				OIS[i]=new ObjectInputStream(d.getS()[i].getInputStream());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -308,14 +309,18 @@ public class Partita {
 			
 			int numG=n.getValue();
 			Socket [] s=new Socket[numG-1];
+			OOS=new ObjectOutputStream[numG-1];
 			for(int i=0;i<s.length;i++)
 				try {
 					s[i]=server.accept();
+					OOS[i]=new ObjectOutputStream(s[i].getOutputStream());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			Dealer d=new Dealer(numG,10000,s);
+			
+			
+			Dealer d=new Dealer(numG,10000,s,OOS);
 			//OOS=null;
 			new Partita(d);
 		}else{
