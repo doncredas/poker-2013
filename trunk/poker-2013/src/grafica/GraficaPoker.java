@@ -42,13 +42,13 @@ public class GraficaPoker extends JFrame {
 	 * 
 	 * 
 	 */
-	public void ScriviChat(String messaggio)
+	public static void scriviChat(String messaggio)
 	{
-		Chat.append(messaggio);
+		Chat.append(" "+messaggio+"\n");
 	}
-	public void ScriviStatistica(String messaggio)
+	public static void scriviStatistica(String messaggio)
 	{
-		Statistiche.append(messaggio);
+		Statistiche.append(" "+messaggio+"\n");
 	}
 	public void disableFold()
 	{
@@ -157,13 +157,13 @@ public class GraficaPoker extends JFrame {
 	
 	
 	// CREAZIONE CHAT E STATISTICHE
-	JTextArea Chat = new JTextArea();
+	static JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
-	JTextArea Statistiche = new JTextArea();
+	static JTextArea Statistiche = new JTextArea();
 	JScrollPane ScrollChat = new JScrollPane(Chat);
 	JScrollPane ScrollStat = new JScrollPane(Statistiche);
 	
-	Listener list = new Listener(Chat, ConsChat,Statistiche); // LISTENER
+	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat); // LISTENER
 
 	// IMMAGINI: CARTE COPERTE
 	ImageIcon Mazzo = new ImageIcon(Carte.getAbsolutePath() + "\\mazzo.png");
@@ -578,13 +578,14 @@ public class GraficaPoker extends JFrame {
 		ScrollChat.setWheelScrollingEnabled(true);
 		ScrollStat.setBounds(927,542,290,100);
 		ScrollStat.setWheelScrollingEnabled(true);	
+		
 		Statistiche.setEditable(false);
-		Statistiche.setForeground(Color.LIGHT_GRAY);
+		Statistiche.setForeground(Color.GREEN.darker());
 		Statistiche.setFont(font);
 		Chat.setEditable(false);
-		Chat.setOpaque(false);
 		Chat.setForeground(Color.BLUE);
 		Chat.setFont(font);
+		
 		ConsChat.setFont(font);
 		ConsChat.setBounds(927, 643, 200, 30);
 		ConsChat.setForeground(Color.BLACK);
