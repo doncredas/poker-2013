@@ -36,5 +36,13 @@ public class Carta implements Comparable<Carta>,Serializable{
 		if(this.getVal()==1)return -1;
 		return this.getVal()-c.getVal();
 	}
+	public int getIndice(){
+		switch (palo){
+			case 'c':return val;
+			case 'q':return val+13;
+			case 'f':return val+26;
+			default:return val+39;
+		}
+	}
 	
 }

@@ -53,6 +53,7 @@ public class Giocatore {
 			com=new Comando(null,fiches);
 			try {
 				OOS.writeObject(com);
+				OOS.flush();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,6 +70,7 @@ public class Giocatore {
 		while(true){
 			try {
 				OOS.writeObject(com);
+				OOS.flush();
 				break;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -100,18 +102,19 @@ public class Giocatore {
 		this.fiches=fiches;
 		this.indice=indice;
 	}
-	public Giocatore(int fiches,Socket s,int indice) {
+	public Giocatore(int fiches,Socket s,int indice,ObjectOutputStream OOS) {
 		this.fiches=fiches;
 		this.indice=indice;
 		client=s;
 		com=new Comando(null,fiches);
-		try {
-			OOS=new ObjectOutputStream( s.getOutputStream());
-			OOS.writeObject(com);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			this.OOS=OOS;
+			try {
+				OOS.writeObject(com);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
 
 }

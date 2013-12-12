@@ -45,14 +45,14 @@ public class Dealer {
 		return g;
 	}//getG
 
-	public Dealer(int nGiocatori, int fiches, Socket []s) {
+	public Dealer(int nGiocatori, int fiches, Socket []s,ObjectOutputStream [] OOS) {
 		this.s=s;
 		this.nGiocatori=nGiocatori;
 		g=new Giocatore[nGiocatori];
 		piatto=new int [g.length];
 		g[0]=new Giocatore(fiches,0);
 		for(int i=1; i<g.length;i++){
-			g[i]=new Giocatore(fiches,s[i-1],i);
+			g[i]=new Giocatore(fiches,s[i-1],i,OOS[i-1]);
 		}
 		for(int i=0;i<52;i++){
 			if(i<=12){mazzo[i]=new Carta(i+1,'c');continue;}
