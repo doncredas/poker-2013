@@ -77,7 +77,7 @@ public class Partita {
 			}
 		}else{
 			if(com.t==null){
-				//TODO set fiches
+				gp.Giocatori[0].setFiches(com.getFiches());
 			}else{
 				switch(com.t){
 				case NICK_NAME:risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
