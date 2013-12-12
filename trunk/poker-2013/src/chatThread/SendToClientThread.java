@@ -21,13 +21,13 @@ class SendToClientThread implements Runnable {
 				String msgToClientString = null;
 				// get userinput
 				//msgToClientString = input.readLine();// get message to send to
-				msgToClientString = grafica.GraficaPoker.getConsChat().getText();
+				msgToClientString = grafica.GraficaPoker.ConsChat.getText();
 
 				for(int i=0;i<clientSock.length;i++){// client
 				pwPrintWriter[i].println(msgToClientString);// send message to client with PrintWriter
 				pwPrintWriter[i].flush();// flush the PrintWriter
 				}
-				System.out.println("Please enter something to send back to client..");
+				//System.out.println("Please enter something to send back to client..");
 			}// end while
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

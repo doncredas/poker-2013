@@ -24,7 +24,7 @@ class RecieveFromClientThread implements Runnable {
 			String messageString;
 			brBufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 			while (true) {
-				messageString = grafica.GraficaPoker.getConsChat().getText();
+				messageString = grafica.GraficaPoker.ConsChat.getText();
 				//grafica.GraficaPoker.setConsChat(" ");
 
 				//while ((messageString = brBufferedReader.readLine()) != null) {// assign message from client to messageString
@@ -46,7 +46,7 @@ class RecieveFromClientThread implements Runnable {
 					}
 					
 				//}
-				System.out.println("Please enter something to send back to client..");
+				//System.out.println("Please enter something to send back to client..");
 				this.clientSocket.close();
 				System.exit(0);
 			}
