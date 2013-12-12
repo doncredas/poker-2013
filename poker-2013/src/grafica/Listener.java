@@ -9,10 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import progettoPoker.*;
 import progettoPoker.Comando.Tipo;
@@ -25,18 +22,26 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 	JScrollPane ScrollChat = new JScrollPane(Chat);
 	JScrollPane ScrollStat = new JScrollPane(Statistiche);
 	
+	
+	JScrollBar BarRaise=new JScrollBar();
+	JScrollPane ScrollRaise=new JScrollPane(BarRaise);
+	JTextField ConsRaise=new JTextField();
+	
 	ImageIcon VisChatSelected=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\VisChatSel.png");
 	ImageIcon StatSelected=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\StatsSel.png");
 	ImageIcon VisualizzaChat=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\VisChat.png");
 	ImageIcon Statistics=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\Stats.png");
 	
 	
-	public Listener(JTextArea a, JTextField b,JTextArea c,JScrollPane sc,JScrollPane ss) {
+	public Listener(JTextArea a, JTextField b,JTextArea c,JScrollPane sc,JScrollPane ss,JScrollPane spb,JScrollBar sb,JTextField br) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche=c;
 		this.ScrollChat=sc;
 		this.ScrollStat=ss;
+		this.BarRaise=sb;
+		this.ConsRaise=br;
+		this.ScrollRaise=spb;
 
 
 
@@ -53,8 +58,6 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 				this.Chat.setText(this.Chat.getText() + "  Nickname: "	+ ConsChat.getText()+ "\n" );
 				ConsChat.setText("");
 			}
-			this.Statistiche.setText(this.Chat.getText()+" STAT: "+ConsChat.getText()+"\n");
-			ConsChat.setText("");
 		}
 	}
 
@@ -127,7 +130,6 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -141,17 +143,23 @@ public class Listener implements KeyListener,ActionListener,MouseListener {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
+     
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+       // BarRaise.setUnitIncrement(20); Setta il movimento della barra alla presione delle frecce
+		this.ConsRaise.setText(Integer.toString(this.BarRaise.getValue()));
 	}
+    
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
+		this.ConsRaise.setText(Integer.toString(this.BarRaise.getValue()));
 	}
 
 }
