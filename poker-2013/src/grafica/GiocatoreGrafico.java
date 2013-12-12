@@ -79,7 +79,7 @@ public class GiocatoreGrafico
 	 */
 	public void setCarte(Carta c1)
 	{
-		this.carta1.setIcon(MazzoGrafico.tredici);
+		this.carta1.setIcon(MazzoGrafico.getCarta(c1.getIndice()));
 		
 	}
 

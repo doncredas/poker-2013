@@ -69,9 +69,14 @@ public final class MazzoGrafico {
 		public static ImageIcon cinquantadue = new ImageIcon(Carte.getAbsolutePath()+ "\\52.png");// Asso di picche
 		
 
-		public ImageIcon getCarta(Carta c1)
+		public static ImageIcon getCarta(int i)
 		{
+			switch(i)
+			{
+			case 1: return uno;
+			case 2: return due;
 			//TODO
-			return null;
+			default: return cinquantadue;
+			}
 		}
 }
