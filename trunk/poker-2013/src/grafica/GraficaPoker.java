@@ -19,7 +19,6 @@ public class GraficaPoker extends JFrame {
 	static Comando com=null;
 	
 	/**
-	 * 
 	 * Restituisce un Comando
 	 */
 	public Comando getComando()
@@ -163,7 +162,7 @@ public class GraficaPoker extends JFrame {
 	JScrollPane ScrollChat = new JScrollPane(Chat);
 	JScrollPane ScrollStat = new JScrollPane(Statistiche);
 	
-	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat); // LISTENER
+	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,ScrollRaise,BarRaise,ConsRaise); // LISTENER
 
 	// IMMAGINI: CARTE COPERTE
 	ImageIcon Mazzo = new ImageIcon(Carte.getAbsolutePath() + "\\mazzo.png");
@@ -564,10 +563,14 @@ public class GraficaPoker extends JFrame {
 		AllIn.addActionListener(list);
 		VisChat.addActionListener(list);
 		Stats.addActionListener(list);
+		
+		BarRaise.addMouseListener(list);
+		ScrollRaise.addMouseListener(list);
 
+		
 		BarRaise.setOrientation(0); //MESSO IN ORIZZONTALE
-		BarRaise.setMaximum(2000);  //SETTA IL MASSIMO
-		BarRaise.getValue();  //RITORNA IL VALORE ATTUALE DELLA BARRA
+		BarRaise.setMaximum(110);  //SETTA IL MASSIMO
+		  //RITORNA IL VALORE ATTUALE DELLA BARRA
 		ScrollRaise.setBorder(null);
 		ScrollRaise.setBounds(450,640,150,20);
 		ConsRaise.setBounds(602,640,55,20);
