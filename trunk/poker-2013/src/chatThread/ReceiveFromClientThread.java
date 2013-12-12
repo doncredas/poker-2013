@@ -24,13 +24,15 @@ class RecieveFromClientThread implements Runnable {
 			String messageString;
 			brBufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 			while (true) {
-				while ((messageString = brBufferedReader.readLine()) != null) {// assign message from client to messageString
-					if (messageString.equals("EXIT")) {
-						break;// break to close socket if EXIT
-					}
+				messageString = grafica.GraficaPoker.getConsChat().getText();
+
+				//while ((messageString = brBufferedReader.readLine()) != null) {// assign message from client to messageString
+				//	if (messageString.equals("EXIT")) {
+				//		break;// break to close socket if EXIT
+				//	}
 					System.out.println("From Client: " + messageString);// print the message from client
 					//manda il messaggio nella chat grafica
-					grafica.GraficaPoker.Scrivi(messageString);
+					grafica.GraficaPoker.scriviChat(messageString);
 					//Manda il messaggio a tutti quanti
 					for(int i=0;i<clientSocket1.length;i++)
 					pwPrintWriter[i] = new PrintWriter(this.clientSocket1[i].getOutputStream());
@@ -42,7 +44,7 @@ class RecieveFromClientThread implements Runnable {
 						}
 					}
 					
-				}
+				//}
 				System.out.println("Please enter something to send back to client..");
 				this.clientSocket.close();
 				System.exit(0);
