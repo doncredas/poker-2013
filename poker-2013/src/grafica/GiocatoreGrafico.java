@@ -77,9 +77,12 @@ public class GiocatoreGrafico
 	/**
 	 * Setta l'icona delle carte del giocatore
 	 */
-	public void setCarte(Carta c1)
+	public void setCarte(Carta c1,int i)
 	{
-		this.carta1.setIcon(MazzoGrafico.getCarta(c1.getIndice()));
+		if(i==1) //se è la prima carta
+		    this.carta1.setIcon(MazzoGrafico.getCarta(c1.getIndice()));
+		if(i==2) //se è la seconda carta
+			this.carta2.setIcon(MazzoGrafico.getCarta(c1.getIndice()));
 		
 	}
 
