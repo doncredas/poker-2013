@@ -130,16 +130,14 @@ public class Dealer {
 					 mazzoMischiato[iTotale]=mazzo[iS+i];
 					 iS++;
 					 iTotale++;
-				 } 
-				 for(int j=0; j<dx && iD<52; j++){
-					 mazzoMischiato[iTotale]=mazzo[iD+j];
+				 } for(int j=0; j<dx && iD<52; j++){
+					 mazzoMischiato[iTotale]=mazzo[iD+j-1];
 					 iD++;
 					 iTotale++;
 				 }
+				 
 			}//while
-			Carta[] tmp=mazzo;
 			mazzo=mazzoMischiato;
-			mazzoMischiato=tmp;
 		}//for
 	}//mischia
 	
@@ -175,7 +173,7 @@ public class Dealer {
 			if(g[i].getFiches()>0){
 				g[i].setCarta1(mazzo[primaCarta]);
 				primaCarta--;
-				j=(i+1)%nGiocatori;
+				i=(i+1)%nGiocatori;
 			}			
 		}while( i != posD);
 	}//daiCarte

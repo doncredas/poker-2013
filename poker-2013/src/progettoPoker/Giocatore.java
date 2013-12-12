@@ -66,11 +66,15 @@ public class Giocatore {
 		this.carta1 = carta1;
 		if(OOS!=null){
 		com=new Comando(Tipo.DAI_CARTA,carta1);
-		try {
-			OOS.writeObject(com);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while(true){
+			try {
+				OOS.writeObject(com);
+				break;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				//System.out.println("errore setcarta1");
+			}
 		}
 		}
 	}

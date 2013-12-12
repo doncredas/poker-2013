@@ -70,7 +70,7 @@ public class Partita {
 
 	private void eseguiComando(Comando com,GraficaPoker gp) {
 		Comando risp=null;
-		if(com.t==null&&com.fiches==0){
+		if(com==null){
 			gp.disableBottoni(false);
 			while(risp==null){
 				risp=gp.getComando();
@@ -101,12 +101,14 @@ public class Partita {
 		//this.ss=ss;
 		GraficaPoker gp=new GraficaPoker();
 		try {
-			ServerT chat=new ServerT(1,444);
+			ServerT chat=new ServerT(d.getS().length-1,444);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		this.d=d;
+		OOS=new ObjectOutputStream[d.getG().length-1];
+		OIS=new ObjectInputStream[d.getG().length-1];
 		for(int i=0;i<d.getS().length;i++){
 			try {
 				OOS[i]=new ObjectOutputStream(d.getS()[i].getOutputStream());
@@ -314,7 +316,7 @@ public class Partita {
 					e.printStackTrace();
 				}
 			Dealer d=new Dealer(numG,10000,s);
-			
+			//OOS=null;
 			new Partita(d);
 		}else{
 			String ip=JOptionPane.showInputDialog("Inserire indirizzio ip");
