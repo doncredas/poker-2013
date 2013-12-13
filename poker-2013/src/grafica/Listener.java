@@ -28,10 +28,9 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 	JScrollPane ScrollRaise=new JScrollPane(BarRaise);
 	JTextField ConsRaise=new JTextField();
 	
-	ImageIcon VisChatSelected=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\VisChatSel.png");
-	ImageIcon StatSelected=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\StatsSel.png");
-	ImageIcon VisualizzaChat=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\VisChat.png");
-	ImageIcon Statistics=new ImageIcon(GraficaPoker.Bottoni.getAbsolutePath()+"\\Stats.png");
+	
+	
+
 	
 	
 	public Listener(JTextArea a, JTextField b,JTextArea c,JScrollPane sc,JScrollPane ss,JScrollPane spb,JScrollBar sb,JTextField br) {
@@ -86,10 +85,10 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 			this.ScrollChat.setVisible(true);
 			this.ConsChat.setVisible(true);
 			GraficaPoker.Invia.setVisible(true);
-			GraficaPoker.VisChat.setIcon(VisChatSelected);;
-            GraficaPoker.Stats.setIcon(Statistics);
+			GraficaPoker.VisChat.setIcon(Icone.ChatSelected);;
+            GraficaPoker.VisStat.setIcon(Icone.VisualizzaStat);
 		}
-		if(arg0.getSource()==GraficaPoker.Stats)
+		if(arg0.getSource()==GraficaPoker.VisStat)
 		{
 			this.Chat.setVisible(false);
 			this.ScrollChat.setVisible(false);
@@ -97,8 +96,8 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 			this.ScrollStat.setVisible(true);
 			this.ConsChat.setVisible(false);
 			GraficaPoker.Invia.setVisible(false);
-            GraficaPoker.Stats.setIcon(StatSelected);
-			GraficaPoker.VisChat.setIcon(VisualizzaChat);
+            GraficaPoker.VisStat.setIcon(Icone.StatSelected);
+			GraficaPoker.VisChat.setIcon(Icone.VisualizzaChat);
 			
 
 		}
