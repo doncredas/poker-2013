@@ -24,38 +24,32 @@ public class GraficaPoker extends JFrame {
 	static Comando com=null;
 
 	
-	/**	 Setta le prime 2 carte sul tavolo
+	/**	 Setta le prime 3 carte sul tavolo
 	 */
-	public void setCarteTavolo(Carta c1,Carta c2)
+	public void setFlop(Carta [] c)
 	{
-		this.cartaT1.setIcon(Icone.getCarta(c1.getIndice()));
+		this.cartaT1.setIcon(Icone.getCarta(c[0].getIndice()));
 		this.cartaT1.setVisible(true);
-		this.cartaT2.setIcon(Icone.getCarta(c2.getIndice()));
+		this.cartaT2.setIcon(Icone.getCarta(c[1].getIndice()));
 		this.cartaT2.setVisible(true);
+		this.cartaT3.setIcon(Icone.getCarta(c[2].getIndice()));
+		this.cartaT3.setVisible(true);
 	}
 	/**
-	 * Setta solo una carta alla volta solo se il turno � dal 2� in poi
+	 * Setta la 4a carta sul tavolo
 	 */
-	public void setCartaTavolo(Carta c1)
+	public void setTurn(Carta c1)
 	{
-		int mano=0;
-		//int mano=Partita.getTurno();
-		if(mano==2)
-		{
-			this.cartaT3.setIcon(Icone.getCarta(c1.getIndice()));
-			this.cartaT3.setVisible(true);
-		}
-		if(mano==3)
-		{
-			this.cartaT4.setIcon(Icone.getCarta(c1.getIndice()));
-			this.cartaT4.setVisible(true);
-		}
-		if(mano==4)
-		{
-			this.cartaT5.setIcon(Icone.getCarta(c1.getIndice()));
-			this.cartaT5.setVisible(true);
-		}
-		
+		this.cartaT4.setIcon(Icone.getCarta(c1.getIndice()));
+		this.cartaT4.setVisible(true);
+	}
+	/**
+	 * Setta la 5a carta sul tavolo
+	 */
+	public void setRiver(Carta c1)
+	{
+		this.cartaT5.setIcon(Icone.getCarta(c1.getIndice()));
+		this.cartaT5.setVisible(true);
 	}
 	/**
 	 * Restituisce un Comando

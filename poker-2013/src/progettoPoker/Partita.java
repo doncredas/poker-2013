@@ -85,13 +85,18 @@ public class Partita {
 				case NICK_NAME:risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
 				case DAI_CARTA:{
 					if(com.getC()!=null){
-						nCarta=(nCarta%7)+1;
-						gp.Giocatori[0].setCarte(com.getC(),nCarta);
-					}else
-						for(int i=0;i<3;i++){
-							nCarta=(nCarta%7)+1;
-							gp.Giocatori[0].setCarte(com.getCar()[i],nCarta);
-						}
+						nCarta=(nCarta%4)+1;
+						if(nCarta==1||nCarta==2)
+							gp.Giocatori[0].setCarte(com.getC(),nCarta);
+						else
+							if(nCarta==3)
+								gp.setTurn(com.getC());
+							else
+								gp.setRiver(com.getC());
+						//TODO
+					}else{
+						gp.setFlop(com.getCar());
+					}
 					if(com.getFiches()!=0){
 						//TODO
 					}
