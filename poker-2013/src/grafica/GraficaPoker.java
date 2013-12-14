@@ -34,7 +34,7 @@ public class GraficaPoker extends JFrame {
 		this.cartaT2.setVisible(true);
 	}
 	/**
-	 * Setta solo una carta alla volta solo se il turno è dal 2° in poi
+	 * Setta solo una carta alla volta solo se il turno ï¿½ dal 2ï¿½ in poi
 	 */
 	public void setCartaTavolo(Carta c1)
 	{
@@ -262,10 +262,10 @@ public class GraficaPoker extends JFrame {
 		cartaT4.setBounds(545, 240, 100, 100); 
 		cartaT5.setBounds(620, 240, 100,100); 
 		
-		cartaT1.setIcon(Icone.tredici);  //TODO da eliminare queste icone
-		cartaT2.setIcon(Icone.ventisei);
-		cartaT3.setIcon(Icone.trentanove);  
-		cartaT4.setIcon(Icone.cinquantadue);
+		cartaT1.setIcon(Icone.zero);  //TODO da eliminare queste icone
+		cartaT2.setIcon(Icone.tredici);
+		cartaT3.setIcon(Icone.ventisei);  
+		cartaT4.setIcon(Icone.trentanove);
 		cartaT5.setIcon(Icone.uno);
 
 		mazzo.setIcon(Icone.Mazzo);

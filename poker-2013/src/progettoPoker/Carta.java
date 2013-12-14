@@ -38,10 +38,10 @@ public class Carta implements Comparable<Carta>,Serializable{
 	}
 	public int getIndice(){
 		switch (palo){
-			case 'c':return val;
-			case 'q':return val+13;
-			case 'f':return val+26;
-			default:return val+39;
+			case 'c':return val-1;
+			case 'q':return val+12;
+			case 'f':return val+25;
+			default:return val+38;
 		}
 	}
 	

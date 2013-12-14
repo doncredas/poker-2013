@@ -31,6 +31,7 @@ public class Partita {
 	private Dealer d = null;
 	private boolean fineMano=false;
 	private int tempo=60;
+	private int nCarta=0;
 	private Cronometro cron=new Cronometro();
 
 	public Partita(Socket client)  {
@@ -82,7 +83,20 @@ public class Partita {
 			}else{
 				switch(com.t){
 				case NICK_NAME:risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
-				case DAI_CARTA:gp.Giocatori[0].setCarte(com.getC());
+				case DAI_CARTA:{
+					if(com.getC()!=null){
+						nCarta=(nCarta%7)+1;
+						gp.Giocatori[0].setCarte(com.getC(),nCarta);
+					}else
+						for(int i=0;i<3;i++){
+							nCarta=(nCarta%7)+1;
+							gp.Giocatori[0].setCarte(com.getCar()[i],nCarta);
+						}
+					if(com.getFiches()!=0){
+						//TODO
+					}
+						
+				}
 				case NOTIFICA:
 				}
 			}
