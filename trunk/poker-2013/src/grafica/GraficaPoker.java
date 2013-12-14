@@ -69,7 +69,6 @@ public class GraficaPoker extends JFrame {
 	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
 	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
 	
-	
 	/**Scrive un messaggio in chat
 	 */ 
 	public static void scriviChat(String messaggio)
@@ -529,7 +528,9 @@ public class GraficaPoker extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new GraficaPoker();
+		GraficaPoker gp=new GraficaPoker();
+		Movimento.muovi(Call, 500, 400, gp);
+		Movimento.muovi(Fold, 100, 200, gp);
 	}// main
 
 }// GraficaPoker
