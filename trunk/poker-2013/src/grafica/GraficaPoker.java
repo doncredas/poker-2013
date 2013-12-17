@@ -23,188 +23,6 @@ public class GraficaPoker extends JFrame {
 	public GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
 	static Comando com=null;
 
-	
-	/**	 Setta le prime 3 carte sul tavolo
-	 */
-	public void setFlop(Carta [] c)
-	{
-		this.cartaT1.setIcon(Icone.getCarta(c[0].getIndice()));
-		this.cartaT1.setVisible(true);
-		this.cartaT2.setIcon(Icone.getCarta(c[1].getIndice()));
-		this.cartaT2.setVisible(true);
-		this.cartaT3.setIcon(Icone.getCarta(c[2].getIndice()));
-		this.cartaT3.setVisible(true);
-	}
-	/**
-	 * Setta la 4a carta sul tavolo
-	 */
-	public void setTurn(Carta c1)
-	{
-		this.cartaT4.setIcon(Icone.getCarta(c1.getIndice()));
-		this.cartaT4.setVisible(true);
-	}
-	/**
-	 * Setta la 5a carta sul tavolo
-	 */
-	public void setRiver(Carta c1)
-	{
-		this.cartaT5.setIcon(Icone.getCarta(c1.getIndice()));
-		this.cartaT5.setVisible(true);
-	}
-	/**
-	 * Restituisce un Comando
-	 */
-	public Comando getComando()
-	{
-		return com;
-	}
-	/**
-	 * Resetta il comando
-	 */
-	public void resetComando()
-	{
-		com=null;
-	}
-	
-	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
-	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
-	
-	/**Scrive un messaggio in chat
-	 */ 
-	public static void scriviChat(String messaggio)
-	{
-		Chat.append(" "+messaggio+"\n");
-	}
-	/**Scrive un messaggio nella console delle statistiche
-	 */ 
-	public static void scriviStatistica(String messaggio)
-	{
-		Statistiche.append(" "+messaggio+"\n");
-	}
-	/**Se settato a true disabilita il fold, settato a false lo riabilita
-	 */ 
-	public void disableFold(boolean flag)
-	{
-		Fold.setEnabled(!flag);
-	}
-	/**Se settato a true disabilita il Raise, settato a false lo riabilita
-	 */ 
-	public void disableRaise(boolean flag)
-	{
-		Raise.setEnabled(!flag);
-	}
-	/**
-	 * Chiamato con true disabilita tutti i bottoni,con false li riabilita.
-	 */
-	public void disableBottoni(boolean flag)
-	{
-		Fold.setEnabled(!flag);
-		Raise.setEnabled(!flag);
-		Call.setEnabled(!flag);
-		AllIn.setEnabled(!flag);
-	}
-
-	// CREAZIONE BOTTONI
-	static JButton Fold = new JButton("Fold");
-	static JButton Call = new JButton("Call");
-	static JButton Raise = new JButton("Raise");
-	static JButton AllIn = new JButton("All-In");
-	static JButton Invia = new JButton("Invia");
-	       JButton SegnaPunti = new JButton("Punti");
-	static JButton VisChat=new JButton("Chat");
-	static JButton VisStat=new JButton("Stats");
-
-	// GIOCATORE 1
-	JLabel etiUtente1 = new JLabel();
-	JLabel nome1 = new JLabel("Giocatore 1");
-	JLabel fiches1 = new JLabel("10000");
-	JLabel Gioc1Car1 = new JLabel();
-	JLabel Gioc1Car2 = new JLabel();
-
-	// GIOCATORE 2
-	JLabel etiUtente2 = new JLabel();
-	JLabel nome2 = new JLabel("Giocatore 2");
-	JLabel fiches2 = new JLabel("10000");
-	JLabel Gioc2Car1 = new JLabel();
-	JLabel Gioc2Car2 = new JLabel();
-
-	// GIOCATORE 3
-
-	JLabel etiUtente3 = new JLabel();
-	JLabel nome3 = new JLabel("Giocatore 3");
-	JLabel fiches3 = new JLabel("10000");
-	JLabel Gioc3Car1 = new JLabel();
-	JLabel Gioc3Car2 = new JLabel();
-
-	// GIOCATORE 4
-
-	JLabel etiUtente4 = new JLabel();
-	JLabel nome4 = new JLabel("Giocatore 4");
-	JLabel fiches4 = new JLabel("10000");
-	JLabel Gioc4Car1 = new JLabel();
-	JLabel Gioc4Car2 = new JLabel();
-
-	// GIOCATORE 5
-
-	JLabel etiUtente5 = new JLabel();
-	JLabel nome5 = new JLabel("Giocatore 5");
-	JLabel fiches5 = new JLabel("10000");
-	JLabel Gioc5Car1 = new JLabel();
-	JLabel Gioc5Car2 = new JLabel();
-
-	// GIOCATORE 6
-
-	JLabel etiUtente6 = new JLabel();
-	JLabel nome6 = new JLabel("Giocatore 6");
-	JLabel fiches6 = new JLabel("10000");
-	JLabel Gioc6Car1 = new JLabel();
-	JLabel Gioc6Car2 = new JLabel();
-
-	// GIOCATORE 7
-
-	JLabel etiUtente7 = new JLabel();
-	JLabel nome7 = new JLabel("Giocatore 7");
-	JLabel fiches7 = new JLabel("10000");
-	JLabel Gioc7Car1 = new JLabel();
-	JLabel Gioc7Car2 = new JLabel();
-
-	// GIOCATORE 8
-	JLabel etiUtente8 = new JLabel();
-	JLabel nome8 = new JLabel("Giocatore 8");
-	JLabel fiches8 = new JLabel("10000");
-	JLabel Gioc8Car1 = new JLabel();
-	JLabel Gioc8Car2 = new JLabel();
-
-	// CREAZIONE CARTE SUL TAVOLO
-	JLabel mazzo = new JLabel();
-	JLabel cartaT1 = new JLabel();
-	JLabel cartaT2 = new JLabel();
-	JLabel cartaT3 = new JLabel(); // carte sul tavolo scoperte
-	JLabel cartaT4 = new JLabel();
-	JLabel cartaT5 = new JLabel();
-
-	//BARRA DEL RAISE
-	JScrollBar  BarRaise=new JScrollBar();
-	JScrollPane ScrollRaise=new JScrollPane(BarRaise);
-	JTextField ConsRaise=new JTextField();
-
-	// CREAZIONE CHAT E STATISTICHE
-	static JTextArea Chat = new JTextArea();
-	JTextField ConsChat = new JTextField();
-	static JTextArea Statistiche = new JTextArea();
-	JScrollPane ScrollChat = new JScrollPane(Chat);
-	JScrollPane ScrollStat = new JScrollPane(Statistiche);
-	
-	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,ScrollRaise,BarRaise,ConsRaise); // LISTENER
-
-	JLabel sfondo = new JLabel(Icone.sfondo);
-	
-
-	// FONT
-	Font fontnome = new Font("Comic Sans MS", Font.BOLD, 13);
-	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
-	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
-
 	public GraficaPoker() {
 
 		// DIMENSIONE E OPZIONI FINESTRA (completo)
@@ -526,11 +344,203 @@ public class GraficaPoker extends JFrame {
 
 		this.setVisible(true);
 	}
+	/**	 Setta le prime 3 carte sul tavolo
+	 */
+	public void setFlop(Carta [] c,GraficaPoker gp)
+	{
+		this.cartaT1.setIcon(Icone.getCarta(c[0].getIndice()));
+		this.cartaT1.setVisible(true);
+		this.cartaT2.setIcon(Icone.getCarta(c[1].getIndice()));
+		this.cartaT2.setVisible(true);
+		this.cartaT3.setIcon(Icone.getCarta(c[2].getIndice()));
+		this.cartaT3.setVisible(true);
+	}
+	/**
+	 * Setta la 4a carta sul tavolo
+	 */
+	public void setTurn(Carta c1)
+	{
+		this.cartaT4.setIcon(Icone.getCarta(c1.getIndice()));
+		this.cartaT4.setVisible(true);
+	}
+	/**
+	 * Setta la 5a carta sul tavolo
+	 */
+	public void setRiver(Carta c1)
+	{
+		this.cartaT5.setIcon(Icone.getCarta(c1.getIndice()));
+		this.cartaT5.setVisible(true);
+	}
+	public void reset() {
+		this.cartaT1.setVisible(false);
+		this.cartaT2.setVisible(false);
+		this.cartaT3.setVisible(false);
+		this.cartaT4.setVisible(false);
+		this.cartaT5.setVisible(false);
+		disableBottoni(true);
+		Giocatori[0].reset();
+	}
+	/**
+	 * Restituisce un Comando
+	 */
+	public Comando getComando()
+	{
+		return com;
+	}
+	/**
+	 * Resetta il comando
+	 */
+	public void resetComando()
+	{
+		com=null;
+	}
+	
+	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
+	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
+	
+	/**Scrive un messaggio in chat
+	 */ 
+	public static void scriviChat(String messaggio)
+	{
+		Chat.append(" "+messaggio+"\n");
+	}
+	/**Scrive un messaggio nella console delle statistiche
+	 */ 
+	public static void scriviStatistica(String messaggio)
+	{
+		Statistiche.append(" "+messaggio+"\n");
+	}
+	/**Se settato a true disabilita il fold, settato a false lo riabilita
+	 */ 
+	public void disableFold(boolean flag)
+	{
+		Fold.setEnabled(!flag);
+	}
+	/**Se settato a true disabilita il Raise, settato a false lo riabilita
+	 */ 
+	public void disableRaise(boolean flag)
+	{
+		Raise.setEnabled(!flag);
+	}
+	/**
+	 * Chiamato con true disabilita tutti i bottoni,con false li riabilita.
+	 */
+	public void disableBottoni(boolean flag)
+	{
+		Fold.setEnabled(!flag);
+		Raise.setEnabled(!flag);
+		Call.setEnabled(!flag);
+		AllIn.setEnabled(!flag);
+	}
+
+	// CREAZIONE BOTTONI
+	static JButton Fold = new JButton("Fold");
+	static JButton Call = new JButton("Call");
+	static JButton Raise = new JButton("Raise");
+	static JButton AllIn = new JButton("All-In");
+	static JButton Invia = new JButton("Invia");
+	       JButton SegnaPunti = new JButton("Punti");
+	static JButton VisChat=new JButton("Chat");
+	static JButton VisStat=new JButton("Stats");
+
+	// GIOCATORE 1
+	JLabel etiUtente1 = new JLabel();
+	JLabel nome1 = new JLabel("Giocatore 1");
+	JLabel fiches1 = new JLabel("10000");
+	JLabel Gioc1Car1 = new JLabel();
+	JLabel Gioc1Car2 = new JLabel();
+
+	// GIOCATORE 2
+	JLabel etiUtente2 = new JLabel();
+	JLabel nome2 = new JLabel("Giocatore 2");
+	JLabel fiches2 = new JLabel("10000");
+	JLabel Gioc2Car1 = new JLabel();
+	JLabel Gioc2Car2 = new JLabel();
+
+	// GIOCATORE 3
+
+	JLabel etiUtente3 = new JLabel();
+	JLabel nome3 = new JLabel("Giocatore 3");
+	JLabel fiches3 = new JLabel("10000");
+	JLabel Gioc3Car1 = new JLabel();
+	JLabel Gioc3Car2 = new JLabel();
+
+	// GIOCATORE 4
+
+	JLabel etiUtente4 = new JLabel();
+	JLabel nome4 = new JLabel("Giocatore 4");
+	JLabel fiches4 = new JLabel("10000");
+	JLabel Gioc4Car1 = new JLabel();
+	JLabel Gioc4Car2 = new JLabel();
+
+	// GIOCATORE 5
+
+	JLabel etiUtente5 = new JLabel();
+	JLabel nome5 = new JLabel("Giocatore 5");
+	JLabel fiches5 = new JLabel("10000");
+	JLabel Gioc5Car1 = new JLabel();
+	JLabel Gioc5Car2 = new JLabel();
+
+	// GIOCATORE 6
+
+	JLabel etiUtente6 = new JLabel();
+	JLabel nome6 = new JLabel("Giocatore 6");
+	JLabel fiches6 = new JLabel("10000");
+	JLabel Gioc6Car1 = new JLabel();
+	JLabel Gioc6Car2 = new JLabel();
+
+	// GIOCATORE 7
+
+	JLabel etiUtente7 = new JLabel();
+	JLabel nome7 = new JLabel("Giocatore 7");
+	JLabel fiches7 = new JLabel("10000");
+	JLabel Gioc7Car1 = new JLabel();
+	JLabel Gioc7Car2 = new JLabel();
+
+	// GIOCATORE 8
+	JLabel etiUtente8 = new JLabel();
+	JLabel nome8 = new JLabel("Giocatore 8");
+	JLabel fiches8 = new JLabel("10000");
+	JLabel Gioc8Car1 = new JLabel();
+	JLabel Gioc8Car2 = new JLabel();
+
+	// CREAZIONE CARTE SUL TAVOLO
+	JLabel mazzo = new JLabel();
+	JLabel cartaT1 = new JLabel();
+	JLabel cartaT2 = new JLabel();
+	JLabel cartaT3 = new JLabel(); // carte sul tavolo scoperte
+	JLabel cartaT4 = new JLabel();
+	JLabel cartaT5 = new JLabel();
+
+	//BARRA DEL RAISE
+	JScrollBar  BarRaise=new JScrollBar();
+	JScrollPane ScrollRaise=new JScrollPane(BarRaise);
+	JTextField ConsRaise=new JTextField();
+
+	// CREAZIONE CHAT E STATISTICHE
+	static JTextArea Chat = new JTextArea();
+	public static JTextField ConsChat = new JTextField();
+	static JTextArea Statistiche = new JTextArea();
+	JScrollPane ScrollChat = new JScrollPane(Chat);
+	JScrollPane ScrollStat = new JScrollPane(Statistiche);
+	
+	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,ScrollRaise,BarRaise,ConsRaise); // LISTENER
+
+	JLabel sfondo = new JLabel(Icone.sfondo);
+	
+
+	// FONT
+	Font fontnome = new Font("Comic Sans MS", Font.BOLD, 13);
+	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
+	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
+
+	
 
 	public static void main(String[] args) {
 		GraficaPoker gp=new GraficaPoker();
 		Movimento.muovi(Call, 500, 400, gp);
 		Movimento.muovi(Fold, 100, 200, gp);
 	}// main
+	
 
 }// GraficaPoker

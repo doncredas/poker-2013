@@ -28,7 +28,7 @@ public class Dealer {
 	*/
 	private Cronometro c;
 	private Socket[] s; //array dei client da passare ai singoli giocatori
-	
+	private ObjectOutputStream OOS[];
 	private int puntata=piccoloBuio*2;
 	private Giocatore[]g;
 	private int []piatto;
@@ -47,6 +47,7 @@ public class Dealer {
 
 	public Dealer(int nGiocatori, int fiches, Socket []s,ObjectOutputStream [] OOS) {
 		this.s=s;
+		this.OOS=OOS;
 		this.nGiocatori=nGiocatori;
 		g=new Giocatore[nGiocatori];
 		piatto=new int [g.length];
@@ -69,6 +70,10 @@ public class Dealer {
 		
 	}//Costruttore
 	
+	public ObjectOutputStream[] getOOS() {
+		return OOS;
+	}
+
 	public int getPiccoloBuio(){
 		return buioPosizione;
 	}
@@ -120,21 +125,21 @@ public class Dealer {
 	public void mischia(){
 		for(int k=0;k<3;k++){
 			int iS=0, iD, sx, dx, iTotale=0;			
-			iD=(int)((Math.random()*10)+22); //indice per dividere il mazzo a metà
+			iD=(int)((Math.random()*10)+22); //indice per dividere il mazzo a met
 			int inD=iD;
 			Carta[] mazzoMischiato=new Carta[52];
 			while(iTotale<52){
 				sx=(int)Math.round(Math.random()*2)+1;
 				dx=(int)Math.round(Math.random()*2)+1;
-				 for(int i=0; i<sx && iS<inD; i++){
-					 mazzoMischiato[iTotale]=mazzo[iS+i];
-					 iS++;
-					 iTotale++;
-				 } for(int j=0; j<dx && iD<52; j++){
-					 mazzoMischiato[iTotale]=mazzo[iD+j-1];
-					 iD++;
-					 iTotale++;
-				 }
+				for(int j=0; j<dx && iD<52; j++){
+					mazzoMischiato[iTotale]=mazzo[iD];
+					iD++;
+					iTotale++;
+				}for(int i=0; i<sx && iS<inD; i++){
+					mazzoMischiato[iTotale]=mazzo[iS];
+					iS++;
+					iTotale++;
+				}
 				 
 			}//while
 			mazzo=mazzoMischiato;
@@ -165,16 +170,23 @@ public class Dealer {
 				primaCarta--;
 				j=(j+1)%nGiocatori;
 			}
-			
+			if(j==posD){
+				g[j].setCartaDealer1(mazzo[primaCarta]);
+				primaCarta--;
+			}
 		}while( j != posD);
 
 		int i = (posD+1)%nGiocatori;
 		do{	
 			if(g[i].getFiches()>0){
-				g[i].setCarta1(mazzo[primaCarta]);
+				g[i].setCarta2(mazzo[primaCarta]);
 				primaCarta--;
 				i=(i+1)%nGiocatori;
-			}			
+			}	
+			if(i==posD){
+				g[i].setCartaDealer2(mazzo[primaCarta]);
+				primaCarta--;
+			}
 		}while( i != posD);
 	}//daiCarte
 	

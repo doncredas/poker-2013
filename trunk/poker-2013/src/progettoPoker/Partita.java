@@ -22,7 +22,7 @@ import progettoPoker.Comando.Tipo;
 public class Partita {
 	//private ServerSocket ss = null;
 	private Socket s = null;
-	private static ObjectOutputStream OOS[] = null;
+	private ObjectOutputStream OOS[] = null;
 	private ObjectInputStream OIS[] = null;
 	private ObjectOutputStream oos=null;
 	private ObjectInputStream ois=null;
@@ -33,6 +33,7 @@ public class Partita {
 	private int tempo=60;
 	private int nCarta=0;
 	private Cronometro cron=new Cronometro();
+	private GraficaPoker gp;
 
 	public Partita(Socket client)  {
 		this.s=client;
@@ -47,7 +48,7 @@ public class Partita {
 	}
 	
 	private void eseguiClient() {
-		GraficaPoker gp=new GraficaPoker();
+		gp=new GraficaPoker();
 		System.out.println(s.getInetAddress());
 		ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
@@ -95,7 +96,7 @@ public class Partita {
 								gp.setRiver(com.getC());
 						//TODO
 					}else{
-						gp.setFlop(com.getCar());
+						gp.setFlop(com.getCar(),gp);
 					}
 					if(com.getFiches()!=0){
 						//TODO
@@ -119,7 +120,7 @@ public class Partita {
 
 	public Partita(Dealer d)  {
 		//this.ss=ss;
-		GraficaPoker gp=new GraficaPoker();
+		gp=new GraficaPoker();
 		try {
 			ServerT chat=new ServerT(d.getS().length-1,444);
 		} catch (IOException e1) {
@@ -127,7 +128,7 @@ public class Partita {
 			e1.printStackTrace();
 		}
 		this.d=d;
-		//OOS=new ObjectOutputStream[d.getG().length-1];
+		OOS=d.getOOS();
 		OIS=new ObjectInputStream[d.getG().length-1];
 		for(int i=0;i<d.getS().length;i++){
 			try {
@@ -148,6 +149,7 @@ public class Partita {
 			Comando risp=null;
 			boolean ok=true;
 			//TODO set nickname del server
+			
 			for (int i = 1; i < OOS.length; i++) {
 				try {
 					OOS[i].writeObject(c);
@@ -188,15 +190,18 @@ public class Partita {
 			int primoGiocatore=0;
 			int ultimoRaise;
 			risp=null;
-			while(!fineMano){	
+			while(!fineMano){
+				gp.reset();
 				ultimoRaise=-1;
-				for(int cont=0,i=primoGiocatore;cont<OOS.length;cont++,i=(i+1)%OOS.length){
+				for(int cont=0,i=primoGiocatore;cont<=OOS.length;cont++,i=(i+1)%OOS.length){
 					if(i==ultimoRaise){
 						ultimoRaise=-1;
 						break;
 					}
 					if(i==0){
-						//TODO collegare alla grafica
+						gp.Giocatori[0].setCarte(d.getG()[0].getCarta1(), 1);
+						gp.Giocatori[0].setCarte(d.getG()[0].getCarta2(), 2);
+						gp.disableBottoni(false);
 					}else
 					if(d.getG()[i].getInGioco()){
 						try {
@@ -328,7 +333,7 @@ public class Partita {
 			
 			int numG=n.getValue();
 			Socket [] s=new Socket[numG-1];
-			OOS=new ObjectOutputStream[numG-1];
+			ObjectOutputStream [] OOS=new ObjectOutputStream[numG-1];
 			for(int i=0;i<s.length;i++)
 				try {
 					s[i]=server.accept();

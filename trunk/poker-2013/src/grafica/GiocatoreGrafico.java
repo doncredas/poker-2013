@@ -86,6 +86,11 @@ public class GiocatoreGrafico
 		
 	}
 
+	public void reset() {
+		carta1.setVisible(false);
+		carta2.setVisible(false);
+	}
+
 	
 
 }
