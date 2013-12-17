@@ -8,14 +8,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
 
 import progettoPoker.*;
 import progettoPoker.Comando.Tipo;
 
-public class Listener implements KeyListener,ActionListener,MouseListener,MouseMotionListener{
+public class Listener implements KeyListener,ActionListener,MouseListener{
 
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
@@ -25,15 +24,15 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 	
 	
 	JScrollBar BarRaise=new JScrollBar();
-	JScrollPane ScrollRaise=new JScrollPane(BarRaise);
 	JTextField ConsRaise=new JTextField();
 	
-	
-	
+     
+    JLabel carta1=null;
+    JLabel carta2=null;
 
 	
 	
-	public Listener(JTextArea a, JTextField b,JTextArea c,JScrollPane sc,JScrollPane ss,JScrollPane spb,JScrollBar sb,JTextField br) {
+	public Listener(JTextArea a, JTextField b,JTextArea c,JScrollPane sc,JScrollPane ss,JScrollBar sb,JTextField br,JLabel gioc1ca1,JLabel gioc1ca2) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche=c;
@@ -41,13 +40,16 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 		this.ScrollStat=ss;
 		this.BarRaise=sb;
 		this.ConsRaise=br;
-		this.ScrollRaise=spb;
+		
+		this.carta1=gioc1ca1;
+		this.carta2=gioc1ca2;
+		
+		
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 		if(arg0.getKeyCode()==KeyEvent.VK_ENTER)
 		{
@@ -60,23 +62,14 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void keyReleased(KeyEvent arg0) {}
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-
+	public void keyTyped(KeyEvent arg0) {}
 	
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
+		
 		if(arg0.getSource()==GraficaPoker.VisChat)
 		{
 			this.Statistiche.setVisible(false);
@@ -98,8 +91,6 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 			GraficaPoker.Invia.setVisible(false);
             GraficaPoker.VisStat.setIcon(Icone.StatSelected);
 			GraficaPoker.VisChat.setIcon(Icone.VisualizzaChat);
-			
-
 		}
 			
 		if(arg0.getSource()==GraficaPoker.Invia)
@@ -116,7 +107,8 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 		}
 		if(arg0.getSource()==GraficaPoker.Raise)
 		{
-             GraficaPoker.com=new Comando(Tipo.RAISE);//TODO scroll o textbox per inserire raise
+             GraficaPoker.com=new Comando(Tipo.RAISE);
+             //TODO scroll o textbox per inserire raise
 		}
 		if(arg0.getSource()==GraficaPoker.Call)
 		{
@@ -126,20 +118,26 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
-		
-	}
-
+	public void mouseClicked(MouseEvent arg0) {}
+	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 	
-		
+
+	if ((carta1.getIcon()==Icone.coperta)&&(carta2.getIcon()==Icone.coperta))
+	{
+		carta1.setIcon(Icone.quaranta);
+		carta2.setIcon(Icone.quarantadue);
+	}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		
+		if ((carta1.getIcon()!=Icone.coperta)&&(carta2.getIcon()!=Icone.coperta))
+		{
+			carta1.setIcon(Icone.coperta);
+			carta2.setIcon(Icone.coperta);
+		}
 		
 	}
 	
@@ -147,30 +145,18 @@ public class Listener implements KeyListener,ActionListener,MouseListener,MouseM
      
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
-       // BarRaise.setUnitIncrement(20); Setta il movimento della barra alla presione delle frecce
 		this.ConsRaise.setText(Integer.toString(this.BarRaise.getValue()));
+
 	}
     
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
 		this.ConsRaise.setText(Integer.toString(this.BarRaise.getValue()));
 		
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		
-	}
 
 }

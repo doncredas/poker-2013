@@ -71,7 +71,7 @@ public final class Icone {
 	//CARTE COPERTE
 	public static ImageIcon Mazzo = new ImageIcon(Carte.getAbsolutePath() + "\\mazzo.png");
 	public static ImageIcon coperta=new ImageIcon(Carte.getAbsolutePath()+"\\copProv.png");
-	public static ImageIcon copertamezza=new ImageIcon(Carte.getAbsolutePath()+"\\copMez.png");
+
 	
 	//IMMAGINI BOTTONI
 	public static ImageIcon Foldpre = new ImageIcon(Bottoni.getAbsolutePath()	+ "\\Foldpre.png");
