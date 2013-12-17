@@ -88,7 +88,7 @@ public class Giocatore {
 	}
 	public void setCarta2(Carta carta2) {
 		this.carta2 = carta2;
-		if(OOS!=null){
+		
 		com=new Comando(Tipo.DAI_CARTA,carta2);
 		try {
 			OOS.writeObject(com);
@@ -96,7 +96,7 @@ public class Giocatore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}
+		
 	}
 	public Giocatore(int fiches,int indice) {
 		this.fiches=fiches;
@@ -114,6 +114,15 @@ public class Giocatore {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		
+	}
+
+	public void setCartaDealer1(Carta carta) {
+		this.carta1 = carta;		
+	}
+
+	public void setCartaDealer2(Carta carta) {
+		this.carta2 = carta;	
 		
 	}
 
