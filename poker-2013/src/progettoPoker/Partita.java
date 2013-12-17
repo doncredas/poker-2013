@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.concurrent.Semaphore;
@@ -87,8 +88,11 @@ public class Partita {
 				case DAI_CARTA:{
 					if(com.getC()!=null){
 						nCarta=(nCarta%4)+1;
-						if(nCarta==1||nCarta==2)
+						if(nCarta==1||nCarta==2){
+							if(nCarta==1)
+								gp.reset();
 							gp.Giocatori[0].setCarte(com.getC(),nCarta);
+						}
 						else
 							if(nCarta==3)
 								gp.setTurn(com.getC());
@@ -240,12 +244,15 @@ public class Partita {
 		
 		if(d.getCarteComuni()[0]==null){
 			d.flop(OOS);
+			gp.setFlop(Arrays.copyOf(d.getCarteComuni(),3), gp);
 		}else
 			if(d.getCarteComuni()[3]==null){
 				d.turn(OOS);
+				gp.setTurn(d.getCarteComuni()[3]);
 			}else
 				if(d.getCarteComuni()[4]==null){
 					d.river(OOS);
+					gp.setRiver(d.getCarteComuni()[4]);
 				}else
 					d.fineMano(OOS);
 	}

@@ -7,7 +7,7 @@ public class Movimento {
 	public static void muovi(JComponent jc,int x, int y,JFrame jf){
 		int inX=jc.getX();
 		int inY=jc.getY();
-		int spost=(Math.abs(x-inX)+Math.abs(y-inY))/2;
+		int spost=(Math.abs(x-inX)+Math.abs(y-inY))/3;
 		int spostX=(x-inX)/spost;
 		int spostY=(y-inY)/spost;
 		int restoX=0;
@@ -23,7 +23,7 @@ public class Movimento {
 			jc.setLocation(nX,nY);
 			jf.repaint();
 			try {
-				Thread.sleep(10);
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
