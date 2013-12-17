@@ -79,11 +79,14 @@ public class GiocatoreGrafico
 	 */
 	public void setCarte(Carta c1,int i)
 	{
-		if(i==1) //se è la prima carta
+		if(i==1){ //se è la prima carta
 		    this.carta1.setIcon(Icone.getCarta(c1.getIndice()));
-		if(i==2) //se è la seconda carta
+		    this.carta1.setVisible(true);
+		}
+		if(i==2){ //se è la seconda carta
 			this.carta2.setIcon(Icone.getCarta(c1.getIndice()));
-		
+			this.carta2.setVisible(true);
+		}
 	}
 
 	public void reset() {

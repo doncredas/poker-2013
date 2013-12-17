@@ -107,14 +107,13 @@ public class Giocatore {
 		this.indice=indice;
 		client=s;
 		com=new Comando(null,fiches);
-			this.OOS=OOS;
-			try {
-				OOS.writeObject(com);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
+		this.OOS=OOS;
+		try {
+			OOS.writeObject(com);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 	public void setCartaDealer1(Carta carta) {
