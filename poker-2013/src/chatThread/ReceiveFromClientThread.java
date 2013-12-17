@@ -12,6 +12,7 @@ class RecieveFromClientThread implements Runnable {
 	PrintWriter[] pwPrintWriter=new PrintWriter[2];
     Socket [] clientSocket1 = null;
 
+
 	public RecieveFromClientThread(Socket clientSocket, Socket [] clientSocket1) {
 		this.clientSocket = clientSocket;
 		this.clientSocket1 = clientSocket1;
@@ -20,12 +21,12 @@ class RecieveFromClientThread implements Runnable {
 
 	public void run() {
 		try {
-			
-			String messageString;
 			brBufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 			while (true) {
+				grafica.GraficaPoker.ConsChat.setText("poker");
 				messageString = grafica.GraficaPoker.ConsChat.getText();
-				//grafica.GraficaPoker.setConsChat(" ");
+				messageString = messageString+"cia";
+				//grafica.GraficaPoker.setConsChat(" ");				
 
 				//while ((messageString = brBufferedReader.readLine()) != null) {// assign message from client to messageString
 				//	if (messageString.equals("EXIT")) {
@@ -33,7 +34,10 @@ class RecieveFromClientThread implements Runnable {
 				//	}
 					System.out.println("From Client: " + messageString);// print the message from client
 					//manda il messaggio nella chat grafica
-					grafica.GraficaPoker.scriviChat(messageString);
+					
+					grafica.GraficaPoker.scriviChat("ciao3");
+
+					//grafica.GraficaPoker.scriviChat(messageString);
 					//Manda il messaggio a tutti quanti
 					for(int i=0;i<clientSocket1.length;i++)
 					pwPrintWriter[i] = new PrintWriter(this.clientSocket1[i].getOutputStream());

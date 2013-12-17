@@ -7,6 +7,7 @@ class SendToClientThread implements Runnable {
 	PrintWriter[] pwPrintWriter=new PrintWriter[2];
 	Socket[] clientSock = null;
 	BufferedReader input=null;
+	String msgToClientString = null;
 
 	public SendToClientThread(Socket[] clientSock) {
 		this.clientSock = clientSock;
@@ -18,10 +19,11 @@ class SendToClientThread implements Runnable {
 			for(int i=0;i<clientSock.length;i++)
 				pwPrintWriter[i] = new PrintWriter(this.clientSock[i].getOutputStream());// get outputstream
 			while (true) {
-				String msgToClientString = null;
 				// get userinput
 				//msgToClientString = input.readLine();// get message to send to
+				grafica.GraficaPoker.ConsChat.setText("poker");
 				msgToClientString = grafica.GraficaPoker.ConsChat.getText();
+				msgToClientString = msgToClientString+"cia";
 
 				for(int i=0;i<clientSock.length;i++){// client
 				pwPrintWriter[i].println(msgToClientString);// send message to client with PrintWriter
