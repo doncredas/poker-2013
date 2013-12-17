@@ -568,13 +568,14 @@ public class GraficaPoker extends JFrame {
 		
 		Statistiche.setEditable(false);
 		Statistiche.setForeground(Color.GREEN.darker());
+		Statistiche.setFocusable(true);
 		Statistiche.setFont(font);
 		Chat.setEditable(false);
 		Chat.setForeground(Color.BLUE);
 		Chat.setFont(font);
 		
 		//Per far apparire prima la console all' avvio
-		Chat.setVisible(false);
+		ScrollChat.setVisible(false);
 		ConsChat.setVisible(false);
 		Invia.setVisible(false);
 		
@@ -588,6 +589,7 @@ public class GraficaPoker extends JFrame {
 
 
 		// INSERIMENTO NELLA FINESTRA
+		
 
 		principale.add(ScrollChat);
 		principale.add(ScrollStat);
@@ -669,8 +671,10 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 		GraficaPoker gp=new GraficaPoker();
+		GraficaPoker.scriviStatistica("BENVENUTO IN REAL POKER 2014");
 		
 		gp.daiCarteGioc(8);
+		
 		
 		
 	}// main
