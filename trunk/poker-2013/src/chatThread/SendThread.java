@@ -5,6 +5,7 @@ class SendThread implements Runnable {
 	Socket sock = null;
 	PrintWriter print = null;
 	BufferedReader brinput = null;
+	String msgtoServerString = null;
 
 	
 	public SendThread(Socket sock) {
@@ -14,22 +15,14 @@ class SendThread implements Runnable {
 	public void run() {
 		try {
 			if (sock.isConnected()) {
-				System.out.println("Client connected to "
-						+ sock.getInetAddress() + " on port " + sock.getPort());
+				System.out.println("Client connected to "+ sock.getInetAddress() + " on port " + sock.getPort());
 				this.print = new PrintWriter(sock.getOutputStream(), true);
 				while (true) {
-
-					//System.out.println("Type your message to send to server..type 'EXIT' to exit");
-					brinput = new BufferedReader(new InputStreamReader(
-							System.in));
-
 					//System.out.println("Type your message to send to server..type 'EXIT' to exit");
 					brinput = new BufferedReader(new InputStreamReader(System.in));
-
-					String msgtoServerString = null;
 					msgtoServerString = grafica.GraficaPoker.ConsChat.getText();
-					grafica.GraficaPoker.scriviChat(msgtoServerString);
-
+					grafica.GraficaPoker.scriviChat("ciao");
+					//grafica.GraficaPoker.scriviChat(msgtoServerString);
 					//msgtoServerString = brinput.readLine();
 					this.print.println(msgtoServerString);
 					this.print.flush();
