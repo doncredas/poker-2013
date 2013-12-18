@@ -37,7 +37,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	
 	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
 			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
-			JLabel gioc1ca2,GiocatoreGrafico g) {
+			JLabel gioc1ca2) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche = c;
@@ -49,7 +49,6 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		this.carta1 = gioc1ca1;
 		this.carta2 = gioc1ca2;
  
-		this.g1=g;
 	}
 	
 
