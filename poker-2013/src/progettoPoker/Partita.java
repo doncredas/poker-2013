@@ -75,18 +75,18 @@ public class Partita {
 	private void eseguiComando(Comando com,GraficaPoker gp) {
 		Comando risp=null;
 		if(com.getT()==Tipo.GIOCATORI){
-			gp=new GraficaPoker(com.gioc);
-			gp.Giocatori[0].setFiches(fiches);
+			this.gp=new GraficaPoker(com.gioc);
+			this.gp.Giocatori[0].setFiches(fiches);
 		}else
 		if(com.t==null&&com.fiches==0){
-			gp.disableBottoni(false);
+			this.gp.disableBottoni(false);
 			while(risp==null){
-				risp=gp.getComando();
+				risp=this.gp.getComando();
 			}
 		}else{
 			if(com.t==null){
-				if(gp!=null)
-					gp.Giocatori[0].setFiches(com.getFiches());
+				if(this.gp!=null)
+					this.gp.Giocatori[0].setFiches(com.getFiches());
 				else
 					fiches=com.getFiches();
 			}else{
@@ -99,17 +99,17 @@ public class Partita {
 						nCarta=(nCarta%4)+1;
 						if(nCarta==1||nCarta==2){
 							if(nCarta==1)
-								gp.reset();
-							gp.Giocatori[0].setCarte(com.getC(),nCarta);
+								this.gp.reset();
+							this.gp.Giocatori[0].setCarte(com.getC(),nCarta);
 						}
 						else
 							if(nCarta==3)
-								gp.setTurn(com.getC());
+								this.gp.setTurn(com.getC());
 							else
-								gp.setRiver(com.getC());
+								this.gp.setRiver(com.getC());
 						//TODO
 					}else{
-						gp.setFlop(com.getCar(),gp);
+						this.gp.setFlop(com.getCar(),this.gp);
 					}
 					if(com.getFiches()!=0){
 						//TODO

@@ -381,128 +381,163 @@ public class GraficaPoker extends JFrame {
 		switch(numGioc)
 		{
 		
-		   case 8:    GiocatoreGrafico Giocatore8=new GiocatoreGrafico(etiUtente8,nome8,fiches8,Gioc8Car1,Gioc8Car2);
+		   case 8:    
+		   	          etiUtente8.setIcon(Icone.Etichetta);
+		   	          etiUtente8.setBounds(845, 287, 300, 55);
+		   	          nome8.setFont(fontnome);               
+		   	          nome8.setBounds(1010, 276, 100, 60);
+		   	          nome8.setForeground(Color.BLUE);
+		   	          fiches8.setFont(fontfiches);
+		   	          fiches8.setBounds(1030, 293, 100, 60);
+		   	          fiches8.setForeground(Color.BLACK);
+		   	          Gioc8Car1.setIcon(Icone.coperta);
+		   	          Gioc8Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore8=new GiocatoreGrafico(etiUtente8,nome8,fiches8,Gioc8Car1,Gioc8Car2);
 		   	          Giocatori[7]=Giocatore8;
+		              principale.add(nome8);
+		              principale.add(fiches8);
+		              principale.add(etiUtente8);
+		              principale.add(Gioc8Car1);
+		              principale.add(Gioc8Car2);
 		   
-		   case 7:    GiocatoreGrafico Giocatore7=new GiocatoreGrafico(etiUtente7,nome7,fiches7,Gioc7Car1,Gioc7Car2);
+		   case 7:    
+		   	          etiUtente7.setIcon(Icone.Etichetta);
+		   	          etiUtente7.setBounds(-44, 287, 300, 55);  
+		   	          nome7.setFont(fontnome);
+		   	          nome7.setBounds(121, 276, 100, 60);
+		   	          nome7.setForeground(Color.BLUE);
+		   	          fiches7.setFont(fontfiches);
+		   	          fiches7.setBounds(141, 293, 100, 60);
+		   	          fiches7.setForeground(Color.BLACK);
+		   	          Gioc7Car1.setIcon(Icone.coperta);
+		   	          Gioc7Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore7=new GiocatoreGrafico(etiUtente7,nome7,fiches7,Gioc7Car1,Gioc7Car2);
 		   	          Giocatori[6]=Giocatore7;
+		              principale.add(nome7);
+		              principale.add(fiches7);
+		              principale.add(etiUtente7);
+		              principale.add(Gioc7Car1);
+		              principale.add(Gioc7Car2);
 		   
-		   case 6:    GiocatoreGrafico Giocatore6=new GiocatoreGrafico(etiUtente6,nome6,fiches6,Gioc6Car1,Gioc6Car2);
+		   case 6:    
+				      etiUtente6.setIcon(Icone.Etichetta);
+		   	          etiUtente6.setBounds(730, 460, 300, 55);
+		   	          nome6.setFont(fontnome);
+		   	          nome6.setBounds(895, 449, 100, 60);
+		   	          nome6.setForeground(Color.BLUE);
+		   	          fiches6.setFont(fontfiches);
+		   	          fiches6.setBounds(915, 466, 100, 60);
+		   	          fiches6.setForeground(Color.BLACK);
+		   	          Gioc6Car1.setIcon(Icone.coperta);
+		   	          Gioc6Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore6=new GiocatoreGrafico(etiUtente6,nome6,fiches6,Gioc6Car1,Gioc6Car2);
 		   	          Giocatori[5]=Giocatore6;
+		              principale.add(nome6);
+		              principale.add(fiches6);
+		              principale.add(etiUtente6);
+		              principale.add(Gioc6Car1);
+		              principale.add(Gioc6Car2);
 		   
-		   case 5:    GiocatoreGrafico Giocatore5=new GiocatoreGrafico(etiUtente5,nome5,fiches5,Gioc5Car1,Gioc5Car2);
+		   case 5:    
+		   	          etiUtente5.setIcon(Icone.Etichetta);
+		   	          etiUtente5.setBounds(75, 460, 300, 55);
+		   	          nome5.setFont(fontnome);
+		   	          nome5.setBounds(240, 449, 100, 60);
+		   	          nome5.setForeground(Color.BLUE);
+		   	          fiches5.setFont(fontfiches);
+		   	          fiches5.setBounds(260, 466, 100, 60);
+		   	          fiches5.setForeground(Color.BLACK);
+		   	          Gioc5Car1.setIcon(Icone.coperta);
+		   	          Gioc5Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore5=new GiocatoreGrafico(etiUtente5,nome5,fiches5,Gioc5Car1,Gioc5Car2);
 		   	          Giocatori[4]=Giocatore5;
+		              principale.add(nome5);
+		              principale.add(fiches5);
+		              principale.add(etiUtente5);
+		              principale.add(Gioc5Car1);
+		              principale.add(Gioc5Car2);
 		   	        		              
-		   case 4:    GiocatoreGrafico Giocatore4=new GiocatoreGrafico(etiUtente4,nome4,fiches4,Gioc4Car1,Gioc4Car2);
+		   case 4:   
+		   	          etiUtente4.setIcon(Icone.Etichetta);
+		   	          etiUtente4.setBounds(730, 115, 300, 55);
+		   	          nome4.setFont(fontnome);
+		   	          nome4.setBounds(895, 104, 100, 60);
+		   	          nome4.setForeground(Color.BLUE);
+		   	          fiches4.setFont(fontfiches);
+		   	          fiches4.setBounds(915, 121, 100, 60);
+		   	          fiches4.setForeground(Color.BLACK);
+		   	          Gioc4Car1.setIcon(Icone.coperta);
+		   	          Gioc4Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore4=new GiocatoreGrafico(etiUtente4,nome4,fiches4,Gioc4Car1,Gioc4Car2);
 		   	          Giocatori[3]=Giocatore4;
+		              principale.add(nome4);
+		              principale.add(fiches4);
+		              principale.add(etiUtente4);
+		              principale.add(Gioc4Car1);
+		              principale.add(Gioc4Car2);
 		              
-		   case 3:	  GiocatoreGrafico Giocatore3=new GiocatoreGrafico(etiUtente3,nome3,fiches3,Gioc3Car1,Gioc3Car2);
+		   case 3:	  
+		   	          etiUtente3.setIcon(Icone.Etichetta);
+		              etiUtente3.setBounds(75, 115, 300, 55);
+		              nome3.setFont(fontnome);
+		              nome3.setBounds(240, 104, 100, 60);
+		              nome3.setForeground(Color.BLUE);
+		              fiches3.setFont(fontfiches);
+		              fiches3.setBounds(260, 121, 100, 60);
+		              fiches3.setForeground(Color.BLACK);
+		              Gioc3Car1.setIcon(Icone.coperta);
+		              Gioc3Car2.setIcon(Icone.coperta);			   
+			          GiocatoreGrafico Giocatore3=new GiocatoreGrafico(etiUtente3,nome3,fiches3,Gioc3Car1,Gioc3Car2);
 		              Giocatori[2]=Giocatore3;
+		              principale.add(nome3);
+		              principale.add(fiches3);
+		              principale.add(etiUtente3);
+		              principale.add(Gioc3Car1);
+		              principale.add(Gioc3Car2);
 		   	          
-		   case 2:    GiocatoreGrafico Giocatore2=new GiocatoreGrafico(etiUtente2,nome2,fiches2,Gioc2Car1,Gioc2Car2);
+		   case 2:    
+		   	          etiUtente2.setIcon(Icone.Etichetta);
+		   	          etiUtente2.setBounds(400, 60, 300, 55);
+		   	          nome2.setFont(fontnome);
+		   	          nome2.setBounds(565, 49, 100, 60);
+		   	          nome2.setForeground(Color.BLUE);
+		   	          fiches2.setFont(fontfiches);
+		   	          fiches2.setBounds(585, 66, 100, 60);
+		   	          fiches2.setForeground(Color.BLACK);
+		   	          Gioc2Car1.setIcon(Icone.coperta);
+		   	          Gioc2Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore2=new GiocatoreGrafico(etiUtente2,nome2,fiches2,Gioc2Car1,Gioc2Car2);
 		   	          Giocatori[1]=Giocatore2;
-		   	          
-		   case 1:    GiocatoreGrafico Giocatore1 = new GiocatoreGrafico(etiUtente1, nome1,fiches1, Gioc1Car1, Gioc1Car2);
+		              principale.add(nome2);
+		              principale.add(fiches2);
+		              principale.add(etiUtente2);
+		              principale.add(Gioc2Car1);
+		              principale.add(Gioc2Car2);
+		              
+		   case 1:     
+		              etiUtente1.setIcon(Icone.Etichetta);
+		              etiUtente1.setBounds(400, 520, 300, 55);
+		              nome1.setFont(fontnome);
+		              nome1.setBounds(565, 509, 100, 60); // +14,-10
+		              nome1.setForeground(Color.BLUE);
+		              fiches1.setFont(fontfiches); // rispetto a Utente1
+		              fiches1.setBounds(585, 526, 100, 60); // +35,+10
+		              fiches1.setForeground(Color.BLACK); 
+		              Gioc1Car1.setIcon(Icone.coperta);
+		              Gioc1Car2.setIcon(Icone.coperta);
+			          GiocatoreGrafico Giocatore1 = new GiocatoreGrafico(etiUtente1, nome1,fiches1, Gioc1Car1, Gioc1Car2);
 		              Giocatori[0]=Giocatore1;
+		              principale.add(nome1);
+		              principale.add(fiches1);
+		              principale.add(etiUtente1);
+		              principale.add(Gioc1Car1);
+		              principale.add(Gioc1Car2);
 		        
 		}
 
-		//GIOCATORE 1
-        etiUtente1.setIcon(Icone.Etichetta);
-        etiUtente1.setBounds(400, 520, 300, 55);
-        nome1.setFont(fontnome);
-        nome1.setBounds(565, 509, 100, 60); // +14,-10
-        nome1.setForeground(Color.BLUE);
-        fiches1.setFont(fontfiches); // rispetto a Utente1
-        fiches1.setBounds(585, 526, 100, 60); // +35,+10
-        fiches1.setForeground(Color.BLACK); 
-        Gioc1Car1.setIcon(Icone.coperta);
-        Gioc1Car2.setIcon(Icone.coperta);
-		
-		//GIOCATORE 2
-   	    etiUtente2.setIcon(Icone.Etichetta);
-   	    etiUtente2.setBounds(400, 60, 300, 55);
-   	    nome2.setFont(fontnome);
-   	    nome2.setBounds(565, 49, 100, 60);
-   	    nome2.setForeground(Color.BLUE);
-   	    fiches2.setFont(fontfiches);
-   	    fiches2.setBounds(585, 66, 100, 60);
-   	    fiches2.setForeground(Color.BLACK);
-   	    Gioc2Car1.setIcon(Icone.coperta);
-   	    Gioc2Car2.setIcon(Icone.coperta);
-		
-		//GIOCATORE 3
-   	    etiUtente3.setIcon(Icone.Etichetta);
-        etiUtente3.setBounds(75, 115, 300, 55);
-        nome3.setFont(fontnome);
-        nome3.setBounds(240, 104, 100, 60);
-        nome3.setForeground(Color.BLUE);
-        fiches3.setFont(fontfiches);
-        fiches3.setBounds(260, 121, 100, 60);
-        fiches3.setForeground(Color.BLACK);
-        Gioc3Car1.setIcon(Icone.coperta);
-        Gioc3Car2.setIcon(Icone.coperta);
-		
-		//GIOCATORE 4
-   	    etiUtente4.setIcon(Icone.Etichetta);
-   	    etiUtente4.setBounds(730, 115, 300, 55);
-   	    nome4.setFont(fontnome);
-   	    nome4.setBounds(895, 104, 100, 60);
-   	    nome4.setForeground(Color.BLUE);
-   	    fiches4.setFont(fontfiches);
-   	    fiches4.setBounds(915, 121, 100, 60);
-   	    fiches4.setForeground(Color.BLACK);
-   	    Gioc4Car1.setIcon(Icone.coperta);
-   	    Gioc4Car2.setIcon(Icone.coperta);
-		
-		//GIOCATORE 5
-   	    etiUtente5.setIcon(Icone.Etichetta);
-   	    etiUtente5.setBounds(75, 460, 300, 55);
-   	    nome5.setFont(fontnome);
-   	    nome5.setBounds(240, 449, 100, 60);
-   	    nome5.setForeground(Color.BLUE);
-   	    fiches5.setFont(fontfiches);
-   	    fiches5.setBounds(260, 466, 100, 60);
-   	    fiches5.setForeground(Color.BLACK);
-   	    Gioc5Car1.setIcon(Icone.coperta);
-   	    Gioc5Car2.setIcon(Icone.coperta);
-   	    
-		
-		//GIOCATORE 6
-		etiUtente6.setIcon(Icone.Etichetta);
-   	    etiUtente6.setBounds(730, 460, 300, 55);
-   	    nome6.setFont(fontnome);
-   	    nome6.setBounds(895, 449, 100, 60);
-   	    nome6.setForeground(Color.BLUE);
-   	    fiches6.setFont(fontfiches);
-   	    fiches6.setBounds(915, 466, 100, 60);
-   	    fiches6.setForeground(Color.BLACK);
-   	    Gioc6Car1.setIcon(Icone.coperta);
-   	    Gioc6Car2.setIcon(Icone.coperta);
-		
-		//GIOCATORE 7
-   	    etiUtente7.setIcon(Icone.Etichetta);
-   	    etiUtente7.setBounds(-44, 287, 300, 55);  
-   	    nome7.setFont(fontnome);
-   	    nome7.setBounds(121, 276, 100, 60);
-   	    nome7.setForeground(Color.BLUE);
-   	    fiches7.setFont(fontfiches);
-   	    fiches7.setBounds(141, 293, 100, 60);
-   	    fiches7.setForeground(Color.BLACK);
-   	    Gioc7Car1.setIcon(Icone.coperta);
-   	    Gioc7Car2.setIcon(Icone.coperta);
 		
         //GIOCATORE 8
-   	    etiUtente8.setIcon(Icone.Etichetta);
-   	    etiUtente8.setBounds(845, 287, 300, 55);
-   	    nome8.setFont(fontnome);               
-   	    nome8.setBounds(1010, 276, 100, 60);
-   	    nome8.setForeground(Color.BLUE);
-   	    fiches8.setFont(fontfiches);
-   	    fiches8.setBounds(1030, 293, 100, 60);
-   	    fiches8.setForeground(Color.BLACK);
-   	    Gioc8Car1.setIcon(Icone.coperta);
-   	    Gioc8Car2.setIcon(Icone.coperta);
+
 
 		//TODO posizioni al mazzo
 
@@ -596,52 +631,7 @@ public class GraficaPoker extends JFrame {
 		principale.add(SegnaPunti);
 		principale.add(VisStat);
 		principale.add(VisChat);
-
-
-
-        
-
-		principale.add(nome1);
-		principale.add(fiches1);
-		principale.add(etiUtente1);// sfondo per ultimo
-		principale.add(nome2);
-		principale.add(fiches2);
-		principale.add(etiUtente2);
-		principale.add(nome3);
-		principale.add(fiches3);
-		principale.add(etiUtente3);
-		principale.add(nome4);
-		principale.add(fiches4);
-		principale.add(etiUtente4);
-		principale.add(nome5);
-		principale.add(fiches5);
-		principale.add(etiUtente5);  
-		principale.add(nome6);
-		principale.add(fiches6);
-		principale.add(etiUtente6);
-		principale.add(nome7);
-		principale.add(fiches7);
-		principale.add(etiUtente7);
-		principale.add(nome8);
-		principale.add(fiches8);
-		principale.add(etiUtente8);
-		
-		principale.add(Gioc1Car1);
-		principale.add(Gioc5Car1);
-		principale.add(Gioc7Car1);
-		principale.add(Gioc3Car1);
-		principale.add(Gioc2Car1);
-		principale.add(Gioc4Car1);
-		principale.add(Gioc8Car1);
-		principale.add(Gioc6Car1);
-		principale.add(Gioc1Car2); 
-		principale.add(Gioc5Car2);
-		principale.add(Gioc7Car2);
-		principale.add(Gioc3Car2);
-		principale.add(Gioc2Car2);
-		principale.add(Gioc4Car2);
-		principale.add(Gioc8Car2);
-		principale.add(Gioc6Car2);
+	
 		
 		principale.add(cartaT1);
 		principale.add(cartaT2);
@@ -663,7 +653,7 @@ public class GraficaPoker extends JFrame {
 		GraficaPoker gp=new GraficaPoker(8);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 		
-		gp.daiCarteGioc(8);
+		gp.daiCarteGioc(5);
 		
 		
 		
