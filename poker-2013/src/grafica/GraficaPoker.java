@@ -278,7 +278,7 @@ public class GraficaPoker extends JFrame {
 	
 
 	
-	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2); // LISTENER
+	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,Giocatori[0]); // LISTENER
 
 	JLabel sfondo = new JLabel(Icone.sfondo);
 	
