@@ -92,7 +92,9 @@ public class Partita {
 			}else{
 				switch(com.t){
 				case NICK_NAME:
-					risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
+					String nick=JOptionPane.showInputDialog("inserire nickname");
+					risp=new Comando(Tipo.NICK_NAME,nick);
+					gp.Giocatori[0].setNome(nick);
 					break;
 				case DAI_CARTA:{
 					if(com.getC()!=null){
