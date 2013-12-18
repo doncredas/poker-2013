@@ -20,16 +20,16 @@ class SendToClientThread implements Runnable {
 				pwPrintWriter[i] = new PrintWriter(this.clientSock[i].getOutputStream());// get outputstream
 			while (true) {
 				// get userinput
-				//msgToClientString = input.readLine();// get message to send to
-				grafica.GraficaPoker.ConsChat.setText("poker");
-				msgToClientString = grafica.GraficaPoker.ConsChat.getText();
-				msgToClientString = msgToClientString+"cia";
+				msgToClientString = input.readLine();// get message to send to
+				//grafica.GraficaPoker.ConsChat.setText("poker");
+				//msgToClientString = grafica.GraficaPoker.ConsChat.getText();
+				//msgToClientString = msgToClientString+"cia";
 
 				for(int i=0;i<clientSock.length;i++){// client
-				pwPrintWriter[i].println(msgToClientString);// send message to client with PrintWriter
-				pwPrintWriter[i].flush();// flush the PrintWriter
+					pwPrintWriter[i].println(msgToClientString);// send message to client with PrintWriter
+					pwPrintWriter[i].flush();// flush the PrintWriter
 				}
-				//System.out.println("Please enter something to send back to client..");
+				System.out.println("Please enter something to send back to client..");
 			}// end while
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
