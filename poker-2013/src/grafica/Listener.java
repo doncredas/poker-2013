@@ -10,6 +10,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 
 import javax.swing.*;
 
@@ -17,7 +21,7 @@ import progettoPoker.*;
 import progettoPoker.Comando.Tipo;
 
 public class Listener extends JPanel implements KeyListener, ActionListener,
-		MouseListener, AdjustmentListener {
+		MouseListener, AdjustmentListener, Runnable {
 
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
@@ -31,13 +35,20 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	JLabel carta1 = null;
 	JLabel carta2 = null;
+
+	Socket socket=null;
+	Thread thread;
+	//Giocatore [] giocatore;
+
+
 	
 	ImageIcon ico1=null;
 	ImageIcon ico2=null;
 	
+
 	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
 			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
-			JLabel gioc1ca2) {
+			JLabel gioc1ca2, Socket s) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche = c;
@@ -48,10 +59,14 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 		this.carta1 = gioc1ca1;
 		this.carta2 = gioc1ca2;
- 
-	}
-	
 
+		try{
+			socket=s;
+		thread= new Thread(this);
+		thread.start();
+		}catch(Exception ex){ex.printStackTrace();}		
+
+	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -63,6 +78,8 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			{
 				if (this.ConsChat.getText().length() > 0) 
 				{
+					String s=ConsChat.getText();					
+					invia(s);				
 					this.Chat.setText(this.Chat.getText() + "  Nickname: "
 							+ ConsChat.getText() + "\n");
 					ConsChat.setText("");
@@ -77,6 +94,41 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			}
 		}
 	}
+
+	private void invia(String s) {
+		// TODO Auto-generated method stub
+		OutputStream outStream;
+		try {
+			outStream = socket.getOutputStream();
+			outStream.write(s.getBytes());
+			outStream.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//invia
+	
+	 public String ricevi() throws IOException {
+		 String line = "";
+		 InputStream inStream = socket.getInputStream();
+		 int read = inStream.read();
+		 while (read!=10 && read > -1) {
+			 line+=String.valueOf((char)read);
+			 read = inStream.read();
+		}
+		if (read==-1) return null;
+		line+=String.valueOf((char)read);
+		return line;
+	}//receive
+	 
+	 public void run() {
+		 try {
+			 while(true) {
+				 String msg = ricevi();
+				 Chat.append(msg);
+			}
+		 }catch(Exception ex){System.out.println("disconnesso");}
+	}//run
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
