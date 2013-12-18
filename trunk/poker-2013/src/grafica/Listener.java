@@ -31,7 +31,10 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	JLabel carta1 = null;
 	JLabel carta2 = null;
-
+	
+	ImageIcon ico1=null;
+	ImageIcon ico2=null;
+	
 	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
 			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
 			JLabel gioc1ca2,GiocatoreGrafico g) {
@@ -138,7 +141,10 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 		if ((arg0.getSource() == carta1) || (arg0.getSource() == carta2)) 
 		{
-		      this.g1.giraCarte();
+			if(ico1!=null){
+			this.carta1.setIcon(ico1);
+			this.carta2.setIcon(ico2);
+			}
 		}
 	}
 
@@ -146,7 +152,10 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	public void mouseExited(MouseEvent arg0) {
 		if ((arg0.getSource() == carta1) || (arg0.getSource() == carta2)) 
 		{
-			this.g1.giraCarte();
+			ico1=(ImageIcon) this.carta1.getIcon();
+			this.carta1.setIcon(Icone.coperta);
+			ico2=(ImageIcon) this.carta2.getIcon();
+			this.carta2.setIcon(Icone.coperta);
 		}
 
 	}
