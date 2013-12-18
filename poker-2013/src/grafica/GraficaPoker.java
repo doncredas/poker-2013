@@ -25,15 +25,15 @@ public class GraficaPoker extends JFrame {
 	
 	public GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
 	static Comando com=null;
-
+	int nGioc=0;
 	/**
 	 * Quando viene chiamato dà le carte ai giocatori graficamente
 	 */
-	public void daiCarteGioc(int numGioc)
+	public void daiCarteGioc()
 	{
 		for(int i=0;i<2;i++)
 		{
-		switch(numGioc)
+		switch(nGioc)
 		{
 	
 		    default: {
@@ -291,6 +291,7 @@ public class GraficaPoker extends JFrame {
 
 	public GraficaPoker(int numGioc) {
 
+		
 		// DIMENSIONE E OPZIONI FINESTRA (completo)
 		super("Real Poker");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // DA ELIMINARE
@@ -300,6 +301,7 @@ public class GraficaPoker extends JFrame {
 		this.setSize(1224, 701);
 		this.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 
+		this.nGioc=numGioc;
 		// SETTA IL LOGO DELLA FINESTRA PUNTEGGI
 		FP.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 
@@ -620,10 +622,10 @@ public class GraficaPoker extends JFrame {
 
 
 	public static void main(String[] args) {
-		GraficaPoker gp=new GraficaPoker(2);
+		GraficaPoker gp=new GraficaPoker(4);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 		
-		gp.daiCarteGioc(2);
+		gp.daiCarteGioc();
 		
 		
 		
