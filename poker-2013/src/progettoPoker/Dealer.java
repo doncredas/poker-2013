@@ -1,5 +1,7 @@
 package progettoPoker;
 
+import grafica.GraficaPoker;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -162,7 +164,7 @@ public class Dealer {
 		nMano++;
 	}//muoviDealer
 	
-	public void daiCarte(){		
+	public void daiCarte(GraficaPoker gp){		
 		int j = (posD+1)%nGiocatori;
 		do{	
 			if(g[j].getFiches()>0){
@@ -171,7 +173,7 @@ public class Dealer {
 				j=(j+1)%nGiocatori;
 			}
 			if(j==posD){
-				g[j].setCartaDealer1(mazzo[primaCarta]);
+				g[j].setCartaDealer1(mazzo[primaCarta], gp);
 				primaCarta--;
 			}
 		}while( j != posD);
@@ -184,7 +186,7 @@ public class Dealer {
 				i=(i+1)%nGiocatori;
 			}	
 			if(i==posD){
-				g[i].setCartaDealer2(mazzo[primaCarta]);
+				g[i].setCartaDealer2(mazzo[primaCarta], gp);
 				primaCarta--;
 			}
 		}while( i != posD);
@@ -220,8 +222,8 @@ public class Dealer {
 	}//turn
 	
 	public void river(ObjectOutputStream [] oos){
-		carteComuni[4]=mazzo[primaCarta];
 		primaCarta--;
+		carteComuni[4]=mazzo[primaCarta];
 		Comando c=new Comando(Tipo.DAI_CARTA, carteComuni[4] );
 		for(int i=0; i<oos.length; i++){
 			try {
@@ -246,8 +248,8 @@ public class Dealer {
 	}//fold
 	
 	public int posGrandeBuio() {
-		int i=buioPosizione+1%nGiocatori;
-		while(!g[i].getInGioco()){i++;}
+		int i=(buioPosizione+1)%nGiocatori;
+		while(!g[i].getInGioco()){i=(i+1)%nGiocatori;}
 		return i;
 	}
 

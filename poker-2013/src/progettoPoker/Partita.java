@@ -49,7 +49,6 @@ public class Partita {
 	}
 	
 	private void eseguiClient() {
-		gp=new GraficaPoker();
 		System.out.println(s.getInetAddress());
 		ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
@@ -74,6 +73,9 @@ public class Partita {
 
 	private void eseguiComando(Comando com,GraficaPoker gp) {
 		Comando risp=null;
+		if(com.getT()==Tipo.GIOCATORI){
+			gp=new GraficaPoker(com.gioc);
+		}
 		if(com.t==null&&com.fiches==0){
 			gp.disableBottoni(false);
 			while(risp==null){
@@ -84,7 +86,9 @@ public class Partita {
 				gp.Giocatori[0].setFiches(com.getFiches());
 			}else{
 				switch(com.t){
-				case NICK_NAME:risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
+				case NICK_NAME:
+					risp=new Comando(Tipo.NICK_NAME,JOptionPane.showInputDialog("inserire nickname"));
+					break;
 				case DAI_CARTA:{
 					if(com.getC()!=null){
 						nCarta=(nCarta%4)+1;
@@ -107,8 +111,11 @@ public class Partita {
 					}
 						
 				}
+				break;
 				case NOTIFICA:
+					break;
 				}
+				
 			}
 		}
 		if(risp!=null){
@@ -124,7 +131,7 @@ public class Partita {
 
 	public Partita(Dealer d)  {
 		//this.ss=ss;
-		gp=new GraficaPoker();
+		gp=new GraficaPoker(d.getG().length);
 		try {
 			ServerT chat=new ServerT(d.getS().length-1,444);
 		} catch (IOException e1) {
@@ -149,15 +156,27 @@ public class Partita {
 
 	private void eseguiServer() {
 		while(true){
+			Comando comNGioc= new Comando(Tipo.GIOCATORI,d.getG().length);
 			Comando c=new Comando(Tipo.NICK_NAME);
 			Comando risp=null;
+			Comando vecchioRisp=null;
 			boolean ok=true;
 			//TODO set nickname del server
 			
-			for (int i = 1; i < OOS.length; i++) {
+			for (int i = 0; i < OOS.length; i++) {
 				try {
+					OOS[i].writeObject(comNGioc);
 					OOS[i].writeObject(c);
-					risp=(Comando)OIS[i].readObject();
+					while(risp==vecchioRisp){
+					try {
+						risp=(Comando)OIS[i].readObject();
+						System.out.println("1");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
+						System.out.println("2");
+					}
+					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -174,8 +193,8 @@ public class Partita {
 				}
 				Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
 				if(ok){
-					for (int j = 1; j < OOS.length; j++) {
-						if(j!=i)
+					gp.Giocatori[i+1].setNome(risp.getNickName());
+					for (int j = 0; j < OOS.length; j++) {
 							try {
 								OOS[i].writeObject(notifica);
 							} catch (IOException e) {
@@ -185,31 +204,29 @@ public class Partita {
 					}
 				}
 				ok=true;
-				d.getG()[i].setNickName(risp.getNickName());
+				d.getG()[i+1].setNickName(risp.getNickName());
 			}//nick
+			gp.reset();
 			d.mischia();
-			d.daiCarte();
+			d.daiCarte(gp);
 			fineMano=false;
 			c=new Comando(null);
 			int primoGiocatore=0;
 			int ultimoRaise;
 			risp=null;
 			while(!fineMano){
-				gp.reset();
 				ultimoRaise=-1;
-				for(int cont=0,i=primoGiocatore;cont<=OOS.length;cont++,i=(i+1)%OOS.length){
+				for(int cont=0,i=primoGiocatore;cont<d.getG().length;cont++,i=(i+1)%d.getG().length){
 					if(i==ultimoRaise){
 						ultimoRaise=-1;
 						break;
 					}
 					if(i==0){
-						gp.Giocatori[0].setCarte(d.getG()[0].getCarta1(), 1);
-						gp.Giocatori[0].setCarte(d.getG()[0].getCarta2(), 2);
 						gp.disableBottoni(false);
 					}else
 					if(d.getG()[i].getInGioco()){
 						try {
-							OOS[i].writeObject(c);
+							OOS[i-1].writeObject(c);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -218,7 +235,7 @@ public class Partita {
 						cron.reset();//TODO spostare il cronometro nel client
 						while(risp==null&&cron.getSecondi()<tempo){
 							try {
-								risp=(Comando) OIS[i].readObject();
+								risp=(Comando) OIS[i-1].readObject();
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
