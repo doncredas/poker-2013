@@ -10,7 +10,7 @@ public class Comando implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4387454705887783423L;
-	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME};
+	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME,GIOCATORI};
 	Carta c;
 	Carta[] car=new Carta[3];
 	int fiches;
@@ -42,7 +42,10 @@ public class Comando implements Serializable {
 	}
 	Comando(Tipo t,int i){
 		this.t=t;
-		this.fiches=i;
+		if(t==Tipo.GIOCATORI){
+			this.gioc=i;
+		}else
+			this.fiches=i;
 	}
 	Comando(Tipo t, Tipo t1,int g){
 		this.t=t;

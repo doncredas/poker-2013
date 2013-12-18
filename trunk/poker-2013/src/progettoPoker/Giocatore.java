@@ -1,5 +1,7 @@
 package progettoPoker;
 
+import grafica.GraficaPoker;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -116,13 +118,14 @@ public class Giocatore {
 		}		
 	}
 
-	public void setCartaDealer1(Carta carta) {
-		this.carta1 = carta;		
+	public void setCartaDealer1(Carta carta,GraficaPoker gp) {
+		this.carta1 = carta;
+		gp.Giocatori[0].setCarte(carta, 1);
 	}
 
-	public void setCartaDealer2(Carta carta) {
+	public void setCartaDealer2(Carta carta,GraficaPoker gp) {
 		this.carta2 = carta;	
-		
+		gp.Giocatori[0].setCarte(carta, 2);
 	}
 
 }
