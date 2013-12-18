@@ -19,7 +19,7 @@ import progettoPoker.Comando;
 public class GraficaPoker extends JFrame {
 	
 	public GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
-	public Socket s=null;
+	//public Socket s=null;
 	static Comando com=null;
 	int nGioc=0;
 	/**
@@ -274,7 +274,7 @@ public class GraficaPoker extends JFrame {
 	
 
 	
-	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2, s); // LISTENER
+	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2); // LISTENER
 
 	JLabel sfondo = new JLabel(Icone.sfondo);
 	
@@ -285,12 +285,12 @@ public class GraficaPoker extends JFrame {
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
 
 
-	public GraficaPoker(int numGioc, Socket s) {
+	public GraficaPoker(int numGioc) {
 
 
 		// DIMENSIONE E OPZIONI FINESTRA (completo)
 		super("Real Poker");
-		this.s=s;
+		//this.s=s;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // DA ELIMINARE
 		this.setResizable(false);
 		this.setBounds(115, 15, 1024, 700);
@@ -620,7 +620,7 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 
-		GraficaPoker gp=new GraficaPoker(4, null);
+		GraficaPoker gp=new GraficaPoker(4);
 
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 		

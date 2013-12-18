@@ -21,7 +21,7 @@ import progettoPoker.*;
 import progettoPoker.Comando.Tipo;
 
 public class Listener extends JPanel implements KeyListener, ActionListener,
-		MouseListener, AdjustmentListener, Runnable {
+		MouseListener, AdjustmentListener {
 
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
@@ -48,7 +48,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
 			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
-			JLabel gioc1ca2, Socket s) {
+			JLabel gioc1ca2) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche = c;
@@ -59,13 +59,13 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 		this.carta1 = gioc1ca1;
 		this.carta2 = gioc1ca2;
-
+/*
 		try{
 			socket=s;
 		thread= new Thread(this);
 		thread.start();
 		}catch(Exception ex){ex.printStackTrace();}		
-
+*/
 	}
 
 	@Override
@@ -77,9 +77,10 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER) 
 			{
 				if (this.ConsChat.getText().length() > 0) 
-				{
+				{/*
 					String s=ConsChat.getText();					
-					invia(s);				
+					invia(s);
+				*/				
 					this.Chat.setText(this.Chat.getText() + "  Nickname: "
 							+ ConsChat.getText() + "\n");
 					ConsChat.setText("");
@@ -94,7 +95,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			}
 		}
 	}
-
+/*
 	private void invia(String s) {
 		// TODO Auto-generated method stub
 		OutputStream outStream;
@@ -129,7 +130,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			}
 		 }catch(Exception ex){System.out.println("disconnesso");}
 	}//run
-
+*/
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 	}
