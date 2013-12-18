@@ -27,13 +27,14 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	JScrollBar BarRaise = new JScrollBar();
 	JTextField ConsRaise = new JTextField();
+	GiocatoreGrafico g1=null;
 
 	JLabel carta1 = null;
 	JLabel carta2 = null;
 
 	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
 			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
-			JLabel gioc1ca2) {
+			JLabel gioc1ca2,GiocatoreGrafico g) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche = c;
@@ -44,8 +45,11 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 		this.carta1 = gioc1ca1;
 		this.carta2 = gioc1ca2;
-
+ 
+		this.g1=g;
 	}
+	
+
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -132,19 +136,17 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 
-		if (((arg0.getSource() == carta1 || (arg0.getSource() == carta2)
-				&& carta1.getIcon() == Icone.coperta) && carta2.getIcon() == Icone.coperta)) {
-			carta1.setIcon(Icone.quaranta);
-			carta2.setIcon(Icone.quarantadue);
+		if ((arg0.getSource() == carta1) || (arg0.getSource() == carta2)) 
+		{
+		      this.g1.giraCarte();
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		if ((carta1.getIcon() != Icone.coperta)
-				&& (carta2.getIcon() != Icone.coperta)) {
-			carta1.setIcon(Icone.coperta);
-			carta2.setIcon(Icone.coperta);
+		if ((arg0.getSource() == carta1) || (arg0.getSource() == carta2)) 
+		{
+			this.g1.giraCarte();
 		}
 
 	}

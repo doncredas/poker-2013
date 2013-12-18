@@ -125,6 +125,7 @@ public class GiocatoreGrafico
 	{
 		if((this.carta1.getIcon()==Icone.coperta)&&(this.carta2.getIcon()==Icone.coperta))
 		{
+		    
 			this.carta1.setIcon(icona1);
 			this.carta2.setIcon(icona2);
 		}
