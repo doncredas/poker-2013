@@ -14,18 +14,16 @@ class RecieveThread implements Runnable {
 	public void run() {
 		try {
 			recieve = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));// get inputstream
-			msgRecieved = grafica.GraficaPoker.ConsChat.getText();
-
+			//msgRecieved = grafica.GraficaPoker.ConsChat.getText();
 			//grafica.GraficaPoker.setConsChat(" ");
+			//manda il messaggio nella chat grafica
+			//grafica.GraficaPoker.scriviChat("ciao1");
+			//grafica.GraficaPoker.scriviChat(msgRecieved);
 			
-			//while ((msgRecieved = recieve.readLine()) != null) {
+			while ((msgRecieved = recieve.readLine()) != null) {
 				System.out.println("From Server: " + msgRecieved);
-				//manda il messaggio nella chat grafica
-				grafica.GraficaPoker.scriviChat("ciao1");
-
-				//grafica.GraficaPoker.scriviChat(msgRecieved);
-		//		System.out.println("Please enter something to send to server..");
-			//}
+				System.out.println("Please enter something to send to server..");
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
