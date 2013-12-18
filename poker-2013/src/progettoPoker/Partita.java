@@ -100,8 +100,10 @@ public class Partita {
 					if(com.getC()!=null){
 						nCarta=(nCarta%4)+1;
 						if(nCarta==1||nCarta==2){
-							if(nCarta==1)
+							if(nCarta==1){
 								this.gp.reset();
+								gp.daiCarteGioc();
+							}
 							this.gp.Giocatori[0].setCarte(com.getC(),nCarta);
 						}
 						else
@@ -216,6 +218,7 @@ public class Partita {
 			gp.reset();
 			d.mischia();
 			d.daiCarte(gp);
+			gp.daiCarteGioc();
 			fineMano=false;
 			c=new Comando(null);
 			int primoGiocatore=0;
