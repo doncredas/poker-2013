@@ -33,6 +33,7 @@ public class Partita {
 	private boolean fineMano=false;
 	private int tempo=60;
 	private int nCarta=0;
+	private int fiches;
 	private Cronometro cron=new Cronometro();
 	private GraficaPoker gp;
 
@@ -75,7 +76,8 @@ public class Partita {
 		Comando risp=null;
 		if(com.getT()==Tipo.GIOCATORI){
 			gp=new GraficaPoker(com.gioc);
-		}
+			gp.Giocatori[0].setFiches(fiches);
+		}else
 		if(com.t==null&&com.fiches==0){
 			gp.disableBottoni(false);
 			while(risp==null){
@@ -83,7 +85,10 @@ public class Partita {
 			}
 		}else{
 			if(com.t==null){
-				gp.Giocatori[0].setFiches(com.getFiches());
+				if(gp!=null)
+					gp.Giocatori[0].setFiches(com.getFiches());
+				else
+					fiches=com.getFiches();
 			}else{
 				switch(com.t){
 				case NICK_NAME:
