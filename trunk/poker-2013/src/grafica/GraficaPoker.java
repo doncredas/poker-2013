@@ -620,10 +620,10 @@ public class GraficaPoker extends JFrame {
 
 
 	public static void main(String[] args) {
-		GraficaPoker gp=new GraficaPoker(5);
+		GraficaPoker gp=new GraficaPoker(2);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 		
-		gp.daiCarteGioc(5);
+		gp.daiCarteGioc(2);
 		
 		
 		
