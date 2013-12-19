@@ -1,7 +1,9 @@
 package progettoPoker;
 
 import grafica.GraficaPoker;
+import grafica.Icone;
 
+import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,12 +13,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.concurrent.Semaphore;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
 import chatThread.ClientT;
 import chatThread.ServerT;
-
 import progettoPoker.Comando.Tipo;
 
 
@@ -92,7 +94,8 @@ public class Partita {
 			}else{
 				switch(com.t){
 				case NICK_NAME:
-					String nick=JOptionPane.showInputDialog("inserire nickname");
+					//String nick=JOptionPane.showInputDialog("inserire nickname");
+					String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 					risp=new Comando(Tipo.NICK_NAME,nick);
 					gp.Giocatori[0].setNome(nick);
 					break;
@@ -170,7 +173,7 @@ public class Partita {
 			Comando risp=null;
 			Comando vecchioRisp=null;
 			boolean ok=true;
-			String nick=JOptionPane.showInputDialog("inserire nickname");
+			String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 			d.getG()[0].setNickName(nick);
 			gp.Giocatori[0].setNome(nick);
 			Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
@@ -313,39 +316,29 @@ public class Partita {
 		Socket client=null;
 		int sc = JOptionPane.showOptionDialog(null,
 				"Creare una nuova partita o connettersi ad una esistente?",
-				"Poker", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-				null, new String[] { "Crea nuova", "Connetti ad esistente" },
+				"Real Poker 2014", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+				Icone.logo, new String[] { "Crea nuova", "Connetti ad esistente" },
 				"Crea nuova");
 		if(sc==-1)System.exit(0);
 		if(sc==0){
 			try {
-				server =new ServerSocket(7777);
+				server = new ServerSocket(7777);
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Errore durante la creazione del Server!","Errore",JOptionPane.ERROR_MESSAGE);
 				System.exit(-1);
 			}
-			JFrame f=new JFrame();
-			Semaphore sem=new Semaphore(0);
-			NumGioc n=new NumGioc(sem);
-			f.add(n);
-			f.setLocation(500,300);
-			f.setSize(200, 200);
-			f.setVisible(true);
-			
-			
-			try {
-				sem.acquire();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Integer gioc[]={2,3,4,5,6,7,8,9}; 
+			Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
+
 			
 				try {
 					Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
 					String inet=null;
 					for (NetworkInterface netint : Collections.list(nets))
 						if(netint.getName().equals("net4"))
-			        	inet= netint.getInetAddresses().nextElement().getHostAddress();
+							inet= netint.getInetAddresses().nextElement().getHostAddress();
+
+				
 					JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client");
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
@@ -356,7 +349,7 @@ public class Partita {
 				} 
 			
 			
-			int numG=n.getValue();
+			int numG=nGiocatori;
 			Socket [] s=new Socket[numG-1];
 			ObjectOutputStream [] OOS=new ObjectOutputStream[numG-1];
 			for(int i=0;i<s.length;i++)
@@ -373,9 +366,11 @@ public class Partita {
 			//OOS=null;
 			new Partita(d);
 		}else{
-			String ip=JOptionPane.showInputDialog("Inserire indirizzo ip");
+
+			String ip2= (String) JOptionPane.showInputDialog(null,"Inserisci l'IP a cui collegarti", "Inserimento IP", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null); 
+			
 			try {
-				client=new Socket(ip,7777);
+				client=new Socket(ip2,7777);
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -393,36 +388,4 @@ public class Partita {
 		
 	}
 	
-	static class NumGioc extends JPanel implements ActionListener{ 
-
-		JList<Integer> list; 
-		 int numGioc=0;
-		 Semaphore s;
-		 public NumGioc(Semaphore s){ 
-		 super();
-		 this.s=s;
-		 JLabel testo=new JLabel("Seleziona il numero di giocatori");
-		 add(testo);
-		 Integer gioc[]={2,3,4,5,6,7,8,9}; 
-		 list = new JList<Integer>(gioc); 
-		 JScrollPane pane = new JScrollPane(list); 
-		 list.setVisibleRowCount(5); 
-		 add(pane);
-		 JButton conferma=new JButton("OK");
-		 add(conferma);
-		 conferma.addActionListener(this);
-		 
-		 } 
-		 public int getValue(){
-			 return numGioc;
-		 }
-		 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			try{
-				numGioc=list.getSelectedValue();
-				s.release();
-			}catch(Exception e){System.out.println("err");}
-		}
-	}
 }
