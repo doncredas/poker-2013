@@ -22,7 +22,7 @@ public class ServerT {
 			// create two threads to send and recieve from client
 			RecieveFromClientThread recieve = new RecieveFromClientThread(clientSocket[i], clientSocket);
 			thread = new Thread(recieve);
-			thread.start();
+			//thread.start();
 		}		
 			SendToClientThread send = new SendToClientThread(clientSocket);
 		    thread2= new Thread(send);
