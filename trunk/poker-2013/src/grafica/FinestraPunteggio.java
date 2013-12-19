@@ -1,17 +1,18 @@
 package grafica;
-                         //AL CLICK DEL BOTTONE PUNTI APRE UNA FINESTRA CON LA LISTA DEI PUNTEGGI
-import java.awt.Container;
-import java.awt.Image;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class FinestraPunteggio extends JFrame implements MouseListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; //TODO
 	static File Immagini=new File("Immagini");
 	File Bottoni=new File(Immagini.getAbsolutePath()+"\\Bottoni");
 	

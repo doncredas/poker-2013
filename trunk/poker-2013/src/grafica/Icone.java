@@ -2,12 +2,8 @@ package grafica;
 
 import java.io.File;
 
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
-import progettoPoker.Carta;
-
 public final class Icone {
 	
 	static File Immagini = new File("Immagini");

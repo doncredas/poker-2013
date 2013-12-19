@@ -1,23 +1,17 @@
 package grafica;
 
-import java.applet.Applet;
+
 import java.awt.*;
-import java.awt.event.MouseEvent;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-import java.io.File;
-//import java.net.*;
-
-
-import java.net.Socket;
-
 import javax.swing.*;
-
 import progettoPoker.Carta;
 import progettoPoker.Comando;
 
 public class GraficaPoker extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; //TODO
 	public GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
 	//public Socket s=null;
 	static Comando com=null;
@@ -296,7 +290,6 @@ public class GraficaPoker extends JFrame {
 
 		// DIMENSIONE E OPZIONI FINESTRA (completo)
 		super("Real Poker");
-		//this.s=s;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // DA ELIMINARE
 		this.setResizable(false);
 		this.setBounds(115, 15, 1024, 700);
@@ -558,6 +551,9 @@ public class GraficaPoker extends JFrame {
 		BarRaise.setMaximum(110);  //SETTA IL MASSIMO
 		BarRaise.setBounds(450, 640,150, 20);
 		ConsRaise.setBounds(602,640,55,20);
+		BarRaise.setValue(50);  //TODO SETTARE VAL INIZIALE BAR
+		ConsRaise.setText(new Integer(BarRaise.getValue()).toString());
+		
 		
 		
 		// CHAT

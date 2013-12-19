@@ -10,9 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 import javax.swing.*;
@@ -23,6 +20,10 @@ import progettoPoker.Comando.Tipo;
 public class Listener extends JPanel implements KeyListener, ActionListener,
 		MouseListener, AdjustmentListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L; //TODO
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
 	JTextArea Statistiche = new JTextArea();
@@ -71,7 +72,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 
-		// TODO METTERE IL SOURCE A ENTRAMBI
+	
 		if (arg0.getSource() == GraficaPoker.ConsChat) 
 		{
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER) 
@@ -224,7 +225,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	@Override
 	public void adjustmentValueChanged(AdjustmentEvent arg0) {
-		// TODO Auto-generated method stub
+
 		this.ConsRaise.setText("" + arg0.getValue());
 		repaint();
 
