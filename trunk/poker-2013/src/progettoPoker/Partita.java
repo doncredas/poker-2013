@@ -304,17 +304,6 @@ public class Partita {
 		
 	}
 	
-	/*static void displayInterfaceInformation(NetworkInterface netint) throws SocketException {
-        //System.out.printf("Display name: %s\n", netint.getDisplayName());
-        if(netint.getName().equals("net4"))
-        	System.out.println("****"+netint.getInetAddresses().nextElement());
-        System.out.printf("Name: %s\n", netint.getName());
-        Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
-        for (InetAddress inetAddress : Collections.list(inetAddresses)) {
-        	System.out.printf("InetAddress: %s\n", inetAddress);
-        }
-        System.out.printf("\n");
-     }*/
 
 	/**
 	 * @param args
@@ -356,11 +345,7 @@ public class Partita {
 					String inet=null;
 					for (NetworkInterface netint : Collections.list(nets))
 						if(netint.getName().equals("net4"))
-			        	inet= netint.getInetAddresses().nextElement().toString();
-					
-			           // displayInterfaceInformation(netint);
-					//InetAddress []ia=server.getInetAddress().getAllByName("Utente-PC");
-				//	System.out.println(ia[1]);
+			        	inet= netint.getInetAddresses().nextElement().getHostAddress();
 					JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client");
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
@@ -388,7 +373,7 @@ public class Partita {
 			//OOS=null;
 			new Partita(d);
 		}else{
-			String ip=JOptionPane.showInputDialog("Inserire indirizzio ip");
+			String ip=JOptionPane.showInputDialog("Inserire indirizzo ip");
 			try {
 				client=new Socket(ip,7777);
 			} catch (UnknownHostException e) {
