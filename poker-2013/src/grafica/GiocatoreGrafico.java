@@ -1,10 +1,7 @@
 package grafica;
 
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-
 import javax.swing.*;
-
 import progettoPoker.Carta;
 
 public class GiocatoreGrafico
