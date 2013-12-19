@@ -170,11 +170,14 @@ public class Partita {
 			Comando risp=null;
 			Comando vecchioRisp=null;
 			boolean ok=true;
-			//TODO set nickname del server
-			
+			String nick=JOptionPane.showInputDialog("inserire nickname");
+			d.getG()[0].setNickName(nick);
+			gp.Giocatori[0].setNome(nick);
+			Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
 			for (int i = 0; i < OOS.length; i++) {
 				try {
 					OOS[i].writeObject(comNGioc);
+					//TODO OOS[i].writeObject(nickServ);
 					OOS[i].writeObject(c);
 					while(risp==vecchioRisp){
 					try {
