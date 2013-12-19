@@ -83,13 +83,19 @@ public class GraficaPoker extends JFrame {
 		    
 		    case 1: {
 		    	       if(i==0)
+		    	       {
+		    	    	   Gioc1Car1.setVisible(true);
 		    	    	   Movimento.muovi(Gioc1Car1,510,420,this);
+		    	       }
 		    	       if(i==1)
+		    	       {
+		    	    	   Gioc1Car2.setVisible(true);
 			               Movimento.muovi(Gioc1Car2,582,420,this);
+		    	       }
 		            }//case1
 
-      }//switch
-      }//for
+			}//switch
+		}//for
 	}//daiCarteGioc
 			
 	/**	 Setta le prime 3 carte sul tavolo
