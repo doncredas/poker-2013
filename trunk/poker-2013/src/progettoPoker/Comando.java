@@ -14,7 +14,8 @@ public class Comando implements Serializable {
 	Carta c;
 	Carta[] car=new Carta[3];
 	int fiches;
-	int gioc;
+	int gioc;  //numero giocatori totali
+	int giocN; //posizione giocatore corrente
 	Tipo t;
 	Tipo t1;
 	String nickName;
@@ -42,10 +43,12 @@ public class Comando implements Serializable {
 	}
 	Comando(Tipo t,int i){
 		this.t=t;
-		if(t==Tipo.GIOCATORI){
-			this.gioc=i;
-		}else
-			this.fiches=i;
+		this.fiches=i;
+	}
+	Comando(Tipo t,int i, int j){
+		this.t=t;
+		this.gioc=i;
+		this.giocN=j;
 	}
 	Comando(Tipo t, Tipo t1,int g){
 		this.t=t;
@@ -81,6 +84,9 @@ public class Comando implements Serializable {
 	}
 	public Tipo getT() {
 		return t;
+	}
+	public int getGiocN(){
+		return giocN;
 	}
 
 }
