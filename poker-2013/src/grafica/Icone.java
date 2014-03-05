@@ -9,6 +9,7 @@ public final class Icone {
 	static File Immagini = new File("Immagini");
 	static File Bottoni = new File(Immagini.getAbsolutePath() + "\\Bottoni");
 	static File Carte = new File(Immagini.getAbsolutePath() + "\\Carte");
+	static File Fiches=new File(Immagini.getAbsolutePath()+"\\Fiches");
 
 	//ICONE CARTE
 	public static ImageIcon zero = new ImageIcon(Carte.getAbsolutePath() + "\\0.png");// Asso di cuori
@@ -82,6 +83,8 @@ public final class Icone {
 	public static ImageIcon Puntinot = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Punti.png");
 	public static ImageIcon Sendpre = new ImageIcon(Bottoni.getAbsolutePath()	+ "\\Sendpre.png");
 	public static ImageIcon Sendnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Send.png");
+	public static ImageIcon ValFipre = new ImageIcon(Bottoni.getAbsolutePath() +"\\ValFipre.png");
+	public static ImageIcon ValFinot = new ImageIcon(Bottoni.getAbsolutePath() +"\\ValFi.png");
 	
 	//BOTTONI DELLA CHAT
 	public static ImageIcon ChatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChatSel.png");
@@ -98,6 +101,27 @@ public final class Icone {
 	//LOGO
 	public static ImageIcon logo = new ImageIcon(Bottoni.getAbsolutePath() + "\\logo.jpg");
 
+	//FICHES
+	//public static ImageIcon Fi_AllIn=new ImageIcon(Fiches.getAbsolutePath()+"\\AllIn.png");
+	public static ImageIcon uno1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1uno.png");
+	public static ImageIcon uno2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2uno.png");
+	public static ImageIcon uno3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3uno.png");
+	public static ImageIcon uno4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4uno.png");
+	public static ImageIcon uno5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5uno.png");
+	public static ImageIcon uno6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6uno.png");
+	public static ImageIcon uno7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7uno.png");
+	public static ImageIcon uno8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8uno.png");
+	public static ImageIcon uno9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9uno.png");
+	
+	public static ImageIcon due1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1dieci.png");
+	public static ImageIcon due2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2dieci.png");
+	public static ImageIcon due3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3dieci.png");
+	public static ImageIcon due4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4dieci.png");
+	public static ImageIcon due5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5dieci.png");
+	public static ImageIcon due6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6dieci.png");
+	public static ImageIcon due7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7dieci.png");
+	public static ImageIcon due8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8dieci.png");
+	public static ImageIcon due9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9dieci.png");
 	
 	/**
 	 * Le icone delle carte sono numerate da 0 a 51 con i pali: Cuori Quadri Fiori Picche.
