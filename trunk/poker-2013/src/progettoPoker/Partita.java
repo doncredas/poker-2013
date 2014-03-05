@@ -328,17 +328,20 @@ public class Partita {
 				System.exit(-1);
 			}
 			Integer gioc[]={2,3,4,5,6,7,8,9}; 
-			Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
+			Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
 
 			
 				try {
 					Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
 					String inet=null;
-					for (NetworkInterface netint : Collections.list(nets))
-						if(netint.getName().equals("net4"))
+					for (NetworkInterface netint : Collections.list(nets)){
+						if(netint.getName().equals("net0")||netint.getName().equals("net4"))
+							try{
 							inet= netint.getInetAddresses().nextElement().getHostAddress();
+							}catch(Exception e){}
+						if(inet!=null)break;
 
-				
+					}
 					JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client");
 				} catch (HeadlessException e1) {
 					// TODO Auto-generated catch block
