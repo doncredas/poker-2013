@@ -85,6 +85,9 @@ public class Comando implements Serializable {
 	public Tipo getT() {
 		return t;
 	}
+	public int getGioc(){
+		return gioc;
+	}
 	public int getGiocN(){
 		return giocN;
 	}
