@@ -129,6 +129,7 @@ public class Partita {
 				case NOTIFICA:
 					switch(com.t1){
 					case NICK_NAME:
+						System.out.println(com.getGioc()+" "+com.getNickName());
 						gp.getGiocatore(com.getGioc()).setNome(com.getNickName());
 						break;
 					}
@@ -181,11 +182,11 @@ public class Partita {
 			String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 			d.getG()[0].setNickName(nick);
 			gp.Giocatori[0].setNome(nick);
-			Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
+			Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,1,nick);
 			for (int i = 0; i < OOS.length; i++) {
 				try {
 					OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
-					//TODO OOS[i].writeObject(nickServ);
+					OOS[i].writeObject(nickServ);
 					OOS[i].writeObject(c);
 					while(risp==vecchioRisp){
 					try {
