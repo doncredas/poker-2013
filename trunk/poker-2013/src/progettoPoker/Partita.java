@@ -38,6 +38,7 @@ public class Partita {
 	private int fiches;
 	private Cronometro cron=new Cronometro();
 	private GraficaPoker gp;
+	private int posGioc=0;
 
 	public Partita(Socket client)  {
 		this.s=client;
@@ -79,6 +80,7 @@ public class Partita {
 		if(com.getT()==Tipo.GIOCATORI){
 			this.gp=new GraficaPoker(com.gioc);
 			this.gp.Giocatori[0].setFiches(fiches);
+			this.posGioc=com.getGiocN();
 		}else
 		if(com.t==null&&com.fiches==0){
 			this.gp.disableBottoni(false);
@@ -125,7 +127,11 @@ public class Partita {
 				}
 				break;
 				case NOTIFICA:
-					break;
+					switch(com.t1){
+					case NICK_NAME:
+						gp.getGiocatore(com.getGioc()).setNome(com.getNickName());
+						break;
+					}
 				}
 				
 			}
@@ -168,7 +174,6 @@ public class Partita {
 
 	private void eseguiServer() {
 		while(true){
-			Comando comNGioc= new Comando(Tipo.GIOCATORI,d.getG().length);
 			Comando c=new Comando(Tipo.NICK_NAME);
 			Comando risp=null;
 			Comando vecchioRisp=null;
@@ -179,7 +184,7 @@ public class Partita {
 			Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
 			for (int i = 0; i < OOS.length; i++) {
 				try {
-					OOS[i].writeObject(comNGioc);
+					OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
 					//TODO OOS[i].writeObject(nickServ);
 					OOS[i].writeObject(c);
 					while(risp==vecchioRisp){
