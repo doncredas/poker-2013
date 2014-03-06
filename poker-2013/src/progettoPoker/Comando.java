@@ -18,11 +18,12 @@ public class Comando implements Serializable {
 	int giocN; //posizione giocatore corrente
 	Tipo t;
 	Tipo t1;
-	String nickName;
+	String [] nickName;
+	String nick;
 	
 	public Comando(Tipo nickName, String name){
 		this.t = nickName;
-		this.nickName = name;
+		this.nick = name;
 	}
 	
 	public Comando(Tipo t){
@@ -56,10 +57,9 @@ public class Comando implements Serializable {
 		this.gioc=g;
 	}
 	
-	Comando(Tipo t, Tipo t1, int g, String nickName){
+	Comando(Tipo t, Tipo t1, String [] nickName){
 		this.t=t;
 		this.t1=t1;
-		this.gioc=g;
 		this.nickName=nickName;
 	}
 	
@@ -70,7 +70,10 @@ public class Comando implements Serializable {
 		this.fiches=fiches;
 	}
 	
-	public String getNickName(){
+	public String getNick(){
+		return nick;
+	}
+	public String[] getNickName(){
 		return nickName;
 	}
 	public Carta getC() {
