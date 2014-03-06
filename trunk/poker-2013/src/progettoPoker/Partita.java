@@ -80,7 +80,7 @@ public class Partita {
 		if(com.getT()==Tipo.GIOCATORI){
 			this.gp=new GraficaPoker(com.gioc);
 			this.gp.Giocatori[0].setFiches(fiches);
-			this.posGioc=com.getGiocN();
+			this.posGioc=com.getGiocN()+1;
 		}else
 		if(com.t==null&&com.fiches==0){
 			this.gp.disableBottoni(false);
@@ -130,7 +130,12 @@ public class Partita {
 					switch(com.t1){
 					case NICK_NAME:
 						System.out.println(com.getGioc()+" "+com.getNickName());
-						gp.getGiocatore(com.getGioc()+1).setNome(com.getNickName());
+						for(int i=0;i<posGioc;i++){
+							gp.getGiocatore(i+1).setNome(com.getNickName()[i]);
+						}
+						for(int i=posGioc+1;i<com.getNickName().length;i++){
+							gp.getGiocatore(i).setNome(com.getNickName()[i]);
+						}
 						break;
 					}
 				}
@@ -168,9 +173,8 @@ public class Partita {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			eseguiServer();
-			
 		}
+		eseguiServer();
 	}
 
 	private void eseguiServer() {
@@ -182,11 +186,20 @@ public class Partita {
 			String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 			d.getG()[0].setNickName(nick);
 			gp.Giocatori[0].setNome(nick);
-			Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
+			//Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
 			for (int i = 0; i < OOS.length; i++) {
 				try {
 					OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
-					OOS[i].writeObject(nickServ);
+					//OOS[i].writeObject(nickServ);
+				}catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			for (int i = 0; i < OOS.length; i++) {
+				try {
+					//OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
+					//OOS[i].writeObject(nickServ);
 					OOS[i].writeObject(c);
 					while(risp==vecchioRisp){
 					try {
@@ -198,6 +211,7 @@ public class Partita {
 						System.out.println("2");
 					}
 					}
+					vecchioRisp=risp;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -212,20 +226,34 @@ public class Partita {
 						break;
 					}
 				}
-				Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
+				//Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
 				if(ok){
-					gp.Giocatori[i+1].setNome(risp.getNickName());
-					for (int j = 0; j < OOS.length; j++) {
+					gp.Giocatori[i+1].setNome(risp.getNick());
+					d.getG()[i+1].setNickName(risp.getNick());
+					/*for (int j = 0; j < OOS.length; j++) {
 							try {
 								OOS[i].writeObject(notifica);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-					}
+					}*/
 				}
 				ok=true;
-				d.getG()[i+1].setNickName(risp.getNickName());
+				
+			}
+			String [] nickName=new String [d.getG().length];
+			for (int i = 0; i < nickName.length; i++) {
+				nickName[i]=d.getG()[i].getNickName();
+			}
+			Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,nickName);
+			for (int i = 0; i < OOS.length; i++) {
+				try {
+					OOS[i].writeObject(notifica);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}//nick
 			gp.reset();
 			d.mischia();
