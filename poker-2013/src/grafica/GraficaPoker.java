@@ -28,9 +28,9 @@ public class GraficaPoker extends JFrame {
 	
 		    default: {
 	                  if(i==0)
-	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car1,960,232,this);
+	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car1,190,405,this);
 	                  if(i==1)
-	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car2,1030,232,this);
+	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car2,260,405,this);
 	                 }//default
 		
 		    case 7:  {
@@ -42,16 +42,16 @@ public class GraficaPoker extends JFrame {
 		    
 		    case 6:  {
 		    	       if(i==0)
-		    	           if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car1,842,405,this);
+		    	           if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car1,190,60,this);
 		    	       if(i==1)
-		    	    	   if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car2,912,405,this);
+		    	    	   if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car2,260,60,this);
 		             }//case 6
 		    
 			case 5:  {
 				       if(i==0)
-				    	   if(Giocatori[4].isVisible()) Movimento.muovi(Gioc5Car1,190,405,this);
+				    	   if(Giocatori[4].isVisible()) Movimento.muovi(Gioc5Car1,512,5,this);
 				       if(i==1)
-                           if(Giocatori[4].isVisible())Movimento.muovi(Gioc5Car2,260,405,this);
+                           if(Giocatori[4].isVisible())Movimento.muovi(Gioc5Car2,582,5,this);
                      }//case5
 			
 			case 4:  {
@@ -63,16 +63,16 @@ public class GraficaPoker extends JFrame {
 			
 			case 3:  {
 				       if(i==0)
-		                   if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car1,190,60,this);
+		                   if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car1,960,232,this);
 		   		       if(i==1)
-	                       if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car2,260,60,this);
+	                       if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car2,1030,232,this);
 	                 }//case3
 			
 			case 2:  {
 			           if(i==0)
-			               if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car1,512,5,this);
+			               if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car1,842,405,this);
 			           if(i==1)
-		                   if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car2,582,5,this);
+		                   if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car2,912,405,this);
 		             }//case2
 		    
 		    case 1: {
@@ -152,6 +152,7 @@ public class GraficaPoker extends JFrame {
 	}
 	
 	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
+	FinestraFiches FF=new FinestraFiches();
 	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
 	
 	/**Scrive un messaggio in chat
@@ -380,8 +381,9 @@ public class GraficaPoker extends JFrame {
 		this.nGioc=numGioc;
 		// SETTA IL LOGO DELLA FINESTRA PUNTEGGI
 		FP.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
-
-		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS)
+		FF.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
+		
+		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
 		Fold.setIcon(Icone.Foldnot);
 		Fold.setPressedIcon(Icone.Foldpre);
 		Fold.setDisabledIcon(Icone.Foldpre);
@@ -408,7 +410,7 @@ public class GraficaPoker extends JFrame {
 		SegnaPunti.setBorder(null);
 		ValoreFiches.setIcon(Icone.ValFinot);
 		ValoreFiches.setPressedIcon(Icone.ValFipre);
-		ValoreFiches.setBounds(0, 600, 90, 30);
+		ValoreFiches.setBounds(90, 645, 90, 30);
 		ValoreFiches.setBorder(null);
 		VisChat.setIcon(Icone.VisualizzaChat);
 		VisChat.setBounds(1017, 512, 90, 30);
@@ -432,11 +434,11 @@ public class GraficaPoker extends JFrame {
 		cartaT4.setBounds(545, 250, 100, 100); 
 		cartaT5.setBounds(620, 250, 100,100); 
 		
-		cartaT1.setIcon(Icone.zero);  //TODO da eliminare queste icone
-		cartaT2.setIcon(Icone.tredici);
-		cartaT3.setIcon(Icone.ventisei);  
-		cartaT4.setIcon(Icone.trentanove);
-		cartaT5.setIcon(Icone.uno);
+		cartaT1.setIcon(Icone.coperta);  //TODO da eliminare queste icone
+		cartaT2.setIcon(Icone.coperta);
+		cartaT3.setIcon(Icone.coperta);  
+		cartaT4.setIcon(Icone.coperta);
+		cartaT5.setIcon(Icone.coperta);
 
 		mazzo.setIcon(Icone.Mazzo);
 		mazzo.setBounds(730, 240, 100, 120);
@@ -446,12 +448,12 @@ public class GraficaPoker extends JFrame {
 		
 		   case 8:    
 		   	          etiUtente8.setIcon(Icone.Etichetta);
-		   	          etiUtente8.setBounds(845, 287, 300, 55);
+		   	          etiUtente8.setBounds(75, 460, 300, 55);
 		   	          nome8.setFont(fontnome);               
-		   	          nome8.setBounds(1010, 276, 100, 60);
+		   	          nome8.setBounds(240, 449, 100, 60);
 		   	          nome8.setForeground(Color.BLUE);
 		   	          fiches8.setFont(fontfiches);
-		   	          fiches8.setBounds(1030, 293, 100, 60);
+		   	          fiches8.setBounds(260, 466, 100, 60);
 		   	          fiches8.setForeground(Color.BLACK);
 		   	          Gioc8Car1.setIcon(Icone.coperta);
 		   	          Gioc8Car2.setIcon(Icone.coperta);
@@ -484,12 +486,12 @@ public class GraficaPoker extends JFrame {
 		   
 		   case 6:    
 				      etiUtente6.setIcon(Icone.Etichetta);
-		   	          etiUtente6.setBounds(730, 460, 300, 55);
+		   	          etiUtente6.setBounds(75, 115, 300, 55);
 		   	          nome6.setFont(fontnome);
-		   	          nome6.setBounds(895, 449, 100, 60);
+		   	          nome6.setBounds(240, 104, 100, 60);
 		   	          nome6.setForeground(Color.BLUE);
 		   	          fiches6.setFont(fontfiches);
-		   	          fiches6.setBounds(915, 466, 100, 60);
+		   	          fiches6.setBounds(260, 121, 100, 60);
 		   	          fiches6.setForeground(Color.BLACK);
 		   	          Gioc6Car1.setIcon(Icone.coperta);
 		   	          Gioc6Car2.setIcon(Icone.coperta);
@@ -503,12 +505,12 @@ public class GraficaPoker extends JFrame {
 		   
 		   case 5:    
 		   	          etiUtente5.setIcon(Icone.Etichetta);
-		   	          etiUtente5.setBounds(75, 460, 300, 55);
+		   	          etiUtente5.setBounds(400, 60, 300, 55);
 		   	          nome5.setFont(fontnome);
-		   	          nome5.setBounds(240, 449, 100, 60);
+		   	          nome5.setBounds(565, 49, 100, 60);
 		   	          nome5.setForeground(Color.BLUE);
 		   	          fiches5.setFont(fontfiches);
-		   	          fiches5.setBounds(260, 466, 100, 60);
+		   	          fiches5.setBounds(585, 66, 100, 60);
 		   	          fiches5.setForeground(Color.BLACK);
 		   	          Gioc5Car1.setIcon(Icone.coperta);
 		   	          Gioc5Car2.setIcon(Icone.coperta);
@@ -541,12 +543,12 @@ public class GraficaPoker extends JFrame {
 		              
 		   case 3:	  
 		   	          etiUtente3.setIcon(Icone.Etichetta);
-		              etiUtente3.setBounds(75, 115, 300, 55);
+		              etiUtente3.setBounds(845, 287, 300, 55);
 		              nome3.setFont(fontnome);
-		              nome3.setBounds(240, 104, 100, 60);
+		              nome3.setBounds(1010, 276, 100, 60);
 		              nome3.setForeground(Color.BLUE);
 		              fiches3.setFont(fontfiches);
-		              fiches3.setBounds(260, 121, 100, 60);
+		              fiches3.setBounds(1030, 293, 100, 60);
 		              fiches3.setForeground(Color.BLACK);
 		              Gioc3Car1.setIcon(Icone.coperta);
 		              Gioc3Car2.setIcon(Icone.coperta);			   
@@ -560,12 +562,12 @@ public class GraficaPoker extends JFrame {
 		   	          
 		   case 2:    
 		   	          etiUtente2.setIcon(Icone.Etichetta);
-		   	          etiUtente2.setBounds(400, 60, 300, 55);
+		   	          etiUtente2.setBounds(730, 460, 300, 55);
 		   	          nome2.setFont(fontnome);
-		   	          nome2.setBounds(565, 49, 100, 60);
+		   	          nome2.setBounds(895, 449, 100, 60);
 		   	          nome2.setForeground(Color.BLUE);
 		   	          fiches2.setFont(fontfiches);
-		   	          fiches2.setBounds(585, 66, 100, 60);
+		   	          fiches2.setBounds(915, 466, 100, 60);
 		   	          fiches2.setForeground(Color.BLACK);
 		   	          Gioc2Car1.setIcon(Icone.coperta);
 		   	          Gioc2Car2.setIcon(Icone.coperta);
@@ -588,7 +590,7 @@ public class GraficaPoker extends JFrame {
 		              fiches1.setForeground(Color.BLACK); 
 		              Gioc1Car1.setIcon(Icone.coperta);
 		              Gioc1Car2.setIcon(Icone.coperta);
-		              Gioc1fich1.setIcon(Icone.due5);    //TODO
+		              Gioc1fich1.setIcon(Icone.diecimila5);    //TODO
 		              Gioc1fich1.setBounds(500,350,100,100);
 			          GiocatoreGrafico Giocatore1 = new GiocatoreGrafico(etiUtente1, nome1,fiches1, Gioc1Car1, Gioc1Car2);
 		              Giocatori[0]=Giocatore1;
@@ -627,6 +629,7 @@ public class GraficaPoker extends JFrame {
 	
 		// LISTENER
 		SegnaPunti.addMouseListener(FP); // Apre la finestra dei Punteggi
+		ValoreFiches.addMouseListener(FF);//Apre la finestra delle fiches
 		Invia.addActionListener(list); // Listener del bottone Invia (Chat)
 		ConsChat.addKeyListener(list); // Listener della console della Chat
 		Fold.addActionListener(list);
@@ -723,7 +726,7 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 
-		GraficaPoker gp=new GraficaPoker(4);
+		GraficaPoker gp=new GraficaPoker(8);
 
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 		

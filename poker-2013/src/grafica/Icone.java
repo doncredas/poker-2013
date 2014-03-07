@@ -103,6 +103,7 @@ public final class Icone {
 
 	//FICHES
 	//public static ImageIcon Fi_AllIn=new ImageIcon(Fiches.getAbsolutePath()+"\\AllIn.png");
+	//FICHES DA 1
 	public static ImageIcon uno1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1uno.png");
 	public static ImageIcon uno2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2uno.png");
 	public static ImageIcon uno3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3uno.png");
@@ -112,17 +113,46 @@ public final class Icone {
 	public static ImageIcon uno7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7uno.png");
 	public static ImageIcon uno8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8uno.png");
 	public static ImageIcon uno9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9uno.png");
-	
-	public static ImageIcon due1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1dieci.png");
-	public static ImageIcon due2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2dieci.png");
-	public static ImageIcon due3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3dieci.png");
-	public static ImageIcon due4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4dieci.png");
-	public static ImageIcon due5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5dieci.png");
-	public static ImageIcon due6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6dieci.png");
-	public static ImageIcon due7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7dieci.png");
-	public static ImageIcon due8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8dieci.png");
-	public static ImageIcon due9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9dieci.png");
-	
+	//FICHES DA 10
+	public static ImageIcon dieci1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1dieci.png");
+	public static ImageIcon dieci2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2dieci.png");
+	public static ImageIcon dieci3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3dieci.png");
+	public static ImageIcon dieci4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4dieci.png");
+	public static ImageIcon dieci5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5dieci.png");
+	public static ImageIcon dieci6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6dieci.png");
+	public static ImageIcon dieci7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7dieci.png");
+	public static ImageIcon dieci8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8dieci.png");
+	public static ImageIcon dieci9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9dieci.png");
+	//FICHES DA 100
+	public static ImageIcon cento1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1cento.png");
+	public static ImageIcon cento2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2cento.png");
+	public static ImageIcon cento3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3cento.png");
+	public static ImageIcon cento4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4cento.png");
+	public static ImageIcon cento5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5cento.png");
+	public static ImageIcon cento6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6cento.png");
+	public static ImageIcon cento7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7cento.png");
+	public static ImageIcon cento8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8cento.png");
+	public static ImageIcon cento9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9cento.png");
+	//FICHES DA 1000
+	public static ImageIcon mille1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1mille.png");
+	public static ImageIcon mille2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2mille.png");
+	public static ImageIcon mille3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3mille.png");
+	public static ImageIcon mille4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4mille.png");
+	public static ImageIcon mille5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5mille.png");
+	public static ImageIcon mille6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6mille.png");
+	public static ImageIcon mille7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7mille.png");
+	public static ImageIcon mille8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8mille.png");
+	public static ImageIcon mille9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9mille.png");
+	//FICHES DA 10000
+	public static ImageIcon diecimila1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1diecimila.png");
+	public static ImageIcon diecimila2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2diecimila.png");
+	public static ImageIcon diecimila3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3diecimila.png");
+	public static ImageIcon diecimila4 = new ImageIcon(Fiches.getAbsolutePath()+"\\4diecimila.png");
+	public static ImageIcon diecimila5 = new ImageIcon(Fiches.getAbsolutePath()+"\\5diecimila.png");
+	public static ImageIcon diecimila6 = new ImageIcon(Fiches.getAbsolutePath()+"\\6diecimila.png");
+	public static ImageIcon diecimila7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7diecimila.png");
+	public static ImageIcon diecimila8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8diecimila.png");
+	public static ImageIcon diecimila9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9diecimila.png");
 	/**
 	 * Le icone delle carte sono numerate da 0 a 51 con i pali: Cuori Quadri Fiori Picche.
 	 * Per ogni palo il valore parte dall'Asso e poi ci sono 2,3,4,5,6,7,8,9,10,J,Q,K
