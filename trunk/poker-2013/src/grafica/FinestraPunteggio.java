@@ -33,51 +33,31 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e)
-    {
-		// TODO Auto-generated method stub
-
-	}
-
+	public void mouseEntered(MouseEvent e){}
 	@Override
-	public void mouseExited(MouseEvent e) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseExited(MouseEvent e) {}
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
-
-	}
-
+	public void mousePressed(MouseEvent e){}
 	@Override
 	public void mouseReleased(MouseEvent e) 
 	{
-		// TODO Auto-generated method stub
-
-		
 		if(this.isVisible())
 	       {
 	    	   
 	    	   this.setVisible(false);
 	       }
 		else{
-			
-	    
-	    ImageIcon sfondo = new ImageIcon(Bottoni.getAbsolutePath()+"\\punteggio.jpg");
-		this.setResizable(false);
-		this.setBounds(115, 15, 600, 650);
-		this.setContentPane(new JLabel(sfondo));
-		this.setSize(600,665);
-	    this.setSize(600,666);
-	    
-	    this.setVisible(true);
-		}
-	}
+	         ImageIcon sfondo = new ImageIcon(Bottoni.getAbsolutePath()+"\\punteggio.jpg");
+		     this.setResizable(false);
+		     this.setBounds(115, 15, 600, 650);
+		     this.setContentPane(new JLabel(sfondo));
+		     this.setSize(600,665);
+	         this.setSize(600,666);
+	         this.setVisible(true);
+		}//else
+	}//mouseReleased
 
-}
+}//FinestraPunteggio
 
 
 
