@@ -87,6 +87,7 @@ public class Partita {
 			while(risp==null){
 				risp=this.gp.getComando();
 			}
+			this.gp.resetComando();
 		}else{
 			if(com.t==null){
 				if(this.gp!=null)
@@ -137,6 +138,12 @@ public class Partita {
 							gp.getGiocatore(i).setNome(com.getNickName()[i]);
 						}
 						break;
+					case CHECK_CALL://TODO
+						break;
+					case FOLD://TODO
+						break;
+					case RAISE://TODO
+						break;
 					}
 				}
 				
@@ -178,30 +185,29 @@ public class Partita {
 	}
 
 	private void eseguiServer() {
-		while(true){
-			Comando c=new Comando(Tipo.NICK_NAME);
-			Comando risp=null;
-			Comando vecchioRisp=null;
-			boolean ok=true;
-			String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
-			d.getG()[0].setNickName(nick);
-			gp.Giocatori[0].setNome(nick);
-			//Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
-			for (int i = 0; i < OOS.length; i++) {
-				try {
-					OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
-					//OOS[i].writeObject(nickServ);
-				}catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		Comando c=new Comando(Tipo.NICK_NAME);
+		Comando risp=null;
+		Comando vecchioRisp=null;
+		boolean ok=true;
+		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+		d.getG()[0].setNickName(nick);
+		gp.Giocatori[0].setNome(nick);
+		//Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
+		for (int i = 0; i < OOS.length; i++) {
+			try {
+				OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
+				//OOS[i].writeObject(nickServ);
+			}catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			for (int i = 0; i < OOS.length; i++) {
-				try {
-					//OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
-					//OOS[i].writeObject(nickServ);
-					OOS[i].writeObject(c);
-					while(risp==vecchioRisp){
+		}
+		for (int i = 0; i < OOS.length; i++) {
+			try {
+				//OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
+				//OOS[i].writeObject(nickServ);
+				OOS[i].writeObject(c);
+				while(risp==vecchioRisp){
 					try {
 						risp=(Comando)OIS[i].readObject();
 						System.out.println("1");
@@ -210,61 +216,62 @@ public class Partita {
 						//e.printStackTrace();
 						System.out.println("2");
 					}
-					}
-					vecchioRisp=risp;
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-				for (int j = 0; j < i; j++) {
-					if(d.getG()[j].getNickName().equals(risp.getNickName())){
-						ok=false;
-						i--;
-						break;
-					}
 				}
-				//Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
-				if(ok){
-					gp.Giocatori[i+1].setNome(risp.getNick());
-					d.getG()[i+1].setNickName(risp.getNick());
-					/*for (int j = 0; j < OOS.length; j++) {
-							try {
-								OOS[i].writeObject(notifica);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-					}*/
+				vecchioRisp=risp;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			for (int j = 0; j < i; j++) {
+				if(d.getG()[j].getNickName().equals(risp.getNickName())){
+					ok=false;
+					i--;
+					break;
 				}
-				ok=true;
-				
 			}
-			String [] nickName=new String [d.getG().length];
-			for (int i = 0; i < nickName.length; i++) {
-				nickName[i]=d.getG()[i].getNickName();
+			//Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
+			if(ok){
+				gp.Giocatori[i+1].setNome(risp.getNick());
+				d.getG()[i+1].setNickName(risp.getNick());
+				/*for (int j = 0; j < OOS.length; j++) {
+						try {
+							OOS[i].writeObject(notifica);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				}*/
 			}
-			Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,nickName);
-			for (int i = 0; i < OOS.length; i++) {
-				try {
-					OOS[i].writeObject(notifica);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}//nick
+			ok=true;
+			
+		}
+		String [] nickName=new String [d.getG().length];
+		for (int i = 0; i < nickName.length; i++) {
+			nickName[i]=d.getG()[i].getNickName();
+		}
+		Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,nickName);
+		for (int i = 0; i < OOS.length; i++) {
+			try {
+				OOS[i].writeObject(notifica);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}//nick
+		int primoGiocatore=0;
+		while(true){
 			gp.reset();
 			d.mischia();
 			d.daiCarte(gp);
 			gp.daiCarteGioc();
-			fineMano=false;
 			c=new Comando(null);
-			int primoGiocatore=0;
+			primoGiocatore=(d.getPosD()+1)%d.getG().length;
 			int ultimoRaise;
 			risp=null;
-			while(!fineMano){
+			for(int j=0;j<4;j++){
 				ultimoRaise=-1;
 				for(int cont=0,i=primoGiocatore;cont<d.getG().length;cont++,i=(i+1)%d.getG().length){
 					if(i==ultimoRaise){
@@ -273,6 +280,7 @@ public class Partita {
 					}
 					if(i==0){
 						gp.disableBottoni(false);
+						while(gp.bottoniEnabled());
 					}else
 					if(d.getG()[i].getInGioco()){
 						try {
@@ -295,15 +303,17 @@ public class Partita {
 							}
 						}
 						eseguiComando(risp,i);
-						if(risp.getT()==Tipo.RAISE)ultimoRaise=i;
+						if(risp.getT()==Tipo.RAISE){
+							ultimoRaise=i;
+							cont=0;
+						}
 					}
 				}
 				if(ultimoRaise==-1)CreaComando();
 			}
-			primoGiocatore=(primoGiocatore+1)%OOS.length;
+			d.muoviDealer();
 		}
 		
-
 	}
 	
 

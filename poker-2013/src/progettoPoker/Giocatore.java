@@ -90,13 +90,14 @@ public class Giocatore {
 	}
 	public void setCarta2(Carta carta2) {
 		this.carta2 = carta2;
-		
+		if(OOS!=null){
 		com=new Comando(Tipo.DAI_CARTA,carta2);
 		try {
 			OOS.writeObject(com);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		
 	}

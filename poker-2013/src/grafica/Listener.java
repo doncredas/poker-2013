@@ -24,6 +24,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L; //TODO
+	GraficaPoker gp;
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
 	JTextArea Statistiche = new JTextArea();
@@ -49,7 +50,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
 			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
-			JLabel gioc1ca2) {
+			JLabel gioc1ca2,GraficaPoker gp) {
 		this.Chat = a;
 		this.ConsChat = b;
 		this.Statistiche = c;
@@ -60,6 +61,8 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 		this.carta1 = gioc1ca1;
 		this.carta2 = gioc1ca2;
+		
+		this.gp=gp;
 /*
 		try{
 			socket=s;
@@ -151,7 +154,6 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			this.ConsChat.setVisible(true);
 			GraficaPoker.Invia.setVisible(true);
 			GraficaPoker.VisChat.setIcon(Icone.ChatSelected);
-			;
 			GraficaPoker.VisStat.setIcon(Icone.VisualizzaStat);
 		}
 		if (arg0.getSource() == GraficaPoker.VisStat) {
@@ -174,13 +176,16 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		}
 		if (arg0.getSource() == GraficaPoker.Fold) {
 			GraficaPoker.com = new Comando(Tipo.FOLD);
+			gp.disableBottoni(true);
 		}
 		if (arg0.getSource() == GraficaPoker.Raise) {
 			GraficaPoker.com = new Comando(Tipo.RAISE);
+			gp.disableBottoni(true);
 			// TODO scroll o textbox per inserire raise
 		}
 		if (arg0.getSource() == GraficaPoker.Call) {
 			GraficaPoker.com = new Comando(Tipo.CHECK_CALL);
+			gp.disableBottoni(true);
 		}
 
 	}
