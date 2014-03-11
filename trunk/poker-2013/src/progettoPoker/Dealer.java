@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import progettoPoker.Comando.Tipo;
 
@@ -102,12 +103,18 @@ public class Dealer {
 			}
 		}
 		
+		LinkedList<Mano> maniPerdenti=new LinkedList<Mano>();
+		
 		for(Mano m : mani.keySet())
-			if(m.getVal()!=manoMigliore) mani.remove(m);
+			if(m.getVal()!=manoMigliore) maniPerdenti.add(m);
+		
+		for(Mano m:maniPerdenti){
+			mani.remove(m);
+		}
 
 		if(mani.size()==1){
 			vincenti=new Giocatore[1];
-			vincenti[1]=mani.get(migliore);
+			vincenti[0]=mani.get(migliore);
 			return vincenti;
 		}
 		else{
@@ -164,6 +171,10 @@ public class Dealer {
 		nMano++;
 	}//muoviDealer
 	
+	public int getPosD() {
+		return posD;
+	}
+
 	public void daiCarte(GraficaPoker gp){		
 		int j = (posD+1)%nGiocatori;
 		do{	
@@ -289,11 +300,16 @@ public class Dealer {
 					vincita+=quota;
 			}
 			vin=new Comando(null,vincitori[i].getFiches()+vincita);
-			try {
-				oOS[vincitori[i].indice].writeObject(vin);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(vincitori[i].indice!=0){
+				try {
+					oOS[vincitori[i].indice-1].writeObject(vin);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else{
+				//TODO gestire vittoria del server
+				System.out.println("vittoria del server");
 			}
 			vincita=0;
 		}

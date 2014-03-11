@@ -2,6 +2,7 @@ package progettoPoker;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class Mano {
@@ -20,7 +21,7 @@ public class Mano {
 	int val=0;
 	
 	Mano(Carta[]c,Carta c1,Carta c2){
-		this.c=Arrays.copyOf(c,c.length);
+		this.c=Arrays.copyOf(c,this.c.length);
 		this.c[5]=new Carta(c1);
 		this.c[6]=new Carta(c2);
 	}
@@ -59,17 +60,17 @@ public class Mano {
 		int cont=1;
 		int[] cMax={1,1};
 		for(int i=0; i<c.length; i++){
-			for(int j=i+1; i<c.length; j++){
+			for(int j=i+1; j<c.length; j++){
 				if(c[i].getVal()==c[j].getVal())
 					cont++;					
 			}
-			if(cont>cMax[1]){
-				cMax[2]=cMax[1];
-				cMax[1]=cont;
+			if(cont>cMax[0]){
+				cMax[1]=cMax[0];
+				cMax[0]=cont;
 				cartaMax1=cont;
 			}else
-				if(cont>cMax[2]){
-					cMax[2]=cont;
+				if(cont>cMax[1]){
+					cMax[1]=cont;
 					cartaMax2=cont;
 				}
 			cont=1;
@@ -128,8 +129,12 @@ public class Mano {
 				}
 			}
 		}
+		LinkedList<Mano> maniPerdenti=new LinkedList<Mano>();
 		for(Mano m:man){
-			if(m.cartaMax1<tmp||m.cartaMax2<tmp2)mani.remove(m);
+			if(m.cartaMax1<tmp||m.cartaMax2<tmp2)maniPerdenti.add(m);
+		}
+		for(Mano m:maniPerdenti){
+			mani.remove(m);
 		}
 	}
 		
