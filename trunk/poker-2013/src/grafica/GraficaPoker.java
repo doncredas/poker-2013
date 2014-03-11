@@ -189,6 +189,9 @@ public class GraficaPoker extends JFrame {
 		Call.setEnabled(!flag);
 		AllIn.setEnabled(!flag);
 	}
+	public boolean bottoniEnabled(){
+		return (Fold.isEnabled()&&Call.isEnabled()&&Raise.isEnabled()&&AllIn.isEnabled());
+	}
 	/**
 	 *  Restituisce un array di GiocatoriGrafici
 	 */
@@ -356,7 +359,7 @@ public class GraficaPoker extends JFrame {
 	
 
 	
-	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2); // LISTENER
+	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,this); // LISTENER
 	JLabel sfondo = new JLabel(Icone.sfondo);
 	
 
