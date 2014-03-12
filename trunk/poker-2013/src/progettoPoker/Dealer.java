@@ -322,6 +322,7 @@ public class Dealer {
 			c.reset();
 			piccoloBuio*=incrementoBui;
 		}
+		carteComuni= new Carta[5];
 	}//fineMano
 	
 }//Dealer
