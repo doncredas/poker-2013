@@ -6,6 +6,11 @@ public class Fiches {
 	private int quanto;
 	private JLabel chip,chip2,chip3,chip4,chip5;
 	
+	/**
+	 * viene creato un solo oggetto con più JLabel
+	 * come se fosse un array di fiches. Creo la fiches
+	 * inserendo il valore e quindi per ognugno setta le icone 
+	 */
 	public Fiches(int quanto){
 		switch(quanto){
 		case 1: {this.quanto=quanto;chip.setIcon(Icone.uno1);break;}
