@@ -4,6 +4,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 public class Movimento {
+
 	public static void muovi(JComponent jc, int x, int y, JFrame jf) {
 		int inX = jc.getX();
 		int inY = jc.getY();
@@ -24,11 +25,12 @@ public class Movimento {
 				jc.setLocation(nX, nY);
 				jf.repaint();
 				try {
-					Thread.sleep(5);
+					Thread.sleep(2);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 			jc.setLocation(x, y);
 		}
