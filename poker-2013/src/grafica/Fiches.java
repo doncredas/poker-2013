@@ -6,6 +6,7 @@ public class Fiches {
 	private int quanto;
 	private JLabel chip,chip2,chip3,chip4,chip5;
 	
+	
 	/**
 	 * viene creato un solo oggetto con più JLabel
 	 * come se fosse un array di fiches. Creo la fiches
@@ -76,7 +77,28 @@ public class Fiches {
 	
 	public int getQuanto(){
 		return this.quanto;
-	}//setQuanto
+	}//getQuanto
+	
+	public JLabel getChip() {
+		return chip;
+	}
+
+	public JLabel getChip2() {
+		return chip2;
+	}
+
+	public JLabel getChip3() {
+		return chip3;
+	}
+
+	public JLabel getChip4() {
+		return chip4;
+	}
+
+	public JLabel getChip5() {
+		return chip5;
+	}
+
 	
 	
 
