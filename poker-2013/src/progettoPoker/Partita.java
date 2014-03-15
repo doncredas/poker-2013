@@ -3,42 +3,34 @@ package progettoPoker;
 import grafica.GraficaPoker;
 import grafica.Icone;
 
-import java.awt.Frame;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.concurrent.Semaphore;
-
 import javax.swing.*;
-import javax.swing.event.*;
-
-import chatThread.ClientT;
-import chatThread.ServerT;
+import chatThread.*;
 import progettoPoker.Comando.Tipo;
 
 
 public class Partita {
-	//private ServerSocket ss = null;
 	private Socket s = null;
 	private ObjectOutputStream OOS[] = null;
 	private ObjectInputStream OIS[] = null;
 	private ObjectOutputStream oos=null;
 	private ObjectInputStream ois=null;
 	//private BufferedReader br = null;
-	private Thread t = null;
+	//private Thread t = null;
 	private Dealer d = null;
-	private boolean fineMano=false;
+	//private boolean fineMano=false;
 	private int tempo=60;
 	private int nCarta=0;
 	private int fiches;
 	private Cronometro cron=new Cronometro();
 	private GraficaPoker gp;
 	private int posGioc=0;
+	private Comando c=null;
+	private Comando risp=null;
 
 	public Partita(Socket client)  {
 		this.s=client;
@@ -95,58 +87,7 @@ public class Partita {
 				else
 					fiches=com.getFiches();
 			}else{
-				switch(com.t){
-				case NICK_NAME:
-					//String nick=JOptionPane.showInputDialog("inserire nickname");
-					String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
-					risp=new Comando(Tipo.NICK_NAME,nick);
-					gp.Giocatori[0].setNome(nick);
-					break;
-				case DAI_CARTA:{
-					if(com.getC()!=null){
-						nCarta=(nCarta%4)+1;
-						if(nCarta==1||nCarta==2){
-							if(nCarta==1){
-								this.gp.reset();
-								gp.daiCarteGioc();
-							}
-							this.gp.Giocatori[0].setCarte(com.getC(),nCarta);
-						}
-						else
-							if(nCarta==3)
-								this.gp.setTurn(com.getC());
-							else
-								this.gp.setRiver(com.getC());
-						//TODO
-					}else{
-						this.gp.setFlop(com.getCar(),this.gp);
-					}
-					if(com.getFiches()!=0){
-						//TODO
-					}
-						
-				}
-				break;
-				case NOTIFICA:
-					switch(com.t1){
-					case NICK_NAME:
-						System.out.println(com.getGioc()+" "+com.getNickName());
-						for(int i=0;i<posGioc;i++){
-							gp.getGiocatore(i+1).setNome(com.getNickName()[i]);
-						}
-						for(int i=posGioc+1;i<com.getNickName().length;i++){
-							gp.getGiocatore(i).setNome(com.getNickName()[i]);
-						}
-						break;
-					case CHECK_CALL://TODO
-						break;
-					case FOLD://TODO
-						break;
-					case RAISE://TODO
-						break;
-					}
-				}
-				
+				risp=eseguiTipo(com,risp);
 			}
 		}
 		if(risp!=null){
@@ -160,15 +101,95 @@ public class Partita {
 		
 	}
 
+	private Comando eseguiTipo(Comando com, Comando risp) {
+		switch(com.t){
+		case NICK_NAME:
+			String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+			risp=new Comando(Tipo.NICK_NAME,nick);
+			gp.Giocatori[0].setNome(nick);
+			break;
+		case DAI_CARTA:{
+			if(com.getC()!=null){
+				nCarta=(nCarta%4)+1;
+				if(nCarta==1||nCarta==2){
+					if(nCarta==1){
+						this.gp.reset();
+						gp.daiCarteGioc();
+					}
+					this.gp.Giocatori[0].setCarte(com.getC(),nCarta);
+				}
+				else
+					if(nCarta==3)
+						this.gp.setTurn(com.getC());
+					else
+						this.gp.setRiver(com.getC());
+				//TODO
+			}else{
+				this.gp.setFlop(com.getCar(),this.gp);
+			}
+			if(com.getFiches()!=0){
+				//TODO
+			}
+				
+		}
+		break;
+		case NOTIFICA:
+			eseguiNotifica(com);
+		}
+		
+		return risp;
+	}
+
+	private void eseguiNotifica(Comando com) {
+
+		switch(com.t1){
+		case NICK_NAME:
+			System.out.println(com.getGioc()+" "+com.getNickName());
+			for(int i=0;i<posGioc;i++){
+				gp.getGiocatore(i+1).setNome(com.getNickName()[i]);
+			}
+			for(int i=posGioc+1;i<com.getNickName().length;i++){
+				gp.getGiocatore(i).setNome(com.getNickName()[i]);
+			}
+			break;
+		case CHECK_CALL://TODO
+			break;
+		case FOLD:
+			if(com.getGioc()<posGioc)
+				gp.getGiocatore(com.getGioc()+1).setFold(true);
+			else
+				if(com.getGioc()==posGioc)
+					gp.getGiocatore(0).setFold(true); 
+				else
+					gp.getGiocatore(com.getGioc()).setFold(true);
+			break;
+		case RAISE://TODO
+			break;
+		case FINE_MANO:
+			boolean rimanenti[]=com.rimanenti;
+			for (int i = 0; i < rimanenti.length; i++) {
+				if(i<posGioc){
+					if(rimanenti[i]==true)gp.getGiocatore(i).setFold(false);
+					else
+						gp.getGiocatore(i).elimina();
+				}else
+					if(rimanenti[i]==true)gp.getGiocatore(i-1).setFold(false);
+					else
+						gp.getGiocatore(i-1).elimina();
+			}
+		}
+		
+	}
+
 	public Partita(Dealer d)  {
 		//this.ss=ss;
 		gp=new GraficaPoker(d.getG().length);
-		try {
+		/*try {
 			ServerT chat=new ServerT(d.getS().length-1,444);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		this.d=d;
 		OOS=d.getOOS();
 		OIS=new ObjectInputStream[d.getG().length-1];
@@ -185,82 +206,7 @@ public class Partita {
 	}
 
 	private void eseguiServer() {
-		Comando c=new Comando(Tipo.NICK_NAME);
-		Comando risp=null;
-		Comando vecchioRisp=null;
-		boolean ok=true;
-		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
-		d.getG()[0].setNickName(nick);
-		gp.Giocatori[0].setNome(nick);
-		//Comando nickServ=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,0,nick);
-		for (int i = 0; i < OOS.length; i++) {
-			try {
-				OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
-				//OOS[i].writeObject(nickServ);
-			}catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		for (int i = 0; i < OOS.length; i++) {
-			try {
-				//OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
-				//OOS[i].writeObject(nickServ);
-				OOS[i].writeObject(c);
-				while(risp==vecchioRisp){
-					try {
-						risp=(Comando)OIS[i].readObject();
-						System.out.println("1");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						//e.printStackTrace();
-						System.out.println("2");
-					}
-				}
-				vecchioRisp=risp;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			for (int j = 0; j < i; j++) {
-				if(d.getG()[j].getNickName().equals(risp.getNickName())){
-					ok=false;
-					i--;
-					break;
-				}
-			}
-			//Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,i,risp.getNickName());
-			if(ok){
-				gp.Giocatori[i+1].setNome(risp.getNick());
-				d.getG()[i+1].setNickName(risp.getNick());
-				/*for (int j = 0; j < OOS.length; j++) {
-						try {
-							OOS[i].writeObject(notifica);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				}*/
-			}
-			ok=true;
-			
-		}
-		String [] nickName=new String [d.getG().length];
-		for (int i = 0; i < nickName.length; i++) {
-			nickName[i]=d.getG()[i].getNickName();
-		}
-		Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,nickName);
-		for (int i = 0; i < OOS.length; i++) {
-			try {
-				OOS[i].writeObject(notifica);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}//nick
+		generaNick();
 		int primoGiocatore=0;
 		while(true){
 			gp.reset();
@@ -273,6 +219,7 @@ public class Partita {
 			risp=null;
 			for(int j=0;j<4;j++){
 				ultimoRaise=-1;
+				if(unicoGiocatore())break;
 				for(int cont=0,i=primoGiocatore;cont<d.getG().length;cont++,i=(i+1)%d.getG().length){
 					if(i==ultimoRaise){
 						ultimoRaise=-1;
@@ -312,10 +259,96 @@ public class Partita {
 				if(ultimoRaise==-1)CreaComando();
 			}
 			d.muoviDealer();
+			resetRimanenti(d.getRimanenti());
 		}
 		
 	}
 	
+
+	private void generaNick() {
+		c=new Comando(Tipo.NICK_NAME);
+		Comando vecchioRisp=null;
+		boolean ok=true;
+		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+		d.getG()[0].setNickName(nick);
+		gp.Giocatori[0].setNome(nick);
+		for (int i = 0; i < OOS.length; i++) {
+			try {
+				OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		for (int i = 0; i < OOS.length; i++) {
+			try {
+				OOS[i].writeObject(c);
+				while(risp==vecchioRisp){
+					try {
+						risp=(Comando)OIS[i].readObject();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				vecchioRisp=risp;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			for (int j = 0; j < i; j++) {
+				if(d.getG()[j].getNickName().equals(risp.getNickName())){//TODO sistemare il caso di nick uguali
+					ok=false;
+					i--;
+					break;
+				}
+			}
+			if(ok){
+				gp.Giocatori[i+1].setNome(risp.getNick());
+				d.getG()[i+1].setNickName(risp.getNick());
+				/*for (int j = 0; j < OOS.length; j++) {
+						try {
+							OOS[i].writeObject(notifica);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				}*/
+			}
+			ok=true;
+			
+		}
+		String [] nickName=new String [d.getG().length];
+		for (int i = 0; i < nickName.length; i++) {
+			nickName[i]=d.getG()[i].getNickName();
+		}
+		Comando notifica=new Comando(Tipo.NOTIFICA,Tipo.NICK_NAME,nickName);
+		for (int i = 0; i < OOS.length; i++) {
+			try {
+				OOS[i].writeObject(notifica);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	private void resetRimanenti(boolean[] rimanenti) {
+		for (int i = 0; i < rimanenti.length; i++) {
+			if(rimanenti[i]==false)gp.getGiocatore(i).elimina();
+		}
+		Comando delete=new Comando(Tipo.NOTIFICA,Tipo.FINE_MANO,rimanenti);
+		inviaComando(delete);
+		
+	}
+
+	private boolean unicoGiocatore() {
+		int cont=0;
+		for(int i=0;i<d.getG().length;i++){
+			if(d.getG()[i].getInGioco())cont++;
+		}
+		if(cont<2)
+		d.fineMano(OOS);
+		return cont<2;
+	}
 
 	private void CreaComando() {
 		
@@ -338,6 +371,9 @@ public class Partita {
 		switch(c.getT()){
 		case FOLD:
 			d.fold(i);
+			gp.getGiocatore(i).setFold(true);
+			Comando notFold=new Comando(Tipo.NOTIFICA,Tipo.FOLD,i);
+			inviaComando(notFold);
 			break;
 		case CHECK_CALL:
 			d.checkCall(i);
@@ -352,11 +388,68 @@ public class Partita {
 	}
 	
 
+	private void inviaComando(Comando c) {
+		for(int i=0;i<OOS.length;i++)
+			try {
+				OOS[i].writeObject(c);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+	}
+	
+	private static void mostraIp() {
+		try {
+			Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+			String inet=null;
+			for (NetworkInterface netint : Collections.list(nets)){
+				if(netint.getName().startsWith("net"))
+					try{
+					inet= netint.getInetAddresses().nextElement().getHostAddress();
+					}catch(Exception e){}
+				if(inet!=null)break;
+
+			}
+			JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	private static void creaServer() {
+		ServerSocket server = null;
+		try {
+			server = new ServerSocket(7777);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Errore durante la creazione del Server!","Errore",JOptionPane.ERROR_MESSAGE);
+			System.exit(-1);
+		}
+		Integer gioc[]={2,3,4,5,6,7,8,9}; 
+		Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
+
+		mostraIp();
+		
+		int numG=nGiocatori;
+		Socket [] s=new Socket[numG-1];
+		ObjectOutputStream [] OOS=new ObjectOutputStream[numG-1];
+		for(int i=0;i<s.length;i++)
+			try {
+				s[i]=server.accept();
+				OOS[i]=new ObjectOutputStream(s[i].getOutputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		Dealer d=new Dealer(numG,10000,s,OOS);
+		new Partita(d);
+		
+	}
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ServerSocket server=null;
 		Socket client=null;
 		int sc = JOptionPane.showOptionDialog(null,
 				"Creare una nuova partita o connettersi ad una esistente?",
@@ -365,74 +458,21 @@ public class Partita {
 				"Crea nuova");
 		if(sc==-1)System.exit(0);
 		if(sc==0){
-			try {
-				server = new ServerSocket(7777);
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Errore durante la creazione del Server!","Errore",JOptionPane.ERROR_MESSAGE);
-				System.exit(-1);
-			}
-			Integer gioc[]={2,3,4,5,6,7,8,9}; 
-			Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
-
-			
-				try {
-					Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
-					String inet=null;
-					for (NetworkInterface netint : Collections.list(nets)){
-						if(netint.getName().equals("net0")||netint.getName().equals("net4"))
-							try{
-							inet= netint.getInetAddresses().nextElement().getHostAddress();
-							}catch(Exception e){}
-						if(inet!=null)break;
-
-					}
-					JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client");
-				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SocketException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-			
-			
-			int numG=nGiocatori;
-			Socket [] s=new Socket[numG-1];
-			ObjectOutputStream [] OOS=new ObjectOutputStream[numG-1];
-			for(int i=0;i<s.length;i++)
-				try {
-					s[i]=server.accept();
-					OOS[i]=new ObjectOutputStream(s[i].getOutputStream());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			
-			
-			Dealer d=new Dealer(numG,10000,s,OOS);
-			//OOS=null;
-			new Partita(d);
-		}else{
+			creaServer();
+			}else{
 
 			String ip2= (String) JOptionPane.showInputDialog(null,"Inserisci l'IP a cui collegarti", "Inserimento IP", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null); 
 			
 			try {
 				client=new Socket(ip2,7777);
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			new Partita(client);
 		}
 		
-		//System.out.println(sc);
-		//Partita p = new Partita();
-		//p.setVisible(true);
-
-		
 	}
+
+
 	
 }

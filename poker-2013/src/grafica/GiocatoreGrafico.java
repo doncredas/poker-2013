@@ -73,6 +73,16 @@ public class GiocatoreGrafico
 	
 	}//setFold
 	
+	public void elimina()
+	{
+		this.etichetta.setVisible(false);
+		this.nome.setVisible(false);
+		this.fiches.setVisible(false);
+		this.carta1.setVisible(false);
+		this.carta2.setVisible(false);
+	
+	}//setFold	
+	
 	/**
 	 * Setta le fiches del giocatore,e nel caso in cui
 	 * siano  <= 200 il colore cambia in rosso
