@@ -324,5 +324,14 @@ public class Dealer {
 		}
 		carteComuni= new Carta[5];
 	}//fineMano
+
+	public boolean[] getRimanenti() {
+		boolean rimanenti[]=new boolean[g.length];
+		for (int i=0;i<g.length;i++){
+			rimanenti[i]=g[i].getInGioco();
+		}
+		return rimanenti;
+		
+	}
 	
 }//Dealer
