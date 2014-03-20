@@ -95,7 +95,6 @@ public final class Icone {
 	//ETICHETTA
 	public static ImageIcon Etichetta = new ImageIcon(Bottoni.getAbsolutePath()+ "\\EtichettaR.png");
 	public static ImageIcon EtichettaCall =new ImageIcon(Bottoni.getAbsolutePath()+ "\\EtichettaCall.png");
-	public static ImageIcon EtichettaCall2 =new ImageIcon(Bottoni.getAbsolutePath()+ "\\EtichettaCall2.png");
 	
 	//SFONDO
 	public static ImageIcon sfondo = new ImageIcon(Bottoni.getAbsolutePath()+ "\\tavolo-ovale.jpg");
