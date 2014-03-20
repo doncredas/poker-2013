@@ -160,6 +160,9 @@ public class GiocatoreGrafico
 		}
 	}//giraCarte()
 	
+	public void setAttivo(){
+		this.etichetta.setIcon(Icone.EtichettaCall);
+	}
 	
 
 }//GiocatoreGrafico
