@@ -46,7 +46,7 @@ public class Partita {
 	
 	private void eseguiClient() {
 		System.out.println(s.getInetAddress());
-		ClientT chat=new ClientT(s.getInetAddress(),444);
+		//ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
 		Comando vecchio=null;
 		while(true){
@@ -104,7 +104,11 @@ public class Partita {
 	private Comando eseguiTipo(Comando com, Comando risp) {
 		switch(com.t){
 		case NICK_NAME:
-			String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+			String nick=null;
+			do{
+			   nick=(String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+			   nick.trim();
+			}while(nick.length()>11);
 			risp=new Comando(Tipo.NICK_NAME,nick);
 			gp.Giocatori[0].setNome(nick);
 			break;
