@@ -104,20 +104,17 @@ public class GiocatoreGrafico
 		switch (lung)
 		{
 		case 1:this.nome.setBounds(x+30,y,100,60);break;
-		case 2:this.nome.setBounds(x+29,y,100,60);break;
-		case 3:this.nome.setBounds(x+28,y,100,60);break;   //TODO TESTARE
-		case 4:this.nome.setBounds(x+27,y,100,60);break;
-		case 5:this.nome.setBounds(x+26,y,100,60);break;
-		case 6:this.nome.setBounds(x+25,y,100,60);break;
-		case 7:this.nome.setBounds(x+24,y,100,60);break;
-		case 8:this.nome.setBounds(x+23,y,100,60);break;
-		case 9:this.nome.setBounds(x+22,y,100,60);break;
-		case 10:this.nome.setBounds(x+21,y,100,60);break;
-		case 11:this.nome.setBounds(x+20,y,100,60);break;
-		case 12:this.nome.setBounds(x+19,y,100,60);break;
-		case 13:this.nome.setBounds(x+18,y,100,60);break;
-		case 14:this.nome.setBounds(x+17,y,100,60);break;
-		case 15:this.nome.setBounds(x+16,y,100,60);break;
+		case 2:this.nome.setBounds(x+28,y,100,60);break;
+		case 3:this.nome.setBounds(x+26,y,100,60);break;   //TODO TESTARE
+		case 4:this.nome.setBounds(x+24,y,100,60);break;
+		case 5:this.nome.setBounds(x+22,y,100,60);break;
+		case 6:this.nome.setBounds(x+20,y,100,60);break;
+		case 7:this.nome.setBounds(x+18,y,100,60);break;
+		case 8:this.nome.setBounds(x+16,y,100,60);break;
+		case 9:this.nome.setBounds(x+14,y,100,60);break;
+		case 10:this.nome.setBounds(x+12,y,100,60);break;
+		case 11:this.nome.setBounds(x+10,y,100,60);break;
+		default:this.nome.setBounds(x,y,100,60);break;
 		}
 		this.nome.setText(nome);
 	}//setNome
