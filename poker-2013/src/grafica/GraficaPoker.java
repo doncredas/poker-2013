@@ -225,26 +225,12 @@ public class GraficaPoker extends JFrame {
 	JLabel Gioc1Car1 = new JLabel();
 	JLabel Gioc1Car2 = new JLabel();
 	
-	JLabel Gioc1fich1=new JLabel();  //TODO
-	JLabel Gioc1fich10=new JLabel();  
-	JLabel Gioc1fich100=new JLabel();  
-	JLabel Gioc1fich1000=new JLabel();
-	JLabel Gioc1fich10000=new JLabel();
-
-
 	// GIOCATORE 2
 	JLabel etiUtente2 = new JLabel();
 	JLabel nome2 = new JLabel("Giocatore 2");
 	JLabel fiches2 = new JLabel("9000");
 	JLabel Gioc2Car1 = new JLabel();
 	JLabel Gioc2Car2 = new JLabel();
-	
-	JLabel Gioc2fich1=new JLabel();  
-	JLabel Gioc2fich10=new JLabel();  
-	JLabel Gioc2fich100=new JLabel();  
-	JLabel Gioc2fich1000=new JLabel();
-	JLabel Gioc2fich10000=new JLabel();
-
 
 	// GIOCATORE 3
 
@@ -254,13 +240,6 @@ public class GraficaPoker extends JFrame {
 	JLabel Gioc3Car1 = new JLabel();
 	JLabel Gioc3Car2 = new JLabel();
 	
-	JLabel Gioc3fich1=new JLabel();  
-	JLabel Gioc3fich10=new JLabel();  
-	JLabel Gioc3fich100=new JLabel();  
-	JLabel Gioc3fich1000=new JLabel();
-	JLabel Gioc3fich10000=new JLabel();
-
-
 	// GIOCATORE 4
 
 	JLabel etiUtente4 = new JLabel();
@@ -269,12 +248,6 @@ public class GraficaPoker extends JFrame {
 	JLabel Gioc4Car1 = new JLabel();
 	JLabel Gioc4Car2 = new JLabel();
 	
-	JLabel Gioc4fich1=new JLabel();  
-	JLabel Gioc4fich10=new JLabel();  
-	JLabel Gioc4fich100=new JLabel();  
-	JLabel Gioc4fich1000=new JLabel();
-	JLabel Gioc4fich10000=new JLabel();
-
 	// GIOCATORE 5
 
 	JLabel etiUtente5 = new JLabel();
@@ -282,13 +255,6 @@ public class GraficaPoker extends JFrame {
 	JLabel fiches5 = new JLabel("9000");
 	JLabel Gioc5Car1 = new JLabel();
 	JLabel Gioc5Car2 = new JLabel();
-	
-	JLabel Gioc5fich1=new JLabel();  
-	JLabel Gioc5fich10=new JLabel();  
-	JLabel Gioc5fich100=new JLabel();  
-	JLabel Gioc5fich1000=new JLabel();
-	JLabel Gioc5fich10000=new JLabel();
-
 
 	// GIOCATORE 6
 
@@ -298,12 +264,6 @@ public class GraficaPoker extends JFrame {
 	JLabel Gioc6Car1 = new JLabel();
 	JLabel Gioc6Car2 = new JLabel();
 	
-	JLabel Gioc6fich1=new JLabel();  
-	JLabel Gioc6fich10=new JLabel();  
-	JLabel Gioc6fich100=new JLabel();  
-	JLabel Gioc6fich1000=new JLabel();
-	JLabel Gioc6fich10000=new JLabel();
-
 
 	// GIOCATORE 7
 
@@ -313,13 +273,6 @@ public class GraficaPoker extends JFrame {
 	JLabel Gioc7Car1 = new JLabel();
 	JLabel Gioc7Car2 = new JLabel();
 	
-	JLabel Gioc7fich1=new JLabel();  
-	JLabel Gioc7fich10=new JLabel();  
-	JLabel Gioc7fich100=new JLabel();  
-	JLabel Gioc7fich1000=new JLabel();
-	JLabel Gioc7fich10000=new JLabel();
-
-
 	// GIOCATORE 8
 	JLabel etiUtente8 = new JLabel();
 	JLabel nome8 = new JLabel("Giocatore 8");
@@ -327,13 +280,6 @@ public class GraficaPoker extends JFrame {
 	JLabel Gioc8Car1 = new JLabel();
 	JLabel Gioc8Car2 = new JLabel();
 	
-	JLabel Gioc8fich1=new JLabel();  
-	JLabel Gioc8fich10=new JLabel();  
-	JLabel Gioc8fich100=new JLabel();  
-	JLabel Gioc8fich1000=new JLabel();
-	JLabel Gioc8fich10000=new JLabel();
-
-
 	// CREAZIONE CARTE SUL TAVOLO
 	JLabel mazzo = new JLabel();
 	JLabel cartaT1 = new JLabel();
@@ -593,8 +539,7 @@ public class GraficaPoker extends JFrame {
 		              fiches1.setForeground(Color.BLACK); 
 		              Gioc1Car1.setIcon(Icone.coperta);
 		              Gioc1Car2.setIcon(Icone.coperta);
-		              Gioc1fich1.setIcon(Icone.diecimila5);    //TODO
-		              Gioc1fich1.setBounds(500,350,100,100);
+
 			          GiocatoreGrafico Giocatore1 = new GiocatoreGrafico(etiUtente1, nome1,fiches1, Gioc1Car1, Gioc1Car2);
 		              Giocatori[0]=Giocatore1;
 		              principale.add(nome1);
@@ -602,7 +547,6 @@ public class GraficaPoker extends JFrame {
 		              principale.add(etiUtente1);
 		              principale.add(Gioc1Car1);
 		              principale.add(Gioc1Car2);
-		              principale.add(Gioc1fich1);
 		        
 		}
 
