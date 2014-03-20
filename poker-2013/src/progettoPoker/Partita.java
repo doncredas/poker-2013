@@ -225,28 +225,33 @@ public class Partita {
 						ultimoRaise=-1;
 						break;
 					}
-					if(i==0){
-						gp.disableBottoni(false);
-						while(gp.bottoniEnabled());
-					}else
 					if(d.getG()[i].getInGioco()){
-						try {
-							OOS[i-1].writeObject(c);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 						risp=null;
 						cron.reset();//TODO spostare il cronometro nel client
-						while(risp==null&&cron.getSecondi()<tempo){
+						if(i==0){
+							gp.disableBottoni(false);
+							gp.resetComando();
+							while(risp==null&&cron.getSecondi()<tempo){
+								risp=gp.getComando();
+							}
+							
+						}else{
 							try {
-								risp=(Comando) OIS[i-1].readObject();
-							} catch (ClassNotFoundException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								OOS[i-1].writeObject(c);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
+							}
+							while(risp==null&&cron.getSecondi()<tempo){
+								try {
+									risp=(Comando) OIS[i-1].readObject();
+								} catch (ClassNotFoundException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						}
 						eseguiComando(risp,i);
@@ -254,6 +259,7 @@ public class Partita {
 							ultimoRaise=i;
 							cont=0;
 						}
+						
 					}
 				}
 				if(ultimoRaise==-1)CreaComando();
@@ -279,20 +285,16 @@ public class Partita {
 				e.printStackTrace();
 			}
 		}
+		inviaComando(c);
 		for (int i = 0; i < OOS.length; i++) {
-			try {
-				OOS[i].writeObject(c);
-				while(risp==vecchioRisp){
-					try {
-						risp=(Comando)OIS[i].readObject();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			while(risp==vecchioRisp){
+				try {
+					risp=(Comando)OIS[i].readObject();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				vecchioRisp=risp;
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
+			}
+			vecchioRisp=risp;
 			for (int j = 0; j < i; j++) {
 				if(d.getG()[j].getNickName().equals(risp.getNickName())){//TODO sistemare il caso di nick uguali
 					ok=false;
