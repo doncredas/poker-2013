@@ -13,8 +13,8 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 	 * 
 	 */
 	private static final long serialVersionUID = 1L; //TODO
-	static File Immagini=new File("Immagini");
-	File Bottoni=new File(Immagini.getAbsolutePath()+"\\Bottoni");
+	//static File Immagini=new File("Immagini");
+	//File Varie=new File(Immagini.getAbsolutePath()+"\\Varie");
 	
 	public FinestraPunteggio()
 	{
@@ -47,10 +47,10 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 	    	   this.setVisible(false);
 	       }
 		else{
-	         ImageIcon sfondo = new ImageIcon(Bottoni.getAbsolutePath()+"\\punteggio.jpg");
+	        // ImageIcon sfondo = new ImageIcon(Icone.sfondoFiches);
 		     this.setResizable(false);
 		     this.setBounds(115, 15, 600, 650);
-		     this.setContentPane(new JLabel(sfondo));
+		     this.setContentPane(new JLabel(Icone.sfondoPunteggio));
 		     this.setSize(600,665);
 	         this.setSize(600,666);
 	         this.setVisible(true);

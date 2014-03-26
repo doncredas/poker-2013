@@ -13,8 +13,6 @@ public class FinestraFiches extends JFrame implements MouseListener
 	 * 
 	 */
 	private static final long serialVersionUID = 1L; //TODO
-	static File Immagini=new File("Immagini");
-	File Bottoni=new File(Immagini.getAbsolutePath()+"\\Bottoni");
 	
 	public FinestraFiches()
 	{
@@ -49,10 +47,10 @@ public class FinestraFiches extends JFrame implements MouseListener
 		else{
 			
 	    
-	    ImageIcon sfondo = new ImageIcon(Bottoni.getAbsolutePath()+"\\ValoreFiches.jpg");
+	
 		this.setResizable(false);
 		this.setBounds(115, 15, 600, 650);
-		this.setContentPane(new JLabel(sfondo));
+		this.setContentPane(new JLabel(Icone.sfondoFiches));
 		this.setSize(600,665);
 	    this.setSize(600,666);
 	    
