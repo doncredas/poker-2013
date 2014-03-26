@@ -180,11 +180,13 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		}
 		if (arg0.getSource() == GraficaPoker.Raise) {
 			GraficaPoker.com = new Comando(Tipo.RAISE);
+			
 			gp.disableBottoni(true);
 			// TODO scroll o textbox per inserire raise
 		}
 		if (arg0.getSource() == GraficaPoker.Call) {
 			GraficaPoker.com = new Comando(Tipo.CHECK_CALL);
+			//Fiches.punta(1, BarRaise.getValue(), gp);
 			gp.disableBottoni(true);
 		}
 

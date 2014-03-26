@@ -313,8 +313,10 @@ public class GraficaPoker extends JFrame {
 	Font fontnome = new Font("Comic Sans MS", Font.BOLD, 13);    //Palatino Linotype
 	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
-
-
+	
+	public void aggiungiComp(JComponent jc){
+		principale.add(jc,50);
+	}
 	public GraficaPoker(int numGioc) {
 
 
@@ -529,7 +531,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc2Car2);
 		              
 		   case 1:     
-		              etiUtente1.setIcon(Icone.Etichetta);
+		              etiUtente1.setIcon(Icone.EtichettaCall);
 		              etiUtente1.setBounds(400, 520, 300, 55);
 		              nome1.setFont(fontnome);
 		              nome1.setBounds(565, 509, 100, 60); // +14,-10
@@ -673,10 +675,9 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 
-		GraficaPoker gp=new GraficaPoker(8);
-
+		GraficaPoker gp=new GraficaPoker(2);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
-		
+		Fiches.punta(1, 204521, gp);
 		gp.daiCarteGioc();
 		
 		
