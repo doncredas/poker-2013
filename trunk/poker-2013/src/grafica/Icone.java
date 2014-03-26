@@ -99,7 +99,8 @@ public final class Icone {
 	
 	//SFONDO
 	public static ImageIcon sfondo = new ImageIcon(Varie.getAbsolutePath()+ "\\tavolo-ovale.jpg");
-
+	public static ImageIcon sfondoPunteggio=new ImageIcon(Varie.getAbsolutePath()+"\\punteggio.jpg");
+	public static ImageIcon sfondoFiches=new ImageIcon(Varie.getAbsolutePath()+"\\ValoreFiches.jpg");
 	//LOGO
 	public static ImageIcon logo = new ImageIcon(Varie.getAbsolutePath() + "\\logo.jpg");
 
