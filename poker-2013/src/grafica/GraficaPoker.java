@@ -206,6 +206,21 @@ public class GraficaPoker extends JFrame {
 	{
 		return Giocatori[indice];
 	}
+	
+	/**
+	 * Setta il valore minimo che può essere raggiunto dalla Scrollbar del raise
+	 * @param x
+	 */
+	public void setRaiseMin(int x){
+		BarRaise.setMinimum(x);
+	}
+	/**
+	 * Setta il valore massimo che può essere raggiunto dalla Scrollbar del raise
+	 * @param x 
+	 */
+	public void setRaiseMax(int x){
+		BarRaise.setMaximum(x+10);
+	}
 
 	// CREAZIONE BOTTONI
 	static JButton Fold = new JButton("Fold");
@@ -315,7 +330,7 @@ public class GraficaPoker extends JFrame {
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
 	
 	public void aggiungiComp(JComponent jc){
-		principale.add(jc,50);
+		principale.add(jc,30);
 	}
 	public GraficaPoker(int numGioc) {
 
@@ -598,11 +613,13 @@ public class GraficaPoker extends JFrame {
 		
 		//SCROLL DEL RAISE
 		BarRaise.setOrientation(0); //MESSO IN ORIZZONTALE
-		BarRaise.setMaximum(110);  //SETTA IL MASSIMO
 		BarRaise.setBounds(450, 640,150, 20);
 		ConsRaise.setBounds(602,640,55,20);
-		BarRaise.setValue(50);  //TODO SETTARE VAL INIZIALE BAR
 		ConsRaise.setText(new Integer(BarRaise.getValue()).toString());
+		
+		BarRaise.setMinimum(50);  //TODO SETTARE VAL INIZIALE BAR
+		BarRaise.setMaximum(10010);  //SETTA IL MASSIMO
+
 		
 		
 		
@@ -677,7 +694,7 @@ public class GraficaPoker extends JFrame {
 
 		GraficaPoker gp=new GraficaPoker(2);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
-		Fiches.punta(1, 204521, gp);
+		//Fiches.punta(1, 204521, gp);
 		gp.daiCarteGioc();
 		
 		
