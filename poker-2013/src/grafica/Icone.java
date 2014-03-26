@@ -10,6 +10,7 @@ public final class Icone {
 	static File Bottoni = new File(Immagini.getAbsolutePath() + "\\Bottoni");
 	static File Carte = new File(Immagini.getAbsolutePath() + "\\Carte");
 	static File Fiches=new File(Immagini.getAbsolutePath()+"\\Fiches");
+	static File Varie=new File(Immagini.getAbsolutePath()+"\\Varie");
 
 	//ICONE CARTE
 	public static ImageIcon zero = new ImageIcon(Carte.getAbsolutePath() + "\\0.png");// Asso di cuori
@@ -93,18 +94,21 @@ public final class Icone {
 	public static ImageIcon StatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\StatsSel.png");
 	
 	//ETICHETTA
-	public static ImageIcon Etichetta = new ImageIcon(Bottoni.getAbsolutePath()+ "\\EtichettaR.png");
-	public static ImageIcon EtichettaCall =new ImageIcon(Bottoni.getAbsolutePath()+ "\\EtichettaCall.png");
+	public static ImageIcon Etichetta = new ImageIcon(Varie.getAbsolutePath()+ "\\EtichettaR.png");
+	public static ImageIcon EtichettaCall =new ImageIcon(Varie.getAbsolutePath()+ "\\EtichettaCall.png");
 	
 	//SFONDO
-	public static ImageIcon sfondo = new ImageIcon(Bottoni.getAbsolutePath()+ "\\tavolo-ovale.jpg");
+	public static ImageIcon sfondo = new ImageIcon(Varie.getAbsolutePath()+ "\\tavolo-ovale.jpg");
 
 	//LOGO
-	public static ImageIcon logo = new ImageIcon(Bottoni.getAbsolutePath() + "\\logo.jpg");
+	public static ImageIcon logo = new ImageIcon(Varie.getAbsolutePath() + "\\logo.jpg");
 
+	//DEALER,SB,BB
+	public static ImageIcon BB=new ImageIcon(Varie.getAbsolutePath()+"\\BB.png");
+	public static ImageIcon SB=new ImageIcon(Varie.getAbsolutePath()+"\\SB.png");
+	public static ImageIcon Dealer=new ImageIcon(Varie.getAbsolutePath()+"\\Deal.png");
+	
 	//FICHES
-	//public static ImageIcon Fi_AllIn=new ImageIcon(Fiches.getAbsolutePath()+"\\AllIn.png");
-	//FICHES DA 1
 	public static ImageIcon uno1 = new ImageIcon(Fiches.getAbsolutePath()+"\\1uno.png");
 	public static ImageIcon uno2 = new ImageIcon(Fiches.getAbsolutePath()+"\\2uno.png");
 	public static ImageIcon uno3 = new ImageIcon(Fiches.getAbsolutePath()+"\\3uno.png");
