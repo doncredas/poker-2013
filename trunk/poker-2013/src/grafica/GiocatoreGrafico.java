@@ -160,9 +160,15 @@ public class GiocatoreGrafico
 		}
 	}//giraCarte()
 	
-	public void setAttivo(){
-		this.etichetta.setIcon(Icone.EtichettaCall);
-	}
+	/**
+	 * 
+	 * @param flag se è true l'etichetta del giocatore diventa gialla
+	 * altrimenti ritorna nera
+	 */
+	public void setAttivo(boolean flag){
+		if(flag)this.etichetta.setIcon(Icone.EtichettaCall);
+		else this.etichetta.setIcon(Icone.Etichetta);
+	}//setAttivo
 	
 
 }//GiocatoreGrafico

@@ -275,7 +275,7 @@ public class Fiches {
 
 	public JLabel getSiChip1() { // fornisce la singola chip
 		return chip1;
-	}
+	}//getSiChip1
 
 	public JLabel getSiChip2() {
 		return chip2;
@@ -304,15 +304,20 @@ public class Fiches {
 	 *            puntata per ogni giocatore, il giocatore1 punterà le fiches in
 	 *            posizione (495,370) ecc.
 	 */
-	public void punta(int numGioc, int quanto, GraficaPoker gp) {
+	public static void punta(int numGioc, int quanto, GraficaPoker gp) {
 		Fiches g = new Fiches(quanto, numGioc);
+		gp.aggiungiComp(g.getSiChip1());
+		gp.aggiungiComp(g.getSiChip2());
+		gp.aggiungiComp(g.getSiChip3());
+		gp.aggiungiComp(g.getSiChip4());
+		gp.aggiungiComp(g.getSiChip5());
 		switch (numGioc) {
 		case 1: {
-			Movimento.muovi(g.getSiChip1(), 495, 370, gp);
-			Movimento.muovi(g.getSiChip2(), 525, 370, gp);
-			Movimento.muovi(g.getSiChip3(), 555, 370, gp);
-			Movimento.muovi(g.getSiChip4(), 585, 370, gp);
-			Movimento.muovi(g.getSiChip5(), 615, 370, gp);
+			Movimento.muovi(g.getSiChip1(), 495, 350, gp);
+			Movimento.muovi(g.getSiChip2(), 525, 350, gp);
+			Movimento.muovi(g.getSiChip3(), 555, 350, gp);
+			Movimento.muovi(g.getSiChip4(), 585, 350, gp);
+			Movimento.muovi(g.getSiChip5(), 615, 350, gp);
 			break;
 		}// case1
 		case 2: {
@@ -347,5 +352,7 @@ public class Fiches {
 			break;
 		}// default
 		}// switch
+		
+		
 	}// punta
 }
