@@ -16,7 +16,7 @@ public class Comando implements Serializable {
 	Carta c;
 	Carta[] car=new Carta[3];
 	int fiches;
-	int gioc;  //numero giocatori totali
+	int gioc;  //numero giocatori totali o giocatore corrente
 	int giocN; //posizione giocatore corrente
 	Tipo t;
 	Tipo t1;

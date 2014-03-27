@@ -694,7 +694,9 @@ public class GraficaPoker extends JFrame {
 
 		GraficaPoker gp=new GraficaPoker(2);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
-		//Fiches.punta(1, 204521, gp);
+
+		Fiches f=Fiches.punta(1, 15, gp,null);
+		Fiches.punta(1, 6, gp,f);
 		gp.daiCarteGioc();
 		
 		

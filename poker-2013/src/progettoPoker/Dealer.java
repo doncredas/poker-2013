@@ -32,7 +32,7 @@ public class Dealer {
 	private Cronometro c;
 	private Socket[] s; //array dei client da passare ai singoli giocatori
 	private ObjectOutputStream OOS[];
-	private int puntata=piccoloBuio*2;
+	private int puntata;
 	private Giocatore[]g;
 	private int []piatto;
 	private Carta[] carteComuni=new Carta[5];
@@ -65,6 +65,8 @@ public class Dealer {
 			else{mazzo[i]=new Carta((i%13)+1,'p');}
 		}
 		piccoloBuio=fiches/100;
+		puntata=piccoloBuio*2;
+
 		buioPosizione=1;
 		//this.incrementoBui=incrementoBui;
 		//this.tempoBui=tempoBui;
@@ -216,6 +218,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
+		puntata=0;
 	}//flop
 	
 	public void turn(ObjectOutputStream [] oos){
@@ -230,6 +233,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
+		puntata=0;
 	}//turn
 	
 	public void river(ObjectOutputStream [] oos){
@@ -243,7 +247,8 @@ public class Dealer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}		
+		}
+		puntata=0;
 	}//river
 	
 	public void fold(int gioc){
@@ -280,6 +285,10 @@ public class Dealer {
 		piatto[gioc]+=fiches;
 		puntata=fiches;
 	}//rais
+	
+	public int getPuntata(){
+		return puntata;
+	}
 
 	public int getGrandeBuio() {
 		// TODO Auto-generated method stub
