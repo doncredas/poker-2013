@@ -1,13 +1,11 @@
 package progettoPoker;
 
-import grafica.GraficaPoker;
-import grafica.Icone;
+
+import grafica.*;
 
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Enumeration;
+import java.util.*;
 import javax.swing.*;
 import chatThread.*;
 import progettoPoker.Comando.Tipo;
@@ -28,7 +26,7 @@ public class Partita {
 	private int fiches;
 	private Cronometro cron=new Cronometro();
 	private GraficaPoker gp;
-	private int posGioc=0;
+	private int posGioc=0; //posizione del giocatore che si vede centrale rispetto al server
 	private Comando c=null;
 	private Comando risp=null;
 
@@ -156,7 +154,15 @@ public class Partita {
 				gp.getGiocatore(i).setNome(com.getNickName()[i]);
 			}
 			break;
-		case CHECK_CALL://TODO
+		case CHECK_CALL:
+		case RAISE:
+			if(com.getGioc()<posGioc)
+				Fiches.punta(com.getGioc()+2, com.getFiches(), gp,null);//TODO memorizzare fiches precedenti
+			else
+				if(com.getGioc()==posGioc)
+					Fiches.punta(1,com.getFiches(), gp,null);
+				else
+					Fiches.punta(com.getGioc()+1, com.getFiches(), gp,null);
 			break;
 		case FOLD:
 			if(com.getGioc()<posGioc)
@@ -166,8 +172,6 @@ public class Partita {
 					gp.getGiocatore(0).setFold(true); 
 				else
 					gp.getGiocatore(com.getGioc()).setFold(true);
-			break;
-		case RAISE://TODO
 			break;
 		case FINE_MANO:
 			boolean rimanenti[]=com.rimanenti;
@@ -374,18 +378,27 @@ public class Partita {
 	}
 
 	private void eseguiComando(Comando c,int i) {
+		Comando notifica;
 		switch(c.getT()){
 		case FOLD:
 			d.fold(i);
 			gp.getGiocatore(i).setFold(true);
-			Comando notFold=new Comando(Tipo.NOTIFICA,Tipo.FOLD,i);
-			inviaComando(notFold);
+			notifica=new Comando(Tipo.NOTIFICA,Tipo.FOLD,i);
+			inviaComando(notifica);
 			break;
 		case CHECK_CALL:
 			d.checkCall(i);
+			gp.Giocatori[i].setFiches(d.getG()[i].getFiches());
+			Fiches.punta(i+1, d.getPuntata(), gp,null);//TODO memeorizzare fiches precedenti
+			notifica=new Comando(Tipo.NOTIFICA,Tipo.CHECK_CALL,i,d.getPuntata());
+			inviaComando(notifica);
 			break;
 		case RAISE:
 			d.raise(i,c.getFiches());
+			gp.Giocatori[i].setFiches(d.getG()[i].getFiches());
+			Fiches.punta(i+1,c.getFiches(), gp,null);
+			notifica=new Comando(Tipo.NOTIFICA,Tipo.RAISE,i,c.getFiches());
+			inviaComando(notifica);
 			break;
 		default:
 			break;

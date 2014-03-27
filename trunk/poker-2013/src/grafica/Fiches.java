@@ -12,7 +12,7 @@ public class Fiches {
 	 * fiches. Creo la fiches inserendo il valore e quindi per ognugno setta le
 	 * icone
 	 */
-	public Fiches(int quanto, int numGioc) {
+	public Fiches(int quanto, int numGioc, GraficaPoker gp) {
 		this.quanto = quanto;
 		switch (numGioc) {
 		case 1:
@@ -20,6 +20,12 @@ public class Fiches {
 			chip2.setBounds(525, 505, 100, 100);
 			chip3.setBounds(555, 505, 100, 100);
 			chip4.setBounds(585, 505, 100, 100);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			chip5.setBounds(615, 505, 100, 100);
 			break;
 		case 2:
@@ -267,6 +273,13 @@ public class Fiches {
 			break;
 		}
 		}// switch quanto%100000/10000
+		
+		gp.aggiungiComp(chip1);
+		gp.aggiungiComp(chip2);
+		gp.aggiungiComp(chip3);
+		gp.aggiungiComp(chip4);
+		gp.aggiungiComp(chip5);
+		
 	}// Fiches
 
 	public int getQuanto() {
@@ -304,13 +317,77 @@ public class Fiches {
 	 *            puntata per ogni giocatore, il giocatore1 punterà le fiches in
 	 *            posizione (495,370) ecc.
 	 */
-	public static void punta(int numGioc, int quanto, GraficaPoker gp) {
-		Fiches g = new Fiches(quanto, numGioc);
-		gp.aggiungiComp(g.getSiChip1());
-		gp.aggiungiComp(g.getSiChip2());
-		gp.aggiungiComp(g.getSiChip3());
-		gp.aggiungiComp(g.getSiChip4());
-		gp.aggiungiComp(g.getSiChip5());
+	public static Fiches punta(int numGioc, int quanto, GraficaPoker gp, Fiches g) {
+		if(g==null){
+			g = new Fiches(quanto, numGioc,gp);
+			muovi(numGioc,g,gp);
+		}else{
+			Fiches f = new Fiches(quanto, numGioc,gp);
+			muovi(numGioc,f,gp);
+			reset(g,gp);
+			reset(f,gp);
+			g = new Fiches(quanto+g.getQuanto(), numGioc,gp);
+			setPosition(numGioc,g,gp);
+		}
+		return g;
+	}// punta
+
+	private static void setPosition(int numGioc, Fiches g, GraficaPoker gp) {
+		switch (numGioc) {
+		case 1: {
+			g.getSiChip1().setBounds(495, 350, 100, 100);
+			g.getSiChip2().setBounds(525, 350, 100, 100);
+			g.getSiChip3().setBounds(555, 350, 100, 100);
+			g.getSiChip4().setBounds(585, 350, 100, 100);
+			g.getSiChip5().setBounds(615, 350, 100, 100);	
+			break;
+		}// case1
+		case 2: {
+			g.getSiChip1().setBounds(700, 340, 100, 100);
+			g.getSiChip2().setBounds(730, 340, 100, 100);
+			g.getSiChip3().setBounds(760, 340, 100, 100);
+			g.getSiChip4().setBounds(790, 340, 100, 100);
+			g.getSiChip5().setBounds(820, 340, 100, 100);
+			break;
+		}// case 2
+		case 3: {
+			// g.setPos(numGioc, x, y);
+			break;
+		}// case 3
+		case 4: {
+			// g.setPos(numGioc, x, y);
+			break;
+		}// case 4
+		case 5: {
+			// g.setPos(numGioc, x, y);
+			break;
+		}// case 5
+		case 6: {
+			// g.setPos(numGioc, x, y);
+			break;
+		}// case 6
+		case 7: {
+			// g.setPos(numGioc, x, y);
+			break;
+		}// case 4
+		default: { // g.setPos(numGioc, x, y);
+			break;
+		}// default
+		}// switch
+		
+		
+		
+	}
+
+	private static void reset(Fiches g, GraficaPoker gp) {
+		gp.remove(g.getSiChip1());
+		gp.remove(g.getSiChip2());
+		gp.remove(g.getSiChip3());
+		gp.remove(g.getSiChip4());
+		gp.remove(g.getSiChip5());
+	}
+
+	private static void muovi(int numGioc, Fiches g, GraficaPoker gp) {
 		switch (numGioc) {
 		case 1: {
 			Movimento.muovi(g.getSiChip1(), 495, 350, gp);
@@ -354,5 +431,5 @@ public class Fiches {
 		}// switch
 		
 		
-	}// punta
+	}
 }
