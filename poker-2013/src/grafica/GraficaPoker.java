@@ -608,8 +608,8 @@ public class GraficaPoker extends JFrame {
 		
 		Gioc1Car1.addMouseListener(list);   //listener per girare le carte del gioc1 al passaggio del mouse
 		Gioc1Car2.addMouseListener(list);
-
-      
+		
+		this.addMouseListener(list);
 		
 		//SCROLL DEL RAISE
 		BarRaise.setOrientation(0); //MESSO IN ORIZZONTALE
