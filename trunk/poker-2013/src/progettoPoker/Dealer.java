@@ -93,6 +93,7 @@ public class Dealer {
 		
 		for(int i=0; i<g.length; i++)
 			if(g[i].getInGioco()) mani.put(new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2()), g[i]);
+		if(mani.size()>1){
 		int manoMigliore=0;
 		int manoCorrente=0;
 		Mano migliore=null;
@@ -121,6 +122,7 @@ public class Dealer {
 		}
 		else{
 			Mano.ManiMigliori(mani);
+		}
 		}
 		vincenti=new Giocatore[mani.size()];
 		int i=0;
@@ -155,6 +157,7 @@ public class Dealer {
 			}//while
 			mazzo=mazzoMischiato;
 		}//for
+		primaCarta=51;
 	}//mischia
 	
 	public void muoviDealer(){
@@ -218,7 +221,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntata=0;
+		puntata=getGrandeBuio();
 	}//flop
 	
 	public void turn(ObjectOutputStream [] oos){
@@ -233,7 +236,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntata=0;
+		puntata=getGrandeBuio();
 	}//turn
 	
 	public void river(ObjectOutputStream [] oos){
@@ -248,7 +251,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntata=0;
+		puntata=getGrandeBuio();
 	}//river
 	
 	public void fold(int gioc){

@@ -2,7 +2,9 @@ package grafica;
 
 
 import java.awt.*;
+
 import javax.swing.*;
+
 import progettoPoker.Carta;
 import progettoPoker.Comando;
 
@@ -135,6 +137,8 @@ public class GraficaPoker extends JFrame {
 		this.cartaT5.setVisible(false);
 		disableBottoni(true);
 		Giocatori[0].reset();
+		for(int i=0;i<nGioc;i++)
+			Giocatori[i].resetFiches(this);
 	}
 	/**
 	 * Restituisce un Comando
@@ -688,6 +692,9 @@ public class GraficaPoker extends JFrame {
 		this.setVisible(true);
 	}
 
+	public void punta(int i, int puntata, GraficaPoker gp) {
+		Giocatori[i-1].puntata=Fiches.punta(i, puntata, gp, Giocatori[i-1].puntata);
+	}
 
 
 	public static void main(String[] args) {
