@@ -290,7 +290,7 @@ public class Fiches {
 		gp.aggiungiComp(chip4);
 		gp.aggiungiComp(chip5);
 
-	}// Fiches
+	}// Fiches costruttore
 
 	public int getQuanto() {
 		return this.quanto;
@@ -411,7 +411,7 @@ public class Fiches {
 		}// default
 		}// switch
 
-	}
+	}//setPosition
 
 	protected static void reset(Fiches g, GraficaPoker gp) {
 		gp.remove(g.getSiChip1());
@@ -419,7 +419,7 @@ public class Fiches {
 		gp.remove(g.getSiChip3());
 		gp.remove(g.getSiChip4());
 		gp.remove(g.getSiChip5());
-	}
+	}//reset
 
 	private static void muovi(int numGioc, Fiches g, GraficaPoker gp) {
 		switch (numGioc) {
@@ -489,5 +489,5 @@ public class Fiches {
 		}// default
 		}// switch
 
-	}
-}
+	}//muovi
+}//Fiches
