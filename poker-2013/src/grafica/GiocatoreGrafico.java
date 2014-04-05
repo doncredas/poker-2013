@@ -15,7 +15,7 @@ public class GiocatoreGrafico
 	private JLabel carta2=null;
 	private ImageIcon icona1=null;
 	private ImageIcon icona2=null;
-
+	Fiches puntata=null;
 
 	public GiocatoreGrafico(JLabel eti,JLabel nome,JLabel fich, JLabel car1,JLabel car2)
 	{
@@ -169,6 +169,16 @@ public class GiocatoreGrafico
 		if(flag)this.etichetta.setIcon(Icone.EtichettaCall);
 		else this.etichetta.setIcon(Icone.Etichetta);
 	}//setAttivo
+
+
+	public void resetFiches(GraficaPoker gp) {
+		if(!(puntata==null))
+			Fiches.reset(puntata, gp);
+			puntata=null;
+	}
+
+
+	
 	
 
 }//GiocatoreGrafico

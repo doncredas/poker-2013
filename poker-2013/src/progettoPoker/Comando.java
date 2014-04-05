@@ -45,7 +45,7 @@ public class Comando implements Serializable {
 		this.t=t;
 		this.car=c;
 	}
-	Comando(Tipo t,int i){
+	public Comando(Tipo t,int i){
 		this.t=t;
 		this.fiches=i;
 	}

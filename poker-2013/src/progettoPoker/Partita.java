@@ -85,7 +85,7 @@ public class Partita {
 				else
 					fiches=com.getFiches();
 			}else{
-				risp=eseguiTipo(com,risp);
+				risp=eseguiTipo(com);
 			}
 		}
 		if(risp!=null){
@@ -99,7 +99,8 @@ public class Partita {
 		
 	}
 
-	private Comando eseguiTipo(Comando com, Comando risp) {
+	private Comando eseguiTipo(Comando com) {
+		Comando risp=null;
 		switch(com.t){
 		case NICK_NAME:
 			String nick=null;
@@ -157,12 +158,12 @@ public class Partita {
 		case CHECK_CALL:
 		case RAISE:
 			if(com.getGioc()<posGioc)
-				Fiches.punta(com.getGioc()+2, com.getFiches(), gp,null);//TODO memorizzare fiches precedenti
+				gp.punta(com.getGioc()+2, com.getFiches(), gp);
 			else
 				if(com.getGioc()==posGioc)
-					Fiches.punta(1,com.getFiches(), gp,null);
+					gp.punta(1, com.getFiches(), gp);
 				else
-					Fiches.punta(com.getGioc()+1, com.getFiches(), gp,null);
+					gp.punta(com.getGioc()+1, com.getFiches(), gp);
 			break;
 		case FOLD:
 			if(com.getGioc()<posGioc)
@@ -175,6 +176,8 @@ public class Partita {
 			break;
 		case FINE_MANO:
 			boolean rimanenti[]=com.rimanenti;
+			gp.reset();
+			nCarta=0;
 			for (int i = 0; i < rimanenti.length; i++) {
 				if(i<posGioc){
 					if(rimanenti[i]==true)gp.getGiocatore(i).setFold(false);
@@ -225,6 +228,7 @@ public class Partita {
 			primoGiocatore=(d.getPosD()+1)%d.getG().length;
 			int ultimoRaise;
 			risp=null;
+			ciclo:
 			for(int j=0;j<4;j++){
 				ultimoRaise=-1;
 				if(unicoGiocatore())break;
@@ -265,8 +269,13 @@ public class Partita {
 						eseguiComando(risp,i);
 						if(risp.getT()==Tipo.RAISE){
 							ultimoRaise=i;
-							cont=0;
+							cont=-1;
 						}
+						if(risp.getT()==Tipo.FOLD){
+							if(unicoGiocatore())
+								break ciclo;
+						}
+						
 						
 					}
 				}
@@ -389,14 +398,14 @@ public class Partita {
 		case CHECK_CALL:
 			d.checkCall(i);
 			gp.Giocatori[i].setFiches(d.getG()[i].getFiches());
-			Fiches.punta(i+1, d.getPuntata(), gp,null);//TODO memeorizzare fiches precedenti
+			gp.punta(i+1, d.getPuntata(), gp);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.CHECK_CALL,i,d.getPuntata());
 			inviaComando(notifica);
 			break;
 		case RAISE:
 			d.raise(i,c.getFiches());
 			gp.Giocatori[i].setFiches(d.getG()[i].getFiches());
-			Fiches.punta(i+1,c.getFiches(), gp,null);
+			gp.punta(i+1,c.getFiches(), gp);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.RAISE,i,c.getFiches());
 			inviaComando(notifica);
 			break;
@@ -491,7 +500,5 @@ public class Partita {
 		}
 		
 	}
-
-
 	
 }

@@ -379,7 +379,7 @@ public class Fiches {
 		
 	}
 
-	private static void reset(Fiches g, GraficaPoker gp) {
+	protected static void reset(Fiches g, GraficaPoker gp) {
 		gp.remove(g.getSiChip1());
 		gp.remove(g.getSiChip2());
 		gp.remove(g.getSiChip3());
