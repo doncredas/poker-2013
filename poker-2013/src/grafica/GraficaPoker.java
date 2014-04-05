@@ -8,6 +8,8 @@ import javax.swing.*;
 import progettoPoker.Carta;
 import progettoPoker.Comando;
 
+
+
 public class GraficaPoker extends JFrame {
 	
 	/**
@@ -233,10 +235,15 @@ public class GraficaPoker extends JFrame {
 	static JButton AllIn = new JButton("All-In");
 	static JButton Invia = new JButton("Invia");
 	       JButton SegnaPunti = new JButton("Punti");
-	       JButton ValoreFiches = new JButton("Fiches"); //TODO
+	       JButton ValoreFiches = new JButton("Fiches"); 
 	static JButton VisChat=new JButton("Chat");
 	static JButton VisStat=new JButton("Stats");
 
+	//DEALER,SB,BB
+	static JLabel Dealer=new JLabel();
+	static JLabel SB=new JLabel();
+	static JLabel BB=new JLabel();
+	
 	// GIOCATORE 1
 	JLabel etiUtente1 = new JLabel();
 	JLabel nome1 = new JLabel("Giocatore 1");
@@ -333,9 +340,66 @@ public class GraficaPoker extends JFrame {
 	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
 	
+	/**
+	 * aggiunge un componente grafico al pannello principale
+	 * @param jc
+	 */
 	public void aggiungiComp(JComponent jc){
-		principale.add(jc,30);
+		principale.add(jc,30); //TODO posizione in base al giocatore
+		//30 per gioc 4,gioc 5,gioc 6,,gioc 7,gioc 8 e le carte passano sopra le fiches
+	}//aggiungiComp
+	
+	/**
+	 * setta il dealer (graficamente) al numero del giocatore che gli viene passato
+	 * @param numGioc
+	 * e setta anche Small Blind e Big Blind
+	 */
+	public static void setDealer(int numGioc){ //TODO aggiustare nel caso di gioc mancanti
+		switch(numGioc)
+		{
+		case 1:
+			Dealer.setBounds(642,533,50,50); //gioc1
+			SB.setBounds(316,475,50,50); //gioc8
+			BB.setBounds(198,302,50,50); //gioc7
+        	break;
+		case 2:
+			Dealer.setBounds(972,475,50,50); //gioc2
+			SB.setBounds(642,533,50,50); //gioc1
+			BB.setBounds(316,475,50,50); //gioc8
+			break;
+		case 3:
+			Dealer.setBounds(1087,301,50,50); //gioc3
+			SB.setBounds(972,475,50,50);  //gioc2
+			BB.setBounds(642,533,50,50);  //gioc1
+			break;
+		case 4:
+			Dealer.setBounds(972,130,50,50);//gioc4
+			SB.setBounds(1087,301,50,50); //gioc3
+			BB.setBounds(972,475,50,50); //gioc2  
+			break;
+		case 5:
+			Dealer.setBounds(641,75,50,50); //gioc5
+			SB.setBounds(972,130,50,50);//gioc4
+			BB.setBounds(1087,301,50,50); //gioc3
+			break;
+		case 6:
+			Dealer.setBounds(316,129,50,50); //gioc6
+			SB.setBounds(641,75,50,50); //gioc5
+			BB.setBounds(972,130,50,50); //gioc4
+			break;
+		case 7:
+			Dealer.setBounds(198,302,50,50); //gioc7
+			SB.setBounds(316,129,50,50); //gioc6
+			BB.setBounds(641,75,50,50); //gioc5
+			break;
+		default:
+			Dealer.setBounds(316,475,50,50); //gioc8
+			SB.setBounds(198,302,50,50); //gioc7
+			BB.setBounds(316,129,50,50);//gioc6
+			break;
+		}
 	}
+	
 	public GraficaPoker(int numGioc) {
 
 
@@ -352,6 +416,14 @@ public class GraficaPoker extends JFrame {
 		// SETTA IL LOGO DELLA FINESTRA PUNTEGGI
 		FP.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 		FF.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
+		
+		//DEALER,SB,BB
+		Dealer.setIcon(Icone.Dealer);
+		SB.setIcon(Icone.SB);
+		BB.setIcon(Icone.BB);
+		principale.add(Dealer);
+		principale.add(BB);
+		principale.add(SB);
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
 		Fold.setIcon(Icone.Foldnot);
@@ -626,7 +698,7 @@ public class GraficaPoker extends JFrame {
 
 		
 		
-		
+		setCursor(12); //3=caricam 12=mano //TODO
 		// CHAT
 		ScrollChat.setBounds(927, 542, 290, 100);
 		ScrollChat.setWheelScrollingEnabled(true);
@@ -699,11 +771,15 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 
-		GraficaPoker gp=new GraficaPoker(2);
+		GraficaPoker gp=new GraficaPoker(8);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 
-		Fiches f=Fiches.punta(1, 15, gp,null);
-		Fiches.punta(1, 6, gp,f);
+		setDealer(1);
+		//Fiches f=Fiches.punta(6, 99999, gp,null);
+		//Fiches.punta(3, 50, gp,f);
+
+		Fiches.punta(7,4321, gp, null);
+		Fiches.punta(8,4321, gp, null);
 		gp.daiCarteGioc();
 		
 		

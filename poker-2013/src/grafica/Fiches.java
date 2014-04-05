@@ -2,10 +2,18 @@ package grafica;
 
 import javax.swing.JLabel;
 
+//TODO PROBLEMI:
+/*
+ *1)Se una puntata è massima (99999) la ripuntata mette soltanto le nuove fiches
+ *2)Le fiches vanno aggiunte al componente con il numero esatto
+ *3)La puntata del gioc 5 ha l'ultima fiches che parte da sinistra
+ *4)Nella puntata del gioc 4,l'ultima fiches si sposta a sinistra quando finisce
+ *  la puntata
+ */
 public class Fiches {
 	private int quanto;
-	private JLabel chip1=new JLabel(),chip2=new JLabel(),chip3=new JLabel(),
-			chip4=new JLabel(), chip5=new JLabel();
+	private JLabel chip1 = new JLabel(), chip2 = new JLabel(),
+			chip3 = new JLabel(), chip4 = new JLabel(), chip5 = new JLabel();
 
 	/**
 	 * viene creato un solo oggetto con più JLabel come se fosse un array di
@@ -14,18 +22,19 @@ public class Fiches {
 	 */
 	public Fiches(int quanto, int numGioc, GraficaPoker gp) {
 		this.quanto = quanto;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		switch (numGioc) {
+
 		case 1:
 			chip1.setBounds(495, 505, 100, 100);
 			chip2.setBounds(525, 505, 100, 100);
 			chip3.setBounds(555, 505, 100, 100);
 			chip4.setBounds(585, 505, 100, 100);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			chip5.setBounds(615, 505, 100, 100);
 			break;
 		case 2:
@@ -45,7 +54,7 @@ public class Fiches {
 		case 4:
 			chip1.setBounds(820, 100, 100, 100);
 			chip2.setBounds(850, 100, 100, 100);
-		    chip3.setBounds(880, 100, 100, 100);
+			chip3.setBounds(880, 100, 100, 100);
 			chip4.setBounds(910, 100, 100, 100);
 			chip5.setBounds(940, 100, 100, 100);
 			break;
@@ -64,18 +73,19 @@ public class Fiches {
 			chip5.setBounds(170, 100, 100, 100);
 			break;
 		case 7:
-			chip1.setBounds(165, 275, 100, 100);
-			chip2.setBounds(135, 275, 100, 100);
-			chip3.setBounds(105, 275, 100, 100);
-			chip4.setBounds(85, 275, 100, 100);
-			chip5.setBounds(55, 275, 100, 100);
-
+			chip1.setBounds(200, 290, 100, 100);
+			chip2.setBounds(170, 290, 100, 100);
+			chip3.setBounds(140, 290, 100, 100);
+			chip4.setBounds(110, 290, 100, 100);
+			chip5.setBounds(80, 290, 100, 100);
+			break;
 		case 8:
 			chip1.setBounds(170, 445, 100, 100);
 			chip2.setBounds(200, 445, 100, 100);
 			chip3.setBounds(230, 445, 100, 100);
 			chip4.setBounds(260, 445, 100, 100);
 			chip5.setBounds(290, 445, 100, 100);
+			break;
 
 		}// switch 1
 
@@ -273,13 +283,13 @@ public class Fiches {
 			break;
 		}
 		}// switch quanto%100000/10000
-		
+
 		gp.aggiungiComp(chip1);
 		gp.aggiungiComp(chip2);
 		gp.aggiungiComp(chip3);
 		gp.aggiungiComp(chip4);
 		gp.aggiungiComp(chip5);
-		
+
 	}// Fiches
 
 	public int getQuanto() {
@@ -288,7 +298,7 @@ public class Fiches {
 
 	public JLabel getSiChip1() { // fornisce la singola chip
 		return chip1;
-	}//getSiChip1
+	}// getSiChip1
 
 	public JLabel getSiChip2() {
 		return chip2;
@@ -315,19 +325,20 @@ public class Fiches {
 	 * 
 	 *            crea una nuova fiches di quanto e la sposta in posizione di
 	 *            puntata per ogni giocatore, il giocatore1 punterà le fiches in
-	 *            posizione (495,370) ecc.
+	 *            posizione (495,350) ecc.
 	 */
-	public static Fiches punta(int numGioc, int quanto, GraficaPoker gp, Fiches g) {
-		if(g==null){
-			g = new Fiches(quanto, numGioc,gp);
-			muovi(numGioc,g,gp);
-		}else{
-			Fiches f = new Fiches(quanto, numGioc,gp);
-			muovi(numGioc,f,gp);
-			reset(g,gp);
-			reset(f,gp);
-			g = new Fiches(quanto+g.getQuanto(), numGioc,gp);
-			setPosition(numGioc,g,gp);
+	public static Fiches punta(int numGioc, int quanto, GraficaPoker gp,
+			Fiches g) {
+		if (g == null) {
+			g = new Fiches(quanto, numGioc, gp);
+			muovi(numGioc, g, gp);
+		} else {
+			Fiches f = new Fiches(quanto, numGioc, gp);
+			muovi(numGioc, f, gp);
+			reset(g, gp);
+			reset(f, gp);
+			g = new Fiches(quanto + g.getQuanto(), numGioc, gp);
+			setPosition(numGioc, g, gp);
 		}
 		return g;
 	}// punta
@@ -339,44 +350,67 @@ public class Fiches {
 			g.getSiChip2().setBounds(525, 350, 100, 100);
 			g.getSiChip3().setBounds(555, 350, 100, 100);
 			g.getSiChip4().setBounds(585, 350, 100, 100);
-			g.getSiChip5().setBounds(615, 350, 100, 100);	
+			g.getSiChip5().setBounds(615, 350, 100, 100);
 			break;
 		}// case1
 		case 2: {
-			g.getSiChip1().setBounds(700, 340, 100, 100);
-			g.getSiChip2().setBounds(730, 340, 100, 100);
-			g.getSiChip3().setBounds(760, 340, 100, 100);
-			g.getSiChip4().setBounds(790, 340, 100, 100);
-			g.getSiChip5().setBounds(820, 340, 100, 100);
+			g.getSiChip1().setBounds(690, 340, 100, 100);
+			g.getSiChip2().setBounds(720, 340, 100, 100);
+			g.getSiChip3().setBounds(750, 340, 100, 100);
+			g.getSiChip4().setBounds(780, 340, 100, 100);
+			g.getSiChip5().setBounds(810, 340, 100, 100);
 			break;
 		}// case 2
 		case 3: {
-			// g.setPos(numGioc, x, y);
+			g.getSiChip1().setBounds(855, 230, 100, 100);
+			g.getSiChip2().setBounds(855, 250, 100, 100);
+			g.getSiChip3().setBounds(855, 270, 100, 100);
+			g.getSiChip4().setBounds(855, 290, 100, 100);
+			g.getSiChip5().setBounds(855, 310, 100, 100);
 			break;
 		}// case 3
 		case 4: {
-			// g.setPos(numGioc, x, y);
+			g.getSiChip1().setBounds(670, 160, 100, 100);
+			g.getSiChip2().setBounds(700, 160, 100, 100);
+			g.getSiChip3().setBounds(730, 160, 100, 100);
+			g.getSiChip4().setBounds(760, 160, 100, 100);
+			g.getSiChip5().setBounds(790, 160, 100, 100);
 			break;
 		}// case 4
 		case 5: {
-			// g.setPos(numGioc, x, y);
+			g.getSiChip1().setBounds(495, 140, 100, 100);
+			g.getSiChip2().setBounds(525, 140, 100, 100);
+			g.getSiChip3().setBounds(555, 140, 100, 100);
+			g.getSiChip4().setBounds(585, 140, 100, 100);
+			g.getSiChip5().setBounds(615, 140, 100, 100);
 			break;
 		}// case 5
 		case 6: {
-			// g.setPos(numGioc, x, y);
+			g.getSiChip1().setBounds(325, 160, 100, 100);
+			g.getSiChip2().setBounds(355, 160, 100, 100);
+			g.getSiChip3().setBounds(385, 160, 100, 100);
+			g.getSiChip4().setBounds(415, 160, 100, 100);
+			g.getSiChip5().setBounds(445, 160, 100, 100);
 			break;
 		}// case 6
 		case 7: {
-			// g.setPos(numGioc, x, y);
+			g.getSiChip1().setBounds(260, 230, 100, 100);
+			g.getSiChip2().setBounds(260, 250, 100, 100);
+			g.getSiChip3().setBounds(260, 270, 100, 100);
+			g.getSiChip4().setBounds(260, 290, 100, 100);
+			g.getSiChip5().setBounds(260, 310, 100, 100);
 			break;
 		}// case 4
-		default: { // g.setPos(numGioc, x, y);
+		default: {
+			g.getSiChip1().setBounds(325, 355, 100, 100);
+			g.getSiChip2().setBounds(355, 355, 100, 100);
+			g.getSiChip3().setBounds(385, 355, 100, 100);
+			g.getSiChip4().setBounds(415, 355, 100, 100);
+			g.getSiChip5().setBounds(445, 355, 100, 100);
 			break;
 		}// default
 		}// switch
-		
-		
-		
+
 	}
 
 	protected static void reset(Fiches g, GraficaPoker gp) {
@@ -398,38 +432,62 @@ public class Fiches {
 			break;
 		}// case1
 		case 2: {
-			Movimento.muovi(g.getSiChip1(), 700, 340, gp);
-			Movimento.muovi(g.getSiChip2(), 730, 340, gp);
-			Movimento.muovi(g.getSiChip3(), 760, 340, gp);
-			Movimento.muovi(g.getSiChip4(), 790, 340, gp);
-			Movimento.muovi(g.getSiChip5(), 820, 340, gp);
+			Movimento.muovi(g.getSiChip1(), 690, 340, gp);
+			Movimento.muovi(g.getSiChip2(), 720, 340, gp);
+			Movimento.muovi(g.getSiChip3(), 750, 340, gp);
+			Movimento.muovi(g.getSiChip4(), 780, 340, gp);
+			Movimento.muovi(g.getSiChip5(), 810, 340, gp);
 			break;
 		}// case 2
 		case 3: {
-			// g.setPos(numGioc, x, y);
+			Movimento.muovi(g.getSiChip1(), 855, 230, gp);
+			Movimento.muovi(g.getSiChip2(), 855, 250, gp);
+			Movimento.muovi(g.getSiChip3(), 855, 270, gp);
+			Movimento.muovi(g.getSiChip4(), 855, 290, gp);
+			Movimento.muovi(g.getSiChip5(), 855, 310, gp);
 			break;
 		}// case 3
 		case 4: {
-			// g.setPos(numGioc, x, y);
+			Movimento.muovi(g.getSiChip1(), 670, 160, gp);
+			Movimento.muovi(g.getSiChip2(), 700, 160, gp);
+			Movimento.muovi(g.getSiChip3(), 730, 160, gp);
+			Movimento.muovi(g.getSiChip4(), 760, 160, gp);
+			Movimento.muovi(g.getSiChip5(), 790, 160, gp);
 			break;
 		}// case 4
 		case 5: {
-			// g.setPos(numGioc, x, y);
+			Movimento.muovi(g.getSiChip1(), 495, 140, gp);
+			Movimento.muovi(g.getSiChip2(), 525, 140, gp);
+			Movimento.muovi(g.getSiChip3(), 555, 140, gp);
+			Movimento.muovi(g.getSiChip4(), 585, 140, gp);
+			Movimento.muovi(g.getSiChip5(), 615, 140, gp);
 			break;
 		}// case 5
 		case 6: {
-			// g.setPos(numGioc, x, y);
+			Movimento.muovi(g.getSiChip1(), 325, 160, gp);
+			Movimento.muovi(g.getSiChip2(), 355, 160, gp);
+			Movimento.muovi(g.getSiChip3(), 385, 160, gp);
+			Movimento.muovi(g.getSiChip4(), 415, 160, gp);
+			Movimento.muovi(g.getSiChip5(), 445, 160, gp);
 			break;
 		}// case 6
 		case 7: {
-			// g.setPos(numGioc, x, y);
+			Movimento.muovi(g.getSiChip1(), 260, 230, gp);
+			Movimento.muovi(g.getSiChip2(), 260, 250, gp);
+			Movimento.muovi(g.getSiChip3(), 260, 270, gp);
+			Movimento.muovi(g.getSiChip4(), 260, 290, gp);
+			Movimento.muovi(g.getSiChip5(), 260, 310, gp);
 			break;
 		}// case 4
-		default: { // g.setPos(numGioc, x, y);
+		default: {
+			Movimento.muovi(g.getSiChip1(), 325, 355, gp);
+			Movimento.muovi(g.getSiChip2(), 355, 355, gp);
+			Movimento.muovi(g.getSiChip3(), 385, 355, gp);
+			Movimento.muovi(g.getSiChip4(), 415, 355, gp);
+			Movimento.muovi(g.getSiChip5(), 445, 355, gp);
 			break;
 		}// default
 		}// switch
-		
-		
+
 	}
 }
