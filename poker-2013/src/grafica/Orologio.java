@@ -1,4 +1,5 @@
 package grafica;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -11,9 +12,12 @@ import javax.swing.JLabel;
 public class Orologio implements Runnable{
 	private static JLabel time=new JLabel();
 	private int i;
-	public Orologio(){
+	private JFrame jf;
+	
+	public Orologio(JFrame jf){
 		setIcona(60);
 		time.setBounds(680,615,230,70);
+		this.jf=jf;
 	}
 	
 	//public void start(){
@@ -70,18 +74,17 @@ public class Orologio implements Runnable{
 	}
 
 	@Override
-	public void run() {
-		while(this.i<0)
+	public void run() {  //TODO sostituire il for
+		for(this.i=60;i>0;i--)
 		{
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			setIcona(this.i);
-			this.i--;
-			time.repaint();
+			jf.repaint();
 		}//while
 	}
 

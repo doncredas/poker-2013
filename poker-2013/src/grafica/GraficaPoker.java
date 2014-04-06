@@ -883,8 +883,9 @@ public class GraficaPoker extends JFrame {
 		setDealer(2);
 		//Fiches f=Fiches.punta(6, 99999, gp,null);
 		//Fiches.punta(3, 50, gp,f);
-		Orologio orol =new Orologio();
+		Orologio orol =new Orologio(gp);
 		orol.run();
+		
 		
 		Fiches.punta(1, 1, gp, null);
 		gp.daiCarteGioc();
