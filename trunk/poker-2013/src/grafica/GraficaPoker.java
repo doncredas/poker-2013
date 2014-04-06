@@ -19,7 +19,7 @@ public class GraficaPoker extends JFrame {
 	public GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
 	//public Socket s=null;
 	static Comando com=null;
-	int nGioc=0;
+	static int nGioc=0;
 	/**
 	 * Quando viene chiamato dà le carte ai giocatori graficamente
 	 */
@@ -345,10 +345,52 @@ public class GraficaPoker extends JFrame {
 	 * @param jc
 	 */
 	public void aggiungiComp(JComponent jc){
-		principale.add(jc,30); //TODO posizione in base al giocatore
-		//30 per gioc 4,gioc 5,gioc 6,,gioc 7,gioc 8 e le carte passano sopra le fiches
+		switch(nGioc)
+		{
+		case 7: principale.add(jc,60);break;
+		case 6: principale.add(jc,55);break;
+		case 5: principale.add(jc,50);break;
+		case 4: principale.add(jc,45);break;
+		case 3: principale.add(jc,40);break;
+		case 2: principale.add(jc,35);break;
+		case 1: principale.add(jc,30);break;
+		default: principale.add(jc,65);break;
+		}
 	}//aggiungiComp
 	
+	/**
+	 * Setta uno smallBlind in base al numero del giocatore
+	 * @param numGioc= numero del giocatore che deve avere SmallBlind
+	 */
+	public static void setSmallBlind(int numGioc){ //a sinistra del dealer
+		switch(numGioc){
+		case 8: SB.setBounds(316,475,50,50);break;
+		case 7: SB.setBounds(198,302,50,50);break;
+		case 6: SB.setBounds(316,129,50,50);break;
+		case 5: SB.setBounds(641,75,50,50);break;
+		case 4: SB.setBounds(972,130,50,50);break;
+		case 3: SB.setBounds(1087,301,50,50);break;
+		case 2: SB.setBounds(972,475,50,50);break;
+		default: SB.setBounds(642,533,50,50);break;
+		}//switch
+	}//setSmallBlind
+	
+	/**
+	 * Setta un bigBlind in base al numero del giocatore
+	 * @param numGioc= numero del giocatore che deve avere bigBlind
+	 */
+	public static void setBigBlind(int numGioc){ //a sinistra del smallBlind
+		switch(numGioc){
+		case 8: BB.setBounds(316,475,50,50);break;
+		case 7: BB.setBounds(198,302,50,50);break;
+		case 6: BB.setBounds(316,129,50,50);break;
+		case 5: BB.setBounds(641,75,50,50);break;
+		case 4: BB.setBounds(972,130,50,50);break;
+		case 3: BB.setBounds(1087,301,50,50);break;
+		case 2: BB.setBounds(972,475,50,50);break;
+		default: BB.setBounds(642,533,50,50);break;
+		}//switch
+	}
 	/**
 	 * setta il dealer (graficamente) al numero del giocatore che gli viene passato
 	 * @param numGioc
@@ -357,6 +399,63 @@ public class GraficaPoker extends JFrame {
 	public static void setDealer(int numGioc){ //TODO aggiustare nel caso di gioc mancanti
 		switch(numGioc)
 		{
+		
+		case 1: {
+			       Dealer.setBounds(642,533,50,50); //giocatore 1
+			       switch(nGioc)
+		           {
+			       case 8: setSmallBlind(8);setBigBlind(7);break;
+			       case 7: setSmallBlind(7);setBigBlind(6);break;
+			       case 6: setSmallBlind(6);setBigBlind(5);break;
+			       case 5: setSmallBlind(5);setBigBlind(4);break;
+			       case 4: setSmallBlind(4);setBigBlind(3);break;
+			       case 3: setSmallBlind(3);setBigBlind(2);break;
+			       default: setSmallBlind(2);break;  //caso base di 2 giocatori
+		           }//switch 1
+		
+		        }//case 1 
+		        break;
+		
+		case 2: {
+			      Dealer.setBounds(972,475,50,50);  //giocatore 2
+			      switch(nGioc)
+			      {
+			      case 8:setSmallBlind(1);setBigBlind(8);break;
+			      case 7:setSmallBlind(1);setBigBlind(7);break;
+			      case 6:setSmallBlind(1);setBigBlind(6);break;
+			      case 5:setSmallBlind(1);setBigBlind(5);break;
+			      case 4:setSmallBlind(1);setBigBlind(4);break;
+			      case 3:setSmallBlind(1);setBigBlind(3);break;
+			      default:setSmallBlind(1);break;
+			      }//switch 2
+	
+		        }//case 2
+		        break;
+		case 3:  Dealer.setBounds(1087,301,50,50);
+		         setSmallBlind(2);
+		         setBigBlind(1);
+		         break;
+		case 4: Dealer.setBounds(972,130,50,50);
+		        setSmallBlind(3);
+		        setBigBlind(2);
+		        break;
+		case 5: Dealer.setBounds(641,75,50,50);
+                setSmallBlind(4);
+                setBigBlind(3);
+                break;
+		case 6: Dealer.setBounds(316,129,50,50);
+		        setSmallBlind(5);
+		        setBigBlind(4);
+		        break;
+		case 7: Dealer.setBounds(198,302,50,50);
+		        setSmallBlind(6);
+		        setBigBlind(5);
+		        break;
+		default: Dealer.setBounds(316,475,50,50);
+		         setSmallBlind(7);
+		         setBigBlind(6);
+		         break;
+		/*
 		case 1:
 			Dealer.setBounds(642,533,50,50); //gioc1
 			SB.setBounds(316,475,50,50); //gioc8
@@ -397,8 +496,11 @@ public class GraficaPoker extends JFrame {
 			SB.setBounds(198,302,50,50); //gioc7
 			BB.setBounds(316,129,50,50);//gioc6
 			break;
-		}
-	}
+			*/
+		        	
+		        	
+		}//switch generale
+	}//setDealer
 	
 	public GraficaPoker(int numGioc) {
 
@@ -771,15 +873,14 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 
-		GraficaPoker gp=new GraficaPoker(8);
+		GraficaPoker gp=new GraficaPoker(5);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 
-		setDealer(1);
+		setDealer(2);
 		//Fiches f=Fiches.punta(6, 99999, gp,null);
 		//Fiches.punta(3, 50, gp,f);
 
-		Fiches.punta(7,4321, gp, null);
-		Fiches.punta(8,4321, gp, null);
+		Fiches.punta(1, 1, gp, null);
 		gp.daiCarteGioc();
 		
 		
