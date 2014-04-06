@@ -11,6 +11,7 @@ public final class Icone {
 	static File Carte = new File(Immagini.getAbsolutePath() + "\\Carte");
 	static File Fiches=new File(Immagini.getAbsolutePath()+"\\Fiches");
 	static File Varie=new File(Immagini.getAbsolutePath()+"\\Varie");
+	static File Timer=new File(Immagini.getAbsolutePath()+"\\Timer");
 
 	//ICONE CARTE
 	public static ImageIcon zero = new ImageIcon(Carte.getAbsolutePath() + "\\0.png");// Asso di cuori
@@ -159,6 +160,43 @@ public final class Icone {
 	public static ImageIcon diecimila7 = new ImageIcon(Fiches.getAbsolutePath()+"\\7diecimila.png");
 	public static ImageIcon diecimila8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8diecimila.png");
 	public static ImageIcon diecimila9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9diecimila.png");
+	
+	//TIMER
+	public static ImageIcon Tsessanta=new ImageIcon(Timer.getAbsolutePath()+"\\60.png");
+	public static ImageIcon Tcinquantanove=new ImageIcon(Timer.getAbsolutePath()+"\\59.png");
+	public static ImageIcon Tcinquantotto=new ImageIcon(Timer.getAbsolutePath()+"\\58.png");
+	public static ImageIcon Tcinquantasette=new ImageIcon(Timer.getAbsolutePath()+"\\57.png");
+	public static ImageIcon Tcinquantasei=new ImageIcon(Timer.getAbsolutePath()+"\\56.png");
+	public static ImageIcon Tcinquantacinque=new ImageIcon(Timer.getAbsolutePath()+"\\55.png");
+	public static ImageIcon Tcinquantaquattro=new ImageIcon(Timer.getAbsolutePath()+"\\54.png");
+	public static ImageIcon Tcinquantatre=new ImageIcon(Timer.getAbsolutePath()+"\\53.png");
+	public static ImageIcon Tcinquantadue=new ImageIcon(Timer.getAbsolutePath()+"\\52.png");
+	public static ImageIcon Tcinquantuno=new ImageIcon(Timer.getAbsolutePath()+"\\51.png");
+	public static ImageIcon Tcinquanta=new ImageIcon(Timer.getAbsolutePath()+"\\50.png");
+	public static ImageIcon Tquarantanove=new ImageIcon(Timer.getAbsolutePath()+"\\49.png");
+	public static ImageIcon Tquarantotto=new ImageIcon(Timer.getAbsolutePath()+"\\48.png");
+	public static ImageIcon Tquarantasette=new ImageIcon(Timer.getAbsolutePath()+"\\47.png");
+	public static ImageIcon Tquarantasei=new ImageIcon(Timer.getAbsolutePath()+"\\46.png");
+	public static ImageIcon Tquarantacinque=new ImageIcon(Timer.getAbsolutePath()+"\\45.png");
+	public static ImageIcon Tquarantaquattro=new ImageIcon(Timer.getAbsolutePath()+"\\44.png");
+	public static ImageIcon Tquarantatre=new ImageIcon(Timer.getAbsolutePath()+"\\43.png");
+	public static ImageIcon Tquarantadue=new ImageIcon(Timer.getAbsolutePath()+"\\42.png");
+	public static ImageIcon Tquarantuno=new ImageIcon(Timer.getAbsolutePath()+"\\41.png");
+	public static ImageIcon Tquaranta=new ImageIcon(Timer.getAbsolutePath()+"\\40.png");
+	public static ImageIcon Ttrentanove=new ImageIcon(Timer.getAbsolutePath()+"\\39.png");
+	public static ImageIcon Ttrentotto=new ImageIcon(Timer.getAbsolutePath()+"\\38.png");
+	public static ImageIcon Ttrentasette=new ImageIcon(Timer.getAbsolutePath()+"\\37.png");
+	public static ImageIcon Ttrentasei=new ImageIcon(Timer.getAbsolutePath()+"\\36.png");
+	public static ImageIcon Ttrentacinque=new ImageIcon(Timer.getAbsolutePath()+"\\35.png");
+	public static ImageIcon Ttrentaquattro=new ImageIcon(Timer.getAbsolutePath()+"\\34.png");
+	public static ImageIcon Ttrentatre=new ImageIcon(Timer.getAbsolutePath()+"\\33.png");
+	public static ImageIcon Ttrentadue=new ImageIcon(Timer.getAbsolutePath()+"\\32.png");
+	public static ImageIcon Ttrentuno=new ImageIcon(Timer.getAbsolutePath()+"\\31.png");
+	public static ImageIcon Ttrenta=new ImageIcon(Timer.getAbsolutePath()+"\\30.png");
+	
+	
+	
+	
 	/**
 	 * Le icone delle carte sono numerate da 0 a 51 con i pali: Cuori Quadri Fiori Picche.
 	 * Per ogni palo il valore parte dall'Asso e poi ci sono 2,3,4,5,6,7,8,9,10,J,Q,K

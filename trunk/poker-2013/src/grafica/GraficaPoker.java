@@ -768,7 +768,11 @@ public class GraficaPoker extends JFrame {
 		Gioc8Car1.setBounds(736,240,100,100);
 		Gioc8Car2.setBounds(736,240,100,100);
 		
-	
+	    //TIMER TODO
+		//Orologio orol=new Orologio();
+		
+		
+		
 		// LISTENER
 		SegnaPunti.addMouseListener(FP); // Apre la finestra dei Punteggi
 		ValoreFiches.addMouseListener(FF);//Apre la finestra delle fiches
@@ -830,7 +834,7 @@ public class GraficaPoker extends JFrame {
 
 
 		// INSERIMENTO NELLA FINESTRA
-		
+		principale.add(Orologio.getLabel());
 
 		principale.add(ScrollChat);
 		principale.add(ScrollStat);
@@ -879,11 +883,12 @@ public class GraficaPoker extends JFrame {
 		setDealer(2);
 		//Fiches f=Fiches.punta(6, 99999, gp,null);
 		//Fiches.punta(3, 50, gp,f);
-
+		Orologio orol =new Orologio();
+		orol.run();
+		
 		Fiches.punta(1, 1, gp, null);
 		gp.daiCarteGioc();
-		
-		
+
 		
 	}// main
 	
