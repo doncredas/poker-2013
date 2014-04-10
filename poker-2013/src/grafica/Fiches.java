@@ -424,67 +424,67 @@ public class Fiches {
 	private static void muovi(int numGioc, Fiches g, GraficaPoker gp) {
 		switch (numGioc) {
 		case 1: {
-			Movimento.muovi(g.getSiChip1(), 495, 350, gp);
-			Movimento.muovi(g.getSiChip2(), 525, 350, gp);
-			Movimento.muovi(g.getSiChip3(), 555, 350, gp);
-			Movimento.muovi(g.getSiChip4(), 585, 350, gp);
-			Movimento.muovi(g.getSiChip5(), 615, 350, gp);
+			Movimento.muovi(g.getSiChip1(), 495, 350);
+			Movimento.muovi(g.getSiChip2(), 525, 350);
+			Movimento.muovi(g.getSiChip3(), 555, 350);
+			Movimento.muovi(g.getSiChip4(), 585, 350);
+			Movimento.muovi(g.getSiChip5(), 615, 350);
 			break;
 		}// case1
 		case 2: {
-			Movimento.muovi(g.getSiChip1(), 690, 340, gp);
-			Movimento.muovi(g.getSiChip2(), 720, 340, gp);
-			Movimento.muovi(g.getSiChip3(), 750, 340, gp);
-			Movimento.muovi(g.getSiChip4(), 780, 340, gp);
-			Movimento.muovi(g.getSiChip5(), 810, 340, gp);
+			Movimento.muovi(g.getSiChip1(), 690, 340);
+			Movimento.muovi(g.getSiChip2(), 720, 340);
+			Movimento.muovi(g.getSiChip3(), 750, 340);
+			Movimento.muovi(g.getSiChip4(), 780, 340);
+			Movimento.muovi(g.getSiChip5(), 810, 340);
 			break;
 		}// case 2
 		case 3: {
-			Movimento.muovi(g.getSiChip1(), 855, 230, gp);
-			Movimento.muovi(g.getSiChip2(), 855, 250, gp);
-			Movimento.muovi(g.getSiChip3(), 855, 270, gp);
-			Movimento.muovi(g.getSiChip4(), 855, 290, gp);
-			Movimento.muovi(g.getSiChip5(), 855, 310, gp);
+			Movimento.muovi(g.getSiChip1(), 855, 230);
+			Movimento.muovi(g.getSiChip2(), 855, 250);
+			Movimento.muovi(g.getSiChip3(), 855, 270);
+			Movimento.muovi(g.getSiChip4(), 855, 290);
+			Movimento.muovi(g.getSiChip5(), 855, 310);
 			break;
 		}// case 3
 		case 4: {
-			Movimento.muovi(g.getSiChip1(), 670, 160, gp);
-			Movimento.muovi(g.getSiChip2(), 700, 160, gp);
-			Movimento.muovi(g.getSiChip3(), 730, 160, gp);
-			Movimento.muovi(g.getSiChip4(), 760, 160, gp);
-			Movimento.muovi(g.getSiChip5(), 790, 160, gp);
+			Movimento.muovi(g.getSiChip1(), 670, 160);
+			Movimento.muovi(g.getSiChip2(), 700, 160);
+			Movimento.muovi(g.getSiChip3(), 730, 160);
+			Movimento.muovi(g.getSiChip4(), 760, 160);
+			Movimento.muovi(g.getSiChip5(), 790, 160);
 			break;
 		}// case 4
 		case 5: {
-			Movimento.muovi(g.getSiChip1(), 495, 140, gp);
-			Movimento.muovi(g.getSiChip2(), 525, 140, gp);
-			Movimento.muovi(g.getSiChip3(), 555, 140, gp);
-			Movimento.muovi(g.getSiChip4(), 585, 140, gp);
-			Movimento.muovi(g.getSiChip5(), 615, 140, gp);
+			Movimento.muovi(g.getSiChip1(), 495, 140);
+			Movimento.muovi(g.getSiChip2(), 525, 140);
+			Movimento.muovi(g.getSiChip3(), 555, 140);
+			Movimento.muovi(g.getSiChip4(), 585, 140);
+			Movimento.muovi(g.getSiChip5(), 615, 140);
 			break;
 		}// case 5
 		case 6: {
-			Movimento.muovi(g.getSiChip1(), 325, 160, gp);
-			Movimento.muovi(g.getSiChip2(), 355, 160, gp);
-			Movimento.muovi(g.getSiChip3(), 385, 160, gp);
-			Movimento.muovi(g.getSiChip4(), 415, 160, gp);
-			Movimento.muovi(g.getSiChip5(), 445, 160, gp);
+			Movimento.muovi(g.getSiChip1(), 325, 160);
+			Movimento.muovi(g.getSiChip2(), 355, 160);
+			Movimento.muovi(g.getSiChip3(), 385, 160);
+			Movimento.muovi(g.getSiChip4(), 415, 160);
+			Movimento.muovi(g.getSiChip5(), 445, 160);
 			break;
 		}// case 6
 		case 7: {
-			Movimento.muovi(g.getSiChip1(), 260, 230, gp);
-			Movimento.muovi(g.getSiChip2(), 260, 250, gp);
-			Movimento.muovi(g.getSiChip3(), 260, 270, gp);
-			Movimento.muovi(g.getSiChip4(), 260, 290, gp);
-			Movimento.muovi(g.getSiChip5(), 260, 310, gp);
+			Movimento.muovi(g.getSiChip1(), 260, 230);
+			Movimento.muovi(g.getSiChip2(), 260, 250);
+			Movimento.muovi(g.getSiChip3(), 260, 270);
+			Movimento.muovi(g.getSiChip4(), 260, 290);
+			Movimento.muovi(g.getSiChip5(), 260, 310);
 			break;
 		}// case 4
 		default: {
-			Movimento.muovi(g.getSiChip1(), 325, 355, gp);
-			Movimento.muovi(g.getSiChip2(), 355, 355, gp);
-			Movimento.muovi(g.getSiChip3(), 385, 355, gp);
-			Movimento.muovi(g.getSiChip4(), 415, 355, gp);
-			Movimento.muovi(g.getSiChip5(), 445, 355, gp);
+			Movimento.muovi(g.getSiChip1(), 325, 355);
+			Movimento.muovi(g.getSiChip2(), 355, 355);
+			Movimento.muovi(g.getSiChip3(), 385, 355);
+			Movimento.muovi(g.getSiChip4(), 415, 355);
+			Movimento.muovi(g.getSiChip5(), 445, 355);
 			break;
 		}// default
 		}// switch

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 public class Movimento {
 
-	public static void muovi(JComponent jc, int x, int y, JFrame jf) {
+	public static void muovi(JComponent jc, int x, int y) {
 		int inX = jc.getX();
 		int inY = jc.getY();
 		int spost = (Math.abs(x - inX) + Math.abs(y - inY)) / 3;
@@ -23,7 +23,7 @@ public class Movimento {
 				spostX = (x - inX + restoX) / spost;
 				spostY = (y - inY + restoY) / spost;
 				jc.setLocation(nX, nY);
-				jf.repaint();
+				jc.repaint();
 				try {
 					Thread.sleep(1+(1/4));
 				} catch (InterruptedException e) {
