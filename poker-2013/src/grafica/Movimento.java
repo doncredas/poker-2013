@@ -25,7 +25,7 @@ public class Movimento {
 				jc.setLocation(nX, nY);
 				jc.repaint();
 				try {
-					Thread.sleep(1+(1/4));
+					Thread.sleep(1+1/2);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
