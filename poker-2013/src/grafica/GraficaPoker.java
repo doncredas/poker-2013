@@ -455,49 +455,7 @@ public class GraficaPoker extends JFrame {
 		         setSmallBlind(7);
 		         setBigBlind(6);
 		         break;
-		/*
-		case 1:
-			Dealer.setBounds(642,533,50,50); //gioc1
-			SB.setBounds(316,475,50,50); //gioc8
-			BB.setBounds(198,302,50,50); //gioc7
-        	break;
-		case 2:
-			Dealer.setBounds(972,475,50,50); //gioc2
-			SB.setBounds(642,533,50,50); //gioc1
-			BB.setBounds(316,475,50,50); //gioc8
-			break;
-		case 3:
-			Dealer.setBounds(1087,301,50,50); //gioc3
-			SB.setBounds(972,475,50,50);  //gioc2
-			BB.setBounds(642,533,50,50);  //gioc1
-			break;
-		case 4:
-			Dealer.setBounds(972,130,50,50);//gioc4
-			SB.setBounds(1087,301,50,50); //gioc3
-			BB.setBounds(972,475,50,50); //gioc2  
-			break;
-		case 5:
-			Dealer.setBounds(641,75,50,50); //gioc5
-			SB.setBounds(972,130,50,50);//gioc4
-			BB.setBounds(1087,301,50,50); //gioc3
-			break;
-		case 6:
-			Dealer.setBounds(316,129,50,50); //gioc6
-			SB.setBounds(641,75,50,50); //gioc5
-			BB.setBounds(972,130,50,50); //gioc4
-			break;
-		case 7:
-			Dealer.setBounds(198,302,50,50); //gioc7
-			SB.setBounds(316,129,50,50); //gioc6
-			BB.setBounds(641,75,50,50); //gioc5
-			break;
-		default:
-			Dealer.setBounds(316,475,50,50); //gioc8
-			SB.setBounds(198,302,50,50); //gioc7
-			BB.setBounds(316,129,50,50);//gioc6
-			break;
-			*/
-		        	
+		
 		        	
 		}//switch generale
 	}//setDealer
@@ -880,14 +838,19 @@ public class GraficaPoker extends JFrame {
 		GraficaPoker gp=new GraficaPoker(5);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 
+		Orologio orol =new Orologio();
+		Thread orologio=new Thread(orol);
+		orologio.start();
+		
 		setDealer(2);
-		//Fiches f=Fiches.punta(6, 99999, gp,null);
+		Fiches f=Fiches.punta(1, 12345, gp,null);
 		//Fiches.punta(3, 50, gp,f);
-		Orologio orol =new Orologio(gp);
-		orol.run();
+		
+
 		
 		
-		Fiches.punta(1, 1, gp, null);
+		Fiches.punta(1,20000, gp,f);
+		
 		gp.daiCarteGioc();
 
 		

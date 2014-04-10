@@ -23,12 +23,6 @@ public class Fiches {
 	 */
 	public Fiches(int quanto, int numGioc, GraficaPoker gp) {
 		this.quanto = quanto;
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		switch (numGioc) {
 
 		case 1:
