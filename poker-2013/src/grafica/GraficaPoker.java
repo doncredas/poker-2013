@@ -32,63 +32,63 @@ public class GraficaPoker extends JFrame {
 	
 		    default: {
 	                  if(i==0)
-	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car1,190,405,this);
-	                  if(i==1)
-	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car2,260,405,this);
-	                 }//default
+	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car1,190,405);
+	                  if(i==1)                                                         
+	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car2,260,405);
+	                 }//default                                                        
 		
 		    case 7:  {
 		              if(i==0)
-		    	          if(Giocatori[6].isVisible())Movimento.muovi(Gioc7Car1,70,232,this);
+		    	          if(Giocatori[6].isVisible())Movimento.muovi(Gioc7Car1,70,232);
 		              if(i==1) 
-		            	  if(Giocatori[6].isVisible())Movimento.muovi(Gioc7Car2,140,232,this);
+		            	  if(Giocatori[6].isVisible())Movimento.muovi(Gioc7Car2,140,232);
 		             }//case 7
 		    
 		    case 6:  {
 		    	       if(i==0)
-		    	           if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car1,190,60,this);
+		    	           if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car1,190,60);
 		    	       if(i==1)
-		    	    	   if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car2,260,60,this);
+		    	    	   if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car2,260,60);
 		             }//case 6
 		    
 			case 5:  {
 				       if(i==0)
-				    	   if(Giocatori[4].isVisible()) Movimento.muovi(Gioc5Car1,512,5,this);
+				    	   if(Giocatori[4].isVisible()) Movimento.muovi(Gioc5Car1,512,5);
 				       if(i==1)
-                           if(Giocatori[4].isVisible())Movimento.muovi(Gioc5Car2,582,5,this);
+                           if(Giocatori[4].isVisible())Movimento.muovi(Gioc5Car2,582,5);
                      }//case5
 			
 			case 4:  {
 	                   if(i==0)
-	   		               if(Giocatori[3].isVisible())Movimento.muovi(Gioc4Car1,842,60,this);
+	   		               if(Giocatori[3].isVisible())Movimento.muovi(Gioc4Car1,842,60);
                        if(i==1)
-	   		               if(Giocatori[3].isVisible()) Movimento.muovi(Gioc4Car2,912,60,this);
+	   		               if(Giocatori[3].isVisible()) Movimento.muovi(Gioc4Car2,912,60);
                      }//case4
 			
 			case 3:  {
 				       if(i==0)
-		                   if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car1,960,232,this);
+		                   if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car1,960,232);
 		   		       if(i==1)
-	                       if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car2,1030,232,this);
+	                       if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car2,1030,232);
 	                 }//case3
 			
 			case 2:  {
 			           if(i==0)
-			               if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car1,842,405,this);
+			               if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car1,842,405);
 			           if(i==1)
-		                   if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car2,912,405,this);
+		                   if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car2,912,405);
 		             }//case2
 		    
 		    case 1: {
 		    	       if(i==0)
 		    	       {
 		    	    	   Gioc1Car1.setVisible(true);
-		    	    	   Movimento.muovi(Gioc1Car1,510,420,this);
+		    	    	   Movimento.muovi(Gioc1Car1,510,420);
 		    	       }
 		    	       if(i==1)
 		    	       {
 		    	    	   Gioc1Car2.setVisible(true);
-			               Movimento.muovi(Gioc1Car2,582,420,this);
+			               Movimento.muovi(Gioc1Car2,582,420);
 		    	       }
 		            }//case1
 
