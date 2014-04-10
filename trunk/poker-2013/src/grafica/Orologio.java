@@ -12,25 +12,18 @@ import javax.swing.JLabel;
 public class Orologio implements Runnable{
 	private static JLabel time=new JLabel();
 	private int i;
-	private JFrame jf;
+
 	
-	public Orologio(JFrame jf){
+	public Orologio(){
 		setIcona(60);
 		time.setBounds(680,615,230,70);
-		this.jf=jf;
-	}
-	
-	//public void start(){
 		
-	//}
+	}
 	
 	public void restart(){
 		this.i=60;
 		setIcona(this.i);
 		run();
-	}
-	public void stop(){
-		setIcona(this.i);
 	}
 	
 	public void setIcona(int numero){
@@ -84,7 +77,7 @@ public class Orologio implements Runnable{
 				e.printStackTrace();
 			}
 			setIcona(this.i);
-			jf.repaint();
+			time.repaint();
 		}//while
 	}
 
