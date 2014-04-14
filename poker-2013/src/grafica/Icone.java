@@ -213,7 +213,6 @@ public final class Icone {
 	public static ImageIcon T12=new ImageIcon(Timer.getAbsolutePath()+"\\12.png");
 	public static ImageIcon T11=new ImageIcon(Timer.getAbsolutePath()+"\\11.png");
 	public static ImageIcon T10=new ImageIcon(Timer.getAbsolutePath()+"\\10.png");
-	
 	public static ImageIcon T9=new ImageIcon(Timer.getAbsolutePath()+"\\9.png");
 	public static ImageIcon T8=new ImageIcon(Timer.getAbsolutePath()+"\\8.png");
 	public static ImageIcon T7=new ImageIcon(Timer.getAbsolutePath()+"\\7.png");
