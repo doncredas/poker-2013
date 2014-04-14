@@ -96,7 +96,7 @@ public class Orologio implements Runnable{
 
 	@Override
 	public void run() {  //TODO sostituire il for
-		for(this.i=60;i>0;i--)
+		for(this.i=60;i>=0;i--)
 		{
 			try {
 				Thread.sleep(1000);
