@@ -397,67 +397,27 @@ public class GraficaPoker extends JFrame {
 	 * e setta anche Small Blind e Big Blind
 	 */
 	public static void setDealer(int numGioc){ //TODO aggiustare nel caso di gioc mancanti
+		
+		if(nGioc !=1)
+		   if((numGioc-1+nGioc)%nGioc==0)setSmallBlind(nGioc); //se il dealer è il gioc1
+		     else setSmallBlind((numGioc-1+nGioc)%nGioc);
+		
+		if(nGioc>2)
+		   if((numGioc-2+nGioc)%nGioc==0) setBigBlind(nGioc);
+		   else 
+			   setBigBlind((numGioc-2+nGioc)%nGioc);
+			  
 		switch(numGioc)
 		{
-		
-		case 1: {
-			       Dealer.setBounds(642,533,50,50); //giocatore 1
-			       switch(nGioc)
-		           {
-			       case 8: setSmallBlind(8);setBigBlind(7);break;
-			       case 7: setSmallBlind(7);setBigBlind(6);break;
-			       case 6: setSmallBlind(6);setBigBlind(5);break;
-			       case 5: setSmallBlind(5);setBigBlind(4);break;
-			       case 4: setSmallBlind(4);setBigBlind(3);break;
-			       case 3: setSmallBlind(3);setBigBlind(2);break;
-			       default: setSmallBlind(2);break;  //caso base di 2 giocatori
-		           }//switch 1
-		
-		        }//case 1 
-		        break;
-		
-		case 2: {
-			      Dealer.setBounds(972,475,50,50);  //giocatore 2
-			      switch(nGioc)
-			      {
-			      case 8:setSmallBlind(1);setBigBlind(8);break;
-			      case 7:setSmallBlind(1);setBigBlind(7);break;
-			      case 6:setSmallBlind(1);setBigBlind(6);break;
-			      case 5:setSmallBlind(1);setBigBlind(5);break;
-			      case 4:setSmallBlind(1);setBigBlind(4);break;
-			      case 3:setSmallBlind(1);setBigBlind(3);break;
-			      default:setSmallBlind(1);break;
-			      }//switch 2
-	
-		        }//case 2
-		        break;
-		case 3:  Dealer.setBounds(1087,301,50,50);
-		         setSmallBlind(2);
-		         setBigBlind(1);
-		         break;
-		case 4: Dealer.setBounds(972,130,50,50);
-		        setSmallBlind(3);
-		        setBigBlind(2);
-		        break;
-		case 5: Dealer.setBounds(641,75,50,50);
-                setSmallBlind(4);
-                setBigBlind(3);
-                break;
-		case 6: Dealer.setBounds(316,129,50,50);
-		        setSmallBlind(5);
-		        setBigBlind(4);
-		        break;
-		case 7: Dealer.setBounds(198,302,50,50);
-		        setSmallBlind(6);
-		        setBigBlind(5);
-		        break;
-		default: Dealer.setBounds(316,475,50,50);
-		         setSmallBlind(7);
-		         setBigBlind(6);
-		         break;
-		
-		        	
-		}//switch generale
+		case 1:Dealer.setBounds(642,533,50,50);break;
+		case 2:Dealer.setBounds(972,475,50,50);break;
+		case 3:Dealer.setBounds(1087,301,50,50);break;
+		case 4:Dealer.setBounds(972,130,50,50);break;
+		case 5:Dealer.setBounds(641,75,50,50);break;
+		case 6:Dealer.setBounds(316,129,50,50);break;
+		case 7:Dealer.setBounds(198,302,50,50);break;
+		default: Dealer.setBounds(316,475,50,50);break;
+		}
 	}//setDealer
 	
 	public GraficaPoker(int numGioc) {
@@ -682,7 +642,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc2Car2);
 		              
 		   case 1:     
-		              etiUtente1.setIcon(Icone.EtichettaCall);
+		              etiUtente1.setIcon(Icone.Etichetta);
 		              etiUtente1.setBounds(400, 520, 300, 55);
 		              nome1.setFont(fontnome);
 		              nome1.setBounds(565, 509, 100, 60); // +14,-10
@@ -725,11 +685,7 @@ public class GraficaPoker extends JFrame {
 		Gioc7Car2.setBounds(736,240,100,100);
 		Gioc8Car1.setBounds(736,240,100,100);
 		Gioc8Car2.setBounds(736,240,100,100);
-		
-	    //TIMER TODO
-		//Orologio orol=new Orologio();
-		
-		
+				
 		
 		// LISTENER
 		SegnaPunti.addMouseListener(FP); // Apre la finestra dei Punteggi
@@ -835,21 +791,27 @@ public class GraficaPoker extends JFrame {
 
 	public static void main(String[] args) {
 
-		GraficaPoker gp=new GraficaPoker(5);
+		GraficaPoker gp=new GraficaPoker(8);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 
-		Orologio orol =new Orologio();
-		Thread orologio=new Thread(orol);
+		//Orologio orol =new Orologio();
+		Thread orologio=new Thread(new Orologio());
 		orologio.start();
-		
-		setDealer(2);
-		Fiches f=Fiches.punta(1, 12345, gp,null);
+		setDealer(1);
+		Fiches.punta(1, 99999, gp,null);
+		Fiches.punta(2, 99999, gp,null);
+		Fiches.punta(3, 99999, gp,null);
+		Fiches.punta(4, 99999, gp,null);
+		Fiches.punta(5, 99999, gp,null);
+		Fiches.punta(6, 99999, gp,null);
+		Fiches.punta(7, 99999, gp,null);
+		Fiches.punta(8, 99999, gp,null);
 		//Fiches.punta(3, 50, gp,f);
 		
 
 		
 		
-		Fiches.punta(1,20000, gp,f);
+		//Fiches.punta(1,20000, gp,f);
 		
 		gp.daiCarteGioc();
 
