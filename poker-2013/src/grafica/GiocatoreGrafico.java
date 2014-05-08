@@ -88,8 +88,8 @@ public class GiocatoreGrafico
 	 */
 	public void setFiches(int num)
 	{
-
-		if(num<=200)fiches.setForeground(Color.RED);
+        if(num>200)fiches.setForeground(Color.BLACK);
+        else fiches.setForeground(Color.RED);
 		this.fiches.setText(Integer.toString(num));;
 	}//setFiches
 	
