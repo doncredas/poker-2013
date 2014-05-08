@@ -2,6 +2,8 @@ package grafica;
 
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -256,14 +258,14 @@ public class GraficaPoker extends JFrame {
 	// GIOCATORE 1
 	JLabel etiUtente1 = new JLabel();
 	JLabel nome1 = new JLabel("Giocatore 1");
-	JLabel fiches1 = new JLabel("9000");
+	JLabel fiches1 = new JLabel("10000");
 	JLabel Gioc1Car1 = new JLabel();
 	JLabel Gioc1Car2 = new JLabel();
 	
 	// GIOCATORE 2
 	JLabel etiUtente2 = new JLabel();
 	JLabel nome2 = new JLabel("Giocatore 2");
-	JLabel fiches2 = new JLabel("9000");
+	JLabel fiches2 = new JLabel("10000");
 	JLabel Gioc2Car1 = new JLabel();
 	JLabel Gioc2Car2 = new JLabel();
 
@@ -271,7 +273,7 @@ public class GraficaPoker extends JFrame {
 
 	JLabel etiUtente3 = new JLabel();
 	JLabel nome3 = new JLabel("Giocatore 3");
-	JLabel fiches3 = new JLabel("9000");
+	JLabel fiches3 = new JLabel("10000");
 	JLabel Gioc3Car1 = new JLabel();
 	JLabel Gioc3Car2 = new JLabel();
 	
@@ -279,7 +281,7 @@ public class GraficaPoker extends JFrame {
 
 	JLabel etiUtente4 = new JLabel();
 	JLabel nome4 = new JLabel("Giocatore 4");
-	JLabel fiches4 = new JLabel("9000");
+	JLabel fiches4 = new JLabel("10000");
 	JLabel Gioc4Car1 = new JLabel();
 	JLabel Gioc4Car2 = new JLabel();
 	
@@ -287,7 +289,7 @@ public class GraficaPoker extends JFrame {
 
 	JLabel etiUtente5 = new JLabel();
 	JLabel nome5 = new JLabel("Giocatore 5");
-	JLabel fiches5 = new JLabel("9000");
+	JLabel fiches5 = new JLabel("10000");
 	JLabel Gioc5Car1 = new JLabel();
 	JLabel Gioc5Car2 = new JLabel();
 
@@ -295,7 +297,7 @@ public class GraficaPoker extends JFrame {
 
 	JLabel etiUtente6 = new JLabel();
 	JLabel nome6 = new JLabel("Giocatore 6");
-	JLabel fiches6 = new JLabel("9000");
+	JLabel fiches6 = new JLabel("10000");
 	JLabel Gioc6Car1 = new JLabel();
 	JLabel Gioc6Car2 = new JLabel();
 	
@@ -304,14 +306,14 @@ public class GraficaPoker extends JFrame {
 
 	JLabel etiUtente7 = new JLabel();
 	JLabel nome7 = new JLabel("Giocatore 7");
-	JLabel fiches7 = new JLabel("9000");
+	JLabel fiches7 = new JLabel("10000");
 	JLabel Gioc7Car1 = new JLabel();
 	JLabel Gioc7Car2 = new JLabel();
 	
 	// GIOCATORE 8
 	JLabel etiUtente8 = new JLabel();
 	JLabel nome8 = new JLabel("Giocatore 8");
-	JLabel fiches8 = new JLabel("9000");
+	JLabel fiches8 = new JLabel("10000");
 	JLabel Gioc8Car1 = new JLabel();
 	JLabel Gioc8Car2 = new JLabel();
 	
@@ -348,6 +350,7 @@ public class GraficaPoker extends JFrame {
 	Font fontnome = new Font("Comic Sans MS", Font.BOLD, 13);    //Palatino Linotype
 	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
+	
 	
 	/**
 	 * aggiunge un componente grafico al pannello principale
@@ -453,6 +456,15 @@ public class GraficaPoker extends JFrame {
 		principale.add(Dealer);
 		principale.add(BB);
 		principale.add(SB);
+		
+		Font orolox = null;
+		try {
+             orolox=Font.createFont(Font.TRUETYPE_FONT,Icone.orol);
+			} catch (IOException e){}
+		      catch(FontFormatException e1) {}
+		JLabel Time = Orologio.getLabel();
+		Time.setFont(orolox.deriveFont(Font.PLAIN,14));
+			
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
 		Fold.setIcon(Icone.Foldnot);
@@ -759,8 +771,10 @@ public class GraficaPoker extends JFrame {
 		
 		
 		// INSERIMENTO NELLA FINESTRA		
-		principale.add(Orologio.getLabel());
+		//principale.add(Orologio.getLabel());
 
+		principale.add(Time);
+		
 		principale.add(ScrollChat);
 		principale.add(ScrollStat);
 		principale.add(ConsChat);
@@ -805,7 +819,7 @@ public class GraficaPoker extends JFrame {
 		GraficaPoker gp=new GraficaPoker(8);
 		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 
-		//Orologio orol =new Orologio();
+		
 		Thread orologio=new Thread(new Orologio());
 		orologio.start();
 		setDealer(1);
