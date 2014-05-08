@@ -285,6 +285,7 @@ public class Partita {
 				}
 				if(ultimoRaise==-1)CreaComando();
 			}
+			if(unicoGiocatore())d.fineMano(OOS);
 			d.muoviDealer();
 			resetRimanenti(d.getRimanenti());
 		}
