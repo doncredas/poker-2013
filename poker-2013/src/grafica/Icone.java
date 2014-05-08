@@ -1,7 +1,13 @@
 package grafica;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.io.File;
 
+
+
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 public final class Icone {
@@ -11,8 +17,12 @@ public final class Icone {
 	static File Carte = new File(Immagini.getAbsolutePath() + "\\Carte");
 	static File Fiches=new File(Immagini.getAbsolutePath()+"\\Fiches");
 	static File Varie=new File(Immagini.getAbsolutePath()+"\\Varie");
-	static File Timer=new File(Immagini.getAbsolutePath()+"\\Timer");
-
+	
+	
+	//FONT DEL TIMER
+	static File Fonts = new File(Immagini.getAbsolutePath()+"\\Fonts");  
+	static File orol=new File(Fonts.getAbsoluteFile()+"\\advanced_pixel_lcd-7.ttf");
+	
 	//ICONE CARTE
 	public static ImageIcon zero = new ImageIcon(Carte.getAbsolutePath() + "\\0.png");// Asso di cuori
 	public static ImageIcon uno = new ImageIcon(Carte.getAbsolutePath() + "\\1.png");// 2 di cuori
@@ -161,72 +171,7 @@ public final class Icone {
 	public static ImageIcon diecimila8 = new ImageIcon(Fiches.getAbsolutePath()+"\\8diecimila.png");
 	public static ImageIcon diecimila9 = new ImageIcon(Fiches.getAbsolutePath()+"\\9diecimila.png");
 	
-	//TIMER
-	public static ImageIcon T60=new ImageIcon(Timer.getAbsolutePath()+"\\60.png");
-	public static ImageIcon T59=new ImageIcon(Timer.getAbsolutePath()+"\\59.png");
-	public static ImageIcon T58=new ImageIcon(Timer.getAbsolutePath()+"\\58.png");
-	public static ImageIcon T57=new ImageIcon(Timer.getAbsolutePath()+"\\57.png");
-	public static ImageIcon T56=new ImageIcon(Timer.getAbsolutePath()+"\\56.png");
-	public static ImageIcon T55=new ImageIcon(Timer.getAbsolutePath()+"\\55.png");
-	public static ImageIcon T54=new ImageIcon(Timer.getAbsolutePath()+"\\54.png");
-	public static ImageIcon T53=new ImageIcon(Timer.getAbsolutePath()+"\\53.png");
-	public static ImageIcon T52=new ImageIcon(Timer.getAbsolutePath()+"\\52.png");
-	public static ImageIcon T51=new ImageIcon(Timer.getAbsolutePath()+"\\51.png");
-	public static ImageIcon T50=new ImageIcon(Timer.getAbsolutePath()+"\\50.png");
-	public static ImageIcon T49=new ImageIcon(Timer.getAbsolutePath()+"\\49.png");
-	public static ImageIcon T48=new ImageIcon(Timer.getAbsolutePath()+"\\48.png");
-	public static ImageIcon T47=new ImageIcon(Timer.getAbsolutePath()+"\\47.png");
-	public static ImageIcon T46=new ImageIcon(Timer.getAbsolutePath()+"\\46.png");
-	public static ImageIcon T45=new ImageIcon(Timer.getAbsolutePath()+"\\45.png");
-	public static ImageIcon T44=new ImageIcon(Timer.getAbsolutePath()+"\\44.png");
-	public static ImageIcon T43=new ImageIcon(Timer.getAbsolutePath()+"\\43.png");
-	public static ImageIcon T42=new ImageIcon(Timer.getAbsolutePath()+"\\42.png");
-	public static ImageIcon T41=new ImageIcon(Timer.getAbsolutePath()+"\\41.png");
-	public static ImageIcon T40=new ImageIcon(Timer.getAbsolutePath()+"\\40.png");
-	public static ImageIcon T39=new ImageIcon(Timer.getAbsolutePath()+"\\39.png");
-	public static ImageIcon T38=new ImageIcon(Timer.getAbsolutePath()+"\\38.png");
-	public static ImageIcon T37=new ImageIcon(Timer.getAbsolutePath()+"\\37.png");
-	public static ImageIcon T36=new ImageIcon(Timer.getAbsolutePath()+"\\36.png");
-	public static ImageIcon T35=new ImageIcon(Timer.getAbsolutePath()+"\\35.png");
-	public static ImageIcon T34=new ImageIcon(Timer.getAbsolutePath()+"\\34.png");
-	public static ImageIcon T33=new ImageIcon(Timer.getAbsolutePath()+"\\33.png");
-	public static ImageIcon T32=new ImageIcon(Timer.getAbsolutePath()+"\\32.png");
-	public static ImageIcon T31=new ImageIcon(Timer.getAbsolutePath()+"\\31.png");
-	public static ImageIcon T30=new ImageIcon(Timer.getAbsolutePath()+"\\30.png");
-	public static ImageIcon T29=new ImageIcon(Timer.getAbsolutePath()+"\\29.png");
-	public static ImageIcon T28=new ImageIcon(Timer.getAbsolutePath()+"\\28.png");
-	public static ImageIcon T27=new ImageIcon(Timer.getAbsolutePath()+"\\27.png");
-	public static ImageIcon T26=new ImageIcon(Timer.getAbsolutePath()+"\\26.png");
-	public static ImageIcon T25=new ImageIcon(Timer.getAbsolutePath()+"\\25.png");
-	public static ImageIcon T24=new ImageIcon(Timer.getAbsolutePath()+"\\24.png");
-	public static ImageIcon T23=new ImageIcon(Timer.getAbsolutePath()+"\\23.png");
-	public static ImageIcon T22=new ImageIcon(Timer.getAbsolutePath()+"\\22.png");
-	public static ImageIcon T21=new ImageIcon(Timer.getAbsolutePath()+"\\21.png");
-	public static ImageIcon T20=new ImageIcon(Timer.getAbsolutePath()+"\\20.png");
-	public static ImageIcon T19=new ImageIcon(Timer.getAbsolutePath()+"\\19.png");
-	public static ImageIcon T18=new ImageIcon(Timer.getAbsolutePath()+"\\18.png");
-	public static ImageIcon T17=new ImageIcon(Timer.getAbsolutePath()+"\\17.png");
-	public static ImageIcon T16=new ImageIcon(Timer.getAbsolutePath()+"\\16.png");
-	public static ImageIcon T15=new ImageIcon(Timer.getAbsolutePath()+"\\15.png");
-	public static ImageIcon T14=new ImageIcon(Timer.getAbsolutePath()+"\\14.png");
-	public static ImageIcon T13=new ImageIcon(Timer.getAbsolutePath()+"\\13.png");
-	public static ImageIcon T12=new ImageIcon(Timer.getAbsolutePath()+"\\12.png");
-	public static ImageIcon T11=new ImageIcon(Timer.getAbsolutePath()+"\\11.png");
-	public static ImageIcon T10=new ImageIcon(Timer.getAbsolutePath()+"\\10.png");
-	public static ImageIcon T9=new ImageIcon(Timer.getAbsolutePath()+"\\9.png");
-	public static ImageIcon T8=new ImageIcon(Timer.getAbsolutePath()+"\\8.png");
-	public static ImageIcon T7=new ImageIcon(Timer.getAbsolutePath()+"\\7.png");
-	public static ImageIcon T6=new ImageIcon(Timer.getAbsolutePath()+"\\6.png");
-	public static ImageIcon T5=new ImageIcon(Timer.getAbsolutePath()+"\\5.png");
-	public static ImageIcon T4=new ImageIcon(Timer.getAbsolutePath()+"\\4.png");
-	public static ImageIcon T3=new ImageIcon(Timer.getAbsolutePath()+"\\3.png");
-	public static ImageIcon T2=new ImageIcon(Timer.getAbsolutePath()+"\\2.png");
-	public static ImageIcon T1=new ImageIcon(Timer.getAbsolutePath()+"\\1.png");
-	public static ImageIcon T0=new ImageIcon(Timer.getAbsolutePath()+"\\0.png");
-	
-	
-	
-	
+		
 	/**
 	 * Le icone delle carte sono numerate da 0 a 51 con i pali: Cuori Quadri Fiori Picche.
 	 * Per ogni palo il valore parte dall'Asso e poi ci sono 2,3,4,5,6,7,8,9,10,J,Q,K
