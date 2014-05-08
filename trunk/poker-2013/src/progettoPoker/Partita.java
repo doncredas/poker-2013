@@ -155,6 +155,9 @@ public class Partita {
 				gp.getGiocatore(i).setNome(com.getNickName()[i]);
 			}
 			break;
+		
+			//case INVIA:  gp.scriviChat(com.getNick(),gp.ConsChat.getText());
+		                 //gp.ConsChat.setText("");break;
 		case CHECK_CALL:
 		case RAISE:
 			if(com.getGioc()<posGioc)
@@ -188,6 +191,7 @@ public class Partita {
 					else
 						gp.getGiocatore(i-1).elimina();
 			}
+			//break; ci va?
 		}
 		
 	}
@@ -438,7 +442,11 @@ public class Partita {
 				if(inet!=null)break;
 
 			}
-			JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client");
+			
+			
+		    if(inet.charAt(0)=='f')JOptionPane.showMessageDialog(null,"Inserire 127.0.0.1 nei client");
+			else 
+				JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client","Informazione",3,Icone.logo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -453,8 +461,8 @@ public class Partita {
 			JOptionPane.showMessageDialog(null, "Errore durante la creazione del Server!","Errore",JOptionPane.ERROR_MESSAGE);
 			System.exit(-1);
 		}
-		Integer gioc[]={2,3,4,5,6,7,8,9}; 
-		Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
+		Integer gioc[]={2,3,4,5,6,7,8}; 
+		Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "Numero Giocatori", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
 
 		mostraIp();
 		
