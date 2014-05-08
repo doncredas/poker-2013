@@ -160,12 +160,21 @@ public class GraficaPoker extends JFrame {
 	FinestraPunteggio FP = new FinestraPunteggio(); // CREAZIONE FINESTRA PUTNEGGIO
 	FinestraFiches FF=new FinestraFiches();
 	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
-	
+
+	/**
+	 * Setta il minimo della barra del raise
+	 * @param min: minimo da cui iniziare
+	 * @param max: massimo della puntata
+	 */
+	public void setMinMaxBar(int min,int max){
+		BarRaise.setMinimum(min);
+		BarRaise.setMaximum(max);
+	}
 	/**Scrive un messaggio in chat
 	 */ 
-	public static void scriviChat(String messaggio)
+	public static void scriviChat(String nick,String messaggio)
 	{
-		Chat.append(" "+messaggio+"\n");
+		Chat.append(nick+": "+messaggio+"\n");
 	}
 	/**Scrive un messaggio nella console delle statistiche
 	 */ 
@@ -747,7 +756,9 @@ public class GraficaPoker extends JFrame {
 		Invia.setBorder(null);
 
 
-		// INSERIMENTO NELLA FINESTRA
+		
+		
+		// INSERIMENTO NELLA FINESTRA		
 		principale.add(Orologio.getLabel());
 
 		principale.add(ScrollChat);
@@ -798,6 +809,8 @@ public class GraficaPoker extends JFrame {
 		Thread orologio=new Thread(new Orologio());
 		orologio.start();
 		setDealer(1);
+			
+		
 		Fiches.punta(1, 99999, gp,null);
 		Fiches.punta(2, 99999, gp,null);
 		Fiches.punta(3, 99999, gp,null);
