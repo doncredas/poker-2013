@@ -304,6 +304,7 @@ public class Dealer {
 		int quota=0;
 		int vincita=0;
 		for(int i=0;i<vincitori.length;i++){
+			vincita=0;
 			quota=piatto[vincitori[i].indice]/vincitori.length;
 			for (int j = 0; j < g.length; j++) {
 				if(piatto[j]/vincitori.length<quota)
@@ -312,6 +313,7 @@ public class Dealer {
 					vincita+=quota;
 			}
 			vin=new Comando(null,vincitori[i].getFiches()+vincita);
+			getG()[vincitori[i].indice].setFiches(vincitori[i].getFiches()+vincita);
 			if(vincitori[i].indice!=0){
 				try {
 					oOS[vincitori[i].indice-1].writeObject(vin);
@@ -320,7 +322,7 @@ public class Dealer {
 					e.printStackTrace();
 				}
 			}else{
-				//TODO gestire vittoria del server
+				//getG()[0].setFiches(getG()[0].getFiches()+vincita);
 				System.out.println("vittoria del server");
 			}
 			vincita=0;
