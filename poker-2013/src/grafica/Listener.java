@@ -172,6 +172,9 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 				this.Chat.setText(this.Chat.getText() + "  Nickname: "
 						+ ConsChat.getText() + "\n");
 				ConsChat.setText("");
+				//TODO da modificare
+				
+				
 			}
 		}
 		if (arg0.getSource() == GraficaPoker.Fold) {
