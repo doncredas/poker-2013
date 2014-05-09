@@ -176,9 +176,4 @@ public class GiocatoreGrafico
 			Fiches.reset(puntata, gp);
 			puntata=null;
 	}
-
-
-	
-	
-
 }//GiocatoreGrafico
