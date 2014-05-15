@@ -23,7 +23,7 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 
 		if(this.isActive())
        {

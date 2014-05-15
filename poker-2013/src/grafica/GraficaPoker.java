@@ -164,7 +164,7 @@ public class GraficaPoker extends JFrame {
 	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
 
 	/**
-	 * Setta il minimo della barra del raise
+	 * Setta il minimo/massimo della barra del raise
 	 * @param min: minimo da cui iniziare
 	 * @param max: massimo della puntata
 	 */
@@ -224,21 +224,6 @@ public class GraficaPoker extends JFrame {
 		return Giocatori[indice];
 	}
 	
-	/**
-	 * Setta il valore minimo che può essere raggiunto dalla Scrollbar del raise
-	 * @param x
-	 */
-	public void setRaiseMin(int x){
-		BarRaise.setMinimum(x);
-	}
-	/**
-	 * Setta il valore massimo che può essere raggiunto dalla Scrollbar del raise
-	 * @param x 
-	 */
-	public void setRaiseMax(int x){
-		BarRaise.setMaximum(x+10);
-	}
-
 	// CREAZIONE BOTTONI
 	static JButton Fold = new JButton("Fold");
 	static JButton Call = new JButton("Call");

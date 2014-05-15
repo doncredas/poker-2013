@@ -96,7 +96,7 @@ public class GiocatoreGrafico
 	/**
 	 * Setta il nome del giocatore
 	 */
-	public void setNome(String nome)  //TODO gestire caratteri con posizione
+	public void setNome(String nome)
 	{
 		int lung=nome.length();
 		int x=(int)this.nome.getX();
