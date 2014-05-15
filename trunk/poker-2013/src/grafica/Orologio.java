@@ -19,6 +19,7 @@ public class Orologio implements Runnable{
 		time.setText(Integer.toString(i));
 		time.setBounds(675,557, 500, 200);
 		time.setForeground(Color.white);
+		this.i=60;
 	}//Orologio
 	
 	/**
@@ -33,7 +34,7 @@ public class Orologio implements Runnable{
 	 * ritorna il numero attuale del timer
 	 * @return
 	 */
-	public int getNumero(){
+	public int getVal(){
 		return i;
 	}
 	
@@ -46,13 +47,13 @@ public class Orologio implements Runnable{
 	}//getLabel
 
 	@Override
-	public void run() {  //TODO sostituire il for
+	public void run() {  
 		for(this.i=60;i>=0;i--)
 		{
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(this.i<=20)time.setForeground(Color.red);
