@@ -33,6 +33,8 @@ public class Mano {
 	}//getVal
 	
 	private boolean colore(){
+		boolean maggiore=false;
+		int cont=0;
 		int c=0;
 		int q=0;
 		int f=0;
@@ -50,13 +52,25 @@ public class Mano {
 		if(q>=5)seme='q';
 		if(f>=5)seme='f';
 		if(p>=5)seme='p';
+		carteUtili=new int [5];
 		if(this.c[5].getPalo()==seme)carteUtili[0]=this.c[5].getVal();
 		if(this.c[6].getPalo()==seme&&this.c[6].getVal()>carteUtili[0])carteUtili[0]=this.c[6].getVal();
+		if(carteUtili[0]!=0){
+		for(int i=0; i<5; i++){
+			if(this.c[i].getPalo()==seme)
+				cont++;
+			if(carteUtili[0]>this.c[i].getVal())
+				maggiore=true;
+		}
+		if(cont==5 && !maggiore)
+			carteUtili[0]=0;
+		}
 		if(seme!='n')return true;
 		return false;
 	}//colore
 	
 	private int[] copie(){
+		carteUtili=new int [5];
 		int cont=1;
 		int[] cMax=new int[2];
 		int[] rip=new int[7];
