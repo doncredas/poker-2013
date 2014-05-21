@@ -332,12 +332,13 @@ public class Dealer {
 		int valPiatto=0;
 		int quotaRiscossa=0;
 		int quotaRiscossaTmp=0;
+		Giocatore[] vinc;
 		for(int i=0;i<piatto.length;i++){
 			valPiatto+=piatto[i];
 		}
 		while(valPiatto>0/*&&!vincitori.isEmpty()*/){
 		quotaRiscossaTmp=0;
-		Giocatore[] vinc=vincitori.remove();
+		vinc=vincitori.remove();
 		for(int i=0;i<vinc.length;i++){
 			vincita=0;
 			quota=(piatto[vinc[i].indice]/vinc.length)-quotaRiscossa;
