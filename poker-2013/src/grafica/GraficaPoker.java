@@ -182,7 +182,9 @@ public class GraficaPoker extends JFrame {
 	 */ 
 	public static void scriviStatistica(String messaggio)
 	{
-		Statistiche.append(" "+messaggio+"\n");
+		if(messaggio.toLowerCase().equals("clear"))
+			Statistiche.setText("- - - - BENVENUTO IN REAL POKER 2014 - - - -"+"\n");
+		else  Statistiche.append(" - "+messaggio+"\n");
 	}
 	/**Se settato a true disabilita il fold, settato a false lo riabilita
 	 */ 
@@ -223,6 +225,8 @@ public class GraficaPoker extends JFrame {
 	{
 		return Giocatori[indice];
 	}
+	
+
 	
 	// CREAZIONE BOTTONI
 	static JButton Fold = new JButton("Fold");
@@ -321,10 +325,12 @@ public class GraficaPoker extends JFrame {
 	// CREAZIONE CHAT E STATISTICHE
 	static JTextArea Chat = new JTextArea();
 	public static JTextField ConsChat = new JTextField();
-	static JTextArea Statistiche = new JTextArea();
+	static JTextArea Statistiche = new JTextArea(" - - - - BENVENUTO IN REAL POKER 2014 - - - -"+"\n");
 	JScrollPane ScrollChat = new JScrollPane(Chat);
 	JScrollPane ScrollStat = new JScrollPane(Statistiche);
 	
+	//OROLOGIO
+	public Thread orologio;
 
 	
 	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,this); // LISTENER
@@ -353,6 +359,10 @@ public class GraficaPoker extends JFrame {
 		case 1: principale.add(jc,30);break;
 		default: principale.add(jc,65);break;
 		}
+	}//aggiungiComp
+	
+	public void removeComp(JComponent jc){
+		principale.add(jc);
 	}//aggiungiComp
 	
 	/**
@@ -442,6 +452,11 @@ public class GraficaPoker extends JFrame {
 		principale.add(BB);
 		principale.add(SB);
 		
+		
+		
+		//OROLOGIO
+		
+		orologio=new Thread(new Orologio());  //TODO orologio
 		Font orolox = null;
 		try {
              orolox=Font.createFont(Font.TRUETYPE_FONT,Icone.orol);
@@ -756,8 +771,6 @@ public class GraficaPoker extends JFrame {
 		
 		
 		// INSERIMENTO NELLA FINESTRA		
-		//principale.add(Orologio.getLabel());
-
 		principale.add(Time);
 		
 		principale.add(ScrollChat);
@@ -802,13 +815,10 @@ public class GraficaPoker extends JFrame {
 	public static void main(String[] args) {
 
 		GraficaPoker gp=new GraficaPoker(8);
-		GraficaPoker.scriviStatistica("   BENVENUTO IN REAL POKER 2014");
 
-		
-		Thread orologio=new Thread(new Orologio());
-		orologio.start();
+		//Thread orologio=new Thread(new Orologio());
+		//orologio.start();
 		setDealer(1);
-			
 		
 		Fiches.punta(1, 99999, gp,null);
 		Fiches.punta(2, 99999, gp,null);
@@ -820,7 +830,7 @@ public class GraficaPoker extends JFrame {
 		Fiches.punta(8, 99999, gp,null);
 		//Fiches.punta(3, 50, gp,f);
 		
-
+        
 		
 		
 		//Fiches.punta(1,20000, gp,f);
