@@ -199,7 +199,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		JOptionPane.showMessageDialog(null,"X:"+arg0.getX()+" Y:"+arg0.getY());
+		//JOptionPane.showMessageDialog(null,"X:"+arg0.getX()+" Y:"+arg0.getY());
 	}
 
 	@Override
