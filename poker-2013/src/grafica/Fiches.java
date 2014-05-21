@@ -343,6 +343,7 @@ public class Fiches {
 		} else {
 			Fiches f = new Fiches(quanto, numGioc, gp);
 			muovi(numGioc, f);
+			
 			reset(g, gp);
 			reset(f, gp);
 			g = new Fiches(quanto + g.getQuanto(), numGioc, gp);
@@ -436,13 +437,22 @@ public class Fiches {
 	}//setPosition
 
 	protected static void reset(Fiches g, GraficaPoker gp) {
-		g.getSiChip1().setVisible(false);
+		/*g.getSiChip1().setVisible(false);
 		g.getSiChip2().setVisible(false);
 		g.getSiChip3().setVisible(false);
 		g.getSiChip4().setVisible(false);
 		g.getSiChip5().setVisible(false);
 	    g.getSiChip6().setVisible(false);
-	/*
+	*/
+
+		gp.rimuoviComp(g.getSiChip1());
+		gp.rimuoviComp(g.getSiChip2());
+		gp.rimuoviComp(g.getSiChip3());
+		gp.rimuoviComp(g.getSiChip4());
+		gp.rimuoviComp(g.getSiChip5());
+		gp.rimuoviComp(g.getSiChip6());
+		
+	    /*
 		gp.remove(g.getSiChip1());
 		gp.remove(g.getSiChip2());
 		gp.remove(g.getSiChip3());
@@ -450,6 +460,8 @@ public class Fiches {
 		gp.remove(g.getSiChip5());
 		gp.remove(g.getSiChip6());
 		*/
+		
+		
 	}//reset
 
 	private static void muovi(int numGioc, Fiches g) {
