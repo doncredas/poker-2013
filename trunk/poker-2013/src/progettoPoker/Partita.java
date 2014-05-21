@@ -52,6 +52,9 @@ public class Partita {
 				try {
 					com=(Comando)ois.readObject();
 					
+				}catch (ClassCastException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -261,6 +264,9 @@ public class Partita {
 							while(risp==null&&cron.getSecondi()<tempo){
 								try {
 									risp=(Comando) OIS[i-1].readObject();
+								}catch (ClassCastException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
 								} catch (ClassNotFoundException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();

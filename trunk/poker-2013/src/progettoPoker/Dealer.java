@@ -87,17 +87,32 @@ public class Dealer {
 		return piccoloBuio;
 	}
 
-	public Giocatore[] vincitoreMano(){
+	public LinkedList<Giocatore []> vincitoreMano(){
 		HashMap<Mano, Giocatore> mani= new HashMap<Mano, Giocatore>();
-		Giocatore[] vincenti = null;
-		
-		for(int i=0; i<g.length; i++)
-			if(g[i].getInGioco()) mani.put(new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2()), g[i]);
+		LinkedList<Giocatore []>vincenti= new LinkedList<Giocatore []>();
+		Giocatore[] vinc;
+		int cont=0;
+		for(int i=0; i<g.length; i++){
+			if(!g[i].getInGioco())cont++;
+		}
+		Giocatore[] perd=new Giocatore[cont];
+		Giocatore[]unico = new Giocatore[1];
+		int index=0;
+		for(int i=0; i<g.length; i++){
+			if(g[i].getInGioco()){
+				mani.put(new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2()), g[i]);
+				unico[0]=g[i];
+			}else
+				perd[index]=g[i];
+		}		
 		if(mani.size()>1){
 		int manoMigliore=0;
 		int manoCorrente=0;
 		Mano migliore=null;
+		HashMap<Mano,Giocatore> maniTmp=new HashMap<Mano, Giocatore>();
+		while(!mani.isEmpty()){
 		
+		manoMigliore=0;
 		for(Mano m : mani.keySet()){
 			manoCorrente=m.getVal();
 			if(manoCorrente>manoMigliore){
@@ -111,25 +126,36 @@ public class Dealer {
 		for(Mano m : mani.keySet())
 			if(m.getVal()!=manoMigliore) maniPerdenti.add(m);
 		
+		maniTmp=new HashMap<Mano, Giocatore>(mani);
 		for(Mano m:maniPerdenti){
 			mani.remove(m);
 		}
-
+		
 		if(mani.size()==1){
-			vincenti=new Giocatore[1];
-			vincenti[0]=mani.get(migliore);
-			return vincenti;
+			vinc=new Giocatore[1];
+			vinc[0]=mani.get(migliore);
 		}
 		else{
 			Mano.ManiMigliori(mani);
+			vinc=new Giocatore[mani.size()];
+			int i=0;
+			for(Mano m:mani.keySet()){
+				vinc[i]=mani.get(m);
+				i++;
+			}
 		}
-		}
-		vincenti=new Giocatore[mani.size()];
-		int i=0;
 		for(Mano m:mani.keySet()){
-			vincenti[i]=mani.get(m);
-			i++;
+			maniTmp.remove(m);
 		}
+		
+		vincenti.add(vinc);
+		mani=maniTmp;
+		}
+		}else{
+			vincenti.add(unico);
+		}
+		vincenti.add(perd);
+		System.out.println(1);
 		return vincenti;
 		
 	}//vincitoreMano
@@ -299,24 +325,35 @@ public class Dealer {
 	}
 
 	public void fineMano(ObjectOutputStream[] oOS) {
-		Giocatore [] vincitori=vincitoreMano();
+		LinkedList<Giocatore []> vincitori=vincitoreMano();
 		Comando vin=null;
 		int quota=0;
 		int vincita=0;
-		for(int i=0;i<vincitori.length;i++){
+		int valPiatto=0;
+		int quotaRiscossa=0;
+		int quotaRiscossaTmp=0;
+		for(int i=0;i<piatto.length;i++){
+			valPiatto+=piatto[i];
+		}
+		while(valPiatto>0/*&&!vincitori.isEmpty()*/){
+		quotaRiscossaTmp=0;
+		Giocatore[] vinc=vincitori.remove();
+		for(int i=0;i<vinc.length;i++){
 			vincita=0;
-			quota=piatto[vincitori[i].indice]/vincitori.length;
+			quota=(piatto[vinc[i].indice]/vinc.length)-quotaRiscossa;
+			quotaRiscossaTmp+=quota;
 			for (int j = 0; j < g.length; j++) {
-				if(piatto[j]/vincitori.length<quota)
-					vincita+=piatto[j]/vincitori.length;
+				if(piatto[j]/vinc.length<quota)
+					vincita+=piatto[j]/vinc.length;
 				else
 					vincita+=quota;
 			}
-			vin=new Comando(null,vincitori[i].getFiches()+vincita);
-			getG()[vincitori[i].indice].setFiches(vincitori[i].getFiches()+vincita);
-			if(vincitori[i].indice!=0){
+			valPiatto-=vincita;
+			vin=new Comando(null,vinc[i].getFiches()+vincita);
+			getG()[vinc[i].indice].setFiches(vinc[i].getFiches()+vincita);
+			if(vinc[i].indice!=0){
 				try {
-					oOS[vincitori[i].indice-1].writeObject(vin);
+					oOS[vinc[i].indice-1].writeObject(vin);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -325,8 +362,12 @@ public class Dealer {
 				//getG()[0].setFiches(getG()[0].getFiches()+vincita);
 				System.out.println("vittoria del server");
 			}
-			vincita=0;
+			piatto[vinc[i].indice]=0;
 		}
+		quotaRiscossa+=quotaRiscossaTmp;
+		}
+		System.out.println(2);
+		//for(int i=0;i<piatto.length;i++)piatto[i]=0;
 		muoviDealer();
 		for (int i = 0; i < g.length; i++) {
 			if(g[i].getFiches()!=0)

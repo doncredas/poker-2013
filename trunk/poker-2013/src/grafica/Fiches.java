@@ -436,12 +436,20 @@ public class Fiches {
 	}//setPosition
 
 	protected static void reset(Fiches g, GraficaPoker gp) {
+		g.getSiChip1().setVisible(false);
+		g.getSiChip2().setVisible(false);
+		g.getSiChip3().setVisible(false);
+		g.getSiChip4().setVisible(false);
+		g.getSiChip5().setVisible(false);
+	    g.getSiChip6().setVisible(false);
+	/*
 		gp.remove(g.getSiChip1());
 		gp.remove(g.getSiChip2());
 		gp.remove(g.getSiChip3());
 		gp.remove(g.getSiChip4());
 		gp.remove(g.getSiChip5());
 		gp.remove(g.getSiChip6());
+		*/
 	}//reset
 
 	private static void muovi(int numGioc, Fiches g) {

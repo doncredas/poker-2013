@@ -182,7 +182,9 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			gp.disableBottoni(true);
 		}
 		if (arg0.getSource() == GraficaPoker.Raise) {
-			GraficaPoker.com = new Comando(Tipo.RAISE,gp.BarRaise.getValue());
+			this.BarRaise.setValue(Integer.valueOf(this.ConsRaise.getText()));
+			
+			GraficaPoker.com = new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText()));
 			
 			gp.disableBottoni(true);
 			// TODO scroll o textbox per inserire raise
