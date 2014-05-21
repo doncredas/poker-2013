@@ -361,10 +361,12 @@ public class GraficaPoker extends JFrame {
 		}
 	}//aggiungiComp
 	
-	public void removeComp(JComponent jc){
-		principale.add(jc);
-	}//aggiungiComp
+	public void rimuoviComp(JComponent jc){
 	
+		principale.add(jc);
+	
+	}
+
 	/**
 	 * Setta uno smallBlind in base al numero del giocatore
 	 * @param numGioc= numero del giocatore che deve avere SmallBlind
