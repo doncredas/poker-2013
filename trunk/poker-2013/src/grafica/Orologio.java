@@ -11,7 +11,7 @@ import javax.swing.JLabel;
  */
 
 public class Orologio implements Runnable{
-	private static JLabel time=new JLabel();
+	private static JLabel time=new JLabel("60");
 	private int i=60;
 
 	
