@@ -1,6 +1,7 @@
 package progettoPoker;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
@@ -15,8 +16,7 @@ public class Mano {
 	final int DOPPIA_COPPIA=3;
 	final int COPPIA=2;
 	final int CARTA_ALTA=1;
-	int cartaMax1=0;
-	int cartaMax2=0;
+	int [] carteUtili=new int[5];
 	Carta[] c=new Carta[7];
 	int val=0;
 	
@@ -40,9 +40,9 @@ public class Mano {
 		char seme='n';
 		for(int i=0;i<7;i++){
 			switch(this.c[i].getPalo()){
-			case'c':c++;
-			case'q':q++;
-			case'f':f++;
+			case'c':c++;break;
+			case'q':q++;break;
+			case'f':f++;break;
 			case'p':p++; 
 			}
 		}
@@ -50,31 +50,74 @@ public class Mano {
 		if(q>=5)seme='q';
 		if(f>=5)seme='f';
 		if(p>=5)seme='p';
-		if(this.c[5].getPalo()==seme)cartaMax1=this.c[5].getVal();
-		if(this.c[6].getPalo()==seme&&this.c[6].getVal()>cartaMax1)cartaMax1=this.c[6].getVal();
+		if(this.c[5].getPalo()==seme)carteUtili[0]=this.c[5].getVal();
+		if(this.c[6].getPalo()==seme&&this.c[6].getVal()>carteUtili[0])carteUtili[0]=this.c[6].getVal();
 		if(seme!='n')return true;
 		return false;
 	}//colore
 	
-	private int[] copie(){//ho modificato il metodo in modo che ritorni le prime due ripetizioni
+	private int[] copie(){
 		int cont=1;
-		int[] cMax={1,1};
-		for(int i=0; i<c.length; i++){
-			for(int j=i+1; j<c.length; j++){
-				if(c[i].getVal()==c[j].getVal())
-					cont++;					
+		int[] cMax=new int[2];
+		int[] rip=new int[7];
+		Carta [] copy=Arrays.copyOf(c,c.length);
+		Arrays.sort(copy,Collections.reverseOrder());
+		int index=0;
+		for(int i=0; i<copy.length-1; i++){
+			if(copy[i+1].getVal()==copy[i].getVal())cont++;
+			else{
+				rip[index]=cont;
+				cont=1;
+				index++;
 			}
-			if(cont>cMax[0]){
+		}rip[index]=cont;
+		for(int i=0; i<rip.length; i++){
+			if(rip[i]>cMax[0]){
 				cMax[1]=cMax[0];
-				cMax[0]=cont;
-				cartaMax1=cont;
+				cMax[0]=rip[i];
 			}else
-				if(cont>cMax[1]){
-					cMax[1]=cont;
-					cartaMax2=cont;
+				if(rip[i]>cMax[1]){
+					cMax[1]=rip[i];
 				}
-			cont=1;
-			
+		}
+		if(cMax[0]+cMax[1]>5)cMax[1]=5-cMax[0];
+		
+		boolean flag=false, flag2 = false;
+		int somma=0;
+		int indice=-1;
+		for(int i=0; i<rip.length; i++){
+			if(rip[i]==cMax[0]&&!flag){
+				flag=true;
+				for (int j = 0; j < cMax[0]; j++) {
+					carteUtili[j]=copy[somma].getVal();
+				}if(indice!=-1)break;
+			}else{
+				if(rip[i]>=cMax[1]&&!flag2){
+					flag2=true;
+					indice=somma;
+					if(flag)break;
+				}
+			}
+			somma+=rip[i];
+		}
+		for (int i = cMax[0]; i < cMax[0]+cMax[1]; i++) {
+			carteUtili[i]=copy[indice].getVal();
+		}
+		if(cMax[0]+cMax[1]<5){
+			int elim=copy[indice].getVal();
+			for (int i = 0; i < copy.length; i++) {
+				if(copy[i].getVal()==carteUtili[0]||copy[i].getVal()==elim)
+					copy[i]=null;
+			}
+			for (int i = cMax[0]+cMax[1]; i < carteUtili.length; i++) {
+				for (int j = 0; j < copy.length; j++) {
+					if(copy[j]!=null){
+						carteUtili[i]=copy[j].getVal();
+						copy[j]=null;
+						break;
+					}
+				}
+			}
 		}
 		return cMax;
 	}//copie
@@ -86,14 +129,15 @@ public class Mano {
 		for(int i=0; i<c.length; i++){
 			copia[i]=c[i].getVal();
 		}
-		Arrays.sort(copia);
+		Arrays.sort(copia,0,7);
 		if(copia[0]==1) copia[7]=14;
 		for(int i=0; i<copia.length-1; i++){
-			if(copia[i+1] != 0)
-			if(copia[i]-copia[i+1]==-1) cont++;
-			else cont=0;
+			if(copia[i+1]-copia[i] != 0){
+				if(copia[i+1]-copia[i]==1) cont++;
+				else cont=0;
+			}
 			if(cont>=4){
-				cartaMax1 = copia[i];
+				carteUtili[0] = copia[i+1];
 				scala = true;
 			}
 		}
@@ -101,41 +145,63 @@ public class Mano {
 	}//scala
 		
 	private int calcolaVal() {
-		if(scala()&&colore())return val=SCALA_REALE;
-		if(copie()[0]==4)return val=POKER;
-		if(copie()[0]==3&&copie()[1]==2)return val=FULL; 
-		if(colore())return val=COLORE;
-		if(scala())return val=SCALA;
-		if(copie()[0]==3)return val=TRIS;
-		if(copie()[0]==2&&copie()[1]==2)return val=DOPPIA_COPPIA;
-		if(copie()[0]==2)return val=COPPIA;
+		boolean scala=scala();
+		boolean colore=colore();
+		int copie[]=copie();
+		if(scala&&colore&&scalaReale())return val=SCALA_REALE;
+		if(copie[0]==4)return val=POKER;
+		if(copie[0]==3&&copie[1]==2)return val=FULL; 
+		if(colore)return val=COLORE;
+		if(scala)return val=SCALA;
+		if(copie[0]==3)return val=TRIS;
+		if(copie[0]==2&&copie()[1]==2)return val=DOPPIA_COPPIA;
+		if(copie[0]==2)return val=COPPIA;
 		return val=CARTA_ALTA;		
 	}//calcolaVal
 	
-	public static void ManiMigliori(HashMap<Mano,Giocatore> mani){
+	private boolean scalaReale() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static LinkedList<Mano>  ManiMigliori(HashMap<Mano,Giocatore> mani){
 		Set<Mano> man=mani.keySet();
-		int tmp = 0;
-		int tmp2=0;
+		int tmp[]=new int[5];
 		//Mano Migliore=null;
 		for(Mano m:man){
-			if(m.cartaMax1 == 1) m.cartaMax1 = 14;
-			if(m.cartaMax1>tmp){//TODO rendere cartamax1 e cartaMax2 Carte
-				tmp=m.cartaMax1;		
-				//Migliore=m;
-			}
-			if(m.cartaMax2!=0){
-				if(m.cartaMax2>tmp){
-					tmp=m.cartaMax2;	
+			for(int i=0;i<m.carteUtili.length;i++){
+				if(m.carteUtili[i]>tmp[i]){
+					tmp=m.carteUtili;
+					break;
+				}
+				if(m.carteUtili[i]<tmp[i]){
+					if(m.carteUtili[i]==1){
+						tmp=m.carteUtili;
+					}
+					break;
 				}
 			}
+			/*if(m.carteUtili[0] == 1) m.carteUtili[0] = 14;
+			if(m.carteUtili[0]>=tmp){//TODO rendere cartamax1 e cartaMax2 Carte
+				tmp=m.carteUtili[0];		
+				//Migliore=m;
+				if(m.carteUtili[1]>tmp2){
+					tmp2=m.carteUtili[1];	
+				}
+			}*/
+			
 		}
 		LinkedList<Mano> maniPerdenti=new LinkedList<Mano>();
 		for(Mano m:man){
-			if(m.cartaMax1<tmp||m.cartaMax2<tmp2)maniPerdenti.add(m);
+			for(int i=0;i<m.carteUtili.length;i++){
+				if(m.carteUtili[i]<tmp[i])maniPerdenti.add(m);
+			}
+			
 		}
 		for(Mano m:maniPerdenti){
 			mani.remove(m);
 		}
+		return maniPerdenti;
 	}
 		
 }//Mano

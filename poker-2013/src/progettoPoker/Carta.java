@@ -32,8 +32,8 @@ public class Carta implements Comparable<Carta>,Serializable{
 	@Override
 	public int compareTo(Carta c) {
 		if((c.val==1)&&(this.getVal()==1)) return 0;
-		if(c.val==1)return 1;
-		if(this.getVal()==1)return -1;
+		if(c.val==1)return -1;
+		if(this.getVal()==1)return 1;
 		return this.getVal()-c.getVal();
 	}
 	public int getIndice(){
