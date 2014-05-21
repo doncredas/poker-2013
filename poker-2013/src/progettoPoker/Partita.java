@@ -43,7 +43,7 @@ public class Partita {
 	}
 	
 	private void eseguiClient() {
-		System.out.println(s.getInetAddress());
+		//System.out.println(s.getInetAddress());
 		//ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
 		Comando vecchio=null;
@@ -150,7 +150,7 @@ public class Partita {
 
 		switch(com.t1){
 		case NICK_NAME:
-			System.out.println(com.getGioc()+" "+com.getNickName());
+			//System.out.println(com.getGioc()+" "+com.getNickName());
 			for(int i=0;i<posGioc;i++){
 				gp.getGiocatore(i+1).setNome(com.getNickName()[i]);
 			}
