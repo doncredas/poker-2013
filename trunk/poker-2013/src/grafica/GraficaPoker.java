@@ -429,26 +429,17 @@ public class GraficaPoker extends JFrame {
 	 * @param numGioc
 	 * e setta anche Small Blind e Big Blind
 	 */
-	public static void setDealer(int numGioc){ //TODO aggiustare nel caso di gioc mancanti
+	public static void setDealer(int numGioc){ 
 		Dealer.setVisible(true);
-		/*
-		if(nGioc !=1)
-		   if((numGioc-1+nGioc)%nGioc==0)setSmallBlind(nGioc); //se il dealer è il gioc1
-		     else setSmallBlind((numGioc-1+nGioc)%nGioc);
 		
-		if(nGioc>2)
-		   if((numGioc-2+nGioc)%nGioc==0) setBigBlind(nGioc);
-		   else 
-			   setBigBlind((numGioc-2+nGioc)%nGioc);
-			  */
 		int sb=numGioc;
 		sb=getProsGioc(sb);
-		if(sb!=numGioc)
+		if(sb!=numGioc)            //setta lo smallBlind
 		    setSmallBlind(sb);
 		
 		int bb=sb;
 		bb=getProsGioc(bb);
-		if(bb!=numGioc && bb!= sb)
+		if(bb!=numGioc && bb!= sb)   //setta il bigBlind
 	 	    setBigBlind(bb);
 		
 		switch(numGioc)
@@ -725,7 +716,7 @@ public class GraficaPoker extends JFrame {
         //GIOCATORE 8
 
 
-		//TODO posizioni al mazzo
+		//POSIZIONI AL MAZZO
 
 		Gioc1Car1.setBounds(735,240,100,100);
 		Gioc1Car2.setBounds(735,240,100,100);
@@ -776,7 +767,7 @@ public class GraficaPoker extends JFrame {
 
 		
 		
-		setCursor(12); //3=caricam 12=mano //TODO
+		
 		// CHAT
 		ScrollChat.setBounds(927, 542, 290, 100);
 		ScrollChat.setWheelScrollingEnabled(true);
@@ -853,14 +844,6 @@ public class GraficaPoker extends JFrame {
 
 		GraficaPoker gp=new GraficaPoker(8);
 
-		//Thread orologio=new Thread(new Orologio());
-		//orologio.start();
-		Giocatori[1].setVisible(false);
-		Giocatori[7].setVisible(false);
-		Giocatori[6].setVisible(false);
-		Giocatori[5].setVisible(false);
-		
-		Giocatori[3].setVisible(false);
 		setDealer(3);
 		
 		Fiches.punta(1, 99999, gp,null);
@@ -871,12 +854,6 @@ public class GraficaPoker extends JFrame {
 		Fiches.punta(6, 99999, gp,null);
 		Fiches.punta(7, 99999, gp,null);
 		Fiches.punta(8, 99999, gp,null);
-		//Fiches.punta(3, 50, gp,f);
-		
-        
-		
-		
-		//Fiches.punta(1,20000, gp,f);
 		
 		gp.daiCarteGioc();
 
