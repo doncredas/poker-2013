@@ -105,7 +105,7 @@ public class GiocatoreGrafico
 		{
 		case 1:this.nome.setBounds(x+30,y,100,60);break;
 		case 2:this.nome.setBounds(x+28,y,100,60);break;
-		case 3:this.nome.setBounds(x+26,y,100,60);break;   //TODO TESTARE
+		case 3:this.nome.setBounds(x+26,y,100,60);break;   
 		case 4:this.nome.setBounds(x+24,y,100,60);break;
 		case 5:this.nome.setBounds(x+22,y,100,60);break;
 		case 6:this.nome.setBounds(x+20,y,100,60);break;
