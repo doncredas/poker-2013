@@ -410,7 +410,7 @@ public class GraficaPoker extends JFrame {
 	 */
 	public static int getProsGioc(int da){
 		da=da-2;
-		if(da==-1)da=7;
+		if(da==-1)da=nGioc-1;
 		//if(da==0)da=7;
 		while(da>=0){
 			
@@ -418,7 +418,7 @@ public class GraficaPoker extends JFrame {
 				return da+1;
 			da--;
 			if(da==-1){
-				da=7;
+				da=nGioc-1;
 			}
 			
 		}//while

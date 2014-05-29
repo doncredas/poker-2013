@@ -33,6 +33,7 @@ public class Dealer {
 	private Socket[] s; //array dei client da passare ai singoli giocatori
 	private ObjectOutputStream OOS[];
 	private int puntata;
+	private int puntataComune;
 	private Giocatore[]g;
 	private int []piatto;
 	private Carta[] carteComuni=new Carta[5];
@@ -187,16 +188,15 @@ public class Dealer {
 	}//mischia
 	
 	public void muoviDealer(){
-		boolean trovato=false;
-		for(int i=(posD+1)%nGiocatori; i==posD || !trovato ; i=(i+1)%nGiocatori){
+		for(int i=(posD+1)%nGiocatori; ; i=(i+1)%nGiocatori){
 			if(g[i].getFiches()>0){
 				posD=i;
-				trovato=true;
+				break;
 			}else 
 				if(g[i].getFineGiro()){
 					g[i].setFineGiro(false);
 					posD=i;
-					trovato=true;
+					break;
 				}
 		}//for				
 		nMano++;
@@ -247,7 +247,8 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntata=getGrandeBuio();
+		puntataComune=puntataComune+puntata;
+		puntata=0;
 	}//flop
 	
 	public void turn(ObjectOutputStream [] oos){
@@ -262,7 +263,9 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntata=getGrandeBuio();
+		puntataComune=puntataComune+puntata;
+		puntata=0;
+		
 	}//turn
 	
 	public void river(ObjectOutputStream [] oos){
@@ -277,7 +280,8 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntata=getGrandeBuio();
+		puntataComune=puntataComune+puntata;
+		puntata=0;
 	}//river
 	
 	public void fold(int gioc){
@@ -299,13 +303,14 @@ public class Dealer {
 	}
 
 	public void checkCall(int gioc){
-		if(g[gioc].getFiches()<puntata){
+		int daPuntare=puntata-(piatto[gioc]-puntataComune);
+		if(g[gioc].getFiches()<daPuntare){
 			piatto[gioc]+=g[gioc].getFiches();
 			g[gioc].setFiches(0);
 		}		
 		else{
-			g[gioc].setFiches(g[gioc].getFiches()-puntata);
-			piatto[gioc]+=puntata;
+			g[gioc].setFiches(g[gioc].getFiches()-daPuntare);
+			piatto[gioc]+=daPuntare;
 		}
 	}//checCall
 	
@@ -320,8 +325,7 @@ public class Dealer {
 	}
 
 	public int getGrandeBuio() {
-		// TODO Auto-generated method stub
-		return 0;
+		return piccoloBuio*2;
 	}
 
 	public void fineMano(ObjectOutputStream[] oOS) {
