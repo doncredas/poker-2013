@@ -18,7 +18,7 @@ public class GraficaPoker extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L; //TODO
-	public GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
+	public static GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
 	//public Socket s=null;
 	static Comando com=null;
 	static int nGioc=0;
@@ -372,6 +372,7 @@ public class GraficaPoker extends JFrame {
 	 * @param numGioc= numero del giocatore che deve avere SmallBlind
 	 */
 	public static void setSmallBlind(int numGioc){ //a sinistra del dealer
+		SB.setVisible(true);
 		switch(numGioc){
 		case 8: SB.setBounds(316,475,50,50);break;
 		case 7: SB.setBounds(198,302,50,50);break;
@@ -389,6 +390,7 @@ public class GraficaPoker extends JFrame {
 	 * @param numGioc= numero del giocatore che deve avere bigBlind
 	 */
 	public static void setBigBlind(int numGioc){ //a sinistra del smallBlind
+		BB.setVisible(true);
 		switch(numGioc){
 		case 8: BB.setBounds(316,475,50,50);break;
 		case 7: BB.setBounds(198,302,50,50);break;
@@ -400,13 +402,36 @@ public class GraficaPoker extends JFrame {
 		default: BB.setBounds(642,533,50,50);break;
 		}//switch
 	}
+	
+	/**
+	 * Restituisce l'indice del prossimo giocatore visibile
+	 * @param da
+	 * @return
+	 */
+	public static int getProsGioc(int da){
+		da=da-2;
+		if(da==-1)da=7;
+		//if(da==0)da=7;
+		while(da>=0){
+			
+			if(Giocatori[da].isVisible())
+				return da+1;
+			da--;
+			if(da==-1){
+				da=7;
+			}
+			
+		}//while
+		return -1;
+	}
 	/**
 	 * setta il dealer (graficamente) al numero del giocatore che gli viene passato
 	 * @param numGioc
 	 * e setta anche Small Blind e Big Blind
 	 */
 	public static void setDealer(int numGioc){ //TODO aggiustare nel caso di gioc mancanti
-		
+		Dealer.setVisible(true);
+		/*
 		if(nGioc !=1)
 		   if((numGioc-1+nGioc)%nGioc==0)setSmallBlind(nGioc); //se il dealer è il gioc1
 		     else setSmallBlind((numGioc-1+nGioc)%nGioc);
@@ -415,7 +440,17 @@ public class GraficaPoker extends JFrame {
 		   if((numGioc-2+nGioc)%nGioc==0) setBigBlind(nGioc);
 		   else 
 			   setBigBlind((numGioc-2+nGioc)%nGioc);
-			  
+			  */
+		int sb=numGioc;
+		sb=getProsGioc(sb);
+		if(sb!=numGioc)
+		    setSmallBlind(sb);
+		
+		int bb=sb;
+		bb=getProsGioc(bb);
+		if(bb!=numGioc && bb!= sb)
+	 	    setBigBlind(bb);
+		
 		switch(numGioc)
 		{
 		case 1:Dealer.setBounds(642,533,50,50);break;
@@ -820,7 +855,13 @@ public class GraficaPoker extends JFrame {
 
 		//Thread orologio=new Thread(new Orologio());
 		//orologio.start();
-		setDealer(1);
+		Giocatori[1].setVisible(false);
+		Giocatori[7].setVisible(false);
+		Giocatori[6].setVisible(false);
+		Giocatori[5].setVisible(false);
+		
+		Giocatori[3].setVisible(false);
+		setDealer(3);
 		
 		Fiches.punta(1, 99999, gp,null);
 		Fiches.punta(2, 99999, gp,null);
