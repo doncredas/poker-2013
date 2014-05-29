@@ -2,14 +2,7 @@ package grafica;
 
 import javax.swing.JLabel;
 
-//TODO PROBLEMI:
-/*
- *1)Se una puntata è massima (99999) la ripuntata mette soltanto le nuove fiches
- *2)Le fiches vanno aggiunte al componente con il numero esatto
- *3)La puntata del gioc 5 ha l'ultima fiches che parte da sinistra
- *4)Nella puntata del gioc 4,l'ultima fiches si sposta a sinistra quando finisce
- *  la puntata
- */
+
 public class Fiches {
 	private int quanto;
 	private JLabel chip1 = new JLabel(), chip2 = new JLabel(),
@@ -31,7 +24,7 @@ public class Fiches {
 			chip3.setBounds(555, 505, 100, 100);
 			chip4.setBounds(585, 505, 100, 100);
 			chip5.setBounds(615, 505, 100, 100);
-			chip6.setBounds(645,505,100,100);   //TODO
+			chip6.setBounds(645,505,100,100);   
 			break;
 		case 2:
 			chip1.setBounds(820, 445, 100, 100);
@@ -39,7 +32,7 @@ public class Fiches {
 			chip3.setBounds(880, 445, 100, 100);
 			chip4.setBounds(910, 445, 100, 100);
 			chip5.setBounds(940, 445, 100, 100);
-			chip6.setBounds(970,445,100,100);   //TODO
+			chip6.setBounds(970,445,100,100);   
 			break;
 		case 3:
 			chip1.setBounds(940, 270, 100, 100);
@@ -47,7 +40,7 @@ public class Fiches {
 			chip3.setBounds(1000, 270, 100, 100);
 			chip4.setBounds(1030, 270, 100, 100);
 			chip5.setBounds(1060, 270, 100, 100);
-			chip6.setBounds(1090,270,100,100);   //TODO
+			chip6.setBounds(1090,270,100,100);   
 			break;
 		case 4:
 			chip1.setBounds(820, 100, 100, 100);
@@ -55,7 +48,7 @@ public class Fiches {
 			chip3.setBounds(880, 100, 100, 100);
 			chip4.setBounds(910, 100, 100, 100);
 			chip5.setBounds(940, 100, 100, 100);
-			chip6.setBounds(970,100,100,100);   //TODO
+			chip6.setBounds(970,100,100,100);   
 			break;
 		case 5:
 			chip1.setBounds(610, 45, 100, 100);
@@ -63,7 +56,7 @@ public class Fiches {
 			chip3.setBounds(550, 45, 100, 100);
 			chip4.setBounds(520, 45, 100, 100);
 			chip5.setBounds(490, 45, 100, 100);
-			chip6.setBounds(460,45,100,100);   //TODO
+			chip6.setBounds(460,45,100,100);   
 			break;
 		case 6:
 			chip1.setBounds(290, 100, 100, 100);
@@ -71,7 +64,7 @@ public class Fiches {
 			chip3.setBounds(230, 100, 100, 100);
 			chip4.setBounds(200, 100, 100, 100);
 			chip5.setBounds(170, 100, 100, 100);
-			chip6.setBounds(140,100,100,100);   //TODO
+			chip6.setBounds(140,100,100,100);   
 			break;
 		case 7:
 			chip1.setBounds(200, 290, 100, 100);
@@ -79,7 +72,7 @@ public class Fiches {
 			chip3.setBounds(140, 290, 100, 100);
 			chip4.setBounds(110, 290, 100, 100);
 			chip5.setBounds(80, 290, 100, 100);
-			chip6.setBounds(50,290,100,100);   //TODO
+			chip6.setBounds(50,290,100,100);   
 			break;
 		case 8:
 			chip1.setBounds(170, 445, 100, 100);
@@ -87,7 +80,7 @@ public class Fiches {
 			chip3.setBounds(230, 445, 100, 100);
 			chip4.setBounds(260, 445, 100, 100);
 			chip5.setBounds(290, 445, 100, 100);
-			chip6.setBounds(320,445,100,100);   //TODO
+			chip6.setBounds(320,445,100,100);   
 			break;
 
 		}// switch 1
