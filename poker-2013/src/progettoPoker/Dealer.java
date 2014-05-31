@@ -209,29 +209,32 @@ public class Dealer {
 	public void daiCarte(GraficaPoker gp){		
 		int j = (posD+1)%nGiocatori;
 		do{	
+			if(j==0){
+				g[j].setCartaDealer1(mazzo[primaCarta], gp);
+				primaCarta--;
+				j=(j+1)%nGiocatori;
+			}else
 			if(g[j].getFiches()>0){
 				g[j].setCarta1(mazzo[primaCarta]);
 				primaCarta--;
 				j=(j+1)%nGiocatori;
 			}
-			if(j==posD){
-				g[j].setCartaDealer1(mazzo[primaCarta], gp);
-				primaCarta--;
-			}
-		}while( j != posD);
+			
+		}while( j != (posD+1)%nGiocatori);
 
 		int i = (posD+1)%nGiocatori;
 		do{	
-			if(g[i].getFiches()>0){
+			if(i==0){
+				g[i].setCartaDealer2(mazzo[primaCarta], gp);
+				primaCarta--;
+				i=(i+1)%nGiocatori;
+			}else
+				if(g[i].getFiches()>0){
 				g[i].setCarta2(mazzo[primaCarta]);
 				primaCarta--;
 				i=(i+1)%nGiocatori;
 			}	
-			if(i==posD){
-				g[i].setCartaDealer2(mazzo[primaCarta], gp);
-				primaCarta--;
-			}
-		}while( i != posD);
+		}while( i != (posD+1)%nGiocatori);
 	}//daiCarte
 	
 	public void flop(ObjectOutputStream [] oos){
