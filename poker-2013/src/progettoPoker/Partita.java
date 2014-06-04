@@ -91,21 +91,21 @@ public class Partita {
 					if(com.dealer[i]!=0){
 						if(com.dealer[i]-1<posGioc){
 							switch(i){
-							case 0:GraficaPoker.setDealer(com.dealer[0]+1);break;
+							case 0:GraficaPoker.setDealer(com.dealer[i]+1);break;
 							case 1:GraficaPoker.setSmallBlind(com.dealer[i]+1);break;
 							case 2:GraficaPoker.setBigBlind(com.dealer[i]+1);
 							}
 						}else
 							if(com.dealer[i]-1==posGioc){
 								switch(i){                        
-								case 0:GraficaPoker.setDealer(1);
-								case 1:GraficaPoker.setSmallBlind(1);
+								case 0:GraficaPoker.setDealer(1);break;
+								case 1:GraficaPoker.setSmallBlind(1);break;
 								case 2:GraficaPoker.setBigBlind(1);
 								}                             
 						}else
 							switch(i){                        
-							case 0:GraficaPoker.setDealer(com.dealer[i]);
-							case 1:GraficaPoker.setSmallBlind(com.dealer[i]);
+							case 0:GraficaPoker.setDealer(com.dealer[i]);break;
+							case 1:GraficaPoker.setSmallBlind(com.dealer[i]);break;
 							case 2:GraficaPoker.setBigBlind(com.dealer[i]);
 							}
 					}
@@ -306,6 +306,7 @@ public class Partita {
 		int primoGiocatore=0;
 		while(true){
 			gp.reset();
+			d.eliminati();
 			gp.resetGioc(d);
 			d.mischia();
 			d.daiCarte(gp);
@@ -483,7 +484,7 @@ public class Partita {
 
 	private void resetRimanenti(boolean[] rimanenti) {
 		for (int i = 0; i < rimanenti.length; i++) {
-			if(rimanenti[i]==false)gp.getGiocatore(i).setVisible(false);
+			if(!rimanenti[i])gp.getGiocatore(i).setVisible(false);
 		}
 		Comando delete=new Comando(Tipo.NOTIFICA,Tipo.FINE_MANO,rimanenti);
 		inviaComando(delete);
