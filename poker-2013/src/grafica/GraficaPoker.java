@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import progettoPoker.Carta;
 import progettoPoker.Comando;
+import progettoPoker.Dealer;
 
 
 
@@ -19,6 +20,10 @@ public class GraficaPoker extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L; //TODO
 	public static GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
+	public static int getnGioc() {
+		return nGioc;
+	}
+
 	//public Socket s=null;
 	static Comando com=null;
 	static int nGioc=0;
@@ -164,12 +169,18 @@ public class GraficaPoker extends JFrame {
 	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
 
 	/**
-	 * Setta il minimo/massimo della barra del raise
+	 * Setta il minimo della barra del raise
 	 * @param min: minimo da cui iniziare
+	 */
+	public void setMinBar(int min){
+		BarRaise.setMinimum(min);
+	}
+
+	/**
+	 * Setta il massimo della barra del raise
 	 * @param max: massimo della puntata
 	 */
-	public void setMinMaxBar(int min,int max){
-		BarRaise.setMinimum(min);
+	public void setMaxBar(int max){
 		BarRaise.setMaximum(max);
 	}
 	/**Scrive un messaggio in chat
@@ -364,6 +375,7 @@ public class GraficaPoker extends JFrame {
 	public void rimuoviComp(JComponent jc){
 	
 		principale.add(jc);
+		jc.validate();
 	
 	}
 
@@ -409,7 +421,7 @@ public class GraficaPoker extends JFrame {
 	 * @return
 	 */
 	public static int getProsGioc(int da){
-		da=da-2;
+		/*da=da-2;
 		if(da==-1)da=nGioc-1;
 		//if(da==0)da=7;
 		while(da>=0){
@@ -422,25 +434,33 @@ public class GraficaPoker extends JFrame {
 			}
 			
 		}//while
-		return -1;
+		return -1;*/
+		da=da%nGioc;
+		while(!Giocatori[da].isVisible())
+			da=(da+1)%nGioc;
+		return da+1;
 	}
 	/**
 	 * setta il dealer (graficamente) al numero del giocatore che gli viene passato
 	 * @param numGioc
 	 * e setta anche Small Blind e Big Blind
+	 * @return 
 	 */
-	public static void setDealer(int numGioc){ 
+	public static int[] setDealer(int numGioc){ 
 		Dealer.setVisible(true);
 		
 		int sb=numGioc;
 		sb=getProsGioc(sb);
 		if(sb!=numGioc)            //setta lo smallBlind
 		    setSmallBlind(sb);
+		else
+			sb=0;
 		
 		int bb=sb;
 		bb=getProsGioc(bb);
 		if(bb!=numGioc && bb!= sb)   //setta il bigBlind
 	 	    setBigBlind(bb);
+		else bb=0;
 		
 		switch(numGioc)
 		{
@@ -453,6 +473,8 @@ public class GraficaPoker extends JFrame {
 		case 7:Dealer.setBounds(198,302,50,50);break;
 		default: Dealer.setBounds(316,475,50,50);break;
 		}
+		int indici[]={numGioc,sb,bb};
+		return indici;
 	}//setDealer
 	
 	public GraficaPoker(int numGioc) {
@@ -762,8 +784,8 @@ public class GraficaPoker extends JFrame {
 		ConsRaise.setBounds(602,640,55,20);
 		ConsRaise.setText(new Integer(BarRaise.getValue()).toString());
 		
-		BarRaise.setMinimum(50);  //TODO SETTARE VAL INIZIALE BAR
-		BarRaise.setMaximum(10010);  //SETTA IL MASSIMO
+		BarRaise.setMinimum(200);  //TODO SETTARE VAL INIZIALE BAR
+		BarRaise.setMaximum(10000);  //SETTA IL MASSIMO
 
 		
 		
@@ -832,6 +854,8 @@ public class GraficaPoker extends JFrame {
 
 		// sfondo va inserito per ultimo
 
+		disableBottoni(true);
+		
 		this.setVisible(true);
 	}
 
@@ -859,6 +883,20 @@ public class GraficaPoker extends JFrame {
 
 		
 	}// main
+
+	public void resetGioc(Dealer d) {
+		for(int i=0;i<nGioc;i++){
+			Giocatori[i].setVisible(d.getG()[i].getInGioco());
+		}
+		
+	}
+	
+	public void setAttivo(int index){
+		for(int i=0;i<nGioc;i++)
+			Giocatori[i].setAttivo(false);
+		if(index!=-1)
+		Giocatori[index].setAttivo(true);
+	}
 	
 
 }// GraficaPoker

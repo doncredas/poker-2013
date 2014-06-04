@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -20,7 +21,6 @@ import progettoPoker.Comando.Tipo;
 public class Dealer {
 	private int tempoBui=600;
 	private double incrementoBui=2;
-	private int buioPosizione;//indica il giocatore che dovrà pagare il piccolo buio
 	private int nMano=0;//a che mano siamo
 	private int posD=0;
 	private int nGiocatori=0;
@@ -66,9 +66,7 @@ public class Dealer {
 			else{mazzo[i]=new Carta((i%13)+1,'p');}
 		}
 		piccoloBuio=fiches/100;
-		puntata=piccoloBuio*2;
 
-		buioPosizione=1;
 		//this.incrementoBui=incrementoBui;
 		//this.tempoBui=tempoBui;
 		c=new Cronometro();
@@ -78,10 +76,6 @@ public class Dealer {
 	
 	public ObjectOutputStream[] getOOS() {
 		return OOS;
-	}
-
-	public int getPiccoloBuio(){
-		return buioPosizione;
 	}
 	
 	public int getValBuio(){
@@ -103,8 +97,10 @@ public class Dealer {
 			if(g[i].getInGioco()){
 				mani.put(new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2()), g[i]);
 				unico[0]=g[i];
-			}else
+			}else{
 				perd[index]=g[i];
+				index++;
+			}
 		}		
 		if(mani.size()>1){
 		int manoMigliore=0;
@@ -156,7 +152,6 @@ public class Dealer {
 			vincenti.add(unico);
 		}
 		vincenti.add(perd);
-		System.out.println(1);
 		return vincenti;
 		
 	}//vincitoreMano
@@ -235,6 +230,9 @@ public class Dealer {
 				i=(i+1)%nGiocatori;
 			}	
 		}while( i != (posD+1)%nGiocatori);
+
+		puntata=piccoloBuio*2;
+		puntataComune=0;
 	}//daiCarte
 	
 	public void flop(ObjectOutputStream [] oos){
@@ -288,20 +286,26 @@ public class Dealer {
 	}//river
 	
 	public void fold(int gioc){
-		if(buioPosizione==gioc){
+		if(posPiccoloBuio()==gioc&&piatto[gioc]==0){
 			g[gioc].setFiches(g[gioc].getFiches()-piccoloBuio);
 			piatto[gioc]+=piccoloBuio;
 		}
-		if(gioc==posGrandeBuio()){
+		if(gioc==posGrandeBuio()&&piatto[gioc]==0){
 			g[gioc].setFiches(g[gioc].getFiches()-piccoloBuio*2);
 			piatto[gioc]+=piccoloBuio*2;
 		}
 		g[gioc].setInGioco(false);
 	}//fold
 	
+	public int posPiccoloBuio() {
+		int i=(posD+1)%nGiocatori;
+		while(!g[i].getInGioco()&&g[i].getFiches()==0){i=(i+1)%nGiocatori;}
+		return i;
+	}
+	
 	public int posGrandeBuio() {
-		int i=(buioPosizione+1)%nGiocatori;
-		while(!g[i].getInGioco()){i=(i+1)%nGiocatori;}
+		int i=(posPiccoloBuio()+1)%nGiocatori;
+		while(!g[i].getInGioco()&&g[i].getFiches()==0){i=(i+1)%nGiocatori;}
 		return i;
 	}
 
@@ -315,13 +319,13 @@ public class Dealer {
 			g[gioc].setFiches(g[gioc].getFiches()-daPuntare);
 			piatto[gioc]+=daPuntare;
 		}
-	}//checCall
+	}//checkCall
 	
 	public void raise(int gioc, int fiches){
 		g[gioc].setFiches(g[gioc].getFiches()-fiches);
 		piatto[gioc]+=fiches;
 		puntata=fiches;
-	}//rais
+	}//raise
 	
 	public int getPuntata(){
 		return puntata;
@@ -330,6 +334,20 @@ public class Dealer {
 	public int getGrandeBuio() {
 		return piccoloBuio*2;
 	}
+	
+	private class ComparatorPiatto<T> implements java.util.Comparator<T>{
+
+		@Override
+		public int compare(T o1, T o2) {
+			if(!(o1 instanceof Giocatore)||!(o1 instanceof Giocatore)){
+				throw new ClassCastException();
+			}
+			Giocatore g1=(Giocatore)o1;
+			Giocatore g2=(Giocatore)o2;
+			return piatto[g1.indice]-piatto[g2.indice];
+		}
+		
+	}
 
 	public void fineMano(ObjectOutputStream[] oOS) {
 		LinkedList<Giocatore []> vincitori=vincitoreMano();
@@ -337,24 +355,24 @@ public class Dealer {
 		int quota=0;
 		int vincita=0;
 		int valPiatto=0;
-		int quotaRiscossa=0;
-		int quotaRiscossaTmp=0;
+		int piattoTmp[]=Arrays.copyOf(piatto, piatto.length);
 		Giocatore[] vinc;
-		for(int i=0;i<piatto.length;i++){
-			valPiatto+=piatto[i];
-		}
+		valPiatto=getValPiatto();
 		while(valPiatto>0/*&&!vincitori.isEmpty()*/){
-		quotaRiscossaTmp=0;
 		vinc=vincitori.remove();
+		Arrays.sort(vinc, new ComparatorPiatto<Giocatore>());
 		for(int i=0;i<vinc.length;i++){
 			vincita=0;
-			quota=(piatto[vinc[i].indice]/vinc.length)-quotaRiscossa;
-			quotaRiscossaTmp+=quota;
+			quota=(piatto[vinc[i].indice]/(vinc.length-i));
 			for (int j = 0; j < g.length; j++) {
-				if(piatto[j]/vinc.length<quota)
-					vincita+=piatto[j]/vinc.length;
-				else
+				if(piattoTmp[j]/vinc.length<quota){
+					vincita+=piattoTmp[j]/(vinc.length-i);
+					piattoTmp[j]-=piattoTmp[j]/(vinc.length-i);
+				}
+				else{
 					vincita+=quota;
+					piattoTmp[j]-=quota;
+				}
 			}
 			valPiatto-=vincita;
 			vin=new Comando(null,vinc[i].getFiches()+vincita);
@@ -368,13 +386,13 @@ public class Dealer {
 				}
 			}else{
 				//getG()[0].setFiches(getG()[0].getFiches()+vincita);
-				System.out.println("vittoria del server");
 			}
 			piatto[vinc[i].indice]=0;
 		}
-		quotaRiscossa+=quotaRiscossaTmp;
+		for (int i = 0; i < piattoTmp.length; i++) {
+			piatto[i]=piattoTmp[i];
 		}
-		System.out.println(2);
+		}
 		//for(int i=0;i<piatto.length;i++)piatto[i]=0;
 		muoviDealer();
 		for (int i = 0; i < g.length; i++) {
@@ -395,6 +413,14 @@ public class Dealer {
 		}
 		return rimanenti;
 		
+	}
+
+	public int getValPiatto() {
+		int val=0;
+		for (int i = 0; i < piatto.length; i++) {
+			val+=piatto[i];
+		}
+		return val;
 	}
 	
 }//Dealer
