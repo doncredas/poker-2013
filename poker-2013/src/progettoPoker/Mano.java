@@ -16,8 +16,10 @@ public class Mano {
 	final int DOPPIA_COPPIA=3;
 	final int COPPIA=2;
 	final int CARTA_ALTA=1;
-	int [] carteUtili=new int[5];
-	Carta[] c=new Carta[7];
+	static char seme='n';
+	static int [] carteUtili=new int[5];
+	static Carta[] c=new Carta[7];
+	
 	int val=0;
 	
 	Mano(Carta[]c,Carta c1,Carta c2){
@@ -39,7 +41,6 @@ public class Mano {
 		int q=0;
 		int f=0;
 		int p=0;
-		char seme='n';
 		for(int i=0;i<7;i++){
 			switch(this.c[i].getPalo()){
 			case'c':c++;break;
@@ -173,11 +174,30 @@ public class Mano {
 		return val=CARTA_ALTA;		
 	}//calcolaVal
 	
-	private boolean scalaReale() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	private static boolean scalaReale() {
+		int [] copia = new int [8];
+		int cont=0;
+		for(int i=0; i<copia.length; i++)
+			copia[i]=0;		
+		for(int i=0; i<c.length; i++){
+			if(seme==c[i].getPalo())
+				copia[i]=c[i].getVal();
+		}
+		Arrays.sort(copia,0,7);
+		if(copia[0]==1 || copia[1]==1 || copia[2]==1) copia[7]=14;
+		
+		for(int i=0; i<copia.length-1; i++){
+			if(copia[i]==0) continue;
+			if(copia[i+1]-copia[i]==1) cont++;
+				else cont=0;
+			if(cont>=4)
+				return true;
+		}
+		
+		return false;			
+	}//
+	
+	
 	public static LinkedList<Mano>  ManiMigliori(HashMap<Mano,Giocatore> mani){
 		Set<Mano> man=mani.keySet();
 		int tmp[]=new int[5];
