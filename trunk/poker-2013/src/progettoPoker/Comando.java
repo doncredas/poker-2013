@@ -2,7 +2,6 @@ package progettoPoker;
 
 import java.io.Serializable;
 
-import progettoPoker.Comando.Tipo;
 
 public class Comando implements Serializable {
 	
@@ -12,10 +11,10 @@ public class Comando implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4387454705887783423L;
-	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME,GIOCATORI,FINE_MANO};
+	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME,GIOCATORI,FINE_MANO,DISCONNESSIONE,GAME_OVER};
 	Carta c;
 	Carta[] car=new Carta[3];
-	int fiches;
+	int fiches=-1;
 	int gioc;  //numero giocatori totali o giocatore corrente
 	int giocN; //posizione giocatore corrente
 	Tipo t;
@@ -23,7 +22,39 @@ public class Comando implements Serializable {
 	String [] nickName;
 	String nick;
 	boolean[] rimanenti;
+	int valPiatto=-1;
+	int puntata=-1;
+	int fichesGioc[];
+	int dealer[]=null;
 	
+	public int getValPiatto() {
+		return valPiatto;
+	}
+
+	public void setValPiatto(int valPiatto) {
+		this.valPiatto = valPiatto;
+	}
+
+	public int getPuntata() {
+		return puntata;
+	}
+
+	public void setPuntata(int puntata) {
+		this.puntata = puntata;
+	}
+	
+	public void setDealer(int[] dealer) {
+		this.dealer = dealer;
+	}
+
+	public int[] getFichesGioc() {
+		return fichesGioc;
+	}
+
+	public void setFichesGioc(int[] fichesGioc) {
+		this.fichesGioc = fichesGioc;
+	}
+
 	public Comando(Tipo nickName, String name){
 		this.t = nickName;
 		this.nick = name;

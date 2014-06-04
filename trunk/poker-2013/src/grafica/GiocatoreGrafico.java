@@ -46,6 +46,10 @@ public class GiocatoreGrafico
 				
 	}
 	
+	public int getFichesVal() {
+		return Integer.parseInt(fiches.getText());
+	}
+	
 	/**
 	 * Se settato a  true fa comparire etichetta,
 	 * nome,fiches,e carte di un giocatore genericamente inizializzate.
@@ -71,16 +75,6 @@ public class GiocatoreGrafico
 		this.carta2.setVisible(!flag);
 	
 	}//setFold
-	
-	public void elimina()
-	{
-		this.etichetta.setVisible(false);
-		this.nome.setVisible(false);
-		this.fiches.setVisible(false);
-		this.carta1.setVisible(false);
-		this.carta2.setVisible(false);
-	
-	}//setFold	
 	
 	/**
 	 * Setta le fiches del giocatore,e nel caso in cui
