@@ -421,20 +421,6 @@ public class GraficaPoker extends JFrame {
 	 * @return
 	 */
 	public static int getProsGioc(int da){
-		/*da=da-2;
-		if(da==-1)da=nGioc-1;
-		//if(da==0)da=7;
-		while(da>=0){
-			
-			if(Giocatori[da].isVisible())
-				return da+1;
-			da--;
-			if(da==-1){
-				da=nGioc-1;
-			}
-			
-		}//while
-		return -1;*/
 		da=da%nGioc;
 		while(!Giocatori[da].isVisible())
 			da=(da+1)%nGioc;
@@ -867,8 +853,16 @@ public class GraficaPoker extends JFrame {
 	public static void main(String[] args) {
 
 		GraficaPoker gp=new GraficaPoker(8);
-
-		setDealer(3);
+		/*Giocatori[1].setVisible(false);
+		Giocatori[2].setVisible(false);
+		Giocatori[3].setVisible(false);
+		Giocatori[4].setVisible(false);
+		Giocatori[5].setVisible(false);
+		Giocatori[6].setVisible(false);
+		Giocatori[7].setVisible(false);
+		setDealer(1);*/
+		
+		
 		
 		Fiches.punta(1, 99999, gp,null);
 		Fiches.punta(2, 99999, gp,null);

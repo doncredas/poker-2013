@@ -422,5 +422,11 @@ public class Dealer {
 		}
 		return val;
 	}
+
+	public void eliminati() {
+		for(int i=0;i<g.length;i++)
+			if(g[i].getFiches()==0)
+				g[i].setInGioco(false);		
+	}
 	
 }//Dealer
