@@ -129,6 +129,12 @@ public class Partita {
 			if(gp.getGiocatore(0).getFichesVal()!=0){
 				this.gp.disableBottoni(false);
 				while(risp==null){
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					risp=this.gp.getComando();
 				}if(altriAllIn()&&azioneRegistrata){
 					risp=azioneAllIn;
@@ -212,6 +218,8 @@ public class Partita {
 			break;
 		case NOTIFICA:
 			eseguiNotifica(com);
+		default:
+			break;
 		}
 		
 		return risp;
@@ -273,6 +281,8 @@ public class Partita {
 					gp.getGiocatore(0).setVisible(false); 
 				else
 					gp.getGiocatore(com.getGioc()).setVisible(false);
+			break;
+		default:
 			break;
 		}
 		
@@ -341,6 +351,12 @@ public class Partita {
 								gp.disableBottoni(false);
 								gp.resetComando();
 								while(risp==null&&cron.getSecondi()<tempo){
+									try {
+										Thread.sleep(200);
+									} catch (InterruptedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 									risp=gp.getComando();
 								}
 							}else
@@ -422,7 +438,7 @@ public class Partita {
 		c=new Comando(Tipo.NICK_NAME);
 		Comando vecchioRisp=null;
 		boolean ok=true;
-		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname (server)", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 		d.getG()[0].setNickName(nick);
 		GraficaPoker.Giocatori[0].setNome(nick);
 		for (int i = 0; i < OOS.length; i++) {
@@ -444,13 +460,14 @@ public class Partita {
 			vecchioRisp=risp;
 			for (int j = 0; j <= i; j++) {
 				if(d.getG()[j].getNickName().equals(risp.getNick())){//TODO sistemare il caso di nick uguali
-					ok=false;
+					c=new Comando(Tipo.NICK_NAME);
 					try {
 						OOS[i].writeObject(c);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					i--;
+					i--;			
+					ok=false;
 					break;
 				}
 			}
