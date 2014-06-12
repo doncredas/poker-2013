@@ -383,7 +383,10 @@ public class GraficaPoker extends JFrame {
 	 * @param numGioc= numero del giocatore che deve avere SmallBlind
 	 */
 	public static void setSmallBlind(int numGioc){ //a sinistra del dealer
-		SB.setVisible(true);
+		if(numGioc!=0)
+			SB.setVisible(true);
+			else
+				SB.setVisible(false);
 		switch(numGioc){
 		case 8: SB.setBounds(316,475,50,50);break;
 		case 7: SB.setBounds(198,302,50,50);break;
@@ -392,7 +395,7 @@ public class GraficaPoker extends JFrame {
 		case 4: SB.setBounds(972,130,50,50);break;
 		case 3: SB.setBounds(1087,301,50,50);break;
 		case 2: SB.setBounds(972,475,50,50);break;
-		default: SB.setBounds(642,533,50,50);break;
+		case 1: SB.setBounds(642,533,50,50);break;
 		}//switch
 	}//setSmallBlind
 	
@@ -401,7 +404,10 @@ public class GraficaPoker extends JFrame {
 	 * @param numGioc= numero del giocatore che deve avere bigBlind
 	 */
 	public static void setBigBlind(int numGioc){ //a sinistra del smallBlind
+		if(numGioc!=0)
 		BB.setVisible(true);
+		else
+			BB.setVisible(false);
 		switch(numGioc){
 		case 8: BB.setBounds(316,475,50,50);break;
 		case 7: BB.setBounds(198,302,50,50);break;
@@ -410,7 +416,7 @@ public class GraficaPoker extends JFrame {
 		case 4: BB.setBounds(972,130,50,50);break;
 		case 3: BB.setBounds(1087,301,50,50);break;
 		case 2: BB.setBounds(972,475,50,50);break;
-		default: BB.setBounds(642,533,50,50);break;
+		case 1: BB.setBounds(642,533,50,50);break;
 		}//switch
 	}
 	
@@ -436,16 +442,16 @@ public class GraficaPoker extends JFrame {
 		
 		int sb=numGioc;
 		sb=getProsGioc(sb);
-		if(sb!=numGioc)            //setta lo smallBlind
-		    setSmallBlind(sb);
-		else
+		if(sb==numGioc)            //setta lo smallBlind
 			sb=0;
+		setSmallBlind(sb);
 		
 		int bb=sb;
 		bb=getProsGioc(bb);
-		if(bb!=numGioc && bb!= sb)   //setta il bigBlind
-	 	    setBigBlind(bb);
-		else bb=0;
+		if(bb==numGioc || bb== sb)   //setta il bigBlind
+			bb=0;    
+		setBigBlind(bb);
+		
 		
 		switch(numGioc)
 		{
