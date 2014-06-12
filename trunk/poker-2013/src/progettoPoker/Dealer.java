@@ -235,12 +235,13 @@ public class Dealer {
 		puntataComune=0;
 	}//daiCarte
 	
-	public void flop(ObjectOutputStream [] oos){
+	public void flop(ObjectOutputStream [] oos, boolean disconnessi[]){
 		primaCarta--;
 		for(int i=0;i<3;i++, primaCarta--)
 			carteComuni[i]=mazzo[primaCarta];
 		Comando c=new Comando(Tipo.DAI_CARTA, Arrays.copyOf(carteComuni, 3) );
 		for(int i=0; i<oos.length; i++){
+			if(!disconnessi[i+1])
 			try {
 				oos[i].writeObject(c);
 			} catch (IOException e) {
@@ -252,11 +253,12 @@ public class Dealer {
 		puntata=0;
 	}//flop
 	
-	public void turn(ObjectOutputStream [] oos){
+	public void turn(ObjectOutputStream [] oos, boolean disconnessi[]){
 		primaCarta--;
 		carteComuni[3]=mazzo[primaCarta];
 		Comando c=new Comando(Tipo.DAI_CARTA, carteComuni[3] );
 		for(int i=0; i<oos.length; i++){
+			if(!disconnessi[i+1])
 			try {
 				oos[i].writeObject(c);
 			} catch (IOException e) {
@@ -269,11 +271,12 @@ public class Dealer {
 		
 	}//turn
 	
-	public void river(ObjectOutputStream [] oos){
+	public void river(ObjectOutputStream [] oos, boolean disconnessi[]){
 		primaCarta--;
 		carteComuni[4]=mazzo[primaCarta];
 		Comando c=new Comando(Tipo.DAI_CARTA, carteComuni[4] );
 		for(int i=0; i<oos.length; i++){
+			if(!disconnessi[i+1])
 			try {
 				oos[i].writeObject(c);
 			} catch (IOException e) {

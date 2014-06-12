@@ -129,4 +129,8 @@ public class Giocatore {
 		gp.Giocatori[0].setCarte(carta, 2);
 	}
 
+	public void disconnetti() {
+		OOS=null;
+	}
+
 }
