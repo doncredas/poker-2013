@@ -110,6 +110,23 @@ public class Comando implements Serializable {
 		this.rimanenti=rimanenti;
 	}
 
+	public Comando(Comando c2,String s) {
+		this.c=c2.c;
+		this.car=c2.car;
+		this.fiches=c2.fiches;
+		this.gioc=c2.gioc;  
+		this.giocN=c2.giocN; 
+		this.t=c2.t;
+		this.t1=c2.t1;
+		this.nickName=c2.nickName;
+		this.nick=c2.nick;
+		this.rimanenti=c2.rimanenti;
+		this.valPiatto=c2.valPiatto;
+		this.puntata=c2.puntata;
+		this.fichesGioc=c2.fichesGioc;
+		this.dealer=c2.dealer;
+	}
+
 	public String getNick(){
 		return nick;
 	}
