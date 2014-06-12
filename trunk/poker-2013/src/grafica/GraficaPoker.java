@@ -172,7 +172,9 @@ public class GraficaPoker extends JFrame {
 	 * @param min: minimo da cui iniziare
 	 */
 	public void setMinBar(int min){
-		BarRaise.setMinimum(min);
+		if(min>BarRaise.getMaximum())
+		    BarRaise.setMinimum(BarRaise.getMaximum());
+		else BarRaise.setMinimum(min);
 	}
 
 	/**
