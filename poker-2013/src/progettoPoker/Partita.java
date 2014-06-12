@@ -31,7 +31,8 @@ public class Partita {
 	private int posGioc=0; //posizione del giocatore che si vede centrale rispetto al server
 	private Comando c=null;
 	private Comando risp=null;
-
+	private boolean disconnessi[]=null;
+	
 	public Partita(Socket client)  {
 		this.s=client;
 		try {
@@ -280,6 +281,7 @@ public class Partita {
 	public Partita(Dealer d)  {
 		//this.ss=ss;
 		gp=new GraficaPoker(d.getG().length);
+		disconnessi=new boolean[d.getG().length];
 		/*try {
 			ServerT chat=new ServerT(d.getS().length-1,444);
 		} catch (IOException e1) {
@@ -308,6 +310,7 @@ public class Partita {
 			gp.reset();
 			d.eliminati();
 			gp.resetGioc(d);
+			gp.repaint();
 			d.mischia();
 			d.daiCarte(gp);
 			gp.daiCarteGioc();
@@ -439,7 +442,7 @@ public class Partita {
 				}
 			}
 			vecchioRisp=risp;
-			for (int j = 0; j < i; j++) {
+			for (int j = 0; j <= i; j++) {
 				if(d.getG()[j].getNickName().equals(risp.getNick())){//TODO sistemare il caso di nick uguali
 					ok=false;
 					try {
@@ -510,15 +513,15 @@ public class Partita {
 	private void CreaComando() {
 		
 		if(d.getCarteComuni()[0]==null){
-			d.flop(OOS);
+			d.flop(OOS,disconnessi);
 			gp.setFlop(Arrays.copyOf(d.getCarteComuni(),3), gp);
 		}else
 			if(d.getCarteComuni()[3]==null){
-				d.turn(OOS);
+				d.turn(OOS,disconnessi);
 				gp.setTurn(d.getCarteComuni()[3]);
 			}else
 				if(d.getCarteComuni()[4]==null){
-					d.river(OOS);
+					d.river(OOS,disconnessi);
 					gp.setRiver(d.getCarteComuni()[4]);
 				}else
 					d.fineMano(OOS);
@@ -551,9 +554,10 @@ public class Partita {
 			inviaComando(notifica);
 			break;
 		case DISCONNESSIONE:
+			d.getG()[i].disconnetti();
+			disconnessi[i]=true;
 			d.fold(i);
 			d.getG()[i].setFiches(0);
-			d.getG()[i].setInGioco(false);
 			gp.getGiocatore(i).setAttivo(false);
 			gp.getGiocatore(i).setVisible(false);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.DISCONNESSIONE,i);
@@ -580,6 +584,7 @@ public class Partita {
 
 	private void inviaComando(Comando c) {
 		for(int i=0;i<OOS.length;i++)
+			if(!disconnessi[i+1])
 			try {
 				OOS[i].writeObject(c);
 			} catch (IOException e) {

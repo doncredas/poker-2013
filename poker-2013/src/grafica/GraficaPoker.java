@@ -2,7 +2,6 @@ package grafica;
 
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -475,7 +474,7 @@ public class GraficaPoker extends JFrame {
 		this.setSize(1224, 701);
 		this.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 
-		this.nGioc=numGioc;
+		GraficaPoker.nGioc=numGioc;
 		// SETTA IL LOGO DELLA FINESTRA PUNTEGGI
 		FP.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 		FF.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
