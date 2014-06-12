@@ -138,9 +138,9 @@ public class GiocatoreGrafico
 	/**
 	 * Gira le carte del giocatore, se coperte le scopre e viceversa
 	 */
-	public void giraCarte()
+	public void giraCarte(boolean entrato)
 	{
-		if((this.carta1.getIcon()==Icone.coperta)&&(this.carta2.getIcon()==Icone.coperta))
+		if(entrato)
 		{
 		    
 			this.carta1.setIcon(icona1);

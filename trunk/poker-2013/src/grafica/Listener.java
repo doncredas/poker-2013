@@ -210,7 +210,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 
 		if ((arg0.getSource() == carta1) || (arg0.getSource() == carta2)) 
 		{
-			gp.getGiocatore(0).giraCarte();
+			gp.getGiocatore(0).giraCarte(true);
 			
 		}
 	}
@@ -219,7 +219,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	public void mouseExited(MouseEvent arg0) {
 		if ((arg0.getSource() == carta1) || (arg0.getSource() == carta2)) 
 		{
-			gp.getGiocatore(0).giraCarte();
+			gp.getGiocatore(0).giraCarte(false);
 		}
 
 	}
