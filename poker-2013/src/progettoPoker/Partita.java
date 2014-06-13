@@ -218,8 +218,6 @@ public class Partita {
 			break;
 		case NOTIFICA:
 			eseguiNotifica(com);
-		default:
-			break;
 		}
 		
 		return risp;
@@ -281,8 +279,6 @@ public class Partita {
 					gp.getGiocatore(0).setVisible(false); 
 				else
 					gp.getGiocatore(com.getGioc()).setVisible(false);
-			break;
-		default:
 			break;
 		}
 		
@@ -362,12 +358,11 @@ public class Partita {
 							}else
 								risp=new Comando(Tipo.CHECK_CALL);
 						}else{
-							setComando(c,false);
+							setComando(c,true);
 							try {
-								OOS[i-1].writeObject(c);
+								OOS[i-1].writeObject(new Comando(c,"trucco"));
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								eseguiComando(new Comando(Tipo.DISCONNESSIONE),i+1);
 							}
 							while(risp==null&&cron.getSecondi()<tempo){
 								try {
@@ -438,7 +433,7 @@ public class Partita {
 		c=new Comando(Tipo.NICK_NAME);
 		Comando vecchioRisp=null;
 		boolean ok=true;
-		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname (server)", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 		d.getG()[0].setNickName(nick);
 		GraficaPoker.Giocatori[0].setNome(nick);
 		for (int i = 0; i < OOS.length; i++) {
@@ -605,7 +600,7 @@ public class Partita {
 			try {
 				OOS[i].writeObject(c);
 			} catch (IOException e) {
-				e.printStackTrace();
+				eseguiComando(new Comando(Tipo.DISCONNESSIONE),i+1);
 			}
 		
 	}
