@@ -16,6 +16,8 @@ public class GiocatoreGrafico
 	private ImageIcon icona1=null;
 	private ImageIcon icona2=null;
 	Fiches puntata=null;
+	private int nomeX;
+	private int nomeY;
 
 	public GiocatoreGrafico(JLabel eti,JLabel nome,JLabel fich, JLabel car1,JLabel car2)
 	{
@@ -93,8 +95,13 @@ public class GiocatoreGrafico
 	public void setNome(String nome)
 	{
 		int lung=nome.length();
-		int x=(int)this.nome.getX();
-		int y=(int)this.nome.getY();
+		
+		if(nomeX==0){
+			nomeX=(int)this.nome.getX();		//utilizzo nomeX e nomeY per determinare la posizione iniziale dei nick nel caso in cui
+			nomeY=(int)this.nome.getY();		//un giocatore dovesse cambiare il nick per un omonimia il nome non si sposta
+		}
+		int x=nomeX;
+		int y=nomeY;
 		switch (lung)
 		{
 		case 1:this.nome.setBounds(x+30,y,100,60);break;
