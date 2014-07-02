@@ -168,6 +168,13 @@ public class GraficaPoker extends JFrame {
 	Container principale = this.getContentPane();   //CREAZIONE DEL CONTAINER DOVE VIENE INSERITO TUTTO
 
 	/**
+	 * Inserisce in una textField il valore attuale della call
+	 * @param val
+	 */
+	public void setPuntataCall(int val){
+		puCall.setText(""+val);
+	}
+	/**
 	 * Setta il minimo della barra del raise
 	 * @param min: minimo da cui iniziare
 	 */
@@ -251,6 +258,10 @@ public class GraficaPoker extends JFrame {
 	static JButton VisChat=new JButton("Chat");
 	static JButton VisStat=new JButton("Stats");
 
+	//PUNTATA DEL CALL
+	JLabel vaCall=new JLabel("Valore del Call:");
+	JTextField puCall=new JTextField("0");
+	
 	//DEALER,SB,BB
 	static JLabel Dealer=new JLabel();
 	static JLabel SB=new JLabel();
@@ -353,6 +364,7 @@ public class GraficaPoker extends JFrame {
 	Font fontnome = new Font("Comic Sans MS", Font.BOLD, 13);    //Palatino Linotype
 	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
+	Font vc=new Font("Times New Roman",Font.BOLD,12);
 	
 	
 	/**
@@ -495,8 +507,16 @@ public class GraficaPoker extends JFrame {
 		principale.add(BB);
 		principale.add(SB);
 		
-		
-		
+		//VALORE CALL
+		vaCall.setBounds(760,545,100,100);
+		puCall.setBounds(780,605,50,20);
+		puCall.setEnabled(false);
+		puCall.setDisabledTextColor(Color.black);
+		vaCall.setForeground(Color.white);
+		vaCall.setFont(vc);
+		puCall.setEditable(false);
+		principale.add(vaCall);
+		principale.add(puCall);
 		//OROLOGIO
 		
 		orologio=new Thread(new Orologio());  //TODO orologio
@@ -777,7 +797,7 @@ public class GraficaPoker extends JFrame {
 		ConsRaise.setBounds(602,640,55,20);
 		ConsRaise.setText(new Integer(BarRaise.getValue()).toString());
 		
-		BarRaise.setMinimum(200);  //TODO SETTARE VAL INIZIALE BAR
+		BarRaise.setMinimum(200);  
 		BarRaise.setMaximum(10000);  //SETTA IL MASSIMO
 
 		
@@ -890,14 +910,34 @@ public class GraficaPoker extends JFrame {
 			Giocatori[i].setVisible(d.getG()[i].getInGioco());
 		}
 		
-	}
+	}//resetGioc
 	
 	public void setAttivo(int index){
 		for(int i=0;i<nGioc;i++)
 			Giocatori[i].setAttivo(false);
 		if(index!=-1)
 		Giocatori[index].setAttivo(true);
-	}
+	}//setAttivo
+	
+	/**
+	 *Sposta le fiches al giocatore vincente della mano 
+	 * @param ind indice del giocatore
+	 * @param jc  componenti da spostare
+	 */
+	public void vincitoreMano(int ind,JLabel...jc){ //TODO vincitore mano
+		for(int i=0;i<jc.length;i++){
+			switch(ind){
+			case 8:Movimento.muovi(jc[i], 385, 355);break;
+			case 7:Movimento.muovi(jc[i], 260, 270);break;
+			case 6:Movimento.muovi(jc[i], 385, 160);break;
+			case 5:Movimento.muovi(jc[i], 555, 140);break;
+			case 4:Movimento.muovi(jc[i], 730, 160);break;
+			case 3:Movimento.muovi(jc[i], 855, 270);break;
+			case 2:Movimento.muovi(jc[i], 750, 340);break;
+			case 1:Movimento.muovi(jc[i], 555, 350);break;
+			}
+		}
+	}//vincitoreMano
 	
 
 }// GraficaPoker
