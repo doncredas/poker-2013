@@ -25,11 +25,14 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	 */
 	private static final long serialVersionUID = 1L; //TODO
 	GraficaPoker gp;
+	/* TODO Chat
 	JTextArea Chat = new JTextArea();
 	JTextField ConsChat = new JTextField();
-	JTextArea Statistiche = new JTextArea();
 	JScrollPane ScrollChat = new JScrollPane(Chat);
-	JScrollPane ScrollStat = new JScrollPane(Statistiche);
+	*/
+	
+	//JTextArea Statistiche = new JTextArea();
+	//JScrollPane ScrollStat = new JScrollPane(Statistiche);
 
 	JScrollBar BarRaise = new JScrollBar();
 	JTextField ConsRaise = new JTextField();
@@ -48,14 +51,16 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	//ImageIcon ico2=null;
 	
 
-	public Listener(JTextArea a, JTextField b, JTextArea c, JScrollPane sc,
-			JScrollPane ss, JScrollBar sb, JTextField br, JLabel gioc1ca1,
+	public Listener(/*JTextArea a, JTextField b,JTextArea c, JScrollPane sc,
+			JScrollPane ss,*/ JScrollBar sb, JTextField br, JLabel gioc1ca1,
 			JLabel gioc1ca2,GraficaPoker gp) {
+		/*
 		this.Chat = a;
 		this.ConsChat = b;
-		this.Statistiche = c;
 		this.ScrollChat = sc;
-		this.ScrollStat = ss;
+		*/
+		//this.Statistiche = c;
+		//this.ScrollStat = ss;
 		this.BarRaise = sb;
 		this.ConsRaise = br;
 
@@ -63,19 +68,13 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		this.carta2 = gioc1ca2;
 		
 		this.gp=gp;
-/*
-		try{
-			socket=s;
-		thread= new Thread(this);
-		thread.start();
-		}catch(Exception ex){ex.printStackTrace();}		
-*/
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 
 	
+		/* TODO chat
 		if (arg0.getSource() == GraficaPoker.ConsChat) 
 		{
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER) 
@@ -83,14 +82,15 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 				if (this.ConsChat.getText().length() > 0) 
 				{/*
 					String s=ConsChat.getText();					
-					invia(s);
-				*/				
+					invia(s);			
 					this.Chat.setText(this.Chat.getText() + "  Nickname: "
 							+ ConsChat.getText() + "\n");
 					ConsChat.setText("");
 				}//if lunghezza
 			}//if key event
 		}//if getSource
+		*/
+		
 		if (arg0.getSource() == ConsRaise) {
 			if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 				this.BarRaise
@@ -99,42 +99,8 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			}
 		}
 	}
-/*
-	private void invia(String s) {
-		// TODO Auto-generated method stub
-		OutputStream outStream;
-		try {
-			outStream = socket.getOutputStream();
-			outStream.write(s.getBytes());
-			outStream.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}//invia
 	
-	 public String ricevi() throws IOException {
-		 String line = "";
-		 InputStream inStream = socket.getInputStream();
-		 int read = inStream.read();
-		 while (read!=10 && read > -1) {
-			 line+=String.valueOf((char)read);
-			 read = inStream.read();
-		}
-		if (read==-1) return null;
-		line+=String.valueOf((char)read);
-		return line;
-	}//receive
-	 
-	 public void run() {
-		 try {
-			 while(true) {
-				 String msg = ricevi();
-				 Chat.append(msg);
-			}
-		 }catch(Exception ex){System.out.println("disconnesso");}
-	}//run
-*/
+
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 	}
@@ -146,6 +112,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+		/*
 		if (arg0.getSource() == GraficaPoker.VisChat) {
 			this.Statistiche.setVisible(false);
 			this.ScrollStat.setVisible(false);
@@ -156,15 +123,16 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 			GraficaPoker.VisChat.setIcon(Icone.ChatSelected);
 			GraficaPoker.VisStat.setIcon(Icone.VisualizzaStat);
 		}
+		
 		if (arg0.getSource() == GraficaPoker.VisStat) {
-			this.Chat.setVisible(false);
-			this.ScrollChat.setVisible(false);
+			//this.Chat.setVisible(false);
+			//this.ScrollChat.setVisible(false);
 			this.Statistiche.setVisible(true);
 			this.ScrollStat.setVisible(true);
-			this.ConsChat.setVisible(false);
-			GraficaPoker.Invia.setVisible(false);
+			//this.ConsChat.setVisible(false);
+			//GraficaPoker.Invia.setVisible(false);
 			GraficaPoker.VisStat.setIcon(Icone.StatSelected);
-			GraficaPoker.VisChat.setIcon(Icone.VisualizzaChat);
+			//GraficaPoker.VisChat.setIcon(Icone.VisualizzaChat);
 		}
 
 		if (arg0.getSource() == GraficaPoker.Invia) {
@@ -172,11 +140,9 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 				this.Chat.setText(this.Chat.getText() + "  Nickname: "
 						+ ConsChat.getText() + "\n");
 				ConsChat.setText("");
-				//TODO da modificare
-				
-				
 			}
 		}
+		*/
 		if (arg0.getSource() == GraficaPoker.Fold) {
 			GraficaPoker.com = new Comando(Tipo.FOLD);
 			gp.disableBottoni(true);

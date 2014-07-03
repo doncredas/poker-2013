@@ -22,6 +22,7 @@ public final class Icone {
 	//FONT DEL TIMER
 	static File Fonts = new File(Immagini.getAbsolutePath()+"\\Fonts");  
 	static File orol=new File(Fonts.getAbsoluteFile()+"\\advanced_pixel_lcd-7.ttf");
+	static File st=new File(Fonts.getAbsoluteFile()+"\\BRUSHSCI.TTF");
 	
 	//ICONE CARTE
 	public static ImageIcon zero = new ImageIcon(Carte.getAbsolutePath() + "\\0.png");// Asso di cuori

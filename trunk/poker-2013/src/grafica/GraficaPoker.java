@@ -193,16 +193,17 @@ public class GraficaPoker extends JFrame {
 	}
 	/**Scrive un messaggio in chat
 	 */ 
-	public static void scriviChat(String nick,String messaggio)
+	/*public static void scriviChat(String nick,String messaggio)
 	{
 		Chat.append(nick+": "+messaggio+"\n");
 	}
+	*/
 	/**Scrive un messaggio nella console delle statistiche
 	 */ 
 	public static void scriviStatistica(String messaggio)
 	{
 		if(messaggio.toLowerCase().equals("clear"))
-			Statistiche.setText("- - - - BENVENUTO IN REAL POKER 2014 - - - -"+"\n");
+			Statistiche.setText("");
 		else  Statistiche.append(" - "+messaggio+"\n");
 	}
 	/**Se settato a true disabilita il fold, settato a false lo riabilita
@@ -252,11 +253,11 @@ public class GraficaPoker extends JFrame {
 	static JButton Call = new JButton("Call");
 	static JButton Raise = new JButton("Raise");
 	static JButton AllIn = new JButton("All-In");
-	static JButton Invia = new JButton("Invia");
 	       JButton SegnaPunti = new JButton("Punti");
 	       JButton ValoreFiches = new JButton("Fiches"); 
-	static JButton VisChat=new JButton("Chat");
-	static JButton VisStat=new JButton("Stats");
+	//static JButton VisChat=new JButton("Chat"); 
+	//static JButton Invia = new JButton("Invia");
+	//static JButton VisStat=new JButton("Stats");
 
 	//PUNTATA DEL CALL
 	JLabel vaCall=new JLabel("Valore del Call:");
@@ -346,17 +347,19 @@ public class GraficaPoker extends JFrame {
 	JTextField ConsRaise=new JTextField();
 
 	// CREAZIONE CHAT E STATISTICHE
+	static JTextArea Statistiche = new JTextArea();
+	JScrollPane ScrollStat = new JScrollPane(Statistiche);
+	/*
 	static JTextArea Chat = new JTextArea();
 	public static JTextField ConsChat = new JTextField();
-	static JTextArea Statistiche = new JTextArea(" - - - - BENVENUTO IN REAL POKER 2014 - - - -"+"\n");
 	JScrollPane ScrollChat = new JScrollPane(Chat);
-	JScrollPane ScrollStat = new JScrollPane(Statistiche);
+	*/
 	
 	//OROLOGIO
 	public Thread orologio;
 
 	
-	Listener list = new Listener(Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,this); // LISTENER
+	Listener list = new Listener(/*Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,*/BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,this); // LISTENER
 	JLabel sfondo = new JLabel(Icone.sfondo);
 	
 
@@ -374,19 +377,19 @@ public class GraficaPoker extends JFrame {
 	public void aggiungiComp(JComponent jc){
 		switch(nGioc)
 		{
-		case 7: principale.add(jc,60);break;
+		//case 7: principale.add(jc,60);break;
 		case 6: principale.add(jc,55);break;
 		case 5: principale.add(jc,50);break;
 		case 4: principale.add(jc,45);break;
 		case 3: principale.add(jc,40);break;
 		case 2: principale.add(jc,35);break;
 		case 1: principale.add(jc,30);break;
-		default: principale.add(jc,65);break;
+		default: principale.add(jc,60);break; //jc,65 se c'è la chat
 		}
 	}//aggiungiComp
 	
-	public void rimuoviComp(JComponent jc){
-	
+    public void rimuoviComp(JComponent jc){
+
 		principale.add(jc);
 		jc.validate();
 	
@@ -527,6 +530,17 @@ public class GraficaPoker extends JFrame {
 		      catch(FontFormatException e1) {}
 		JLabel Time = Orologio.getLabel();
 		Time.setFont(orolox.deriveFont(Font.PLAIN,14));
+		
+		//SCRITTA STATISTICHE
+		Font fontStat=null;
+		try{
+			fontStat=Font.createFont(Font.TRUETYPE_FONT, Icone.st);
+		   }catch(IOException e){}
+		    catch(FontFormatException e1){}
+		JLabel StatScri=new JLabel("Statistiche");
+		StatScri.setFont(fontStat.deriveFont(Font.BOLD,20));
+		StatScri.setForeground(Color.GREEN);
+		StatScri.setBounds(1030,500,100,100);
 			
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
@@ -558,12 +572,15 @@ public class GraficaPoker extends JFrame {
 		ValoreFiches.setPressedIcon(Icone.ValFipre);
 		ValoreFiches.setBounds(90, 645, 90, 30);
 		ValoreFiches.setBorder(null);
-		VisChat.setIcon(Icone.VisualizzaChat);
+		/*
+		VisChat.setIcon(Icone.VisualizzaChat); 
 		VisChat.setBounds(1017, 512, 90, 30);
 		VisChat.setBorder(null);
-		VisStat.setIcon(Icone.StatSelected);
-		VisStat.setBounds(927,512,90,30);
-		VisStat.setBorder(null);
+		*/
+		
+		//VisStat.setIcon(Icone.StatSelected);
+		//VisStat.setBounds(927,512,90,30);
+		//VisStat.setBorder(null);
 
 		pot.setBounds(580,200,100,50);
 		pot.setFont(fontnome);
@@ -774,14 +791,18 @@ public class GraficaPoker extends JFrame {
 		// LISTENER
 		SegnaPunti.addMouseListener(FP); // Apre la finestra dei Punteggi
 		ValoreFiches.addMouseListener(FF);//Apre la finestra delle fiches
-		Invia.addActionListener(list); // Listener del bottone Invia (Chat)
-		ConsChat.addKeyListener(list); // Listener della console della Chat
+		
+		//Invia.addActionListener(list); // Listener del bottone Invia (Chat)
+		//ConsChat.addKeyListener(list); // Listener della console della Chat
+		//VisChat.addActionListener(list); 
 		Fold.addActionListener(list);
 		Raise.addActionListener(list);
 		Call.addActionListener(list);
 		AllIn.addActionListener(list);
-		VisChat.addActionListener(list);
-		VisStat.addActionListener(list);
+		
+		
+		
+		//VisStat.addActionListener(list);
 		
 		BarRaise.addAdjustmentListener(list);
 		ConsRaise.addKeyListener(list);
@@ -796,32 +817,26 @@ public class GraficaPoker extends JFrame {
 		BarRaise.setBounds(450, 640,150, 20);
 		ConsRaise.setBounds(602,640,55,20);
 		ConsRaise.setText(new Integer(BarRaise.getValue()).toString());
-		
 		BarRaise.setMinimum(200);  
 		BarRaise.setMaximum(10000);  //SETTA IL MASSIMO
 
 		
 		
 		
-		// CHAT
+		
+		/* 
 		ScrollChat.setBounds(927, 542, 290, 100);
 		ScrollChat.setWheelScrollingEnabled(true);
-		ScrollStat.setBounds(927,542,290,100);
-		ScrollStat.setWheelScrollingEnabled(true);	
-		
-		Statistiche.setEditable(false);
-		Statistiche.setForeground(Color.GREEN.darker());
-		Statistiche.setFocusable(true);
-		Statistiche.setFont(font);
+		*/
+		ScrollStat.setBounds(927,560,290,112);
+		ScrollStat.setWheelScrollingEnabled(true);
+		/*
 		Chat.setEditable(false);
 		Chat.setForeground(Color.BLUE);
 		Chat.setFont(font);
-		
-		//Per far apparire prima la console all' avvio
-		ScrollChat.setVisible(false);
 		ConsChat.setVisible(false);
+		ScrollChat.setVisible(false);
 		Invia.setVisible(false);
-		
 		ConsChat.setFont(font);
 		ConsChat.setBounds(927, 643, 200, 30);
 		ConsChat.setForeground(Color.BLACK);
@@ -829,16 +844,20 @@ public class GraficaPoker extends JFrame {
 		Invia.setPressedIcon(Icone.Sendpre);
 		Invia.setBounds(1128, 643, 90, 30);
 		Invia.setBorder(null);
-
-
+		*/
 		
+		Statistiche.setEditable(false);
+		Statistiche.setForeground(Color.GREEN.darker());
+		Statistiche.setFocusable(true);
+		Statistiche.setFont(font);
 		
 		// INSERIMENTO NELLA FINESTRA		
 		principale.add(Time);
 		
-		principale.add(ScrollChat);
+		//principale.add(ScrollChat);
+		principale.add(StatScri);
 		principale.add(ScrollStat);
-		principale.add(ConsChat);
+		//principale.add(ConsChat);
 
 		principale.add(BarRaise);
 		principale.add(ConsRaise);
@@ -847,11 +866,11 @@ public class GraficaPoker extends JFrame {
 		principale.add(Call);
 		principale.add(Raise);
 		principale.add(AllIn);
-		principale.add(Invia);
+		//principale.add(Invia);
 		principale.add(SegnaPunti);
 		principale.add(ValoreFiches);
-		principale.add(VisStat);
-		principale.add(VisChat);
+		//principale.add(VisStat);
+		//principale.add(VisChat);
 	
 		principale.add(pot);
 		principale.add(potVal);
@@ -888,8 +907,6 @@ public class GraficaPoker extends JFrame {
 		Giocatori[6].setVisible(false);
 		Giocatori[7].setVisible(false);
 		setDealer(1);*/
-		
-		
 		
 		Fiches.punta(1, 99999, gp,null);
 		Fiches.punta(2, 99999, gp,null);
