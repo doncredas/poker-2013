@@ -122,8 +122,11 @@ public class Partita {
 				//GraficaPoker.setSmallBlind(com.dealer[1]+1);
 			if(com.valPiatto!=-1)
 				gp.setPot(com.valPiatto);
-			if(com.puntata!=-1)
+			if(com.puntata!=-1){
 				gp.setMinBar(com.puntata);
+				if(com.puntata!=0)
+					gp.setPuntataCall(com.puntata);
+			}
 		}
 		if(com.getT()==Tipo.GIOCATORI){
 			this.gp=new GraficaPoker(com.gioc);
@@ -335,11 +338,11 @@ public class Partita {
 			int ultimoRaise;
 			c.setDealer(GraficaPoker.setDealer(d.getPosD()+1));
 			risp=null;
-			if(unicoGiocatore())termina();
+			if(unicoGiocatore()!=-1)termina();
 			ciclo:
 			for(int j=0;j<4;j++){
 				ultimoRaise=-1;
-				if(unicoGiocatore())break;
+				if(unicoGiocatore()!=-1)break;
 				for(int cont=0,i=primoGiocatore;cont<d.getG().length;cont++,i=(i+1)%d.getG().length){
 					gp.setPot(d.getValPiatto());
 					if(i==ultimoRaise){
@@ -351,6 +354,7 @@ public class Partita {
 						cron.reset();//TODO spostare il cronometro nel client
 						if(i==0){
 							gp.setMinBar(d.getPuntata());
+							gp.setPuntataCall(d.getPuntata());
 							gp.setMaxBar(d.getG()[0].getFiches());
 							gp.getGiocatore()[0].setFiches(d.getG()[0].getFiches());
 							if(d.getG()[0].getFiches()!=0){
@@ -368,7 +372,7 @@ public class Partita {
 							}else
 								risp=new Comando(Tipo.CHECK_CALL);
 						}else{
-							setComando(c,true);
+							setComando(c);
 							try {
 								OOS[i-1].writeObject(new Comando(c,"trucco"));
 							} catch (IOException e) {
@@ -391,8 +395,11 @@ public class Partita {
 							cont=-1;
 						}
 						if(risp.getT()==Tipo.FOLD){
-							if(unicoGiocatore())
+							int indice=unicoGiocatore();
+							if(indice!=-1){
+								vincitoreMano(indice);
 								break ciclo;
+							}
 						}
 						
 						
@@ -407,6 +414,11 @@ public class Partita {
 		
 	}
 	
+
+	private void vincitoreMano(int indice) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	private void termina() {
 		gp.dispose();
@@ -519,7 +531,7 @@ public class Partita {
 		
 	}
 
-	private boolean unicoGiocatore() {
+	private int unicoGiocatore() {
 		int cont=0;
 		int indice=0;
 		for(int i=0;i<d.getG().length;i++){
@@ -532,7 +544,9 @@ public class Partita {
 			d.checkCall(indice);
 			d.fineMano(OOS);
 		}
-		return cont<2;
+		if(cont<2)
+		return indice;
+		return -1;
 	}
 
 	private void CreaComando() {
@@ -559,7 +573,7 @@ public class Partita {
 			d.fold(i);
 			gp.getGiocatore(i).setFold(true);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.FOLD,i);
-			setComando(notifica,true);
+			setComando(notifica);
 			inviaComando(notifica);
 			break;
 		case CHECK_CALL:
@@ -567,7 +581,7 @@ public class Partita {
 			GraficaPoker.Giocatori[i].setFiches(d.getG()[i].getFiches());
 			gp.punta(i+1, d.getPuntata(), gp);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.CHECK_CALL,i,d.getPuntata());
-			setComando(notifica,true);
+			setComando(notifica);
 			inviaComando(notifica);
 			break;
 		case RAISE:
@@ -575,7 +589,7 @@ public class Partita {
 			GraficaPoker.Giocatori[i].setFiches(d.getG()[i].getFiches());
 			gp.punta(i+1,c.getFiches(), gp);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.RAISE,i,c.getFiches());
-			setComando(notifica,true);
+			setComando(notifica);
 			inviaComando(notifica);
 			break;
 		case DISCONNESSIONE:
@@ -586,7 +600,7 @@ public class Partita {
 			gp.getGiocatore(i).setAttivo(false);
 			gp.getGiocatore(i).setVisible(false);
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.DISCONNESSIONE,i);
-			setComando(notifica,true);
+			setComando(notifica);
 			inviaComando(notifica);
 		default:
 			break;
@@ -595,16 +609,14 @@ public class Partita {
 	}
 	
 
-	private void setComando(Comando notifica, boolean b) {
+	private void setComando(Comando notifica) {
 		notifica.setPuntata(d.getPuntata());
-		if(b){
 		int fiches[]=new int [d.getG().length];
 		notifica.setValPiatto(d.getValPiatto());
 		for (int i = 0; i < fiches.length; i++) {
 			fiches[i]=d.getG()[i].getFiches();
 		}
 		notifica.setFichesGioc(fiches);
-		}
 	}
 
 	private void inviaComando(Comando c) {
@@ -623,11 +635,11 @@ public class Partita {
 			Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
 			String inet=null;
 			for (NetworkInterface netint : Collections.list(nets)){
-				if(netint.getName().startsWith("net"))
+				//if(netint.getName().startsWith("net"))
 					try{
 					inet= netint.getInetAddresses().nextElement().getHostAddress();
 					}catch(Exception e){}
-				if(inet!=null)break;
+				if(inet.startsWith(""+10))break;
 
 			}
 			
