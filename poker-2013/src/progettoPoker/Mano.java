@@ -16,9 +16,9 @@ public class Mano {
 	final int DOPPIA_COPPIA=3;
 	final int COPPIA=2;
 	final int CARTA_ALTA=1;
-	static char seme='n';
-	static int [] carteUtili=new int[5];
-	static Carta[] c=new Carta[7];
+	char seme='n';
+	int [] carteUtili=new int[5];
+	Carta[] c=new Carta[7];
 	
 	int val=0;
 	
@@ -174,7 +174,7 @@ public class Mano {
 		return val=CARTA_ALTA;		
 	}//calcolaVal
 	
-	private static boolean scalaReale() {
+	private boolean scalaReale() {
 		int [] copia = new int [8];
 		int cont=0;
 		for(int i=0; i<copia.length; i++)
