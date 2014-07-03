@@ -31,7 +31,12 @@ public class Partita {
 	private int posGioc=0; //posizione del giocatore che si vede centrale rispetto al server
 	private Comando c=null;
 	private Comando risp=null;
-	private boolean disconnessi[]=null;
+	private int disconnessi[]=null; //contiene 0-1-2 
+	                                 //0:giocatore in gioco
+	                                 //1:giocatore sconfitto
+	                                 //2:giocatore disconnesso
+	                                        
+	private boolean flag=false;
 	
 	public Partita(Socket client)  {
 		this.s=client;
@@ -183,9 +188,14 @@ public class Partita {
 		switch(com.t){
 		case NICK_NAME:
 			String nick=null;
+			if(flag)
+				JOptionPane.showMessageDialog(null,"Nickname già in uso, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
+			flag=true;
 			do{
 			   nick=(String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
 			   nick.trim();
+			   if(nick.length()>11)
+				   JOptionPane.showMessageDialog(null,"Nickname troppo lungo, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
 			}while(nick.length()>11);
 			risp=new Comando(Tipo.NICK_NAME,nick);
 			GraficaPoker.Giocatori[0].setNome(nick);
@@ -287,7 +297,7 @@ public class Partita {
 	public Partita(Dealer d)  {
 		//this.ss=ss;
 		gp=new GraficaPoker(d.getG().length);
-		disconnessi=new boolean[d.getG().length];
+		disconnessi=new int[d.getG().length];
 		/*try {
 			ServerT chat=new ServerT(d.getS().length-1,444);
 		} catch (IOException e1) {
@@ -454,7 +464,7 @@ public class Partita {
 			}
 			vecchioRisp=risp;
 			for (int j = 0; j <= i; j++) {
-				if(d.getG()[j].getNickName().equals(risp.getNick())){//TODO sistemare il caso di nick uguali
+				if(d.getG()[j].getNickName().equalsIgnoreCase(risp.getNick())){//TODO sistemare il caso di nick uguali
 					c=new Comando(Tipo.NICK_NAME);
 					try {
 						OOS[i].writeObject(c);
@@ -499,7 +509,10 @@ public class Partita {
 
 	private void resetRimanenti(boolean[] rimanenti) {
 		for (int i = 0; i < rimanenti.length; i++) {
-			if(!rimanenti[i])gp.getGiocatore(i).setVisible(false);
+			if(!rimanenti[i]){
+				gp.getGiocatore(i).setVisible(false);
+				if(disconnessi[i]!=2)disconnessi[i]=1;
+			}
 		}
 		Comando delete=new Comando(Tipo.NOTIFICA,Tipo.FINE_MANO,rimanenti);
 		inviaComando(delete);
@@ -567,7 +580,7 @@ public class Partita {
 			break;
 		case DISCONNESSIONE:
 			d.getG()[i].disconnetti();
-			disconnessi[i]=true;
+			disconnessi[i]=2;
 			d.fold(i);
 			d.getG()[i].setFiches(0);
 			gp.getGiocatore(i).setAttivo(false);
@@ -596,7 +609,7 @@ public class Partita {
 
 	private void inviaComando(Comando c) {
 		for(int i=0;i<OOS.length;i++)
-			if(!disconnessi[i+1])
+			if(disconnessi[i+1]==0||(disconnessi[i+1]==1 &&(c.t!=null || c.fiches!=-1)))	
 			try {
 				OOS[i].writeObject(c);
 			} catch (IOException e) {
