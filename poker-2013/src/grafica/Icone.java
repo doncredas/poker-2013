@@ -23,6 +23,7 @@ public final class Icone {
 	static File Fonts = new File(Immagini.getAbsolutePath()+"\\Fonts");  
 	static File orol=new File(Fonts.getAbsoluteFile()+"\\advanced_pixel_lcd-7.ttf");
 	static File st=new File(Fonts.getAbsoluteFile()+"\\BRUSHSCI.TTF");
+	static File fontArea=new File(Fonts.getAbsoluteFile()+"\\Typo_Comica_light_italic_demo.otf");
 	
 	//ICONE CARTE
 	public static ImageIcon zero = new ImageIcon(Carte.getAbsolutePath() + "\\0.png");// Asso di cuori

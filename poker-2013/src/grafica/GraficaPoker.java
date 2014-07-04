@@ -367,7 +367,7 @@ public class GraficaPoker extends JFrame {
 	Font fontnome = new Font("Comic Sans MS", Font.BOLD, 13);    //Palatino Linotype
 	Font fontfiches = new Font("Comic Sans MS", Font.PLAIN, 10);
 	Font font = new Font("Comic Sans MS", Font.ROMAN_BASELINE, 12);
-	Font vc=new Font("Times New Roman",Font.BOLD,12);
+	
 	
 	
 	/**
@@ -510,28 +510,7 @@ public class GraficaPoker extends JFrame {
 		principale.add(BB);
 		principale.add(SB);
 		
-		//VALORE CALL
-		vaCall.setBounds(760,545,100,100);
-		puCall.setBounds(780,605,50,20);
-		puCall.setEnabled(false);
-		puCall.setDisabledTextColor(Color.black);
-		vaCall.setForeground(Color.white);
-		vaCall.setFont(vc);
-		puCall.setEditable(false);
-		principale.add(vaCall);
-		principale.add(puCall);
-		//OROLOGIO
-		
-		orologio=new Thread(new Orologio());  //TODO orologio
-		Font orolox = null;
-		try {
-             orolox=Font.createFont(Font.TRUETYPE_FONT,Icone.orol);
-			} catch (IOException e){}
-		      catch(FontFormatException e1) {}
-		JLabel Time = Orologio.getLabel();
-		Time.setFont(orolox.deriveFont(Font.PLAIN,14));
-		
-		//SCRITTA STATISTICHE
+		//SCRITTA sulle STATISTICHE
 		Font fontStat=null;
 		try{
 			fontStat=Font.createFont(Font.TRUETYPE_FONT, Icone.st);
@@ -541,7 +520,36 @@ public class GraficaPoker extends JFrame {
 		StatScri.setFont(fontStat.deriveFont(Font.BOLD,20));
 		StatScri.setForeground(Color.GREEN);
 		StatScri.setBounds(1030,500,100,100);
-			
+		
+		//VALORE CALL
+		vaCall.setBounds(760,545,100,100);
+		puCall.setBounds(780,605,50,20);
+		puCall.setEnabled(false);
+		puCall.setDisabledTextColor(Color.black);
+		vaCall.setForeground(Color.white);
+		vaCall.setFont(fontStat.deriveFont(Font.PLAIN,16));
+		puCall.setEditable(false);
+		principale.add(vaCall);
+		principale.add(puCall);
+		//OROLOGIO
+		
+		//FONT OROLOGIO
+		orologio=new Thread(new Orologio());  //TODO orologio
+		Font orolox = null;
+		try {
+             orolox=Font.createFont(Font.TRUETYPE_FONT,Icone.orol);
+			} catch (IOException e){}
+		      catch(FontFormatException e1) {}
+		JLabel Time = Orologio.getLabel();
+		Time.setFont(orolox.deriveFont(Font.PLAIN,14));
+		
+		//FONT TEXTAREA
+		Font font2=null;
+		try {
+            font2=Font.createFont(Font.TRUETYPE_FONT,Icone.fontArea);
+			} catch (IOException e){}
+		      catch(FontFormatException e1) {}
+		Statistiche.setFont(font2.deriveFont(Font.BOLD,12));
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
 		Fold.setIcon(Icone.Foldnot);
@@ -847,9 +855,9 @@ public class GraficaPoker extends JFrame {
 		*/
 		
 		Statistiche.setEditable(false);
-		Statistiche.setForeground(Color.GREEN.darker());
+		Statistiche.setForeground(Color.BLACK);
 		Statistiche.setFocusable(true);
-		Statistiche.setFont(font);
+		//Statistiche.setFont(font);
 		
 		// INSERIMENTO NELLA FINESTRA		
 		principale.add(Time);
@@ -908,15 +916,21 @@ public class GraficaPoker extends JFrame {
 		Giocatori[7].setVisible(false);
 		setDealer(1);*/
 		
-		Fiches.punta(1, 99999, gp,null);
-		Fiches.punta(2, 99999, gp,null);
-		Fiches.punta(3, 99999, gp,null);
-		Fiches.punta(4, 99999, gp,null);
-		Fiches.punta(5, 99999, gp,null);
-		Fiches.punta(6, 99999, gp,null);
-		Fiches.punta(7, 99999, gp,null);
-		Fiches.punta(8, 99999, gp,null);
+		scriviStatistica("Ciao");
+		scriviStatistica("come");
+		scriviStatistica("va?");
+		Fiches f1=Fiches.punta(1, 99999, gp,null);
+		//Fiches f2=Fiches.punta(2, 99999, gp,null);
+		//Fiches f3=Fiches.punta(3, 99999, gp,null);
+		//Fiches f4=Fiches.punta(4, 99999, gp,null);
+		//Fiches f5=Fiches.punta(5, 99999, gp,null);
+		//Fiches f6=Fiches.punta(6, 99999, gp,null);
+		Fiches f7=Fiches.punta(7, 99999, gp,null);
+		Fiches f8=Fiches.punta(8, 2345, gp,null);
 		
+		gp.vincitoreMano(8,f8);
+		gp.vincitoreMano(7,f7);
+	
 		gp.daiCarteGioc();
 
 		
@@ -941,17 +955,25 @@ public class GraficaPoker extends JFrame {
 	 * @param ind indice del giocatore
 	 * @param jc  componenti da spostare
 	 */
-	public void vincitoreMano(int ind,JLabel...jc){ //TODO vincitore mano
-		for(int i=0;i<jc.length;i++){
+	public void vincitoreMano(int ind,Fiches f){ //TODO vincitore mano
+		JLabel [] fiches=new JLabel[6];
+		fiches[0]=f.getSiChip1();
+		fiches[1]=f.getSiChip2();
+		fiches[2]=f.getSiChip3();
+		fiches[3]=f.getSiChip4();
+		fiches[4]=f.getSiChip5();
+		fiches[5]=f.getSiChip6();
+
+		for(int i=0;i<fiches.length;i++){
 			switch(ind){
-			case 8:Movimento.muovi(jc[i], 385, 355);break;
-			case 7:Movimento.muovi(jc[i], 260, 270);break;
-			case 6:Movimento.muovi(jc[i], 385, 160);break;
-			case 5:Movimento.muovi(jc[i], 555, 140);break;
-			case 4:Movimento.muovi(jc[i], 730, 160);break;
-			case 3:Movimento.muovi(jc[i], 855, 270);break;
-			case 2:Movimento.muovi(jc[i], 750, 340);break;
-			case 1:Movimento.muovi(jc[i], 555, 350);break;
+			case 8:Movimento.muovi(fiches[i], 230, 445);break;
+			case 7:Movimento.muovi(fiches[i], 140, 270);break;
+			case 6:Movimento.muovi(fiches[i], 230, 100);break;
+			case 5:Movimento.muovi(fiches[i], 550, 45);break;
+			case 4:Movimento.muovi(fiches[i], 880, 100);break;
+			case 3:Movimento.muovi(fiches[i], 1000, 270);break;
+			case 2:Movimento.muovi(fiches[i], 850, 445);break;
+			default:Movimento.muovi(fiches[i], 555, 505);break;
 			}
 		}
 	}//vincitoreMano
