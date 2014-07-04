@@ -377,13 +377,13 @@ public class GraficaPoker extends JFrame {
 	public void aggiungiComp(JComponent jc){
 		switch(nGioc)
 		{
-		//case 7: principale.add(jc,60);break;
-		case 6: principale.add(jc,55);break;
-		case 5: principale.add(jc,50);break;
-		case 4: principale.add(jc,45);break;
-		case 3: principale.add(jc,40);break;
-		case 2: principale.add(jc,35);break;
-		case 1: principale.add(jc,30);break;
+		case 7: principale.add(jc,55);break; //60 e poi 5 in meno a scendere
+		case 6: principale.add(jc,50);break;
+		case 5: principale.add(jc,45);break;
+		case 4: principale.add(jc,40);break;
+		case 3: principale.add(jc,35);break;
+		case 2: principale.add(jc,30);break;
+		case 1: principale.add(jc,25);break;
 		default: principale.add(jc,60);break; //jc,65 se c'è la chat
 		}
 	}//aggiungiComp
@@ -919,7 +919,7 @@ public class GraficaPoker extends JFrame {
 		scriviStatistica("Ciao");
 		scriviStatistica("come");
 		scriviStatistica("va?");
-		Fiches f1=Fiches.punta(1, 99999, gp,null);
+		Fiches.punta(1, 99999, gp,null);
 		//Fiches f2=Fiches.punta(2, 99999, gp,null);
 		//Fiches f3=Fiches.punta(3, 99999, gp,null);
 		//Fiches f4=Fiches.punta(4, 99999, gp,null);
