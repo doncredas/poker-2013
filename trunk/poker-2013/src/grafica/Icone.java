@@ -99,12 +99,12 @@ public final class Icone {
 	public static ImageIcon Sendnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Send.png");
 	public static ImageIcon ValFipre = new ImageIcon(Bottoni.getAbsolutePath() +"\\ValFipre.png");
 	public static ImageIcon ValFinot = new ImageIcon(Bottoni.getAbsolutePath() +"\\ValFi.png");
-	
+		
 	//BOTTONI DELLA CHAT
-	public static ImageIcon ChatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChatSel.png");
-	public static ImageIcon VisualizzaStat=new ImageIcon(Bottoni.getAbsolutePath()+"\\Stats.png");
-	public static ImageIcon VisualizzaChat=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChat.png");
-	public static ImageIcon StatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\StatsSel.png");
+	//public static ImageIcon ChatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChatSel.png");
+	//public static ImageIcon VisualizzaStat=new ImageIcon(Bottoni.getAbsolutePath()+"\\Stats.png");
+	//public static ImageIcon VisualizzaChat=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChat.png");
+	//public static ImageIcon StatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\StatsSel.png");
 	
 	//ETICHETTA
 	public static ImageIcon Etichetta = new ImageIcon(Varie.getAbsolutePath()+ "\\EtichettaR.png");
@@ -114,6 +114,7 @@ public final class Icone {
 	public static ImageIcon sfondo = new ImageIcon(Varie.getAbsolutePath()+ "\\tavolo-ovale.jpg");
 	public static ImageIcon sfondoPunteggio=new ImageIcon(Varie.getAbsolutePath()+"\\punteggio.jpg");
 	public static ImageIcon sfondoFiches=new ImageIcon(Varie.getAbsolutePath()+"\\ValoreFiches.jpg");
+	
 	//LOGO
 	public static ImageIcon logo = new ImageIcon(Varie.getAbsolutePath() + "\\logo.jpg");
 
