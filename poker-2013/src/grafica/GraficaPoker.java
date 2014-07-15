@@ -903,7 +903,6 @@ public class GraficaPoker extends JFrame {
 		Giocatori[i-1].puntata=Fiches.punta(i, puntata, gp, Giocatori[i-1].puntata);
 	}
 
-
 	public static void main(String[] args) {
 
 		GraficaPoker gp=new GraficaPoker(8);
@@ -919,17 +918,24 @@ public class GraficaPoker extends JFrame {
 		scriviStatistica("Ciao");
 		scriviStatistica("come");
 		scriviStatistica("va?");
-		Fiches.punta(1, 99999, gp,null);
-		//Fiches f2=Fiches.punta(2, 99999, gp,null);
-		//Fiches f3=Fiches.punta(3, 99999, gp,null);
-		//Fiches f4=Fiches.punta(4, 99999, gp,null);
-		//Fiches f5=Fiches.punta(5, 99999, gp,null);
-		//Fiches f6=Fiches.punta(6, 99999, gp,null);
+		Fiches f1=Fiches.punta(1, 99999, gp,null);
+		Fiches f2=Fiches.punta(2, 99999, gp,null);
+		Fiches f3=Fiches.punta(3, 99999, gp,null);
+		Fiches f4=Fiches.punta(4, 99999, gp,null);
+		Fiches f5=Fiches.punta(5, 99999, gp,null);
+		Fiches f6=Fiches.punta(6, 99999, gp,null);
 		Fiches f7=Fiches.punta(7, 99999, gp,null);
 		Fiches f8=Fiches.punta(8, 2345, gp,null);
 		
+		
 		gp.vincitoreMano(8,f8);
 		gp.vincitoreMano(7,f7);
+		gp.vincitoreMano(6,f6);
+		gp.vincitoreMano(5,f5);
+		gp.vincitoreMano(4,f4);
+		gp.vincitoreMano(3,f3);
+		gp.vincitoreMano(2,f2);
+		gp.vincitoreMano(1,f1);
 	
 		gp.daiCarteGioc();
 

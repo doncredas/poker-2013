@@ -444,16 +444,7 @@ public class Fiches {
 		gp.rimuoviComp(g.getSiChip4());
 		gp.rimuoviComp(g.getSiChip5());
 		gp.rimuoviComp(g.getSiChip6());
-		
-	    /*
-		gp.remove(g.getSiChip1());
-		gp.remove(g.getSiChip2());
-		gp.remove(g.getSiChip3());
-		gp.remove(g.getSiChip4());
-		gp.remove(g.getSiChip5());
-		gp.remove(g.getSiChip6());
-		*/
-		
+
 		
 	}//reset
 
