@@ -519,6 +519,7 @@ public class Partita {
 		
 	}
 
+	//TODO prova commit
 	private void resetRimanenti(boolean[] rimanenti) {
 		for (int i = 0; i < rimanenti.length; i++) {
 			if(!rimanenti[i]){
