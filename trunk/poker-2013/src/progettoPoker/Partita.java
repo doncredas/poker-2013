@@ -37,6 +37,7 @@ public class Partita {
 	                                 //2:giocatore disconnesso
 	                                        
 	private boolean flag=false;
+	private boolean rimanenti[];
 	
 	public Partita(Socket client)  {
 		this.s=client;
@@ -205,7 +206,12 @@ public class Partita {
 			break;
 		case DAI_CARTA:
 			if(com.getC()!=null){
+				if(rimanenti==null||rimanenti[posGioc])
 				nCarta=(nCarta%4)+1;
+				else{
+					if(nCarta==1||nCarta==0)nCarta=2;
+					nCarta=(nCarta%4)+1;
+				}
 				if(nCarta==1||nCarta==2){
 					if(nCarta==1){
 						this.gp.reset();
@@ -271,7 +277,7 @@ public class Partita {
 					gp.getGiocatore(com.getGioc()).setFold(true);
 			break;
 		case FINE_MANO:
-			boolean rimanenti[]=com.rimanenti;
+			rimanenti=com.rimanenti;
 			gp.reset();
 			nCarta=0;
 			for (int i = 0; i < rimanenti.length; i++) {
@@ -331,7 +337,7 @@ public class Partita {
 			gp.resetGioc(d);
 			gp.repaint();
 			d.mischia();
-			d.daiCarte(gp);
+			d.daiCarte(gp,disconnessi);
 			gp.daiCarteGioc();
 			c=new Comando(null);
 			primoGiocatore=(d.getPosD()+1)%d.getG().length;
@@ -519,7 +525,6 @@ public class Partita {
 		
 	}
 
-	//TODO prova commit
 	private void resetRimanenti(boolean[] rimanenti) {
 		for (int i = 0; i < rimanenti.length; i++) {
 			if(!rimanenti[i]){
@@ -622,7 +627,7 @@ public class Partita {
 
 	private void inviaComando(Comando c) {
 		for(int i=0;i<OOS.length;i++)
-			if(disconnessi[i+1]==0||(disconnessi[i+1]==1 &&(c.t!=null || c.fiches!=-1)))	
+			//if(disconnessi[i+1]==0||(disconnessi[i+1]==1 &&(c.t!=null || c.fiches!=-1)))	
 			try {
 				OOS[i].writeObject(c);
 			} catch (IOException e) {
