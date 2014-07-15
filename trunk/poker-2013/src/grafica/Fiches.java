@@ -67,12 +67,12 @@ public class Fiches {
 			chip6.setBounds(140,100,100,100);   
 			break;
 		case 7:
-			chip1.setBounds(200, 290, 100, 100);
-			chip2.setBounds(170, 290, 100, 100);
-			chip3.setBounds(140, 290, 100, 100);
-			chip4.setBounds(110, 290, 100, 100);
-			chip5.setBounds(80, 290, 100, 100);
-			chip6.setBounds(50,290,100,100);   
+			chip1.setBounds(200, 270, 100, 100);
+			chip2.setBounds(170, 270, 100, 100);
+			chip3.setBounds(140, 270, 100, 100);
+			chip4.setBounds(110, 270, 100, 100);
+			chip5.setBounds(80, 270, 100, 100);
+			chip6.setBounds(50,270,100,100);   
 			break;
 		case 8:
 			chip1.setBounds(170, 445, 100, 100);
