@@ -120,6 +120,9 @@ public class GiocatoreGrafico
 		this.nome.setText(nome);
 	}//setNome
 	
+	public String getNome(){
+		return nome.getText();
+	}
 	/**
 	 * Setta l'icona delle carte del giocatore
 	 */
