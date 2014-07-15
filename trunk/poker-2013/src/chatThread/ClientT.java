@@ -7,7 +7,7 @@ public class ClientT {
 	private RecieveThread recieveThread;
 	private Thread thread,thread2;
 	
-	public ClientT(InetAddress ip,int port){
+	public ClientT(String ip,int port){
 		try {
 			sock = new Socket(ip,port);
 			sendThread = new SendThread(sock);
@@ -17,6 +17,9 @@ public class ClientT {
 			thread2 =new Thread(recieveThread);
 			thread2.start();
 		} catch (Exception e) {System.out.println(e.getMessage());}
+	}
+	public static void main(String args[]){
+		new ClientT("10.0.204.219",9999);
 	}
 }
 

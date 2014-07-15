@@ -24,7 +24,7 @@ class SendThread implements Runnable {
 					//msgtoServerString = grafica.GraficaPoker.ConsChat.getText();
 					//grafica.GraficaPoker.scriviChat("ciao");
 					//grafica.GraficaPoker.scriviChat(msgtoServerString);
-					//msgtoServerString = brinput.readLine();
+					msgtoServerString = brinput.readLine();
 					
 					this.print.println(msgtoServerString);
 					this.print.flush();
