@@ -444,8 +444,6 @@ public class Fiches {
 		gp.rimuoviComp(g.getSiChip4());
 		gp.rimuoviComp(g.getSiChip5());
 		gp.rimuoviComp(g.getSiChip6());
-
-		
 	}//reset
 
 	private static void muovi(int numGioc, Fiches g) {
