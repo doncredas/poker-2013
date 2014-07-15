@@ -201,34 +201,36 @@ public class Dealer {
 		return posD;
 	}
 
-	public void daiCarte(GraficaPoker gp){		
+	public void daiCarte(GraficaPoker gp,int[] disconnessi){		
 		int j = (posD+1)%nGiocatori;
 		do{	
-			if(j==0){
-				g[j].setCartaDealer1(mazzo[primaCarta], gp);
-				primaCarta--;
-				j=(j+1)%nGiocatori;
-			}else
-			if(g[j].getFiches()>0){
-				g[j].setCarta1(mazzo[primaCarta]);
-				primaCarta--;
-				j=(j+1)%nGiocatori;
+			if(disconnessi[j]==0){
+				if(j==0){
+					g[j].setCartaDealer1(mazzo[primaCarta], gp);
+					primaCarta--;
+				}else
+				if(g[j].getFiches()>0){
+					g[j].setCarta1(mazzo[primaCarta]);
+					primaCarta--;
+				}
 			}
-			
+			j=(j+1)%nGiocatori;
 		}while( j != (posD+1)%nGiocatori);
 
 		int i = (posD+1)%nGiocatori;
 		do{	
-			if(i==0){
-				g[i].setCartaDealer2(mazzo[primaCarta], gp);
-				primaCarta--;
-				i=(i+1)%nGiocatori;
-			}else
-				if(g[i].getFiches()>0){
-				g[i].setCarta2(mazzo[primaCarta]);
-				primaCarta--;
-				i=(i+1)%nGiocatori;
-			}	
+			if(disconnessi[i]==0){
+				if(i==0){
+			
+					g[i].setCartaDealer2(mazzo[primaCarta], gp);
+					primaCarta--;
+				}else
+					if(g[i].getFiches()>0){
+					g[i].setCarta2(mazzo[primaCarta]);
+					primaCarta--;
+				}	
+			}
+			i=(i+1)%nGiocatori;
 		}while( i != (posD+1)%nGiocatori);
 
 		puntata=piccoloBuio*2;
@@ -412,7 +414,7 @@ public class Dealer {
 	public boolean[] getRimanenti() {
 		boolean rimanenti[]=new boolean[g.length];
 		for (int i=0;i<g.length;i++){
-			rimanenti[i]=g[i].getInGioco();
+			rimanenti[i]=g[i].getFiches()!=0;
 		}
 		return rimanenti;
 		
