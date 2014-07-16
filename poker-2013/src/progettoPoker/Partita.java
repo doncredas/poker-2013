@@ -38,6 +38,8 @@ public class Partita {
 	                                        
 	private boolean flag=false;
 	private boolean rimanenti[];
+	private Boolean azioneRegistrata=false;
+	private Comando azioneAllIn=null;
 	
 	public Partita(Socket client)  {
 		this.s=client;
@@ -75,8 +77,6 @@ public class Partita {
 
 	private void eseguiComando(Comando com,GraficaPoker gp) {
 		Comando risp=null;
-		Boolean azioneRegistrata=false;
-		Comando azioneAllIn=null;
 		if(gp!=null){
 			if(com.t==null||com.t!=Tipo.NOTIFICA){
 				gp.setAttivo(0);
@@ -136,24 +136,31 @@ public class Partita {
 		}else
 		if(com.t==null&&com.fiches==-1){
 			if(gp.getGiocatore(0).getFichesVal()!=0){
-				this.gp.disableBottoni(false);
-				while(risp==null){
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				if(!(altriAllIn()&&azioneRegistrata)){
+					if(gp.getPuntataCall()!=0){
+						this.gp.disableBottoni(false);
+						while(risp==null){
+							try {
+								Thread.sleep(200);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							risp=this.gp.getComando();
+						}
 					}
-					risp=this.gp.getComando();
-				}if(altriAllIn()&&azioneRegistrata){
-					risp=azioneAllIn;
-				}else
-					if(altriAllIn()){
-						risp=azioneAllIn=this.gp.getComando();
-					}else{
+					if(azioneRegistrata){
 						azioneRegistrata=false;
 						azioneAllIn=null;
 					}
+					if(altriAllIn()){
+						if(gp.getPuntataCall()==0)
+							risp=new Comando(Tipo.CHECK_CALL);
+						azioneAllIn=risp;
+						azioneRegistrata=true;
+					}
+				}else
+					risp=azioneAllIn;
 			}else
 				risp=new Comando(Tipo.CHECK_CALL);
 			this.gp.resetComando();
@@ -268,13 +275,19 @@ public class Partita {
 					gp.punta(com.getGioc()+1, com.getFiches(), gp);
 			break;
 		case FOLD:
-			if(com.getGioc()<posGioc)
+			if(com.getGioc()<posGioc){
 				gp.getGiocatore(com.getGioc()+1).setFold(true);
+				GraficaPoker.scriviStatistica(gp.getGiocatore(com.getGioc()+1).getNome()+" ha foldato");
+			}
 			else
-				if(com.getGioc()==posGioc)
+				if(com.getGioc()==posGioc){
 					gp.getGiocatore(0).setFold(true); 
-				else
+					GraficaPoker.scriviStatistica(gp.getGiocatore(0).getNome()+" ha foldato");
+				}
+				else{
 					gp.getGiocatore(com.getGioc()).setFold(true);
+					GraficaPoker.scriviStatistica(gp.getGiocatore(com.getGioc()).getNome()+" ha foldato");
+				}
 			break;
 		case FINE_MANO:
 			rimanenti=com.rimanenti;
@@ -284,9 +297,10 @@ public class Partita {
 				if(i<posGioc){
 					gp.getGiocatore(i+1).setVisible(rimanenti[i]);
 				}else
-					if(i==posGioc)
-					gp.getGiocatore(0).setVisible(rimanenti[i]);
-					else
+					if(i==posGioc){
+						gp.getGiocatore(0).setVisible(rimanenti[i]);
+						gp.eliminaBui();
+					}else
 						gp.getGiocatore(i).setVisible(rimanenti[i]);
 			}
 			break;
@@ -533,6 +547,7 @@ public class Partita {
 			}
 		}
 		Comando delete=new Comando(Tipo.NOTIFICA,Tipo.FINE_MANO,rimanenti);
+		eseguiComando(delete,0);
 		inviaComando(delete);
 		
 	}
@@ -548,7 +563,7 @@ public class Partita {
 		}
 		if(cont<2){
 			d.checkCall(indice);
-			d.fineMano(OOS);
+			d.fineMano(OOS,gp);
 		}
 		if(cont<2)
 		return indice;
@@ -569,7 +584,7 @@ public class Partita {
 					d.river(OOS,disconnessi);
 					gp.setRiver(d.getCarteComuni()[4]);
 				}else
-					d.fineMano(OOS);
+					d.fineMano(OOS,gp);
 	}
 
 	private void eseguiComando(Comando c,int i) {
@@ -578,6 +593,7 @@ public class Partita {
 		case FOLD:
 			d.fold(i);
 			gp.getGiocatore(i).setFold(true);
+			GraficaPoker.scriviStatistica(d.getG()[i].getNickName()+" ha foldato");
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.FOLD,i);
 			setComando(notifica);
 			inviaComando(notifica);
@@ -585,7 +601,7 @@ public class Partita {
 		case CHECK_CALL:
 			d.checkCall(i);
 			GraficaPoker.Giocatori[i].setFiches(d.getG()[i].getFiches());
-			gp.punta(i+1, d.getPuntata(), gp);
+			gp.punta(i+1, d.getPuntata()-(d.getPiatto()[i]-d.getPuntataComune()), gp); //TODO
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.CHECK_CALL,i,d.getPuntata());
 			setComando(notifica);
 			inviaComando(notifica);
@@ -608,6 +624,9 @@ public class Partita {
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.DISCONNESSIONE,i);
 			setComando(notifica);
 			inviaComando(notifica);
+		case FINE_MANO:
+			
+			
 		default:
 			break;
 		}
