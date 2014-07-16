@@ -326,6 +326,14 @@ public class Dealer {
 		}
 	}//checkCall
 	
+	public int getPuntataComune() {
+		return puntataComune;
+	}
+
+	public int[] getPiatto() {
+		return piatto;
+	}
+
 	public void raise(int gioc, int fiches){
 		g[gioc].setFiches(g[gioc].getFiches()-fiches);
 		piatto[gioc]+=fiches;
@@ -354,7 +362,7 @@ public class Dealer {
 		
 	}
 
-	public void fineMano(ObjectOutputStream[] oOS) {
+	public void fineMano(ObjectOutputStream[] oOS,GraficaPoker gp) {
 		LinkedList<Giocatore []> vincitori=vincitoreMano();
 		Comando vin=null;
 		int quota=0;
@@ -363,40 +371,41 @@ public class Dealer {
 		int piattoTmp[]=Arrays.copyOf(piatto, piatto.length);
 		Giocatore[] vinc;
 		valPiatto=getValPiatto();
-		while(valPiatto>0/*&&!vincitori.isEmpty()*/){
-		vinc=vincitori.remove();
-		Arrays.sort(vinc, new ComparatorPiatto<Giocatore>());
-		for(int i=0;i<vinc.length;i++){
-			vincita=0;
-			quota=(piatto[vinc[i].indice]/(vinc.length-i));
-			for (int j = 0; j < g.length; j++) {
-				if(piattoTmp[j]/vinc.length<quota){
-					vincita+=piattoTmp[j]/(vinc.length-i);
-					piattoTmp[j]-=piattoTmp[j]/(vinc.length-i);
+		while(valPiatto>0){
+			vinc=vincitori.remove();
+			Arrays.sort(vinc, new ComparatorPiatto<Giocatore>());
+			for(int i=0;i<vinc.length;i++){
+				vincita=0;
+				quota=(piatto[vinc[i].indice]/(vinc.length-i));
+				for (int j = 0; j < g.length; j++) {
+					if(piattoTmp[j]/vinc.length<quota){
+						vincita+=piattoTmp[j]/(vinc.length-i);
+						piattoTmp[j]-=piattoTmp[j]/(vinc.length-i);
+					}
+					else{
+						vincita+=quota;
+						piattoTmp[j]-=quota;
+					}
 				}
-				else{
-					vincita+=quota;
-					piattoTmp[j]-=quota;
+				valPiatto-=vincita;
+				vin=new Comando(null,vinc[i].getFiches()+vincita);
+				gp.getGiocatore(vinc[i].indice).setFiches(vinc[i].getFiches()+vincita);
+				getG()[vinc[i].indice].setFiches(vinc[i].getFiches()+vincita);
+				if(vinc[i].indice!=0){
+					try {
+						oOS[vinc[i].indice-1].writeObject(vin);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{
+					//getG()[0].setFiches(getG()[0].getFiches()+vincita);
 				}
+				piatto[vinc[i].indice]=0;
 			}
-			valPiatto-=vincita;
-			vin=new Comando(null,vinc[i].getFiches()+vincita);
-			getG()[vinc[i].indice].setFiches(vinc[i].getFiches()+vincita);
-			if(vinc[i].indice!=0){
-				try {
-					oOS[vinc[i].indice-1].writeObject(vin);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}else{
-				//getG()[0].setFiches(getG()[0].getFiches()+vincita);
+			for (int i = 0; i < piattoTmp.length; i++) {
+				piatto[i]=piattoTmp[i];
 			}
-			piatto[vinc[i].indice]=0;
-		}
-		for (int i = 0; i < piattoTmp.length; i++) {
-			piatto[i]=piattoTmp[i];
-		}
 		}
 		//for(int i=0;i<piatto.length;i++)piatto[i]=0;
 		muoviDealer();

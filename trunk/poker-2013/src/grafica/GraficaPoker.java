@@ -174,6 +174,10 @@ public class GraficaPoker extends JFrame {
 	public void setPuntataCall(int val){
 		puCall.setText(""+val);
 	}
+	
+	public int getPuntataCall(){
+		return Integer.parseInt(puCall.getText());
+	}
 	/**
 	 * Setta il minimo della barra del raise
 	 * @param min: minimo da cui iniziare
