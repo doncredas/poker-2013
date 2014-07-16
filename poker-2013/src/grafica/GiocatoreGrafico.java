@@ -94,6 +94,7 @@ public class GiocatoreGrafico
 	 */
 	public void setNome(String nome)
 	{
+		nome=nome.trim();
 		int lung=nome.length();
 		
 		if(nomeX==0){
