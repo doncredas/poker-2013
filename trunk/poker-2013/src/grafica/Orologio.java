@@ -26,6 +26,7 @@ public class Orologio implements Runnable{
 	 * resetta il timer
 	 */
 	public void restart(){
+		time.setVisible(true);
 		this.i=60;
 		time.setText(Integer.toString(i));
 	}//restart
@@ -61,5 +62,8 @@ public class Orologio implements Runnable{
 			time.repaint();
 		}//while
 	}//run
+	public void stop(){
+		time.setVisible(false);
+	}
 
 }//Orologio

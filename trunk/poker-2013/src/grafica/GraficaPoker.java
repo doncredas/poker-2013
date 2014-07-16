@@ -902,6 +902,12 @@ public class GraficaPoker extends JFrame {
 	public void punta(int i, int puntata, GraficaPoker gp) {
 		Giocatori[i-1].puntata=Fiches.punta(i, puntata, gp, Giocatori[i-1].puntata);
 	}
+	
+	public void eliminaBui(){
+		Dealer.setVisible(false);
+		SB.setVisible(false);
+		BB.setVisible(false);
+	}
 
 	public static void main(String[] args) {
 
