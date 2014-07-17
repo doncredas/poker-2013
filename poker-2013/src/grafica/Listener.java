@@ -44,8 +44,12 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	Socket socket=null;
 	Thread thread;
 	//Giocatore [] giocatore;
-
-
+	
+	int puntataClient=-1;
+	
+	public void setPuntata(int val){
+		this.puntataClient=val;
+	}
 	
 	//ImageIcon ico1=null;
 	//ImageIcon ico2=null;
@@ -150,7 +154,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		if (arg0.getSource() == GraficaPoker.Raise) {
 			this.BarRaise.setValue(Integer.valueOf(this.ConsRaise.getText()));
 			
-			GraficaPoker.com = new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText()));
+			GraficaPoker.com = new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText()+puntataClient));
 			
 			gp.disableBottoni(true);
 		}

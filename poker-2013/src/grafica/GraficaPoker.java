@@ -103,6 +103,9 @@ public class GraficaPoker extends JFrame {
 		}//for
 	}//daiCarteGioc
 	
+	public void setPCList(int val){
+		list.setPuntata(val);
+	}
 	/**
 	 * Setta il pot generale del tavolo,passandogli un numero
 	 */
