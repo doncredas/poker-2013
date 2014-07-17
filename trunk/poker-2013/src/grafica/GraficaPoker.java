@@ -3,6 +3,7 @@ package grafica;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 
@@ -172,11 +173,12 @@ public class GraficaPoker extends JFrame {
 	 * @param val
 	 */
 	public void setPuntataCall(int val){
-		puCall.setText(""+val);
+		puCall.setText(""+val+" €");
 	}
 	
 	public int getPuntataCall(){
-		return Integer.parseInt(puCall.getText());
+		StringTokenizer st=new StringTokenizer(puCall.getText()," "+"€",false);
+		return Integer.parseInt(st.nextToken());
 	}
 	/**
 	 * Setta il minimo della barra del raise
@@ -209,6 +211,7 @@ public class GraficaPoker extends JFrame {
 		if(messaggio.toLowerCase().equals("clear"))
 			Statistiche.setText("");
 		else  Statistiche.append(" - "+messaggio+"\n");
+		Statistiche.setCaretPosition(Statistiche.getDocument().getLength());
 	}
 	/**Se settato a true disabilita il fold, settato a false lo riabilita
 	 */ 
@@ -265,7 +268,7 @@ public class GraficaPoker extends JFrame {
 
 	//PUNTATA DEL CALL
 	JLabel vaCall=new JLabel("Valore del Call:");
-	JTextField puCall=new JTextField("0");
+	JTextField puCall=new JTextField("0 €");
 	
 	//DEALER,SB,BB
 	static JLabel Dealer=new JLabel();
@@ -527,7 +530,7 @@ public class GraficaPoker extends JFrame {
 		
 		//VALORE CALL
 		vaCall.setBounds(760,545,100,100);
-		puCall.setBounds(780,605,50,20);
+		puCall.setBounds(780,605,55,20);
 		puCall.setEnabled(false);
 		puCall.setDisabledTextColor(Color.black);
 		vaCall.setForeground(Color.white);
@@ -554,6 +557,7 @@ public class GraficaPoker extends JFrame {
 			} catch (IOException e){}
 		      catch(FontFormatException e1) {}
 		Statistiche.setFont(font2.deriveFont(Font.BOLD,12));
+		Statistiche.setAutoscrolls(true);
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
 		Fold.setIcon(Icone.Foldnot);
@@ -842,6 +846,8 @@ public class GraficaPoker extends JFrame {
 		*/
 		ScrollStat.setBounds(927,560,290,112);
 		ScrollStat.setWheelScrollingEnabled(true);
+		ScrollStat.setAutoscrolls(true);
+	
 		/*
 		Chat.setEditable(false);
 		Chat.setForeground(Color.BLUE);
@@ -871,6 +877,7 @@ public class GraficaPoker extends JFrame {
 		principale.add(ScrollStat);
 		//principale.add(ConsChat);
 
+		
 		principale.add(BarRaise);
 		principale.add(ConsRaise);
 		
@@ -913,23 +920,25 @@ public class GraficaPoker extends JFrame {
 		BB.setVisible(false);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		GraficaPoker gp=new GraficaPoker(8);
-		/*Giocatori[1].setVisible(false);
+		//Giocatori[1].setVisible(false);
 		Giocatori[2].setVisible(false);
 		Giocatori[3].setVisible(false);
 		Giocatori[4].setVisible(false);
 		Giocatori[5].setVisible(false);
 		Giocatori[6].setVisible(false);
 		Giocatori[7].setVisible(false);
-		setDealer(1);*/
+		setDealer(1);
 		
 		scriviStatistica("Ciao");
 		scriviStatistica("come");
 		scriviStatistica("va?");
+		
 		Fiches f1=Fiches.punta(1, 99999, gp,null);
 		Fiches f2=Fiches.punta(2, 99999, gp,null);
+		/*
 		Fiches f3=Fiches.punta(3, 99999, gp,null);
 		Fiches f4=Fiches.punta(4, 99999, gp,null);
 		Fiches f5=Fiches.punta(5, 99999, gp,null);
@@ -937,7 +946,7 @@ public class GraficaPoker extends JFrame {
 		Fiches f7=Fiches.punta(7, 99999, gp,null);
 		Fiches f8=Fiches.punta(8, 2345, gp,null);
 		
-		
+		/*
 		gp.vincitoreMano(8,f8);
 		gp.vincitoreMano(7,f7);
 		gp.vincitoreMano(6,f6);
@@ -946,7 +955,7 @@ public class GraficaPoker extends JFrame {
 		gp.vincitoreMano(3,f3);
 		gp.vincitoreMano(2,f2);
 		gp.vincitoreMano(1,f1);
-	
+	*/
 		gp.daiCarteGioc();
 
 		
