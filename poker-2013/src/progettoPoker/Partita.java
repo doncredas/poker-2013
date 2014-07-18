@@ -198,16 +198,20 @@ public class Partita {
 		Comando risp=null;
 		switch(com.t){
 		case NICK_NAME:
-			String nick=null;
+			String nick="";
 			if(flag)
 				JOptionPane.showMessageDialog(null,"Nickname già in uso, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
 			flag=true;
 			do{
 			   nick=(String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
-			   nick.trim();
+			   if(nick.equals("")){
+				     JOptionPane.showMessageDialog(null,"Non hai inserito un nickname!","Attenzione",JOptionPane.WARNING_MESSAGE);
+				     continue;
+			   }
+			   nick=nick.trim();
 			   if(nick.length()>11)
 				   JOptionPane.showMessageDialog(null,"Nickname troppo lungo, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
-			}while(nick.length()>11);
+			}while(nick.length()>11 || nick.equals(""));
 			risp=new Comando(Tipo.NICK_NAME,nick);
 			GraficaPoker.Giocatori[0].setNome(nick);
 			break;
@@ -452,7 +456,7 @@ public class Partita {
 					} catch (IOException e) {
 					}
 					
-				JOptionPane.showMessageDialog(gp, d.getG()[i].getNickName()+" vince la partita");
+				JOptionPane.showMessageDialog(gp, d.getG()[i].getNickName()+" vince la partita","Vincitore",JOptionPane.INFORMATION_MESSAGE,Icone.logo);
 				System.exit(0);
 			}
 		}
@@ -460,7 +464,7 @@ public class Partita {
 	
 	private void gameOver(String nick){
 		gp.dispose();
-		JOptionPane.showMessageDialog(gp, nick+" vince la partita");
+		JOptionPane.showMessageDialog(gp, nick+" vince la partita","Vincitore",JOptionPane.INFORMATION_MESSAGE,Icone.logo);
 		try {
 			oos.writeObject(new Comando(Tipo.GAME_OVER));
 		} catch (IOException e) {
@@ -475,7 +479,18 @@ public class Partita {
 		c=new Comando(Tipo.NICK_NAME);
 		Comando vecchioRisp=null;
 		boolean ok=true;
-		String nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+		String nick="";
+		do{
+			nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+			if(nick.equals("")){
+			     	JOptionPane.showMessageDialog(null,"Non hai inserito un nickname!","Attenzione",JOptionPane.WARNING_MESSAGE);
+			     	continue;
+			}
+			nick=nick.trim();   
+			if(nick.length()>11)
+			   JOptionPane.showMessageDialog(null,"Nickname troppo lungo, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
+		   
+		}while(nick.equals("")|| nick.length()>11);
 		d.getG()[0].setNickName(nick);
 		GraficaPoker.Giocatori[0].setNome(nick);
 		for (int i = 0; i < OOS.length; i++) {
@@ -601,7 +616,7 @@ public class Partita {
 		case CHECK_CALL:
 			d.checkCall(i);
 			GraficaPoker.Giocatori[i].setFiches(d.getG()[i].getFiches());
-			gp.punta(i+1, d.getPuntata()-(d.getPiatto()[i]-d.getPuntataComune()), gp); //TODO
+			gp.punta(i+1, d.getPuntata(), gp); //gp.punta(i+1, d.getPuntata()-(d.getPiatto()[i]-d.getPuntataComune()), gp); TODO
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.CHECK_CALL,i,d.getPuntata());
 			setComando(notifica);
 			inviaComando(notifica);
