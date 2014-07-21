@@ -29,5 +29,8 @@ public class ServerT {
 			thread2.start();
 	}//costruttore
 	
+	public static void main(String[] args) throws IOException {
+		new ServerT(1,9999);
+	}
 		//System.out.println("Server waiting for connection on port " + port);	
 }

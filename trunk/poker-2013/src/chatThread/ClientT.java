@@ -18,8 +18,10 @@ public class ClientT {
 			thread2.start();
 		} catch (Exception e) {System.out.println(e.getMessage());}
 	}
+
 	public static void main(String args[]){
 		new ClientT("10.0.204.219",9999);
 	}
+
 }
 
