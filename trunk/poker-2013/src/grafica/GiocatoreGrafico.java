@@ -175,6 +175,10 @@ public class GiocatoreGrafico
 		else this.etichetta.setIcon(Icone.Etichetta);
 	}//setAttivo
 
+	public Fiches getPuntata() {
+		return puntata;
+	}
+
 
 	public void resetFiches(GraficaPoker gp) {
 		if(!(puntata==null))
