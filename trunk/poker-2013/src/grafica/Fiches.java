@@ -351,7 +351,7 @@ public class Fiches {
 	 * @param g
 	 * @param gp
 	 */
-	private static void setPosition(int numGioc, Fiches g, GraficaPoker gp) {
+	public static void setPosition(int numGioc, Fiches g, GraficaPoker gp) {
 		switch (numGioc) {
 		case 1: {
 			g.getSiChip1().setBounds(495, 350, 100, 100);
