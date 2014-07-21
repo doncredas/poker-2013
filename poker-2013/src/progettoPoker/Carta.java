@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * Classe che concretizza l'idea d una carta con 2 campi un valore numerico da 1 a 13 e un carattere che rappresenta 
- * il palo c,q,f,p sono i caratteri ammessi, entrambi i valori sono costanti così una volta generata una carta non è
- * più modificabile. Comprende il costruttore che riceve il palo e il valore e i metodi getter.
+ * il palo c,q,f,p sono i caratteri ammessi, entrambi i valori sono costanti cosÃ¬ una volta generata una carta non Ã¨
+ * piÃ¹ modificabile. Comprende il costruttore che riceve il palo e il valore e i metodi getter.
  *
  */
 public class Carta implements Comparable<Carta>,Serializable{
@@ -43,6 +43,32 @@ public class Carta implements Comparable<Carta>,Serializable{
 			case 'f':return val+25;
 			default:return val+38;
 		}
+	}
+	public String toString(){
+		return valToString()+paloToString();
+	}
+	
+	public String valToString(){
+		if(val<11&&val!=1){
+			return ""+val;
+		}else{
+			switch(val){
+			case 1:return "A";
+			case 11:return "J";
+			case 12:return "Q";
+			case 13:return "K";
+			}
+		}
+		return null;
+	}
+	public String paloToString(){
+		switch (palo){
+		case 'c':return "♥";
+		case 'q':return "♦";
+		case 'f':return "♣";
+		case 'p':return "♠";
+		}
+		return null;
 	}
 	
 }

@@ -237,5 +237,20 @@ public class Mano {
 		}
 		return maniPerdenti;
 	}
+
+	public String getValString() {
+		int v=getVal();
+		switch(v){
+		case 1:return "carta alta";
+		case 2:return "coppia";
+		case 3:return "doppia coppia";
+		case 4:return "tris";
+		case 5:return "scala";
+		case 6:return "colore";
+		case 7:return "full";
+		case 8:return "scala reale";
+		}
+		return null;
+	}
 		
 }//Mano

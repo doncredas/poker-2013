@@ -2,6 +2,8 @@ package progettoPoker;
 
 import java.io.Serializable;
 
+import progettoPoker.Comando.Tipo;
+
 
 public class Comando implements Serializable {
 	
@@ -11,7 +13,8 @@ public class Comando implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4387454705887783423L;
-	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME,GIOCATORI,FINE_MANO,DISCONNESSIONE,GAME_OVER};
+	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME,GIOCATORI,FINE_MANO,
+		DISCONNESSIONE,GAME_OVER,VINCITORI,ATTIVA};
 	Carta c;
 	Carta[] car=new Carta[3];
 	int fiches=-1;
@@ -26,7 +29,21 @@ public class Comando implements Serializable {
 	int puntata=-1;
 	int fichesGioc[];
 	int dealer[]=null;
+	int vincite[];
+	String statistica;
 	
+	public String getStatistica() {
+		return statistica;
+	}
+
+	public void setStatistica(String statistica) {
+		this.statistica = statistica;
+	}
+
+	public int[] getVincite() {
+		return vincite;
+	}
+
 	public int getValPiatto() {
 		return valPiatto;
 	}
@@ -110,7 +127,7 @@ public class Comando implements Serializable {
 		this.rimanenti=rimanenti;
 	}
 
-	public Comando(Comando c2,String s) {
+	public Comando(Comando c2,Object o) {
 		this.c=c2.c;
 		this.car=c2.car;
 		this.fiches=c2.fiches;
@@ -125,6 +142,11 @@ public class Comando implements Serializable {
 		this.puntata=c2.puntata;
 		this.fichesGioc=c2.fichesGioc;
 		this.dealer=c2.dealer;
+	}
+
+	public Comando(Tipo vincitori, int[] vincite) {
+		this.t=vincitori;
+		this.vincite=vincite;
 	}
 
 	public String getNick(){

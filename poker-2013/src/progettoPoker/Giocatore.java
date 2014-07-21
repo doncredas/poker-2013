@@ -119,12 +119,12 @@ public class Giocatore {
 		}		
 	}
 
-	public void setCartaDealer1(Carta carta,GraficaPoker gp) {
+	public void setCartaServer1(Carta carta,GraficaPoker gp) {
 		this.carta1 = carta;
 		gp.Giocatori[0].setCarte(carta, 1);
 	}
 
-	public void setCartaDealer2(Carta carta,GraficaPoker gp) {
+	public void setCartaServer2(Carta carta,GraficaPoker gp) {
 		this.carta2 = carta;	
 		gp.Giocatori[0].setCarte(carta, 2);
 	}
