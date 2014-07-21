@@ -28,7 +28,7 @@ public class GraficaPoker extends JFrame {
 	static Comando com=null;
 	static int nGioc=0;
 	/**
-	 * Quando viene chiamato dà le carte ai giocatori graficamente
+	 * Quando viene chiamato dï¿½ le carte ai giocatori graficamente
 	 */
 	public void daiCarteGioc()
 	{
@@ -108,7 +108,7 @@ public class GraficaPoker extends JFrame {
 	 */
 	public void setPot(int num)
 	{
-		potVal.setText(Integer.toString(num));
+		potVal.setText(Integer.toString(num)+"â‚¬");
 	}
 			
 	/**	 Setta le prime 3 carte sul tavolo
@@ -173,11 +173,11 @@ public class GraficaPoker extends JFrame {
 	 * @param val
 	 */
 	public void setPuntataCall(int val){
-		puCall.setText(""+val+" €");
+		puCall.setText(""+val+" â‚¬");
 	}
 	
 	public int getPuntataCall(){
-		StringTokenizer st=new StringTokenizer(puCall.getText()," "+"€",false);
+		StringTokenizer st=new StringTokenizer(puCall.getText()," "+"â‚¬",false);
 		return Integer.parseInt(st.nextToken());
 	}
 	/**
@@ -268,7 +268,7 @@ public class GraficaPoker extends JFrame {
 
 	//PUNTATA DEL CALL
 	JLabel vaCall=new JLabel("Valore del Call:");
-	JTextField puCall=new JTextField("0 €");
+	JTextField puCall=new JTextField("0 â‚¬");
 	
 	//DEALER,SB,BB
 	static JLabel Dealer=new JLabel();
@@ -391,7 +391,7 @@ public class GraficaPoker extends JFrame {
 		case 3: principale.add(jc,35);break;
 		case 2: principale.add(jc,30);break;
 		case 1: principale.add(jc,25);break;
-		default: principale.add(jc,60);break; //jc,65 se c'è la chat
+		default: principale.add(jc,60);break; //jc,65 se c'ï¿½ la chat
 		}
 	}//aggiungiComp
 	
@@ -556,7 +556,7 @@ public class GraficaPoker extends JFrame {
             font2=Font.createFont(Font.TRUETYPE_FONT,Icone.fontArea);
 			} catch (IOException e){}
 		      catch(FontFormatException e1) {}
-		Statistiche.setFont(font2.deriveFont(Font.BOLD,12));
+		Statistiche.setFont(font2.deriveFont(Font.BOLD,14)); //TODO
 		Statistiche.setAutoscrolls(true);
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,INVIA,CHAT,STATS,SEGNAPUNTI,VALOREFICHES)
@@ -844,7 +844,7 @@ public class GraficaPoker extends JFrame {
 		ScrollChat.setBounds(927, 542, 290, 100);
 		ScrollChat.setWheelScrollingEnabled(true);
 		*/
-		ScrollStat.setBounds(927,560,290,112);
+		ScrollStat.setBounds(870,560,350,112);
 		ScrollStat.setWheelScrollingEnabled(true);
 		ScrollStat.setAutoscrolls(true);
 	
