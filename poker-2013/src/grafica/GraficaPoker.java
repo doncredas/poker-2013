@@ -363,7 +363,13 @@ public class GraficaPoker extends JFrame {
 	*/
 	
 	//OROLOGIO
-	public Thread orologio;
+	public Thread orol;
+	public Orologio orologio;
+	JLabel Time=new JLabel();
+	
+	
+        
+
 
 	
 	Listener list = new Listener(/*Chat, ConsChat,Statistiche,ScrollChat,ScrollStat,*/BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,this); // LISTENER
@@ -538,18 +544,7 @@ public class GraficaPoker extends JFrame {
 		puCall.setEditable(false);
 		principale.add(vaCall);
 		principale.add(puCall);
-		//OROLOGIO
-		
-		//FONT OROLOGIO
-		orologio=new Thread(new Orologio());  //TODO orologio
-		Font orolox = null;
-		try {
-             orolox=Font.createFont(Font.TRUETYPE_FONT,Icone.orol);
-			} catch (IOException e){}
-		      catch(FontFormatException e1) {}
-		JLabel Time = Orologio.getLabel();
-		Time.setFont(orolox.deriveFont(Font.PLAIN,14));
-		
+
 		//FONT TEXTAREA
 		Font font2=null;
 		try {
@@ -919,7 +914,19 @@ public class GraficaPoker extends JFrame {
 		SB.setVisible(false);
 		BB.setVisible(false);
 	}
-
+	
+	public void creaOrol(int tempo){
+		orologio=new Orologio(tempo);
+		orol=new Thread(orologio); 
+		Time = Orologio.getLabel();
+	}
+	
+	public void stopOr(){
+		orologio.stop();
+	}
+	public void restartOr(){
+		orologio.restart();
+	}
 	public static void main(String[] args) throws InterruptedException {
 
 		GraficaPoker gp=new GraficaPoker(8);
