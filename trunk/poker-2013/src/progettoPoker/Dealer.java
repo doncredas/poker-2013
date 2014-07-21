@@ -33,10 +33,12 @@ public class Dealer {
 	private Socket[] s; //array dei client da passare ai singoli giocatori
 	private ObjectOutputStream OOS[];
 	private int puntata;
-	private int puntataComune;
+	private int puntataTotale;
 	private Giocatore[]g;
 	private int []piatto;
 	private Carta[] carteComuni=new Carta[5];
+	private int[] vincite;
+	private Mano[] maniVincenti;
 	public Socket[] getS() {
 		return s;
 	}
@@ -54,6 +56,7 @@ public class Dealer {
 		this.OOS=OOS;
 		this.nGiocatori=nGiocatori;
 		g=new Giocatore[nGiocatori];
+		maniVincenti=new Mano[nGiocatori];
 		piatto=new int [g.length];
 		g[0]=new Giocatore(fiches,0);
 		for(int i=1; i<g.length;i++){
@@ -95,7 +98,9 @@ public class Dealer {
 		int index=0;
 		for(int i=0; i<g.length; i++){
 			if(g[i].getInGioco()){
-				mani.put(new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2()), g[i]);
+				Mano tmp=new Mano(carteComuni, g[i].getCarta1(), g[i].getCarta2());
+				mani.put(tmp, g[i]);
+				maniVincenti[i]=tmp;
 				unico[0]=g[i];
 			}else{
 				perd[index]=g[i];
@@ -157,6 +162,10 @@ public class Dealer {
 	}//vincitoreMano
 	
 	
+	public Mano[] getManiVincenti() {
+		return maniVincenti;
+	}
+
 	public void mischia(){
 		for(int k=0;k<3;k++){
 			int iS=0, iD, sx, dx, iTotale=0;			
@@ -206,7 +215,7 @@ public class Dealer {
 		do{	
 			if(disconnessi[j]==0){
 				if(j==0){
-					g[j].setCartaDealer1(mazzo[primaCarta], gp);
+					g[j].setCartaServer1(mazzo[primaCarta], gp);
 					primaCarta--;
 				}else
 				if(g[j].getFiches()>0){
@@ -222,7 +231,7 @@ public class Dealer {
 			if(disconnessi[i]==0){
 				if(i==0){
 			
-					g[i].setCartaDealer2(mazzo[primaCarta], gp);
+					g[i].setCartaServer2(mazzo[primaCarta], gp);
 					primaCarta--;
 				}else
 					if(g[i].getFiches()>0){
@@ -234,7 +243,7 @@ public class Dealer {
 		}while( i != (posD+1)%nGiocatori);
 
 		puntata=piccoloBuio*2;
-		puntataComune=0;
+		puntataTotale=0;
 	}//daiCarte
 	
 	public void flop(ObjectOutputStream [] oos, int[] disconnessi){
@@ -251,7 +260,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntataComune=puntataComune+puntata;
+		puntataTotale=puntataTotale+puntata;
 		puntata=0;
 	}//flop
 	
@@ -268,7 +277,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntataComune=puntataComune+puntata;
+		puntataTotale=puntataTotale+puntata;
 		puntata=0;
 		
 	}//turn
@@ -286,7 +295,7 @@ public class Dealer {
 				e.printStackTrace();
 			}
 		}
-		puntataComune=puntataComune+puntata;
+		puntataTotale=puntataTotale+puntata;
 		puntata=0;
 	}//river
 	
@@ -315,7 +324,7 @@ public class Dealer {
 	}
 
 	public void checkCall(int gioc){
-		int daPuntare=puntata-(piatto[gioc]-puntataComune);
+		int daPuntare=puntata-(piatto[gioc]-puntataTotale);
 		if(g[gioc].getFiches()<daPuntare){
 			piatto[gioc]+=g[gioc].getFiches();
 			g[gioc].setFiches(0);
@@ -326,8 +335,8 @@ public class Dealer {
 		}
 	}//checkCall
 	
-	public int getPuntataComune() {
-		return puntataComune;
+	public int getpuntataTotale() {
+		return puntataTotale;
 	}
 
 	public int[] getPiatto() {
@@ -374,6 +383,7 @@ public class Dealer {
 		while(valPiatto>0){
 			vinc=vincitori.remove();
 			Arrays.sort(vinc, new ComparatorPiatto<Giocatore>());
+			vincite=new int[g.length];
 			for(int i=0;i<vinc.length;i++){
 				vincita=0;
 				quota=(piatto[vinc[i].indice]/(vinc.length-i));
@@ -388,6 +398,7 @@ public class Dealer {
 					}
 				}
 				valPiatto-=vincita;
+				vincite[vinc[i].indice]=vincita;
 				vin=new Comando(null,vinc[i].getFiches()+vincita);
 				gp.getGiocatore(vinc[i].indice).setFiches(vinc[i].getFiches()+vincita);
 				getG()[vinc[i].indice].setFiches(vinc[i].getFiches()+vincita);
@@ -442,5 +453,9 @@ public class Dealer {
 			if(g[i].getFiches()==0)
 				g[i].setInGioco(false);		
 	}
-	
+
+	public int[] getVincite() {
+		return vincite;
+	}
+
 }//Dealer
