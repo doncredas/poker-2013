@@ -188,7 +188,7 @@ public class Partita {
 		case NICK_NAME:
 			String nick="";
 			if(flag)
-				JOptionPane.showMessageDialog(null,"Nickname gi� in uso, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Nickname già in uso, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
 			flag=true;
 			do{
 			   nick=(String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
