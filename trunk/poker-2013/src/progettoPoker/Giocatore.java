@@ -115,12 +115,12 @@ public class Giocatore {
 
 	public void setCartaServer1(Carta carta,GraficaPoker gp) {
 		this.carta1 = carta;
-		gp.Giocatori[0].setCarte(carta, 1);
+		GraficaPoker.Giocatori[0].setCarte(carta, 1);
 	}
 
 	public void setCartaServer2(Carta carta,GraficaPoker gp) {
 		this.carta2 = carta;	
-		gp.Giocatori[0].setCarte(carta, 2);
+		GraficaPoker.Giocatori[0].setCarte(carta, 2);
 	}
 
 	public void disconnetti() {
