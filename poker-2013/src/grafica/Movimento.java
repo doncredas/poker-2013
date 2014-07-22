@@ -27,7 +27,6 @@ public class Movimento {
 				try {
 					Thread.sleep(1+1/2);
 				} catch (InterruptedException e) {
-					//  Auto-generated catch block
 					e.printStackTrace();
 				}
 

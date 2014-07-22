@@ -9,13 +9,8 @@ import javax.swing.JLabel;
 
 public class FinestraPunteggio extends JFrame implements MouseListener
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L; //TODO
-	//static File Immagini=new File("Immagini");
-	//File Varie=new File(Immagini.getAbsolutePath()+"\\Varie");
-	
+
+	private static final long serialVersionUID = 1L; 
 	public FinestraPunteggio()
 	{
 	      super("Punteggio");
@@ -23,8 +18,6 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		// Auto-generated method stub
-
 		if(this.isActive())
        {
     	   
@@ -47,7 +40,6 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 	    	   this.setVisible(false);
 	       }
 		else{
-	        // ImageIcon sfondo = new ImageIcon(Icone.sfondoFiches);
 		     this.setResizable(false);
 		     this.setBounds(115, 15, 600, 650);
 		     this.setContentPane(new JLabel(Icone.sfondoPunteggio));
