@@ -16,7 +16,7 @@ public class Partita {
 	private ObjectOutputStream oos=null;
 	private ObjectInputStream ois=null;
 	private Dealer d = null;
-	private int tempo=65;
+	private int tempo=35;
 	private int nCarta=0;
 	private int fiches;
 	private Cronometro cron=new Cronometro();
@@ -128,15 +128,17 @@ public class Partita {
 			if(gp.getGiocatore(0).getFichesVal()!=0){
 				if(!(altriAllIn()&&azioneRegistrata)){
 					if(gp.getPuntataCall()!=0){
+						gp.restartOr();
 						this.gp.disableBottoni(false);
-						while(risp==null){
+						while(risp==null&&gp.getTime()>0){
 							try {
 								Thread.sleep(200);
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
 							risp=this.gp.getComando();
-						}
+						}if(gp.getTime()==0)
+							risp=new Comando(Tipo.FOLD);
 					}
 					if(azioneRegistrata){
 						azioneRegistrata=false;
@@ -372,7 +374,7 @@ public class Partita {
 								inviaComando(new Comando(Tipo.ATTIVA,i));
 								gp.setAttivo(i);
 								gp.resetComando();
-								while(risp==null&&cron.getSecondi()<tempo){
+								while(risp==null&&gp.getTime()>0){
 									try {
 										Thread.sleep(200);
 									} catch (InterruptedException e) {
@@ -381,7 +383,7 @@ public class Partita {
 									risp=gp.getComando();
 								}
 								gp.stopOr();
-								if(cron.getSecondi()>tempo){
+								if(gp.getTime()==0){
 									risp=new Comando(Tipo.FOLD);
 								}
 							}else
