@@ -2,10 +2,8 @@
 import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 
-import progettoPoker.Giocatore;
 class RecieveFromClientThread implements Runnable {
 	Socket clientSocket = null;
 	BufferedReader brBufferedReader = null;
@@ -18,24 +16,17 @@ class RecieveFromClientThread implements Runnable {
 		this.clientSocket = clientSocket;
 		this.clientSocket1 = clientSocket1;
 
-	}// end constructor
+	}
 
 	public void run() {
 		try {
 			brBufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 			while (true) {
-				//grafica.GraficaPoker.ConsChat.setText("poker");
-				//messageString = grafica.GraficaPoker.ConsChat.getText();
-				//messageString = messageString+"cia";
-				//grafica.GraficaPoker.setConsChat(" ");	
-				//manda il messaggio nella chat grafica
-				//grafica.GraficaPoker.scriviChat("ciao3");
-  				//grafica.GraficaPoker.scriviChat(messageString);
-				while ((messageString = brBufferedReader.readLine()) != null) {// assign message from client to messageString
+				while ((messageString = brBufferedReader.readLine()) != null) {//assegna il messaggio dal client a messageString
 					if (messageString.equals("EXIT")) {
-						break;// break to close socket if EXIT
+						break;// per chiudere il socket se si digita EXIT
 					}
-					System.out.println("From Client: " + messageString);// print the message from client
+					System.out.println("Da Client: " + messageString);// stampa il messaggio del client
 					
 					//Manda il messaggio a tutti i client
 					
@@ -45,17 +36,17 @@ class RecieveFromClientThread implements Runnable {
 					for(int j=0;j<clientSocket1.length;j++){
 						// client
 						if(clientSocket.getInetAddress()!=clientSocket1[j].getInetAddress()){
-							pwPrintWriter[j].println(messageString);// send message to client with PrintWriter
-							pwPrintWriter[j].flush();// flush the PrintWriter
+							pwPrintWriter[j].println(messageString);
+							pwPrintWriter[j].flush();
 						}
 					}
 					
 				}
-				System.out.println("Please enter something to send back to client..");
+				System.out.println("Inserisci qualcosa da inviare al client");
 				this.clientSocket.close();
 				System.exit(0);
 			}
 		} catch (Exception ex) {System.out.println(ex.getMessage());}
 	}//run
 	
-}// end class RecieveFromClientThread
+}//RecieveFromClientThread

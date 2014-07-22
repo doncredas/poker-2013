@@ -16,10 +16,9 @@ public class ServerT {
 		clientSocket = new Socket[n];
 		for(int i=0;i<clientSocket.length;i++){
 			clientSocket[i] = ss.accept();
-			System.out.println("Recieved connection from "
-					+ clientSocket[i].getInetAddress() + " on port "
+			System.out.println("Ricevuta connessione da "
+					+ clientSocket[i].getInetAddress() + " su porta "
 					+ clientSocket[i].getPort());
-			// create two threads to send and recieve from client
 			RecieveFromClientThread recieve = new RecieveFromClientThread(clientSocket[i], clientSocket);
 			thread = new Thread(recieve);
 			thread.start();
@@ -31,6 +30,5 @@ public class ServerT {
 	
 	public static void main(String[] args) throws IOException {
 		new ServerT(1,9999);
-	}
-		//System.out.println("Server waiting for connection on port " + port);	
-}
+	}//main
+}//ServerT
