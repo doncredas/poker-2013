@@ -215,14 +215,6 @@ public class Mano {
 					break;
 				}
 			}
-			/*if(m.carteUtili[0] == 1) m.carteUtili[0] = 14;
-			if(m.carteUtili[0]>=tmp){//TODO rendere cartamax1 e cartaMax2 Carte
-				tmp=m.carteUtili[0];		
-				//Migliore=m;
-				if(m.carteUtili[1]>tmp2){
-					tmp2=m.carteUtili[1];	
-				}
-			}*/
 			
 		}
 		LinkedList<Mano> maniPerdenti=new LinkedList<Mano>();
