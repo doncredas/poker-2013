@@ -248,7 +248,8 @@ public class Mano {
 		case 5:return "scala";
 		case 6:return "colore";
 		case 7:return "full";
-		case 8:return "scala reale";
+		case 8:return "poker";
+		case 9:return "scala reale";
 		}
 		return null;
 	}
