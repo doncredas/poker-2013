@@ -376,7 +376,6 @@ public class GraficaPoker extends JFrame {
 		orol=new Thread(orologio);
 		orol.start();
 		Time = Orologio.getLabel();
-		Time.setVisible(true);
 	}//creaOrol
 	
 	/**
@@ -879,7 +878,6 @@ public class GraficaPoker extends JFrame {
 		Statistiche.setForeground(Color.BLACK);
 		Statistiche.setFocusable(true);
 		Time.setBounds(690,557, 500, 200);
-		
 		// INSERIMENTO NELLA FINESTRA		
 		principale.add(Time);
 		principale.add(StatScri);
