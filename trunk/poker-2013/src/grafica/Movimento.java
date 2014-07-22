@@ -1,7 +1,6 @@
 package grafica;
 
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 
 public class Movimento {
 

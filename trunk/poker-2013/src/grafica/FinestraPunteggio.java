@@ -2,8 +2,6 @@ package grafica;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -21,7 +19,7 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 		if(this.isActive())
        {
     	   
-    	   this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+    	   this.setDefaultCloseOperation(FinestraPunteggio.DISPOSE_ON_CLOSE);
        }
 	}
 
