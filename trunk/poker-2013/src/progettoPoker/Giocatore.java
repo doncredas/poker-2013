@@ -57,7 +57,6 @@ public class Giocatore {
 				OOS.writeObject(com);
 				OOS.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -68,20 +67,18 @@ public class Giocatore {
 	public void setCarta1(Carta carta1) {
 		this.carta1 = carta1;
 		if(OOS!=null){
-		com=new Comando(Tipo.DAI_CARTA,carta1);
-		while(true){
-			try {
-				OOS.writeObject(com);
-				OOS.flush();
-				break;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				//System.out.println("errore setcarta1");
-			}
-		}
-		}
-	}
+			com=new Comando(Tipo.DAI_CARTA,carta1);
+			while(true){
+				try {
+					OOS.writeObject(com);
+					OOS.flush();
+					break;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}//while
+		}//if
+	}//setCarta1
 	public Carta getCarta2() {
 		return carta2;
 	}
@@ -91,16 +88,14 @@ public class Giocatore {
 	public void setCarta2(Carta carta2) {
 		this.carta2 = carta2;
 		if(OOS!=null){
-		com=new Comando(Tipo.DAI_CARTA,carta2);
-		try {
-			OOS.writeObject(com);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
-		
-	}
+			com=new Comando(Tipo.DAI_CARTA,carta2);
+			try {
+				OOS.writeObject(com);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}//if
+	}//setCarta2
 	public Giocatore(int fiches,int indice) {
 		this.fiches=fiches;
 		this.indice=indice;
@@ -114,7 +109,6 @@ public class Giocatore {
 		try {
 			OOS.writeObject(com);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}
@@ -133,4 +127,4 @@ public class Giocatore {
 		OOS=null;
 	}
 
-}
+}//Giocatore
