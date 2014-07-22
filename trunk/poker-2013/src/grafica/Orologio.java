@@ -56,7 +56,7 @@ public class Orologio implements Runnable {
 	 * @return
 	 */
 	public int getVal() {
-		return i;
+		return Integer.parseInt(time.getText());
 	}
 
 	/**
@@ -85,6 +85,7 @@ public class Orologio implements Runnable {
 					time.repaint();
 				}
 			}// for
+			stop();
 		}// while
 	}// run
 
