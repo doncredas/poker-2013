@@ -2,14 +2,10 @@ package progettoPoker;
 
 
 import grafica.*;
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
 import javax.swing.*;
-
-import chatThread.*;
 import progettoPoker.Comando.Tipo;
 
 
@@ -19,10 +15,7 @@ public class Partita {
 	private ObjectInputStream OIS[] = null;
 	private ObjectOutputStream oos=null;
 	private ObjectInputStream ois=null;
-	//private BufferedReader br = null;
-	//private Thread t = null;
 	private Dealer d = null;
-	//private boolean fineMano=false;
 	private int tempo=65;
 	private int nCarta=0;
 	private int fiches;
@@ -47,15 +40,12 @@ public class Partita {
 			oos=new ObjectOutputStream(s.getOutputStream());
 			ois=new ObjectInputStream(s.getInputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		eseguiClient();
 	}
 	
 	private void eseguiClient() {
-		//System.out.println(s.getInetAddress());
-		//ClientT chat=new ClientT(s.getInetAddress(),444);
 		Comando com=null;
 		Comando vecchio=null;
 		while(true){
@@ -63,7 +53,6 @@ public class Partita {
 				try {
 					com=(Comando)ois.readObject();
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
 					gp.dispose();
@@ -118,10 +107,6 @@ public class Partita {
 							}
 					}
 			}
-			
-			
-			//if(com.dealer[1]!=0)
-				//GraficaPoker.setSmallBlind(com.dealer[1]+1);
 			if(com.valPiatto!=-1)
 				gp.setPot(com.valPiatto);
 			if(com.puntata!=-1){
@@ -148,7 +133,6 @@ public class Partita {
 							try {
 								Thread.sleep(200);
 							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							risp=this.gp.getComando();
@@ -184,7 +168,6 @@ public class Partita {
 				oos.writeObject(risp);
 				gp.setAttivo(-1);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -240,12 +223,8 @@ public class Partita {
 						this.gp.setTurn(com.getC());
 					else
 						this.gp.setRiver(com.getC());
-				//TODO
 			}else{
 				this.gp.setFlop(com.getCar(),this.gp);
-			}
-			if(com.getFiches()!=0){
-				//TODO
 			}
 		break;
 		case GAME_OVER:
@@ -268,6 +247,8 @@ public class Partita {
 		case NOTIFICA:
 			gp.stopOr();
 			eseguiNotifica(com);
+		default:
+			break;
 		}
 		
 		return risp;
@@ -277,7 +258,6 @@ public class Partita {
 
 		switch(com.t1){
 		case NICK_NAME:
-			//System.out.println(com.getGioc()+" "+com.getNickName());
 			for(int i=0;i<posGioc;i++){
 				gp.getGiocatore(i+1).setNome(com.getNickName()[i]);
 			}
@@ -285,9 +265,6 @@ public class Partita {
 				gp.getGiocatore(i).setNome(com.getNickName()[i]);
 			}
 			break;
-		
-			//case INVIA:  gp.scriviChat(com.getNick(),gp.ConsChat.getText());
-		                 //gp.ConsChat.setText("");break;
 		case CHECK_CALL:
 		case RAISE:
 			if(com.getGioc()<posGioc)
@@ -331,30 +308,23 @@ public class Partita {
 				else
 					gp.getGiocatore(com.getGioc()).setVisible(false);
 			break;
+		default:
+			break;
 		}
 		
 	}
 
 	public Partita(Dealer d)  {
-		//this.ss=ss;
 		gp=new GraficaPoker(d.getG().length);
 		gp.creaOrol(tempo-5);
 		disconnessi=new int[d.getG().length];
-		/*try {
-			ServerT chat=new ServerT(d.getS().length-1,444);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
 		this.d=d;
 		OOS=d.getOOS();
 		OIS=new ObjectInputStream[d.getG().length-1];
 		for(int i=0;i<d.getS().length;i++){
 			try {
-				//OOS[i]=new ObjectOutputStream(d.getS()[i].getOutputStream());
 				OIS[i]=new ObjectInputStream(d.getS()[i].getInputStream());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -390,7 +360,7 @@ public class Partita {
 					}
 					if(d.getG()[i].getInGioco()){
 						risp=null;
-						cron.reset();//TODO spostare il cronometro nel client
+						cron.reset();
 						if(i==0){
 							gp.setMinBar(d.getPuntata());
 							gp.setPuntataCall(d.getPuntata());
@@ -406,7 +376,6 @@ public class Partita {
 									try {
 										Thread.sleep(200);
 									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 									risp=gp.getComando();
@@ -431,7 +400,6 @@ public class Partita {
 								try {
 									risp=(Comando) OIS[i-1].readObject();
 								} catch (ClassNotFoundException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								} catch (IOException e) {
 									risp=new Comando(Tipo.DISCONNESSIONE);
@@ -453,8 +421,6 @@ public class Partita {
 				}
 				if(ultimoRaise==-1)CreaComando();
 			}
-			//if(unicoGiocatore())d.fineMano(OOS);
-			//d.muoviDealer();
 			resetRimanenti(d.getRimanenti());
 		}
 		
@@ -497,7 +463,6 @@ public class Partita {
 		try {
 			oos.writeObject(new Comando(Tipo.GAME_OVER));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.exit(0);
@@ -540,7 +505,7 @@ public class Partita {
 			}
 			vecchioRisp=risp;
 			for (int j = 0; j <= i; j++) {
-				if(d.getG()[j].getNickName().equalsIgnoreCase(risp.getNick())){//TODO sistemare il caso di nick uguali
+				if(d.getG()[j].getNickName().equalsIgnoreCase(risp.getNick())){
 					c=new Comando(Tipo.NICK_NAME);
 					try {
 						OOS[i].writeObject(c);
@@ -555,14 +520,6 @@ public class Partita {
 			if(ok){
 				GraficaPoker.Giocatori[i+1].setNome(risp.getNick());
 				d.getG()[i+1].setNickName(risp.getNick());
-				/*for (int j = 0; j < OOS.length; j++) {
-						try {
-							OOS[i].writeObject(notifica);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				}*/
 			}
 			ok=true;
 			
@@ -576,7 +533,6 @@ public class Partita {
 			try {
 				OOS[i].writeObject(notifica);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -743,7 +699,6 @@ public class Partita {
 			Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
 			String inet=null;
 			for (NetworkInterface netint : Collections.list(nets)){
-				//if(netint.getName().startsWith("net"))
 					try{
 					inet= netint.getInetAddresses().nextElement().getHostAddress();
 					}catch(Exception e){}
