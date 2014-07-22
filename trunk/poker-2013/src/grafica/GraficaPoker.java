@@ -365,7 +365,7 @@ public class GraficaPoker extends JFrame {
 	//OROLOGIO
 	public Thread orol;
 	public Orologio orologio;
-	JLabel Time=new JLabel();
+	JLabel Time=Orologio.getLabel();
 	
 	
         
@@ -843,6 +843,7 @@ public class GraficaPoker extends JFrame {
 		ScrollStat.setWheelScrollingEnabled(true);
 		ScrollStat.setAutoscrolls(true);
 	
+		Time.setBounds(690,557, 500, 200);
 		/*
 		Chat.setEditable(false);
 		Chat.setForeground(Color.BLUE);
@@ -917,8 +918,12 @@ public class GraficaPoker extends JFrame {
 	
 	public void creaOrol(int tempo){
 		orologio=new Orologio(tempo);
-		orol=new Thread(orologio); 
+		orol=new Thread(orologio);
+		orol.start();
 		Time = Orologio.getLabel();
+		Time.setVisible(true);
+		//Time.setBounds(687,557, 500, 200);
+		//aggiungiComp(Time);
 	}
 	
 	public void stopOr(){
@@ -926,26 +931,36 @@ public class GraficaPoker extends JFrame {
 	}
 	public void restartOr(){
 		orologio.restart();
+		//Time.setForeground(Color.white);
 	}
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException{
 
 		GraficaPoker gp=new GraficaPoker(8);
 		//Giocatori[1].setVisible(false);
-		Giocatori[2].setVisible(false);
-		Giocatori[3].setVisible(false);
-		Giocatori[4].setVisible(false);
-		Giocatori[5].setVisible(false);
-		Giocatori[6].setVisible(false);
-		Giocatori[7].setVisible(false);
+		//Giocatori[2].setVisible(false);
+		//Giocatori[3].setVisible(false);
+		//Giocatori[4].setVisible(false);
+		//Giocatori[5].setVisible(false);
+		//Giocatori[6].setVisible(false);
+		//Giocatori[7].setVisible(false);
 		setDealer(1);
 		
 		scriviStatistica("Ciao");
 		scriviStatistica("come");
 		scriviStatistica("va?");
+		scriviStatistica("♥♦♣♠");
+		
+		gp.creaOrol(30);
+		gp.restartOr();
+	//	Thread.sleep(20000);
+	//gp.stopOr();
+	//	Thread.sleep(4000);
+	//	gp.restartOr();
+		Thread.sleep(4000);
 		
 		Fiches f1=Fiches.punta(1, 99999, gp,null);
 		Fiches f2=Fiches.punta(2, 99999, gp,null);
-		/*
+
 		Fiches f3=Fiches.punta(3, 99999, gp,null);
 		Fiches f4=Fiches.punta(4, 99999, gp,null);
 		Fiches f5=Fiches.punta(5, 99999, gp,null);
