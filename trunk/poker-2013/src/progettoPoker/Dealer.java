@@ -21,7 +21,6 @@ import progettoPoker.Comando.Tipo;
 public class Dealer {
 	private int tempoBui=600;
 	private double incrementoBui=2;
-	private int nMano=0;//a che mano siamo
 	private int posD=0;
 	private int nGiocatori=0;
 	private int piccoloBuio;//il valore del piccolo buio (il grande buio è il doppio)
@@ -203,7 +202,6 @@ public class Dealer {
 					break;
 				}
 		}//for				
-		nMano++;
 	}//muoviDealer
 	
 	public int getPosD() {
@@ -256,7 +254,6 @@ public class Dealer {
 			try {
 				oos[i].writeObject(c);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -273,7 +270,6 @@ public class Dealer {
 			try {
 				oos[i].writeObject(c);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -291,7 +287,6 @@ public class Dealer {
 			try {
 				oos[i].writeObject(c);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -369,7 +364,7 @@ public class Dealer {
 			return piatto[g1.indice]-piatto[g2.indice];
 		}
 		
-	}
+	}//ComparatorPiatto
 
 	public void fineMano(ObjectOutputStream[] oOS,GraficaPoker gp) {
 		LinkedList<Giocatore []> vincitori=vincitoreMano();
@@ -406,11 +401,8 @@ public class Dealer {
 					try {
 						oOS[vinc[i].indice-1].writeObject(vin);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}else{
-					//getG()[0].setFiches(getG()[0].getFiches()+vincita);
 				}
 				piatto[vinc[i].indice]=0;
 			}
@@ -418,7 +410,6 @@ public class Dealer {
 				piatto[i]=piattoTmp[i];
 			}
 		}
-		//for(int i=0;i<piatto.length;i++)piatto[i]=0;
 		muoviDealer();
 		for (int i = 0; i < g.length; i++) {
 			if(g[i].getFiches()!=0)
@@ -438,7 +429,7 @@ public class Dealer {
 		}
 		return rimanenti;
 		
-	}
+	}//getRimanenti
 
 	public int getValPiatto() {
 		int val=0;
@@ -446,16 +437,16 @@ public class Dealer {
 			val+=piatto[i];
 		}
 		return val;
-	}
+	}//getValPiatto
 
 	public void eliminati() {
 		for(int i=0;i<g.length;i++)
 			if(g[i].getFiches()==0)
 				g[i].setInGioco(false);		
-	}
+	}//eliminati
 
 	public int[] getVincite() {
 		return vincite;
-	}
+	}//getVincite
 
 }//Dealer
