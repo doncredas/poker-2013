@@ -26,8 +26,6 @@ public class GiocatoreGrafico
 		this.fiches=fich;
 		this.carta1=car1;
 		this.carta2=car2;
-		
-		
 	}//Costruttore
 	
 	
@@ -37,7 +35,7 @@ public class GiocatoreGrafico
 	}
 	
     /**
-     * Restituisce true se un giocatore è visibile,false altrimenti
+     * Restituisce true se un giocatore ï¿½ visibile,false altrimenti
      * 
      */
 	public boolean isVisible()
@@ -68,7 +66,7 @@ public class GiocatoreGrafico
 	
 	    /**
 		 * Nel caso di fold nasconde le carte del giocatore.
-		 * Se fold è a true, le carte scompaiono.
+		 * Se fold ï¿½ a true, le carte scompaiono.
 		 */
 	public void setFold(boolean flag)
 	{
@@ -129,14 +127,14 @@ public class GiocatoreGrafico
 	 */
 	public void setCarte(Carta c1,int i)
 	{
-		if(i==1){ //se è la prima carta
+		if(i==1){ //se Ã¨ la prima carta
 		{
 			this.icona1=Icone.getCarta(c1.getIndice());
 		    carta1.setIcon(icona1);
 		}
 		    this.carta1.setVisible(true);
 		}
-		if(i==2){ //se è la seconda carta
+		if(i==2){ //se Ã¨ la seconda carta
 		{
 			this.icona2=Icone.getCarta(c1.getIndice());
 			carta2.setIcon(icona2);
@@ -167,7 +165,7 @@ public class GiocatoreGrafico
 	
 	/**
 	 * 
-	 * @param flag se è true l'etichetta del giocatore diventa gialla
+	 * @param flag se ï¿½ true l'etichetta del giocatore diventa gialla
 	 * altrimenti ritorna nera
 	 */
 	public void setAttivo(boolean flag){

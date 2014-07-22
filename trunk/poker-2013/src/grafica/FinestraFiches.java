@@ -9,10 +9,7 @@ import javax.swing.JLabel;
 
 public class FinestraFiches extends JFrame implements MouseListener
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L; //TODO
+	private static final long serialVersionUID = 1L; 
 	
 	public FinestraFiches()
 	{
@@ -21,7 +18,6 @@ public class FinestraFiches extends JFrame implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		// Auto-generated method stub
 		if(this.isActive())
        {
     	   
@@ -56,6 +52,6 @@ public class FinestraFiches extends JFrame implements MouseListener
 	    
 	    this.setVisible(true);
 		}
-	}
+	}//mouseReleased
 
-}
+}//FinestraFiches

@@ -1,13 +1,6 @@
 package grafica;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.io.File;
-
-
-
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 public final class Icone {
@@ -95,17 +88,9 @@ public final class Icone {
 	public static ImageIcon Allnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\All.png");
 	public static ImageIcon Puntipre = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Puntipre.png");
 	public static ImageIcon Puntinot = new ImageIcon(Bottoni.getAbsolutePath()+ "\\Punti.png");
-	public static ImageIcon Sendpre = new ImageIcon(Bottoni.getAbsolutePath()	+ "\\Sendpre.png");
-	public static ImageIcon Sendnot = new ImageIcon(Bottoni.getAbsolutePath() + "\\Send.png");
 	public static ImageIcon ValFipre = new ImageIcon(Bottoni.getAbsolutePath() +"\\ValFipre.png");
 	public static ImageIcon ValFinot = new ImageIcon(Bottoni.getAbsolutePath() +"\\ValFi.png");
 		
-	//BOTTONI DELLA CHAT
-	//public static ImageIcon ChatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChatSel.png");
-	//public static ImageIcon VisualizzaStat=new ImageIcon(Bottoni.getAbsolutePath()+"\\Stats.png");
-	//public static ImageIcon VisualizzaChat=new ImageIcon(Bottoni.getAbsolutePath()+"\\VisChat.png");
-	//public static ImageIcon StatSelected=new ImageIcon(Bottoni.getAbsolutePath()+"\\StatsSel.png");
-	
 	//ETICHETTA
 	public static ImageIcon Etichetta = new ImageIcon(Varie.getAbsolutePath()+ "\\EtichettaR.png");
 	public static ImageIcon EtichettaCall =new ImageIcon(Varie.getAbsolutePath()+ "\\EtichettaCall.png");
@@ -237,5 +222,5 @@ public final class Icone {
 		case 50: return cinquanta;
 		default: return cinquantuno;
 		}
-	}
-}
+	}//getCarta
+}//Icone

@@ -16,9 +16,8 @@ import javax.swing.JLabel;
 public class Orologio implements Runnable {
 	private int i, j;
 	boolean flag = true;
-	private static JLabel time = new JLabel("60"); // TODO cambiare il 60 con
-													// tempo effettivo
-	Font orolox = null;
+	private static JLabel time = new JLabel("30"); 
+	static Font orolox = null;
 
 	/**
 	 * Crea l'orologio insieme al font
@@ -91,6 +90,6 @@ public class Orologio implements Runnable {
 
 	public void stop() {
 		flag = false;
-	}
+	}//stop
 
 }// Orologio
