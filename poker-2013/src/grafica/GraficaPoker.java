@@ -376,17 +376,6 @@ public class GraficaPoker extends JFrame {
 		orol=new Thread(orologio);
 		orol.start();
 		Time = Orologio.getLabel();
-		/*Font orolox=null;
-		try {
-			orolox = Font.createFont(Font.TRUETYPE_FONT, Icone.orol);
-		} catch (FontFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-		Time.setFont(orolox.deriveFont(Font.PLAIN, 14));
-		*/
 		Time.setVisible(true);
 	}//creaOrol
 	
@@ -404,6 +393,13 @@ public class GraficaPoker extends JFrame {
 		orologio.restart();
 	}//restartOr
 
+	/**
+	 * restituisce il valore attuale del timer
+	 * @return
+	 */
+	public int getTime(){
+		return orologio.getVal();
+	}
 	public void resetGioc(Dealer d) {
 		for(int i=0;i<nGioc;i++){
 			Giocatori[i].setVisible(d.getG()[i].getInGioco());
