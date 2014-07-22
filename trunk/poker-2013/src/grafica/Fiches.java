@@ -2,7 +2,6 @@ package grafica;
 
 import javax.swing.JLabel;
 
-
 public class Fiches {
 	private int quanto;
 	private JLabel chip1 = new JLabel(), chip2 = new JLabel(),
@@ -10,7 +9,7 @@ public class Fiches {
 
 	
 	/**
-	 * viene creato un solo oggetto con più JLabel come se fosse un array di
+	 * viene creato un solo oggetto con piï¿½ JLabel come se fosse un array di
 	 * fiches. Creo la fiches inserendo il valore e quindi per ognugno setta le
 	 * icone
 	 */
@@ -325,7 +324,7 @@ public class Fiches {
 	 *            = quanto deve puntare
 	 * 
 	 *            crea una nuova fiches di quanto e la sposta in posizione di
-	 *            puntata per ogni giocatore, il giocatore1 punterà le fiches in
+	 *            puntata per ogni giocatore, il giocatore1 punterï¿½ le fiches in
 	 *            posizione (495,350) ecc.
 	 */
 	public static Fiches punta(int numGioc, int quanto, GraficaPoker gp,
@@ -430,14 +429,6 @@ public class Fiches {
 	}//setPosition
 
 	protected static void reset(Fiches g, GraficaPoker gp) {
-		/*g.getSiChip1().setVisible(false);
-		g.getSiChip2().setVisible(false);
-		g.getSiChip3().setVisible(false);
-		g.getSiChip4().setVisible(false);
-		g.getSiChip5().setVisible(false);
-	    g.getSiChip6().setVisible(false);
-	*/
-
 		gp.rimuoviComp(g.getSiChip1());
 		gp.rimuoviComp(g.getSiChip2());
 		gp.rimuoviComp(g.getSiChip3());
