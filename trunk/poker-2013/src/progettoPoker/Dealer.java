@@ -360,7 +360,7 @@ public class Dealer {
 			}
 			Giocatore g1=(Giocatore)o1;
 			Giocatore g2=(Giocatore)o2;
-			return piatto[g1.indice]-piatto[g2.indice];
+			return piatto[g1.getIndice()]-piatto[g2.getIndice()];
 		}
 		
 	}//ComparatorPiatto
@@ -380,7 +380,7 @@ public class Dealer {
 			vincite=new int[g.length];
 			for(int i=0;i<vinc.length;i++){
 				vincita=0;
-				quota=(piatto[vinc[i].indice]/(vinc.length-i));
+				quota=(piatto[vinc[i].getIndice()]/(vinc.length-i));
 				for (int j = 0; j < g.length; j++) {
 					if(piattoTmp[j]/vinc.length<quota){
 						vincita+=piattoTmp[j]/(vinc.length-i);
@@ -392,18 +392,18 @@ public class Dealer {
 					}
 				}
 				valPiatto-=vincita;
-				vincite[vinc[i].indice]=vincita;
+				vincite[vinc[i].getIndice()]=vincita;
 				vin=new Comando(null,vinc[i].getFiches()+vincita);
-				gp.getGiocatore(vinc[i].indice).setFiches(vinc[i].getFiches()+vincita);
-				getG()[vinc[i].indice].setFiches(vinc[i].getFiches()+vincita);
-				if(vinc[i].indice!=0){
+				gp.getGiocatore(vinc[i].getIndice()).setFiches(vinc[i].getFiches()+vincita);
+				getG()[vinc[i].getIndice()].setFiches(vinc[i].getFiches()+vincita);
+				if(vinc[i].getIndice()!=0){
 					try {
-						oOS[vinc[i].indice-1].writeObject(vin);
+						oOS[vinc[i].getIndice()-1].writeObject(vin);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-				piatto[vinc[i].indice]=0;
+				piatto[vinc[i].getIndice()]=0;
 			}
 			for (int i = 0; i < piattoTmp.length; i++) {
 				piatto[i]=piattoTmp[i];

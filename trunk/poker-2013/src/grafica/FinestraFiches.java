@@ -44,7 +44,7 @@ public class FinestraFiches extends JFrame implements MouseListener
 	
 		this.setResizable(false);
 		this.setBounds(115, 15, 600, 650);
-		this.setContentPane(new JLabel(Icone.sfondoFiches));
+		this.setContentPane(new JLabel(Icone.getSfondoFiches()));
 		this.setSize(600,665);
 	    this.setSize(600,666);
 	    

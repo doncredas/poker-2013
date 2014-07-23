@@ -8,8 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.net.Socket;
-
 import javax.swing.*;
 
 import progettoPoker.*;
@@ -19,16 +17,12 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		MouseListener, AdjustmentListener {
 
 	private static final long serialVersionUID = 1L;
-	GraficaPoker gp;
-	JScrollBar BarRaise = new JScrollBar();
-	JTextField ConsRaise = new JTextField();
-	GiocatoreGrafico g1=null;
-	JLabel carta1 = null;
-	JLabel carta2 = null;
-	Socket socket=null;
-	Thread thread;
-
-	int puntataClient=-1;
+	private GraficaPoker gp;
+	private JScrollBar BarRaise = new JScrollBar();
+	private JTextField ConsRaise = new JTextField();
+	private JLabel carta1 = null;
+	private JLabel carta2 = null;
+	private int puntataClient=-1;
 	
 	public void setPuntata(int val){
 		this.puntataClient=val;
@@ -73,22 +67,22 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 	public void actionPerformed(ActionEvent arg0) {
 
 		if (arg0.getSource() == GraficaPoker.Fold) {
-			GraficaPoker.com = new Comando(Tipo.FOLD);
+			GraficaPoker.setCom(new Comando(Tipo.FOLD));
 			gp.disableBottoni(true);
 		}
 		if (arg0.getSource() == GraficaPoker.Raise) {
 			this.BarRaise.setValue(Integer.valueOf(this.ConsRaise.getText()));
 			
-			GraficaPoker.com = new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText()+puntataClient));
+			GraficaPoker.setCom(new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText()+puntataClient)));
 			
 			gp.disableBottoni(true);
 		}
 		if(arg0.getSource() == GraficaPoker.AllIn){
-			GraficaPoker.com = new Comando(Tipo.RAISE,gp.BarRaise.getMaximum());
+			GraficaPoker.setCom(new Comando(Tipo.RAISE,gp.BarRaise.getMaximum()));
 			gp.disableBottoni(true);
 		}
 		if (arg0.getSource() == GraficaPoker.Call) {
-			GraficaPoker.com = new Comando(Tipo.CHECK_CALL);
+			GraficaPoker.setCom(new Comando(Tipo.CHECK_CALL));
 			gp.disableBottoni(true);
 		}
 

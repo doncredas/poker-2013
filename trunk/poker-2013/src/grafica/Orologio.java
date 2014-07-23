@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 
 public class Orologio implements Runnable {
 	private int i, j;
-	boolean flag = true;
+	private boolean flag = true;
 	private static JLabel time = new JLabel("30"); 
-	static Font orolox = null;
+	private static Font orolox = null;
 
 	/**
 	 * Crea l'orologio insieme al font
@@ -25,7 +25,7 @@ public class Orologio implements Runnable {
 	 */
 	public Orologio(int i) {
 		try {
-			orolox = Font.createFont(Font.TRUETYPE_FONT, Icone.orol);
+			orolox = Font.createFont(Font.TRUETYPE_FONT, Icone.getOrol());
 		} catch (FontFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

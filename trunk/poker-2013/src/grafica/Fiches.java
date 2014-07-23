@@ -86,195 +86,195 @@ public class Fiches {
 
 		switch (quanto % 10) {
 		case 1: {
-			chip1.setIcon(Icone.uno1);
+			chip1.setIcon(Icone.getUno1());
 			break;
 		}
 		case 2: {
-			chip1.setIcon(Icone.uno2);
+			chip1.setIcon(Icone.getUno2());
 			break;
 		}
 		case 3: {
-			chip1.setIcon(Icone.uno3);
+			chip1.setIcon(Icone.getUno3());
 			break;
 		}
 		case 4: {
-			chip1.setIcon(Icone.uno4);
+			chip1.setIcon(Icone.getUno4());
 			break;
 		}
 		case 5: {
-			chip1.setIcon(Icone.uno5);
+			chip1.setIcon(Icone.getUno5());
 			break;
 		}
 		case 6: {
-			chip1.setIcon(Icone.uno6);
+			chip1.setIcon(Icone.getUno6());
 			break;
 		}
 		case 7: {
-			chip1.setIcon(Icone.uno7);
+			chip1.setIcon(Icone.getUno7());
 			break;
 		}
 		case 8: {
-			chip1.setIcon(Icone.uno8);
+			chip1.setIcon(Icone.getUno8());
 			break;
 		}
 		case 9: {
-			chip1.setIcon(Icone.uno9);
+			chip1.setIcon(Icone.getUno9());
 			break;
 		}
 		}// switch quanto%10
 
 		switch (quanto % 100 / 10) {
 		case 1: {
-			chip2.setIcon(Icone.dieci1);
+			chip2.setIcon(Icone.getDieci1());
 			break;
 		}
 		case 2: {
-			chip2.setIcon(Icone.dieci2);
+			chip2.setIcon(Icone.getDieci2());
 			break;
 		}
 		case 3: {
-			chip2.setIcon(Icone.dieci3);
+			chip2.setIcon(Icone.getDieci3());
 			break;
 		}
 		case 4: {
-			chip2.setIcon(Icone.dieci4);
+			chip2.setIcon(Icone.getDieci4());
 			break;
 		}
 		case 5: {
-			chip2.setIcon(Icone.dieci5);
+			chip2.setIcon(Icone.getDieci5());
 			break;
 		}
 		case 6: {
-			chip2.setIcon(Icone.dieci6);
+			chip2.setIcon(Icone.getDieci6());
 			break;
 		}
 		case 7: {
-			chip2.setIcon(Icone.dieci7);
+			chip2.setIcon(Icone.getDieci7());
 			break;
 		}
 		case 8: {
-			chip2.setIcon(Icone.dieci8);
+			chip2.setIcon(Icone.getDieci8());
 			break;
 		}
 		case 9: {
-			chip2.setIcon(Icone.dieci9);
+			chip2.setIcon(Icone.getDieci9());
 			break;
 		}
 		}// switch quanto%100/10
 
 		switch (quanto % 1000 / 100) {
 		case 1: {
-			chip3.setIcon(Icone.cento1);
+			chip3.setIcon(Icone.getCento1());
 			break;
 		}
 		case 2: {
-			chip3.setIcon(Icone.cento2);
+			chip3.setIcon(Icone.getCento2());
 			break;
 		}
 		case 3: {
-			chip3.setIcon(Icone.cento3);
+			chip3.setIcon(Icone.getCento3());
 			break;
 		}
 		case 4: {
-			chip3.setIcon(Icone.cento4);
+			chip3.setIcon(Icone.getCento4());
 			break;
 		}
 		case 5: {
-			chip3.setIcon(Icone.cento5);
+			chip3.setIcon(Icone.getCento5());
 			break;
 		}
 		case 6: {
-			chip3.setIcon(Icone.cento6);
+			chip3.setIcon(Icone.getCento6());
 			break;
 		}
 		case 7: {
-			chip3.setIcon(Icone.cento7);
+			chip3.setIcon(Icone.getCento7());
 			break;
 		}
 		case 8: {
-			chip3.setIcon(Icone.cento8);
+			chip3.setIcon(Icone.getCento8());
 			break;
 		}
 		case 9: {
-			chip3.setIcon(Icone.cento9);
+			chip3.setIcon(Icone.getCento9());
 			break;
 		}
 		}// switch quanto%1000/100
 
 		switch (quanto % 10000 / 1000) {
 		case 1: {
-			chip4.setIcon(Icone.mille1);
+			chip4.setIcon(Icone.getMille1());
 			break;
 		}
 		case 2: {
-			chip4.setIcon(Icone.mille2);
+			chip4.setIcon(Icone.getMille2());
 			break;
 		}
 		case 3: {
-			chip4.setIcon(Icone.mille3);
+			chip4.setIcon(Icone.getMille3());
 			break;
 		}
 		case 4: {
-			chip4.setIcon(Icone.mille4);
+			chip4.setIcon(Icone.getMille4());
 			break;
 		}
 		case 5: {
-			chip4.setIcon(Icone.mille5);
+			chip4.setIcon(Icone.getMille5());
 			break;
 		}
 		case 6: {
-			chip4.setIcon(Icone.mille6);
+			chip4.setIcon(Icone.getMille6());
 			break;
 		}
 		case 7: {
-			chip4.setIcon(Icone.mille7);
+			chip4.setIcon(Icone.getMille7());
 			break;
 		}
 		case 8: {
-			chip4.setIcon(Icone.mille8);
+			chip4.setIcon(Icone.getMille8());
 			break;
 		}
 		case 9: {
-			chip4.setIcon(Icone.mille9);
+			chip4.setIcon(Icone.getMille9());
 			break;
 		}
 		}// switch quanto%10000/1000
 
 		switch (quanto % 100000 / 10000) {
 		case 1: {
-			chip5.setIcon(Icone.diecimila1);
+			chip5.setIcon(Icone.getDiecimila1());
 			break;
 		}
 		case 2: {
-			chip5.setIcon(Icone.diecimila2);
+			chip5.setIcon(Icone.getDiecimila2());
 			break;
 		}
 		case 3: {
-			chip5.setIcon(Icone.diecimila3);
+			chip5.setIcon(Icone.getDiecimila3());
 			break;
 		}
 		case 4: {
-			chip5.setIcon(Icone.diecimila4);
+			chip5.setIcon(Icone.getDiecimila4());
 			break;
 		}
 		case 5: {
-			chip5.setIcon(Icone.diecimila5);
+			chip5.setIcon(Icone.getDiecimila5());
 			break;
 		}
 		case 6: {
-			chip5.setIcon(Icone.diecimila6);
+			chip5.setIcon(Icone.getDiecimila6());
 			break;
 		}
 		case 7: {
-			chip5.setIcon(Icone.diecimila7);
+			chip5.setIcon(Icone.getDiecimila7());
 			break;
 		}
 		case 8: {
-			chip5.setIcon(Icone.diecimila8);
+			chip5.setIcon(Icone.getDiecimila8());
 			break;
 		}
 		case 9: {
-			chip5.setIcon(Icone.diecimila9);
+			chip5.setIcon(Icone.getDiecimila9());
 			break;
 		}
 		}// switch quanto%100000/10000

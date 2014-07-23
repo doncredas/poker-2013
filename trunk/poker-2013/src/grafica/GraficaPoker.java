@@ -12,9 +12,9 @@ import progettoPoker.Dealer;
 public class GraficaPoker extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
-	static Comando com=null;
-	static int nGioc=0;
+	private static GiocatoreGrafico Giocatori[]=new GiocatoreGrafico[8];
+	private static Comando com=null;
+	private static int nGioc=0;
 
 	public static int getnGioc() {
 		return nGioc;
@@ -32,51 +32,51 @@ public class GraficaPoker extends JFrame {
 	
 		    default: {
 	                  if(i==0)
-	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car1,190,405);
+	                      if(getGiocatori()[7].isVisible())Movimento.muovi(Gioc8Car1,190,405);
 	                  if(i==1)                                                         
-	                      if(Giocatori[7].isVisible())Movimento.muovi(Gioc8Car2,260,405);
+	                      if(getGiocatori()[7].isVisible())Movimento.muovi(Gioc8Car2,260,405);
 	                 }//default                                                        
 		
 		    case 7:  {
 		              if(i==0)
-		    	          if(Giocatori[6].isVisible())Movimento.muovi(Gioc7Car1,70,232);
+		    	          if(getGiocatori()[6].isVisible())Movimento.muovi(Gioc7Car1,70,232);
 		              if(i==1) 
-		            	  if(Giocatori[6].isVisible())Movimento.muovi(Gioc7Car2,140,232);
+		            	  if(getGiocatori()[6].isVisible())Movimento.muovi(Gioc7Car2,140,232);
 		             }//case 7
 		    
 		    case 6:  {
 		    	       if(i==0)
-		    	           if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car1,190,60);
+		    	           if(getGiocatori()[5].isVisible())Movimento.muovi(Gioc6Car1,190,60);
 		    	       if(i==1)
-		    	    	   if(Giocatori[5].isVisible())Movimento.muovi(Gioc6Car2,260,60);
+		    	    	   if(getGiocatori()[5].isVisible())Movimento.muovi(Gioc6Car2,260,60);
 		             }//case 6
 		    
 			case 5:  {
 				       if(i==0)
-				    	   if(Giocatori[4].isVisible()) Movimento.muovi(Gioc5Car1,512,5);
+				    	   if(getGiocatori()[4].isVisible()) Movimento.muovi(Gioc5Car1,512,5);
 				       if(i==1)
-                           if(Giocatori[4].isVisible())Movimento.muovi(Gioc5Car2,582,5);
+                           if(getGiocatori()[4].isVisible())Movimento.muovi(Gioc5Car2,582,5);
                      }//case5
 			
 			case 4:  {
 	                   if(i==0)
-	   		               if(Giocatori[3].isVisible())Movimento.muovi(Gioc4Car1,842,60);
+	   		               if(getGiocatori()[3].isVisible())Movimento.muovi(Gioc4Car1,842,60);
                        if(i==1)
-	   		               if(Giocatori[3].isVisible()) Movimento.muovi(Gioc4Car2,912,60);
+	   		               if(getGiocatori()[3].isVisible()) Movimento.muovi(Gioc4Car2,912,60);
                      }//case4
 			
 			case 3:  {
 				       if(i==0)
-		                   if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car1,960,232);
+		                   if(getGiocatori()[2].isVisible())Movimento.muovi(Gioc3Car1,960,232);
 		   		       if(i==1)
-	                       if(Giocatori[2].isVisible())Movimento.muovi(Gioc3Car2,1030,232);
+	                       if(getGiocatori()[2].isVisible())Movimento.muovi(Gioc3Car2,1030,232);
 	                 }//case3
 			
 			case 2:  {
 			           if(i==0)
-			               if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car1,842,405);
+			               if(getGiocatori()[1].isVisible())Movimento.muovi(Gioc2Car1,842,405);
 			           if(i==1)
-		                   if(Giocatori[1].isVisible())Movimento.muovi(Gioc2Car2,912,405);
+		                   if(getGiocatori()[1].isVisible())Movimento.muovi(Gioc2Car2,912,405);
 		             }//case2
 		    
 		    case 1: {
@@ -138,23 +138,23 @@ public class GraficaPoker extends JFrame {
 		this.cartaT4.setVisible(false);
 		this.cartaT5.setVisible(false);
 		disableBottoni(true);
-		Giocatori[0].reset();
+		getGiocatori()[0].reset();
 		for(int i=0;i<nGioc;i++)
-			Giocatori[i].resetFiches(this);
+			getGiocatori()[i].resetFiches(this);
 	}
 	/**
 	 * Restituisce un Comando
 	 */
 	public Comando getComando()
 	{
-		return com;
+		return getCom();
 	}
 	/**
 	 * Resetta il comando
 	 */
 	public void resetComando()
 	{
-		com=null;
+		setCom(null);
 	}
 	
 	/**
@@ -230,14 +230,14 @@ public class GraficaPoker extends JFrame {
 	 */
 	public GiocatoreGrafico[] getGiocatore()
 	{
-		return Giocatori;
+		return getGiocatori();
 	}
 	/**
 	 * Restituisce un GiocatoreGrafico in posizione: indice
 	 */
 	public GiocatoreGrafico getGiocatore(int indice)
 	{
-		return Giocatori[indice];
+		return getGiocatori()[indice];
 	}
 	
 
@@ -315,7 +315,7 @@ public class GraficaPoker extends JFrame {
 	 */
 	public static int getProsGioc(int da){
 		da=da%nGioc;
-		while(!Giocatori[da].isVisible())
+		while(!getGiocatori()[da].isVisible())
 			da=(da+1)%nGioc;
 		return da+1;
 	}
@@ -358,7 +358,7 @@ public class GraficaPoker extends JFrame {
 	
 
 	public void punta(int i, int puntata, GraficaPoker gp) {
-		Giocatori[i-1].puntata=Fiches.punta(i, puntata, gp, Giocatori[i-1].puntata);
+		getGiocatori()[i-1].setPuntata(Fiches.punta(i, puntata, gp, getGiocatori()[i-1].getPuntata()));
 	}
 	
 	public void eliminaBui(){
@@ -401,16 +401,16 @@ public class GraficaPoker extends JFrame {
 	}
 	public void resetGioc(Dealer d) {
 		for(int i=0;i<nGioc;i++){
-			Giocatori[i].setVisible(d.getG()[i].getInGioco());
+			getGiocatori()[i].setVisible(d.getG()[i].getInGioco());
 		}
 		
 	}//resetGioc
 	
 	public void setAttivo(int index){
 		for(int i=0;i<nGioc;i++)
-			Giocatori[i].setAttivo(false);
+			getGiocatori()[i].setAttivo(false);
 		if(index!=-1)
-		Giocatori[index].setAttivo(true);
+		getGiocatori()[index].setAttivo(true);
 	}//setAttivo
 	
 	/**
@@ -553,7 +553,7 @@ public class GraficaPoker extends JFrame {
 	
     //LISTENER E SFONDO
 	Listener list = new Listener(BarRaise,ConsRaise,Gioc1Car1,Gioc1Car2,this);
-	JLabel sfondo = new JLabel(Icone.sfondo);
+	JLabel sfondo = new JLabel(Icone.getSfondo());
 	
 
 	// FONT
@@ -572,18 +572,18 @@ public class GraficaPoker extends JFrame {
 		this.setBounds(115, 15, 1024, 700);
 		this.setSize(1224, 700);
 		this.setSize(1224, 701);
-		this.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
+		this.setIconImage(Icone.getLogo().getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 
 		GraficaPoker.nGioc=numGioc;
 		
 		// SETTA IL LOGO DELLA FINESTRA PUNTEGGI
-		FP.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
-		FF.setIconImage(Icone.logo.getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
+		FP.setIconImage(Icone.getLogo().getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
+		FF.setIconImage(Icone.getLogo().getImage().getScaledInstance(350, 300,Image.SCALE_SMOOTH));
 		
 		//DEALER,SB,BB
-		Dealer.setIcon(Icone.Dealer);
-		SB.setIcon(Icone.SB);
-		BB.setIcon(Icone.BB);
+		Dealer.setIcon(Icone.getDealer());
+		SB.setIcon(Icone.getSB());
+		BB.setIcon(Icone.getBB());
 		principale.add(Dealer);
 		principale.add(BB);
 		principale.add(SB);
@@ -591,7 +591,7 @@ public class GraficaPoker extends JFrame {
 		//SCRITTA SULLA TEXTAREA DELLE STATISTICHE
 		Font fontStat=null;
 		try{
-			fontStat=Font.createFont(Font.TRUETYPE_FONT, Icone.st);
+			fontStat=Font.createFont(Font.TRUETYPE_FONT, Icone.getSt());
 		   }catch(IOException e){}
 		    catch(FontFormatException e1){}
 		JLabel StatScri=new JLabel("Statistiche");
@@ -613,39 +613,39 @@ public class GraficaPoker extends JFrame {
 		//FONT TEXTAREA
 		Font font2=null;
 		try {
-            font2=Font.createFont(Font.TRUETYPE_FONT,Icone.fontArea);
+            font2=Font.createFont(Font.TRUETYPE_FONT,Icone.getFontArea());
 			} catch (IOException e){}
 		      catch(FontFormatException e1) {}
 		Statistiche.setFont(font2.deriveFont(Font.BOLD,14));
 		Statistiche.setAutoscrolls(true);
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,SEGNAPUNTI,VALOREFICHES)
-		Fold.setIcon(Icone.Foldnot);
-		Fold.setPressedIcon(Icone.Foldpre);
-		Fold.setDisabledIcon(Icone.Foldpre);
+		Fold.setIcon(Icone.getFoldnot());
+		Fold.setPressedIcon(Icone.getFoldpre());
+		Fold.setDisabledIcon(Icone.getFoldpre());
 		Fold.setBounds(350, 600, 90, 30);
 		Fold.setBorder(null);
-		Call.setIcon(Icone.Callnot);
-		Call.setPressedIcon(Icone.Callpre);
-		Call.setDisabledIcon(Icone.Callpre);
+		Call.setIcon(Icone.getCallnot());
+		Call.setPressedIcon(Icone.getCallpre());
+		Call.setDisabledIcon(Icone.getCallpre());
 		Call.setBounds(445, 600, 90, 30);
 		Call.setBorder(null);
-		Raise.setIcon(Icone.Raisenot);
-		Raise.setPressedIcon(Icone.Raisepre);
-		Raise.setDisabledIcon(Icone.Raisepre);
+		Raise.setIcon(Icone.getRaisenot());
+		Raise.setPressedIcon(Icone.getRaisepre());
+		Raise.setDisabledIcon(Icone.getRaisepre());
 		Raise.setBounds(540, 600, 90, 30);
 		Raise.setBorder(null);
-		AllIn.setIcon(Icone.Allnot);
-		AllIn.setPressedIcon(Icone.Allpre);
-		AllIn.setDisabledIcon(Icone.Allpre);
+		AllIn.setIcon(Icone.getAllnot());
+		AllIn.setPressedIcon(Icone.getAllpre());
+		AllIn.setDisabledIcon(Icone.getAllpre());
 		AllIn.setBounds(635, 600, 90, 30);
 		AllIn.setBorder(null);
-		SegnaPunti.setIcon(Icone.Puntinot);
-		SegnaPunti.setPressedIcon(Icone.Puntipre);
+		SegnaPunti.setIcon(Icone.getPuntinot());
+		SegnaPunti.setPressedIcon(Icone.getPuntipre());
 		SegnaPunti.setBounds(0, 645, 90, 30);
 		SegnaPunti.setBorder(null);
-		ValoreFiches.setIcon(Icone.ValFinot);
-		ValoreFiches.setPressedIcon(Icone.ValFipre);
+		ValoreFiches.setIcon(Icone.getValFinot());
+		ValoreFiches.setPressedIcon(Icone.getValFipre());
 		ValoreFiches.setBounds(90, 645, 90, 30);
 		ValoreFiches.setBorder(null);
 		
@@ -664,19 +664,19 @@ public class GraficaPoker extends JFrame {
 		cartaT3.setBounds(470, 250, 100,100); 
 		cartaT4.setBounds(545, 250, 100, 100); 
 		cartaT5.setBounds(620, 250, 100,100); 
-		cartaT1.setIcon(Icone.coperta);
-		cartaT2.setIcon(Icone.coperta);
-		cartaT3.setIcon(Icone.coperta);  
-		cartaT4.setIcon(Icone.coperta);
-		cartaT5.setIcon(Icone.coperta);
-		mazzo.setIcon(Icone.Mazzo);
+		cartaT1.setIcon(Icone.getCoperta());
+		cartaT2.setIcon(Icone.getCoperta());
+		cartaT3.setIcon(Icone.getCoperta());  
+		cartaT4.setIcon(Icone.getCoperta());
+		cartaT5.setIcon(Icone.getCoperta());
+		mazzo.setIcon(Icone.getMazzo());
 		mazzo.setBounds(730, 240, 100, 120);
        
 		switch(numGioc)
 		{
 		
 		   case 8:    
-		   	          etiUtente8.setIcon(Icone.Etichetta);
+		   	          etiUtente8.setIcon(Icone.getEtichetta());
 		   	          etiUtente8.setBounds(75, 460, 300, 55);
 		   	          nome8.setFont(fontnome);               
 		   	          nome8.setBounds(240, 449, 100, 60);
@@ -684,10 +684,10 @@ public class GraficaPoker extends JFrame {
 		   	          fiches8.setFont(fontfiches);
 		   	          fiches8.setBounds(260, 466, 100, 60);
 		   	          fiches8.setForeground(Color.BLACK);
-		   	          Gioc8Car1.setIcon(Icone.coperta);
-		   	          Gioc8Car2.setIcon(Icone.coperta);
+		   	          Gioc8Car1.setIcon(Icone.getCoperta());
+		   	          Gioc8Car2.setIcon(Icone.getCoperta());
 			          GiocatoreGrafico Giocatore8=new GiocatoreGrafico(etiUtente8,nome8,fiches8,Gioc8Car1,Gioc8Car2);
-		   	          Giocatori[7]=Giocatore8;
+		   	          getGiocatori()[7]=Giocatore8;
 		              principale.add(nome8);
 		              principale.add(fiches8);
 		              principale.add(etiUtente8);
@@ -695,7 +695,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc8Car2);
 		   
 		   case 7:    
-		   	          etiUtente7.setIcon(Icone.Etichetta);
+		   	          etiUtente7.setIcon(Icone.getEtichetta());
 		   	          etiUtente7.setBounds(-44, 287, 300, 55);  
 		   	          nome7.setFont(fontnome);
 		   	          nome7.setBounds(121, 276, 100, 60);
@@ -703,10 +703,10 @@ public class GraficaPoker extends JFrame {
 		   	          fiches7.setFont(fontfiches);
 		   	          fiches7.setBounds(141, 293, 100, 60);
 		   	          fiches7.setForeground(Color.BLACK);
-		   	          Gioc7Car1.setIcon(Icone.coperta);
-		   	          Gioc7Car2.setIcon(Icone.coperta);
+		   	          Gioc7Car1.setIcon(Icone.getCoperta());
+		   	          Gioc7Car2.setIcon(Icone.getCoperta());
 			          GiocatoreGrafico Giocatore7=new GiocatoreGrafico(etiUtente7,nome7,fiches7,Gioc7Car1,Gioc7Car2);
-		   	          Giocatori[6]=Giocatore7;
+		   	          getGiocatori()[6]=Giocatore7;
 		              principale.add(nome7);
 		              principale.add(fiches7);
 		              principale.add(etiUtente7);
@@ -714,7 +714,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc7Car2);
 		   
 		   case 6:    
-				      etiUtente6.setIcon(Icone.Etichetta);
+				      etiUtente6.setIcon(Icone.getEtichetta());
 		   	          etiUtente6.setBounds(75, 115, 300, 55);
 		   	          nome6.setFont(fontnome);
 		   	          nome6.setBounds(240, 104, 100, 60);
@@ -722,10 +722,10 @@ public class GraficaPoker extends JFrame {
 		   	          fiches6.setFont(fontfiches);
 		   	          fiches6.setBounds(260, 121, 100, 60);
 		   	          fiches6.setForeground(Color.BLACK);
-		   	          Gioc6Car1.setIcon(Icone.coperta);
-		   	          Gioc6Car2.setIcon(Icone.coperta);
+		   	          Gioc6Car1.setIcon(Icone.getCoperta());
+		   	          Gioc6Car2.setIcon(Icone.getCoperta());
 			          GiocatoreGrafico Giocatore6=new GiocatoreGrafico(etiUtente6,nome6,fiches6,Gioc6Car1,Gioc6Car2);
-		   	          Giocatori[5]=Giocatore6;
+		   	          getGiocatori()[5]=Giocatore6;
 		              principale.add(nome6);
 		              principale.add(fiches6);
 		              principale.add(etiUtente6);
@@ -733,7 +733,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc6Car2);
 		   
 		   case 5:    
-		   	          etiUtente5.setIcon(Icone.Etichetta);
+		   	          etiUtente5.setIcon(Icone.getEtichetta());
 		   	          etiUtente5.setBounds(400, 60, 300, 55);
 		   	          nome5.setFont(fontnome);
 		   	          nome5.setBounds(565, 49, 100, 60);
@@ -741,10 +741,10 @@ public class GraficaPoker extends JFrame {
 		   	          fiches5.setFont(fontfiches);
 		   	          fiches5.setBounds(585, 66, 100, 60);
 		   	          fiches5.setForeground(Color.BLACK);
-		   	          Gioc5Car1.setIcon(Icone.coperta);
-		   	          Gioc5Car2.setIcon(Icone.coperta);
+		   	          Gioc5Car1.setIcon(Icone.getCoperta());
+		   	          Gioc5Car2.setIcon(Icone.getCoperta());
 			          GiocatoreGrafico Giocatore5=new GiocatoreGrafico(etiUtente5,nome5,fiches5,Gioc5Car1,Gioc5Car2);
-		   	          Giocatori[4]=Giocatore5;
+		   	          getGiocatori()[4]=Giocatore5;
 		              principale.add(nome5);
 		              principale.add(fiches5);
 		              principale.add(etiUtente5);
@@ -752,7 +752,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc5Car2);
 		   	        		              
 		   case 4:   
-		   	          etiUtente4.setIcon(Icone.Etichetta);
+		   	          etiUtente4.setIcon(Icone.getEtichetta());
 		   	          etiUtente4.setBounds(730, 115, 300, 55);
 		   	          nome4.setFont(fontnome);
 		   	          nome4.setBounds(895, 104, 100, 60);
@@ -760,10 +760,10 @@ public class GraficaPoker extends JFrame {
 		   	          fiches4.setFont(fontfiches);
 		   	          fiches4.setBounds(915, 121, 100, 60);
 		   	          fiches4.setForeground(Color.BLACK);
-		   	          Gioc4Car1.setIcon(Icone.coperta);
-		   	          Gioc4Car2.setIcon(Icone.coperta);
+		   	          Gioc4Car1.setIcon(Icone.getCoperta());
+		   	          Gioc4Car2.setIcon(Icone.getCoperta());
 			          GiocatoreGrafico Giocatore4=new GiocatoreGrafico(etiUtente4,nome4,fiches4,Gioc4Car1,Gioc4Car2);
-		   	          Giocatori[3]=Giocatore4;
+		   	          getGiocatori()[3]=Giocatore4;
 		              principale.add(nome4);
 		              principale.add(fiches4);
 		              principale.add(etiUtente4);
@@ -771,7 +771,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc4Car2);
 		              
 		   case 3:	  
-		   	          etiUtente3.setIcon(Icone.Etichetta);
+		   	          etiUtente3.setIcon(Icone.getEtichetta());
 		              etiUtente3.setBounds(845, 287, 300, 55);
 		              nome3.setFont(fontnome);
 		              nome3.setBounds(1010, 276, 100, 60);
@@ -779,10 +779,10 @@ public class GraficaPoker extends JFrame {
 		              fiches3.setFont(fontfiches);
 		              fiches3.setBounds(1030, 293, 100, 60);
 		              fiches3.setForeground(Color.BLACK);
-		              Gioc3Car1.setIcon(Icone.coperta);
-		              Gioc3Car2.setIcon(Icone.coperta);			   
+		              Gioc3Car1.setIcon(Icone.getCoperta());
+		              Gioc3Car2.setIcon(Icone.getCoperta());			   
 			          GiocatoreGrafico Giocatore3=new GiocatoreGrafico(etiUtente3,nome3,fiches3,Gioc3Car1,Gioc3Car2);
-		              Giocatori[2]=Giocatore3;
+		              getGiocatori()[2]=Giocatore3;
 		              principale.add(nome3);
 		              principale.add(fiches3);
 		              principale.add(etiUtente3);
@@ -790,7 +790,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc3Car2);
 		   	          
 		   case 2:    
-		   	          etiUtente2.setIcon(Icone.Etichetta);
+		   	          etiUtente2.setIcon(Icone.getEtichetta());
 		   	          etiUtente2.setBounds(730, 460, 300, 55);
 		   	          nome2.setFont(fontnome);
 		   	          nome2.setBounds(895, 449, 100, 60);
@@ -798,10 +798,10 @@ public class GraficaPoker extends JFrame {
 		   	          fiches2.setFont(fontfiches);
 		   	          fiches2.setBounds(915, 466, 100, 60);
 		   	          fiches2.setForeground(Color.BLACK);
-		   	          Gioc2Car1.setIcon(Icone.coperta);
-		   	          Gioc2Car2.setIcon(Icone.coperta);
+		   	          Gioc2Car1.setIcon(Icone.getCoperta());
+		   	          Gioc2Car2.setIcon(Icone.getCoperta());
 			          GiocatoreGrafico Giocatore2=new GiocatoreGrafico(etiUtente2,nome2,fiches2,Gioc2Car1,Gioc2Car2);
-		   	          Giocatori[1]=Giocatore2;
+		   	          getGiocatori()[1]=Giocatore2;
 		              principale.add(nome2);
 		              principale.add(fiches2);
 		              principale.add(etiUtente2);
@@ -809,7 +809,7 @@ public class GraficaPoker extends JFrame {
 		              principale.add(Gioc2Car2);
 		              
 		   case 1:     
-		              etiUtente1.setIcon(Icone.Etichetta);
+		              etiUtente1.setIcon(Icone.getEtichetta());
 		              etiUtente1.setBounds(400, 520, 300, 55);
 		              nome1.setFont(fontnome);
 		              nome1.setBounds(565, 509, 100, 60); 
@@ -817,11 +817,11 @@ public class GraficaPoker extends JFrame {
 		              fiches1.setFont(fontfiches); 
 		              fiches1.setBounds(585, 526, 100, 60); 
 		              fiches1.setForeground(Color.BLACK); 
-		              Gioc1Car1.setIcon(Icone.coperta);
-		              Gioc1Car2.setIcon(Icone.coperta);
+		              Gioc1Car1.setIcon(Icone.getCoperta());
+		              Gioc1Car2.setIcon(Icone.getCoperta());
 
 			          GiocatoreGrafico Giocatore1 = new GiocatoreGrafico(etiUtente1, nome1,fiches1, Gioc1Car1, Gioc1Car2);
-		              Giocatori[0]=Giocatore1;
+		              getGiocatori()[0]=Giocatore1;
 		              principale.add(nome1);
 		              principale.add(fiches1);
 		              principale.add(etiUtente1);
@@ -947,4 +947,20 @@ public class GraficaPoker extends JFrame {
 
 		
 	}// main
+
+	public static Comando getCom() {
+		return com;
+	}
+
+	public static void setCom(Comando com) {
+		GraficaPoker.com = com;
+	}
+
+	public static GiocatoreGrafico[] getGiocatori() {
+		return Giocatori;
+	}
+
+	public static void setGiocatori(GiocatoreGrafico giocatori[]) {
+		Giocatori = giocatori;
+	}
 }// GraficaPoker

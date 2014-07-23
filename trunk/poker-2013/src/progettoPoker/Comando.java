@@ -7,22 +7,22 @@ public class Comando implements Serializable {
 	private static final long serialVersionUID = 4387454705887783423L;
 	public enum Tipo{DAI_CARTA,FOLD,CHECK_CALL,RAISE,NOTIFICA, NICK_NAME,GIOCATORI,FINE_MANO,
 		DISCONNESSIONE,GAME_OVER,VINCITORI,ATTIVA};
-	Carta c;
-	Carta[] car=new Carta[3];
-	int fiches=-1;
-	int gioc;  //numero giocatori totali o giocatore corrente
-	int giocN; //posizione giocatore corrente
-	Tipo t;
-	Tipo t1;
-	String [] nickName;
-	String nick;
-	boolean[] rimanenti;
-	int valPiatto=-1;
-	int puntata=-1;
-	int fichesGioc[];
-	int dealer[]=null;
-	int vincite[];
-	String statistica;
+	private Carta c;
+	private Carta[] car=new Carta[3];
+	private int fiches=-1;
+	private int gioc;  //numero giocatori totali o giocatore corrente
+	private int giocN; //posizione giocatore corrente
+	private Tipo t;
+	private Tipo t1;
+	private String [] nickName;
+	private String nick;
+	private boolean[] rimanenti;
+	private int valPiatto=-1;
+	private int puntata=-1;
+	private int fichesGioc[];
+	private int dealer[]=null;
+	private int vincite[];
+	private String statistica;
 	
 	public String getStatistica() {
 		return statistica;
@@ -96,27 +96,27 @@ public class Comando implements Serializable {
 	}
 	Comando(Tipo t, Tipo t1,int g){
 		this.t=t;
-		this.t1=t1;
+		this.setT1(t1);
 		this.gioc=g;
 	}
 	
 	Comando(Tipo t, Tipo t1, String [] nickName){
 		this.t=t;
-		this.t1=t1;
+		this.setT1(t1);
 		this.nickName=nickName;
 	}
 	
 	Comando(Tipo t, Tipo t1, int g, int fiches){
 		this.t=t;
-		this.t1=t1;
+		this.setT1(t1);
 		this.gioc=g;
 		this.fiches=fiches;
 	}
 	
 	public Comando(Tipo notifica, Tipo fineMano, boolean[] rimanenti) {
 		this.t=notifica;
-		this.t1=fineMano;
-		this.rimanenti=rimanenti;
+		this.setT1(fineMano);
+		this.setRimanenti(rimanenti);
 	}
 
 	public Comando(Comando c2,Object o) {
@@ -126,14 +126,14 @@ public class Comando implements Serializable {
 		this.gioc=c2.gioc;  
 		this.giocN=c2.giocN; 
 		this.t=c2.t;
-		this.t1=c2.t1;
+		this.setT1(c2.getT1());
 		this.nickName=c2.nickName;
 		this.nick=c2.nick;
-		this.rimanenti=c2.rimanenti;
+		this.setRimanenti(c2.getRimanenti());
 		this.valPiatto=c2.valPiatto;
 		this.puntata=c2.puntata;
 		this.fichesGioc=c2.fichesGioc;
-		this.dealer=c2.dealer;
+		this.setDealer(c2.getDealer());
 	}
 
 	public Comando(Tipo vincitori, int[] vincite) {
@@ -164,6 +164,26 @@ public class Comando implements Serializable {
 	}
 	public int getGiocN(){
 		return giocN;
+	}
+
+	public int[] getDealer() {
+		return dealer;
+	}
+
+	public Tipo getT1() {
+		return t1;
+	}
+
+	public void setT1(Tipo t1) {
+		this.t1 = t1;
+	}
+
+	public boolean[] getRimanenti() {
+		return rimanenti;
+	}
+
+	public void setRimanenti(boolean[] rimanenti) {
+		this.rimanenti = rimanenti;
 	}
 
 }

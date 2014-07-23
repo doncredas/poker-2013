@@ -23,8 +23,12 @@ public class Giocatore {
 	private Socket client=null;    
 	private Comando com=null;
 	private ObjectOutputStream OOS=null;
-	protected final int indice;
+	private final int indice;
 	
+	public int getIndice() {
+		return indice;
+	}
+
 	public String getNickName() {
 		return nickName;
 	}
@@ -115,12 +119,12 @@ public class Giocatore {
 
 	public void setCartaServer1(Carta carta,GraficaPoker gp) {
 		this.carta1 = carta;
-		GraficaPoker.Giocatori[0].setCarte(carta, 1);
+		GraficaPoker.getGiocatori()[0].setCarte(carta, 1);
 	}
 
 	public void setCartaServer2(Carta carta,GraficaPoker gp) {
 		this.carta2 = carta;	
-		GraficaPoker.Giocatori[0].setCarte(carta, 2);
+		GraficaPoker.getGiocatori()[0].setCarte(carta, 2);
 	}
 
 	public void disconnetti() {
