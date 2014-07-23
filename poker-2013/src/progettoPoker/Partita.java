@@ -70,32 +70,32 @@ public class Partita {
 	private void eseguiComando(Comando com,GraficaPoker gp) {
 		Comando risp=null;
 		if(gp!=null){
-			if(com.t==null||com.t!=Tipo.NOTIFICA){
+			if(com.getT()==null||com.getT()!=Tipo.NOTIFICA){
 				gp.setAttivo(0);
 			}
-			if(com.fichesGioc!=null){
-				for (int i = 0; i < com.fichesGioc.length; i++) {
+			if(com.getFichesGioc()!=null){
+				for (int i = 0; i < com.getFichesGioc().length; i++) {
 					if(i<posGioc){
-						gp.getGiocatore()[i+1].setFiches(com.fichesGioc[i]);
+						gp.getGiocatore()[i+1].setFiches(com.getFichesGioc()[i]);
 					}else
 						if(i==posGioc){
-						gp.getGiocatore()[0].setFiches(com.fichesGioc[i]);
-						gp.setMaxBar(com.fichesGioc[i]);
+						gp.getGiocatore()[0].setFiches(com.getFichesGioc()[i]);
+						gp.setMaxBar(com.getFichesGioc()[i]);
 					}else
-						gp.getGiocatore()[i].setFiches(com.fichesGioc[i]);
+						gp.getGiocatore()[i].setFiches(com.getFichesGioc()[i]);
 				}
 			}
-			if(com.dealer!=null){
-				for(int i=0;i<com.dealer.length;i++)
-					if(com.dealer[i]!=0){
-						if(com.dealer[i]-1<posGioc){
+			if(com.getDealer()!=null){
+				for(int i=0;i<com.getDealer().length;i++)
+					if(com.getDealer()[i]!=0){
+						if(com.getDealer()[i]-1<posGioc){
 							switch(i){
-							case 0:GraficaPoker.setDealer(com.dealer[i]+1);break;
-							case 1:GraficaPoker.setSmallBlind(com.dealer[i]+1);break;
-							case 2:GraficaPoker.setBigBlind(com.dealer[i]+1);
+							case 0:GraficaPoker.setDealer(com.getDealer()[i]+1);break;
+							case 1:GraficaPoker.setSmallBlind(com.getDealer()[i]+1);break;
+							case 2:GraficaPoker.setBigBlind(com.getDealer()[i]+1);
 							}
 						}else
-							if(com.dealer[i]-1==posGioc){
+							if(com.getDealer()[i]-1==posGioc){
 								switch(i){                        
 								case 0:GraficaPoker.setDealer(1);break;
 								case 1:GraficaPoker.setSmallBlind(1);break;
@@ -103,30 +103,30 @@ public class Partita {
 								}                             
 						}else
 							switch(i){                        
-							case 0:GraficaPoker.setDealer(com.dealer[i]);break;
-							case 1:GraficaPoker.setSmallBlind(com.dealer[i]);break;
-							case 2:GraficaPoker.setBigBlind(com.dealer[i]);
+							case 0:GraficaPoker.setDealer(com.getDealer()[i]);break;
+							case 1:GraficaPoker.setSmallBlind(com.getDealer()[i]);break;
+							case 2:GraficaPoker.setBigBlind(com.getDealer()[i]);
 							}
 					}
 			}
-			if(com.valPiatto!=-1)
-				gp.setPot(com.valPiatto);
-			if(com.puntata!=-1){
-				gp.setMinBar(com.puntata);
-				if(com.puntata!=0)
-					gp.setPuntataCall(com.puntata);
+			if(com.getValPiatto()!=-1)
+				gp.setPot(com.getValPiatto());
+			if(com.getPuntata()!=-1){
+				gp.setMinBar(com.getPuntata());
+				if(com.getPuntata()!=0)
+					gp.setPuntataCall(com.getPuntata());
 			}
-			if(com.statistica!=null){
+			if(com.getStatistica()!=null){
 				GraficaPoker.scriviStatistica(com.getStatistica());
 			}
 		}
 		if(com.getT()==Tipo.GIOCATORI){
-			this.gp=new GraficaPoker(com.gioc);
+			this.gp=new GraficaPoker(com.getGioc());
 			this.gp.creaOrol(tempo-5);
-			GraficaPoker.Giocatori[0].setFiches(fiches);
+			GraficaPoker.getGiocatori()[0].setFiches(fiches);
 			this.posGioc=com.getGiocN()+1;
 		}else
-		if(com.t==null&&com.fiches==-1){
+		if(com.getT()==null&&com.getFiches()==-1){
 			if(gp.getGiocatore(0).getFichesVal()!=0){
 				if(!(altriAllIn()&&azioneRegistrata)){
 					if(gp.getPuntataCall()!=0){
@@ -158,9 +158,9 @@ public class Partita {
 				risp=new Comando(Tipo.CHECK_CALL);
 			this.gp.resetComando();
 		}else{
-			if(com.t==null){
+			if(com.getT()==null){
 				if(this.gp!=null)
-					GraficaPoker.Giocatori[0].setFiches(com.getFiches());
+					GraficaPoker.getGiocatori()[0].setFiches(com.getFiches());
 				else
 					fiches=com.getFiches();
 			}else{
@@ -188,14 +188,14 @@ public class Partita {
 
 	private Comando eseguiTipo(Comando com) {
 		Comando risp=null;
-		switch(com.t){
+		switch(com.getT()){
 		case NICK_NAME:
 			String nick="";
 			if(flag)
 				JOptionPane.showMessageDialog(null,"Nickname già in uso, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
 			flag=true;
 			do{
-			   nick=(String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+			   nick=(String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.getLogo(),null,null);
 			   if(nick.equals("")){
 				     JOptionPane.showMessageDialog(null,"Non hai inserito un nickname!","Attenzione",JOptionPane.WARNING_MESSAGE);
 				     continue;
@@ -205,7 +205,7 @@ public class Partita {
 				   JOptionPane.showMessageDialog(null,"Nickname troppo lungo, inserirne un altro!","Attenzione",JOptionPane.WARNING_MESSAGE);
 			}while(nick.length()>11 || nick.equals(""));
 			risp=new Comando(Tipo.NICK_NAME,nick);
-			GraficaPoker.Giocatori[0].setNome(nick);
+			GraficaPoker.getGiocatori()[0].setNome(nick);
 			break;
 		case DAI_CARTA:
 			if(com.getC()!=null){
@@ -220,7 +220,7 @@ public class Partita {
 						this.gp.reset();
 						gp.daiCarteGioc();
 					}
-					GraficaPoker.Giocatori[0].setCarte(com.getC(),nCarta);
+					GraficaPoker.getGiocatori()[0].setCarte(com.getC(),nCarta);
 				}
 				else
 					if(nCarta==3)
@@ -235,7 +235,7 @@ public class Partita {
 			gameOver(com.getNick());
 			break;
 		case VINCITORI:
-			int vinc[]=Arrays.copyOf(com.vincite, com.vincite.length);
+			int vinc[]=Arrays.copyOf(com.getVincite(), com.getVincite().length);
 			int tmp=vinc[posGioc];
 			for (int i = 0; i < posGioc; i++) {
 				vinc[i+1]=vinc[i];
@@ -260,7 +260,7 @@ public class Partita {
 
 	private void eseguiNotifica(Comando com) {
 
-		switch(com.t1){
+		switch(com.getT1()){
 		case NICK_NAME:
 			for(int i=0;i<posGioc;i++){
 				gp.getGiocatore(i+1).setNome(com.getNickName()[i]);
@@ -289,7 +289,7 @@ public class Partita {
 					gp.getGiocatore(com.getGioc()).setFold(true);
 			break;
 		case FINE_MANO:
-			rimanenti=com.rimanenti;
+			rimanenti=com.getRimanenti();
 			gp.reset();
 			nCarta=0;
 			for (int i = 0; i < rimanenti.length; i++) {
@@ -453,7 +453,7 @@ public class Partita {
 					} catch (IOException e) {
 					}
 					
-				JOptionPane.showMessageDialog(gp, d.getG()[i].getNickName()+" vince la partita","Vincitore",JOptionPane.INFORMATION_MESSAGE,Icone.logo);
+				JOptionPane.showMessageDialog(gp, d.getG()[i].getNickName()+" vince la partita","Vincitore",JOptionPane.INFORMATION_MESSAGE,Icone.getLogo());
 				System.exit(0);
 			}
 		}
@@ -461,7 +461,7 @@ public class Partita {
 	
 	private void gameOver(String nick){
 		gp.dispose();
-		JOptionPane.showMessageDialog(gp, nick+" vince la partita","Vincitore",JOptionPane.INFORMATION_MESSAGE,Icone.logo);
+		JOptionPane.showMessageDialog(gp, nick+" vince la partita","Vincitore",JOptionPane.INFORMATION_MESSAGE,Icone.getLogo());
 		try {
 			oos.writeObject(new Comando(Tipo.GAME_OVER));
 		} catch (IOException e) {
@@ -477,7 +477,7 @@ public class Partita {
 		boolean ok=true;
 		String nick="";
 		do{
-			nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null);
+			nick= (String) JOptionPane.showInputDialog(null,"Inserisci il tuo Nickname", "NickName", JOptionPane.WARNING_MESSAGE, Icone.getLogo(),null,null);
 			if(nick.equals("")){
 			     	JOptionPane.showMessageDialog(null,"Non hai inserito un nickname!","Attenzione",JOptionPane.WARNING_MESSAGE);
 			     	continue;
@@ -488,7 +488,7 @@ public class Partita {
 		   
 		}while(nick.equals("")|| nick.length()>11);
 		d.getG()[0].setNickName(nick);
-		GraficaPoker.Giocatori[0].setNome(nick);
+		GraficaPoker.getGiocatori()[0].setNome(nick);
 		for (int i = 0; i < OOS.length; i++) {
 			try {
 				OOS[i].writeObject(new Comando(Tipo.GIOCATORI,d.getG().length,i));
@@ -520,7 +520,7 @@ public class Partita {
 				}
 			}
 			if(ok){
-				GraficaPoker.Giocatori[i+1].setNome(risp.getNick());
+				GraficaPoker.getGiocatori()[i+1].setNome(risp.getNick());
 				d.getG()[i+1].setNickName(risp.getNick());
 			}
 			ok=true;
@@ -605,7 +605,7 @@ public class Partita {
 			break;
 		case CHECK_CALL:
 			d.checkCall(i);
-			GraficaPoker.Giocatori[i].setFiches(d.getG()[i].getFiches());
+			GraficaPoker.getGiocatori()[i].setFiches(d.getG()[i].getFiches());
 			gp.punta(i+1, d.getPuntata(), gp); 
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.CHECK_CALL,i,d.getPuntata());
 			setComando(notifica);
@@ -620,7 +620,7 @@ public class Partita {
 			break;
 		case RAISE:
 			d.raise(i,c.getFiches());
-			GraficaPoker.Giocatori[i].setFiches(d.getG()[i].getFiches());
+			GraficaPoker.getGiocatori()[i].setFiches(d.getG()[i].getFiches());
 			gp.punta(i+1,c.getFiches(), gp);
 			GraficaPoker.scriviStatistica(d.getG()[i].getNickName()+" ha effettuato un raise di "+c.getFiches()+"€");
 			notifica=new Comando(Tipo.NOTIFICA,Tipo.RAISE,i,c.getFiches());
@@ -711,7 +711,7 @@ public class Partita {
 			
 		    if(inet.charAt(0)=='f')JOptionPane.showMessageDialog(null,"Inserire 127.0.0.1 nei client");
 			else 
-				JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client","Informazione",3,Icone.logo);
+				JOptionPane.showMessageDialog(null,"Inserire "+inet+" nei client","Informazione",3,Icone.getLogo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -727,7 +727,7 @@ public class Partita {
 			System.exit(-1);
 		}
 		Integer gioc[]={2,3,4,5,6,7,8}; 
-		Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "Numero Giocatori", JOptionPane.WARNING_MESSAGE, Icone.logo,gioc,gioc);
+		Integer nGiocatori= (Integer) JOptionPane.showInputDialog(null,"Inserisci il numero di giocatori", "Numero Giocatori", JOptionPane.WARNING_MESSAGE, Icone.getLogo(),gioc,gioc);
 
 		if(nGiocatori==null)System.exit(0);
 		mostraIp();
@@ -756,14 +756,14 @@ public class Partita {
 		int sc = JOptionPane.showOptionDialog(null,
 				"Creare una nuova partita o connettersi ad una esistente?",
 				"Real Poker 2014", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-				Icone.logo, new String[] { "Crea nuova", "Connetti ad esistente" },
+				Icone.getLogo(), new String[] { "Crea nuova", "Connetti ad esistente" },
 				"Crea nuova");
 		if(sc==-1)System.exit(0);
 		if(sc==0){
 			creaServer();
 			}else{
 
-			String ip2= (String) JOptionPane.showInputDialog(null,"Inserisci l'IP a cui collegarti", "Inserimento IP", JOptionPane.WARNING_MESSAGE, Icone.logo,null,null); 
+			String ip2= (String) JOptionPane.showInputDialog(null,"Inserisci l'IP a cui collegarti", "Inserimento IP", JOptionPane.WARNING_MESSAGE, Icone.getLogo(),null,null); 
 			
 			try {
 				client=new Socket(ip2,7777);

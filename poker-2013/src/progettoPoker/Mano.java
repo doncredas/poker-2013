@@ -201,7 +201,7 @@ public class Mano {
 	}//
 	
 	
-	public static LinkedList<Mano>  ManiMigliori(HashMap<Mano,Giocatore> mani){
+	public static void  ManiMigliori(HashMap<Mano,Giocatore> mani){
 		Set<Mano> man=mani.keySet();
 		int tmp[]=new int[5];
 		for(Mano m:man){
@@ -229,7 +229,6 @@ public class Mano {
 		for(Mano m:maniPerdenti){
 			mani.remove(m);
 		}
-		return maniPerdenti;
 	}
 
 	public String getValString() {

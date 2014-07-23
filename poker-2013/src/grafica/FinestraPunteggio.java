@@ -40,7 +40,7 @@ public class FinestraPunteggio extends JFrame implements MouseListener
 		else{
 		     this.setResizable(false);
 		     this.setBounds(115, 15, 600, 650);
-		     this.setContentPane(new JLabel(Icone.sfondoPunteggio));
+		     this.setContentPane(new JLabel(Icone.getSfondoPunteggio()));
 		     this.setSize(600,665);
 	         this.setSize(600,666);
 	         this.setVisible(true);

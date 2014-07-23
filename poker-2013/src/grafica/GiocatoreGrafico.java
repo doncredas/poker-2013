@@ -15,7 +15,7 @@ public class GiocatoreGrafico
 	private JLabel carta2=null;
 	private ImageIcon icona1=null;
 	private ImageIcon icona2=null;
-	Fiches puntata=null;
+	private Fiches puntata=null;
 	private int nomeX;
 	private int nomeY;
 
@@ -157,8 +157,8 @@ public class GiocatoreGrafico
 		}
 		else 
 		{
-			this.carta1.setIcon(Icone.coperta);
-			this.carta2.setIcon(Icone.coperta);
+			this.carta1.setIcon(Icone.getCoperta());
+			this.carta2.setIcon(Icone.getCoperta());
 			
 		}
 	}//giraCarte()
@@ -169,8 +169,8 @@ public class GiocatoreGrafico
 	 * altrimenti ritorna nera
 	 */
 	public void setAttivo(boolean flag){
-		if(flag)this.etichetta.setIcon(Icone.EtichettaCall);
-		else this.etichetta.setIcon(Icone.Etichetta);
+		if(flag)this.etichetta.setIcon(Icone.getEtichettaCall());
+		else this.etichetta.setIcon(Icone.getEtichetta());
 	}//setAttivo
 
 	public Fiches getPuntata() {
@@ -179,8 +179,13 @@ public class GiocatoreGrafico
 
 
 	public void resetFiches(GraficaPoker gp) {
-		if(!(puntata==null))
-			Fiches.reset(puntata, gp);
-			puntata=null;
+		if(!(getPuntata()==null))
+			Fiches.reset(getPuntata(), gp);
+			setPuntata(null);
+	}
+
+
+	public void setPuntata(Fiches puntata) {
+		this.puntata = puntata;
 	}
 }//GiocatoreGrafico
