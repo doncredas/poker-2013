@@ -16,7 +16,7 @@ public class Partita {
 	private ObjectOutputStream oos=null;
 	private ObjectInputStream ois=null;
 	private Dealer d = null;
-	private int tempo=35;
+	private int tempo=65;
 	private int nCarta=0;
 	private int fiches;
 	private Cronometro cron=new Cronometro();
