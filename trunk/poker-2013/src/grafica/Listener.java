@@ -73,7 +73,7 @@ public class Listener extends JPanel implements KeyListener, ActionListener,
 		if (arg0.getSource() == GraficaPoker.Raise) {
 			this.BarRaise.setValue(Integer.valueOf(this.ConsRaise.getText()));
 			
-			GraficaPoker.setCom(new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText()+puntataClient)));
+			GraficaPoker.setCom(new Comando(Tipo.RAISE,Integer.parseInt(gp.ConsRaise.getText())+puntataClient));
 			
 			gp.disableBottoni(true);
 		}
