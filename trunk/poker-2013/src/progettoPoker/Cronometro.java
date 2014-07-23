@@ -2,7 +2,7 @@ package progettoPoker;
 
 public class Cronometro extends Thread {
 
-	int secondi = 0;
+	private int secondi = 0;
 	@Override
 	public void run() {
 		while(!isInterrupted()){

@@ -7,20 +7,23 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class Mano {
-	final int SCALA_REALE=9;
-	final int POKER=8;
-	final int FULL=7;
-	final int COLORE=6;
-	final int SCALA=5;
-	final int TRIS=4;
-	final int DOPPIA_COPPIA=3;
-	final int COPPIA=2;
-	final int CARTA_ALTA=1;
-	char seme='n';
-	int [] carteUtili=new int[5];
-	Carta[] c=new Carta[7];
+	private final int SCALA_REALE=9;
+	private final int POKER=8;
+	private final int FULL=7;
+	private final int COLORE=6;
+	private final int SCALA=5;
+	private final int TRIS=4;
+	private final int DOPPIA_COPPIA=3;
+	private final int COPPIA=2;
+	private final int CARTA_ALTA=1;
+	private char seme='n';
+	private int [] carteUtili=new int[5];
+	private Carta[] c=new Carta[7];
+	private int val=0;
 	
-	int val=0;
+	public Carta[] getC() {
+		return c;
+	}
 	
 	Mano(Carta[]c,Carta c1,Carta c2){
 		this.c=Arrays.copyOf(c,this.c.length);
@@ -201,7 +204,6 @@ public class Mano {
 	public static LinkedList<Mano>  ManiMigliori(HashMap<Mano,Giocatore> mani){
 		Set<Mano> man=mani.keySet();
 		int tmp[]=new int[5];
-		//Mano Migliore=null;
 		for(Mano m:man){
 			for(int i=0;i<m.carteUtili.length;i++){
 				if(m.carteUtili[i]>tmp[i]){

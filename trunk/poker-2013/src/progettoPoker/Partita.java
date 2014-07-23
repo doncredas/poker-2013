@@ -33,6 +33,8 @@ public class Partita {
 	private boolean rimanenti[];
 	private Boolean azioneRegistrata=false;
 	private Comando azioneAllIn=null;
+	private int primoGiocatore=0;
+	private int ultimoRaise;
 	
 	public Partita(Socket client)  {
 		this.s=client;
@@ -335,7 +337,6 @@ public class Partita {
 
 	private void eseguiServer() {
 		generaNick();
-		int primoGiocatore=0;//TODO provare a spostare
 		while(true){
 			gp.reset();
 			d.eliminati();
@@ -346,7 +347,6 @@ public class Partita {
 			gp.daiCarteGioc();
 			c=new Comando(null);
 			primoGiocatore=(d.getPosD()+1)%d.getG().length;
-			int ultimoRaise;//TODO provare a spostare
 			c.setDealer(GraficaPoker.setDealer(d.getPosD()+1));
 			risp=null;
 			if(unicoGiocatore())termina();
@@ -648,15 +648,15 @@ public class Partita {
 				for(int j=0;j<d.getVincite().length;j++){
 					if(d.getVincite()[j]>0){
 						if(flag){
-							s+="carte a terra: "+d.getManiVincenti()[j].c[0]+" "+
-									d.getManiVincenti()[j].c[1]+" "+
-									d.getManiVincenti()[j].c[2]+" "+
-									d.getManiVincenti()[j].c[3]+" "+
-									d.getManiVincenti()[j].c[4]+'\n';
+							s+="carte a terra: "+d.getManiVincenti()[j].getC()[0]+" "+
+									d.getManiVincenti()[j].getC()[1]+" "+
+									d.getManiVincenti()[j].getC()[2]+" "+
+									d.getManiVincenti()[j].getC()[3]+" "+
+									d.getManiVincenti()[j].getC()[4]+'\n';
 							flag=false;
 						}
 						s+=d.getG()[j].getNickName()+" vince "+ d.getVincite()[j]+"€ con "+d.getManiVincenti()[j].getValString()+'\n'
-								+" carte in mano "+d.getManiVincenti()[j].c[5]+" "+d.getManiVincenti()[j].c[6]+'\n';
+								+" carte in mano "+d.getManiVincenti()[j].getC()[5]+" "+d.getManiVincenti()[j].getC()[6]+'\n';
 					}
 				}
 			else
