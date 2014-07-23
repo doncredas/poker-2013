@@ -616,7 +616,7 @@ public class GraficaPoker extends JFrame {
             font2=Font.createFont(Font.TRUETYPE_FONT,Icone.fontArea);
 			} catch (IOException e){}
 		      catch(FontFormatException e1) {}
-		Statistiche.setFont(font2.deriveFont(Font.BOLD,14)); //TODO grandezza per le statistiche
+		Statistiche.setFont(font2.deriveFont(Font.BOLD,14));
 		Statistiche.setAutoscrolls(true);
 		
 		// BOTTONI (FOLD,RAISE,CALL,ALL-IN,SEGNAPUNTI,VALOREFICHES)
